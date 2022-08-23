@@ -15,15 +15,15 @@ function Home() {
             <Navbar/>
             <Header />
             </div>
-            <div className="mt-10 flex flex-col items-center space-y-4 w-[80%] mx-auto ">
+            <div className="mt-10 flex flex-col items-center space-y-4 w-[75%] mx-auto ">
                 <Featured/>
-                <h1 className="homeTitle">Browse by property type</h1>
+                <h1 className="w-full font-bold text-2xl">Browse by property type</h1>
                 <PropertyList/>
-                <h1 className="homeTitle">Homes guests love</h1>
+                <h1 className="w-full font-bold text-2xl">Homes guests love</h1>
                 <FeaturedProperties/>
+            </div>
                 <MailList/>
                 <Footer/>
-            </div>
         </div>
     )
 }
