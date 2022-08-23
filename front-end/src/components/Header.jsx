@@ -94,9 +94,9 @@ function Header() {
             </div>
 
 
-            <div className='flex justify-around py-2 border border-[#febb02]'>
+            <div className='flex justify-around h-[50px] py-2 border bg-slate-900 border-[#febb02] items-center  w-full'>
                 <div className="space-x-2">
-                    <FontAwesomeIcon icon={faBed} className="text-slate-300" />
+                    <FontAwesomeIcon icon={faBed} className="text-slate-400" />
                     <input
                     type="text"
                     placeholder="Where are you going?"
@@ -105,11 +105,11 @@ function Header() {
                     />
                 </div>
             
-                <div className="space-x-2">
-                    <FontAwesomeIcon icon={faCalendarDays} className="text-slate-300" />
+                <div className="space-x-2 relative">
+                    <FontAwesomeIcon icon={faCalendarDays} className="text-slate-400" />
                     <span
                     onClick={() => setOpenDate(!openDate)}
-                    className="headerSearchText"
+                    className="cursor-pointer"
                     >
                         {`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
                         date[0].endDate,
@@ -122,20 +122,20 @@ function Header() {
                         onChange={(item) => setDate([item.selection])}
                         moveRangeOnFirstSelection={false}
                         ranges={date}
-                        className="date"
+                        className="date absolute top-[30px] z-10"
                         minDate={new Date()}
                     />
                     )}
                 </div>
-                
+
                 <div className="space-x-2">
-                    <FontAwesomeIcon icon={faPerson} className="text-slate-300" />
+                    <FontAwesomeIcon icon={faPerson} className="text-slate-400" />
                     <span
                     onClick={() => setOpenOptions(!openOptions)}
-                    className="headerSearchText"
+                    className="cursor-pointer"
                     >{`${options.adult} adult · ${options.children} children · ${options.room} room`}</span>
                     {openOptions && (
-                    <div className="options">
+                    <div className="absolute z-10 bg-white text-slate-600 w-24 p-2">
                         <div className="optionItem">
                         <span className="optionText">Adult</span>
                         <div className="optionCounter">
