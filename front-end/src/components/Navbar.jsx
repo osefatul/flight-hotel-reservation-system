@@ -8,7 +8,7 @@ function Navbar() {
                 <motion.h1 
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.9 }}
-                    className="font-bold border-b border-golden-700 cursor-pointer hover:text-amber-700" >Best Hotel Booking Site
+                    className="font-bold border-b border-golden-700 cursor-pointer hover:text-amber-700 text-xl" >Best Hotel Booking Site
                 </motion.h1>
                 
                 <div className="space-x-4 ">
