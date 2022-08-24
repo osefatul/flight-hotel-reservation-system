@@ -65,39 +65,40 @@ function Hotel() {
 
 
     return (
-    <div>
-        <div className='bg-slate-900 text-white'>
-            <Navbar />
-            <Header type="list" />
-        </div>
-
-        <div className="flex flex-col space-y-2 items-center mt-4 w-[75%] mx-auto">
-
-            {open && (
-                <div className="slider">
+    <div className='relative'>
+        {open && (
+                <div className="fixed h-screen w-screen left-0 bg-black bgShadow bg-opacity-80  z-50 flex items-center">
                 <FontAwesomeIcon
                     icon={faCircleXmark}
-                    className="close"
+                    className="absolute top-5 right-10 text-lg text-gray-400 cursor-pointer "
                     onClick={() => setOpen(false)}
                 />
                 <FontAwesomeIcon
                     icon={faCircleArrowLeft}
-                    className="arrow"
+                    className=" px-10 text-xl text-gray-400 cursor-pointer"
                     onClick={() => handleMove("l")}
                 />
-                <div className="sliderWrapper">
-                    <img src={photos[slideNumber].src} alt="" className="sliderImg" />
+                <div className="w-full h-full flex items-center justify-center">
+                    <img src={photos[slideNumber].src} alt="" className="w-[80%] h-[80%]" />
                 </div>
                 <FontAwesomeIcon
                     icon={faCircleArrowRight}
-                    className="arrow"
+                    className=" px-10 text-xl text-gray-400 cursor-pointer"
                     onClick={() => handleMove("r")}
                 />
                 </div>
             )}
 
 
-            <div className="w-full flex flex-col space-y-2 relative">
+        <div className='bg-slate-900 text-white'>
+            <Navbar />
+            <Header type="list" />
+        </div>
+
+        <div className="flex flex-col space-y-2 items-center w-[75%] mx-auto mt-4 ">
+
+
+            <div className="w-full flex flex-col space-y-2 relative ">
                 <button className="absolute bg-[#0071c2] text-white p-2 !border-none top-4 cursor-pointer font-bold rounded-sm right-0 hover:text-amber-500  ">Reserve or Book Now!</button>
                 
                 <h1 className="text-2xl font-bold">Tower Street Apartments</h1>
@@ -163,10 +164,13 @@ function Hotel() {
             </div>
 
         </div>
-        <div className="bg-slate-900 w-full">
-            <MailList />
+
+        <div>
+            <div className="bg-slate-900 w-full">
+                <MailList />
+            </div>
+            <Footer />
         </div>
-        <Footer />
 
 
 
