@@ -10,7 +10,7 @@ import SearchItem from '../../components/SearchItem';
 
 function List() {
     const location = useLocation();
-    
+
     const [destination, setDestination] = useState(location.state.destination);
     const [date, setDate] = useState(location.state.date);
     const [openDate, setOpenDate] = useState(false);
@@ -25,9 +25,9 @@ function List() {
             <Header type="list" />
         </div>
 
-        <div className="flex justify-center mt-4">
+        <div className="flex justify-center mt-4 p-2">
 
-            <div className="w-full flex space-x-3 relative">
+            <div className="w-full flex space-x-3">
 
                 <div className="bg-[#febb02] p-2 rounded-sm sticky z-50 h-max top-10 space-y-6">
 
@@ -97,8 +97,7 @@ function List() {
                                 <input
                                 type="number"
                                 min={0}
-                                className="w-10 pl-1"
-                                
+                                className="w-10 pl-1 rounded-sm"
                                 placeholder={options.children}
                                 />
                             </div>
@@ -108,7 +107,7 @@ function List() {
                                 <input
                                 type="number"
                                 min={1}
-                                className="w-10 pl-1"
+                                className="w-10 pl-1 rounded-sm"
                                 placeholder={options.room}
                             />
                             </div>
