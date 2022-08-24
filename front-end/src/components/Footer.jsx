@@ -50,7 +50,7 @@ function Footer() {
         </ul>
 
       </div>
-      <div className="flex justify-center items-center pb-2 sticky z-50 bottom-0">Copyright © 2022 Sefatullah Omar.</div>
+      <div className="flex justify-center items-center pb-2 ">Copyright © 2022 Sefatullah Omar.</div>
     </div>
   );
 }
