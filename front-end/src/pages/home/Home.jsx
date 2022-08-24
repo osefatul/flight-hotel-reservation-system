@@ -11,11 +11,16 @@ import PropertyList from '../../components/PropertyList'
 function Home() {
     return (
         <div className="relative">
-            <div className='sticky z-50 top-0'>
-            <Navbar/>
-            <Header />
+
+            <div className="sticky z-50 top-0 bg-slate-900 " >
+            <Navbar />
             </div>
-            <div className="mt-10 flex flex-col items-center space-y-4 w-[75%] mx-auto ">
+
+            <div className='sticky z-50 top-0 bg-slate-900 '>
+                <Header className="" />
+            </div>
+            
+            <div className="mt-10 flex flex-col items-center space-y-4 w-[75%] mx-auto relative">
                 <Featured/>
                 <h1 className="w-full font-bold text-2xl">Browse by property type</h1>
                 <PropertyList/>
@@ -23,6 +28,7 @@ function Home() {
                 <FeaturedProperties/>
             </div>
                 <MailList/>
+                
                 <Footer/>
         </div>
     )

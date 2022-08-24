@@ -2,8 +2,8 @@ import React from 'react'
 
 function MailList() {
   return (
-    <div className="w-full bg-slate-900 text-white flex flex-col items-center space-y-2 p-3 mt-10">
-      <h1 className="text-2xl font-bold">Save time, save money!</h1>
+    <div className="w-full bg-slate-900 text-white flex flex-col items-center space-y-2 p-5 mt-10">
+      <h1 className="text-3xl font-bold">Save time, save money!</h1>
       <span className="mailDesc">Sign up and we'll send the best deals to you</span>
       
       <div className="mailInputContainer">

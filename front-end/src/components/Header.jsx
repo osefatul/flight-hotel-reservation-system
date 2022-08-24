@@ -59,11 +59,11 @@ function Header({type}) {
 
 
     return (
-        <div className="px-10 bg-slate-900 text-white flex flex-col py-3 pt-8">
+        <div className="px-10 bg-slate-900 text-white flex flex-col py-3 pt-8 w-[80%] mx-auto ">
             
             <div className={type === "list"? "w-full": "space-y-4" }>
         
-                <div className="flex justify-between items-center w-fll px-2 ">
+                <div className="flex justify-between items-center w-fll overflow ">
                     <div className=" flex items-center space-x-2 cursor-pointer hover:text-yellow-500 active">
                         <FontAwesomeIcon icon={faBed} />
                         <span>Stays</span>
@@ -99,7 +99,7 @@ function Header({type}) {
                         </p>
                     </div>
 
-                    <div className='flex justify-between h-[50px] border-y bg-slate-900 border-y-[#febb02] rounded items-center w-full px-2 '>
+                    <div className='flex justify-between h-[50px] border-y bg-slate-900 border-y-[#febb02] items-center w-full px-2  '>
                         
                         <div className="space-x-2 outline-0 border-0">
                             <FontAwesomeIcon icon={faBed} className="text-slate-400" />
