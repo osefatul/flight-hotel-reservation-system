@@ -6,10 +6,11 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from '../../components/SearchItem';
-
+import { faCalendar } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function List() {
-    const location = useLocation();
+    const location = useLocation();// this will get states passed to Navigate
 
     const [destination, setDestination] = useState(location.state.destination);
     const [date, setDate] = useState(location.state.date);
@@ -29,31 +30,59 @@ function List() {
 
             <div className="w-full flex space-x-3">
 
-                <div className="bg-[#febb02] p-2 rounded-sm sticky z-50 h-max top-10 space-y-6">
-
+                <div 
+                    className="bg-[#febb02] p-2 rounded-sm sticky z-50 h-max top-10 space-y-6">
                     <div className='space-y-3'>
-                        <h1 className="text-[##555] text-md font-bold">Search</h1>
 
+                        <h1 className="text-[##555] text-md font-bold">Search</h1>
                         <div className="flex flex-col space-y-1">
                             <label className='text-sm'>Destination</label>
                             <input className="!border-none !outline-none h-5 bg-slate-100 rounded-md pl-1" placeholder={destination} type="text" />
                         </div>
 
-                        <div className="flex flex-col space-y-1">
+                        <div className="flex flex-col space-y-1 relative">
                             <label className='text-sm'>Check-in Date</label>
-                            <input 
-                            type="text"
-                            className="!border-none !outline-none h-5 bg-slate-100 rounded-md pl-1"  
-                            placeholder={`${format(date[0].startDate, "MM/dd/yyyy")}`} />
+                            <div 
+                            onClick={()=> setOpenDate(!openDate)}
+                            className=" h-6 bg-slate-100 rounded-md p-2 flex items-center justify-start space-x-1 cursor-pointer">
+                                <FontAwesomeIcon icon={faCalendar} />
+                                <span>
+                                    {`${format(
+                                        date[0].startDate,
+                                        "MM/dd/yyyy"
+                                        )}`}
+                                </span>
+                            </div>
+                            {openDate && (
+                                <DateRange
+                                onChange={(item) => setDate([item.selection])}
+                                minDate={new Date()}
+                                ranges={date}
+                                className="date absolute top-[36px] z-10"
+
+                                />
+                            )}
                         </div>
 
-                        <div className="flex flex-col space-y-1">
+                        <div className="flex flex-col space-y-1 relative">
                             <label className='text-sm'>Check-out Date</label>
-                            <input 
-                            type="text"
-                            className="!border-none !outline-none h-5 bg-slate-100 rounded-md pl-1"  
-                            placeholder={`${format(date[0].endDate, "MM/dd/yyyy")}`} />
+
+                            <div
+                                onClick={()=> setOpenDate(!openDate)}
+                                className=" h-6 bg-slate-100 rounded-md p-2 flex items-center justify-start space-x-1 cursor-pointer">
+
+                                <FontAwesomeIcon icon={faCalendar} />
+                                <span>
+                                    {`${format(
+                                        date[0].endDate,
+                                        "MM/dd/yyyy"
+                                        )}`}
+                                </span>
+                            </div>
+
+                    
                         </div>
+
                     </div>
 
 
@@ -61,7 +90,6 @@ function List() {
                         <label className='font-bold '>Options</label>
                         
                         <div className="p-2">
-
                             <div className="flex justify-between text-[#555] text-sm mb-2">
                                 <span className="lsOptionText">
                                     Min price <small>per night</small>
