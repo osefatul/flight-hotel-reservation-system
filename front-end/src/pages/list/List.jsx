@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from "../../components/Navbar";
-import Header from "../../components/Header";
+import Header from "../../components/Header/Header";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { format } from "date-fns";
@@ -21,7 +21,7 @@ function List() {
 
     return (
     <div >
-        <div className='bg-slate-900 text-white'>
+        <div className='bg-black text-white'>
             <Navbar />
             <Header type="list" />
         </div>

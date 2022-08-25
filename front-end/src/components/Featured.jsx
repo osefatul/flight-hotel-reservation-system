@@ -10,7 +10,7 @@ function Featured() {
           alt=""
           className="object-cover h-full w-full rounded-lg"
         />
-        <div className="absolute bottom-4 left-4 text-white font-bold text-lg sm:text-3xl">
+        <div className="absolute bottom-4 left-4 text-white font-bold text-[12px] space-y-2 md:text-xl lg:text-3xl">
           <h1>Dublin</h1>
           <h2>123 properties</h2>
         </div>
@@ -23,7 +23,7 @@ function Featured() {
           alt=""
           className="object-cover h-full w-full rounded-lg"
         />
-        <div className="absolute bottom-4 left-4 text-white font-bold text-lg sm:text-3xl">
+        <div className="absolute bottom-4 left-4 text-white font-bold text-[12px] space-y-2 md:text-xl lg:text-3xl">
           <h1>Reno</h1>
           <h2>533 properties</h2>
         </div>
@@ -35,7 +35,7 @@ function Featured() {
           alt=""
           className="object-cover h-full w-full rounded-lg"
         />
-        <div className="absolute bottom-4 left-4 text-white font-bold text-lg sm:text-3xl">
+        <div className="absolute bottom-4 left-4 text-white font-bold text-[12px] space-y-2 md:text-xl lg:text-3xl">
           <h1>Austin</h1>
           <h2>532 properties</h2>
         </div>

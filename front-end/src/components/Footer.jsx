@@ -2,9 +2,10 @@ import React from 'react'
 
 function Footer() {
   return (
-    <div className=" w-full text-sm w-full pt-5">
+    <div className=" ">
 
-      <div className="w-full flex justify-between mb-4 w-[60%] mx-auto">
+      <div className="w-full sm:w-[60%] px-10 sm:px-0 text-[11px] sm:text-sm flex items-start space-x-4 justify-center sm:justify-between mb-4 mx-auto pt-5">
+        
         <ul className="">
           <li className="cursor-pointer mb- text-[#003580]">Countries</li>
           <li className="cursor-pointer mb- text-[#003580]">Regions</li>
@@ -50,7 +51,8 @@ function Footer() {
         </ul>
 
       </div>
-      <div className="flex justify-center items-center pb-2 ">Copyright © 2022 Sefatullah Omar.</div>
+
+
     </div>
   );
 }
