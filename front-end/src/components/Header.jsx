@@ -63,41 +63,35 @@ function Header({type}) {
             
             <div className={type === "list"? "w-full": "space-y-4" }>
         
-                <div className="flex justify-between items-center w-fll overflow ">
-                    <div className=" flex items-center space-x-2 cursor-pointer hover:text-yellow-500 active">
+                <div className="flex justify-between items-center space-x-4">
+
+                    <motion.div className="flex items-center space-x-2 pl-2 cursor-pointer w-full bg-amber-500 text-black rounded-sm"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.9 }}>
                         <FontAwesomeIcon icon={faBed} />
                         <span>Stays</span>
-                    </div>
-                    <div className="flex items-center cursor-pointer hover:text-yellow-500 space-x-2">
+                    </motion.div>
+
+                    <motion.div className="flex items-center space-x-2 pl-2 cursor-pointer w-full bg-amber-500 text-black rounded-sm"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.9 }}>
                         <FontAwesomeIcon icon={faPlane} />
-                        <span>Flights</span>
-                    </div>
-                    <div className="flex items-center cursor-pointer hover:text-yellow-500 space-x-2">
-                        <FontAwesomeIcon icon={faCar} />
-                        <span>Car rentals</span>
-                    </div>
-                    <div className="flex items-center cursor-pointer hover:text-yellow-500 space-x-2">
-                        <FontAwesomeIcon icon={faBed} />
-                        <span>Attractions</span>
-                    </div>
-                    <div className="flex items-center cursor-pointer hover:text-yellow-500 space-x-2">
-                        <FontAwesomeIcon icon={faTaxi} />
-                        <span>Airport taxis</span>
-                    </div>
+                        <span>Travel</span>
+                    </motion.div >
                 </div>
 
                 {type !== "list" && (
                 <div className='space-y-6'>
 
-                    <div className=''>
+                    {/* <div className=''>
                         <h1 className="text-[30px] font-bold">
                         A lifetime of discounts? It's Genius.
                         </h1>
                         <p className="text-[13px] py-2">
                         Get rewarded for your travels – unlock instant savings of 10% or
-                        more with a free Lamabooking account
+                        more with a free TSRS account
                         </p>
-                    </div>
+                    </div> */}
 
                     <div className='flex justify-between h-[50px] border-y bg-slate-900 border-y-[#febb02] items-center w-full px-2  '>
                         
@@ -232,7 +226,6 @@ function Header({type}) {
                     </motion.div>
 
                     </div>
-
                 </div>)}
 
             </div>

@@ -26,9 +26,9 @@ function List() {
             <Header type="list" />
         </div>
 
-        <div className="flex justify-center mt-4 p-2">
+        <div className="flex justify-center mt-4 p-2 w-[75%] mx-auto">
 
-            <div className="w-full flex space-x-3">
+            <div className="w-full flex space-x-5">
 
                 <div 
                     className="bg-[#febb02] p-2 rounded-sm sticky z-50 h-max top-10 space-y-6">

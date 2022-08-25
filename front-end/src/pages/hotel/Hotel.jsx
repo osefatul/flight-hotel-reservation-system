@@ -70,20 +70,20 @@ function Hotel() {
                 <div className="fixed h-screen w-screen left-0 bg-black bgShadow bg-opacity-80  z-50 flex items-center">
                 <FontAwesomeIcon
                     icon={faCircleXmark}
-                    className="absolute top-5 right-10 text-lg text-gray-400 cursor-pointer "
+                    className="absolute top-5 right-10 text-lg text-gray-200 cursor-pointer "
                     onClick={() => setOpen(false)}
                 />
                 <FontAwesomeIcon
                     icon={faCircleArrowLeft}
-                    className=" px-10 text-xl text-gray-400 cursor-pointer"
+                    className=" px-10 text-xl text-gray-200 cursor-pointer"
                     onClick={() => handleMove("l")}
                 />
                 <div className="w-full h-full flex items-center justify-center">
-                    <img src={photos[slideNumber].src} alt="" className="w-[80%] h-[80%]" />
+                    <img src={photos[slideNumber].src} alt="" className="w-[80%] h-[80%] rounded-md" />
                 </div>
                 <FontAwesomeIcon
                     icon={faCircleArrowRight}
-                    className=" px-10 text-xl text-gray-400 cursor-pointer"
+                    className=" px-10 text-xl text-gray-200 cursor-pointer"
                     onClick={() => handleMove("r")}
                 />
                 </div>
@@ -100,7 +100,6 @@ function Hotel() {
 
             <div className="w-full flex flex-col space-y-2 relative ">
                 <button className="absolute bg-[#0071c2] text-white p-2 !border-none top-4 cursor-pointer font-bold rounded-sm right-0 hover:text-amber-500  ">Reserve or Book Now!</button>
-                
                 <h1 className="text-2xl font-bold">Tower Street Apartments</h1>
                 
                 <div className="text-sm flex items-center space-x-2">
@@ -116,6 +115,7 @@ function Hotel() {
                     Book a stay over $114 at this property and get a free airport taxi
                 </span>
 
+
                 <div className="flex flex-wrap justify-between">
                     {photos.map((photo, i) => (
                         <div className="w-[33%]" key={i}>
@@ -123,7 +123,7 @@ function Hotel() {
                             onClick={() => handleOpen(i)}
                             src={photo.src}
                             alt=""
-                            className="w-full cursor-pointer object-cover "
+                            className="w-full cursor-pointer object-cover rounded-sm "
                         />
                         </div>
                     ))}
