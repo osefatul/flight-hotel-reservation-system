@@ -70,7 +70,7 @@ function Hotel() {
                 <div className="fixed h-screen w-screen left-0 bg-black bgShadow bg-opacity-80  z-50 flex items-center justify-center">
                 <FontAwesomeIcon
                     icon={faCircleXmark}
-                    className="fixed top-80 sm:top-10 right-8 sm:right-40 text-lg text-gray-200 cursor-pointer w-6 h-6 "
+                    className="fixed top-[35%] sm:top-10 right-8 sm:right-40 text-lg text-gray-200 cursor-pointer w-6 h-6 "
                     onClick={() => setOpen(false)}
                 />
                 <FontAwesomeIcon
