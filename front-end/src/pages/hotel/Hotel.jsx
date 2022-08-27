@@ -43,7 +43,6 @@ function Hotel() {
 
 
 
-
     const handleOpen = (i) => {
         setSlideNumber(i);
         setOpen(true);
@@ -66,24 +65,25 @@ function Hotel() {
 
     return (
     <div className='relative'>
+
         {open && (
-                <div className="fixed h-screen w-screen left-0 bg-black bgShadow bg-opacity-80  z-50 flex items-center">
+                <div className="fixed h-screen w-screen left-0 bg-black bgShadow bg-opacity-80  z-50 flex items-center justify-center">
                 <FontAwesomeIcon
                     icon={faCircleXmark}
-                    className="absolute top-5 right-10 text-lg text-gray-200 cursor-pointer "
+                    className="fixed top-80 sm:top-10 right-8 sm:right-40 text-lg text-gray-200 cursor-pointer w-6 h-6 "
                     onClick={() => setOpen(false)}
                 />
                 <FontAwesomeIcon
                     icon={faCircleArrowLeft}
-                    className=" px-10 text-xl text-gray-200 cursor-pointer"
+                    className="px-0 sm:px-10 text-xl text-gray-200 cursor-pointer"
                     onClick={() => handleMove("l")}
                 />
-                <div className="w-full h-full flex items-center justify-center">
-                    <img src={photos[slideNumber].src} alt="" className="w-[80%] h-[80%] rounded-md" />
+                <div className="w-screen sm:w-full h-full flex items-center justify-center">
+                    <img src={photos[slideNumber].src} alt="" className="w-[90%] sm:w-[80%] h-44 sm:h-[80%] rounded-md" />
                 </div>
                 <FontAwesomeIcon
                     icon={faCircleArrowRight}
-                    className=" px-10 text-xl text-gray-200 cursor-pointer"
+                    className="pr-1 sm:px-10 text-xl text-gray-200 cursor-pointer"
                     onClick={() => handleMove("r")}
                 />
                 </div>
@@ -95,23 +95,25 @@ function Hotel() {
             <Header type="list" />
         </div>
 
-        <div className="flex flex-col space-y-2 items-center w-[75%] mx-auto mt-4 ">
 
+        <div className="flex flex-col space-y-2 items-center px-5 sm:px-0 w-full sm:w-[75%] mx-auto mt-4 ">
 
             <div className="w-full flex flex-col space-y-2 relative ">
-                <button className="absolute bg-[#0071c2] text-white p-2 !border-none top-4 cursor-pointer font-bold rounded-sm right-0 hover:text-amber-500  ">Reserve or Book Now!</button>
-                <h1 className="text-2xl font-bold">Tower Street Apartments</h1>
+
+                <button className="absolute bg-[#0071c2] text-white p-2 !border-none top-2 sm:top-4 cursor-pointer font-bold rounded-sm right-0 hover:text-amber-500 text-[9px] sm:text-[15px]  ">Reserve or Book Now!</button>
+
+                <h1 className="text-[18px] sm:text-2xl font-bold">Tower Street Apartments</h1>
                 
-                <div className="text-sm flex items-center space-x-2">
+                <div className="text-[10px] sm:text-[13px] flex items-center space-x-2">
                     <FontAwesomeIcon icon={faLocationDot} />
                     <span>Elton St 125 New york</span>
                 </div>
 
-                <span className="text-[#0071c2] font-bold">
+                <span className="text-[#0071c2] font-bold text-[12px] sm:text-[15px]">
                     Excellent location – 500m from center
                 </span>
 
-                <span className="text-[#008009] font-bold">
+                <span className="text-[#008009] font-bold text-[12px] sm:text-[15px]">
                     Book a stay over $114 at this property and get a free airport taxi
                 </span>
 
@@ -129,11 +131,11 @@ function Hotel() {
                     ))}
                 </div>
 
-                <div className="flex justify-between space-x-2 w-full">
+                <div className="flex sm:flex-row flex-col justify-between space-x-2 w-full">
 
-                    <div className="w-3/4">
-                        <h1 className="text-2xl font-bold">Stay in the heart of City</h1>
-                        <p className="text-md mt-5">
+                    <div className="sm:w-3/4 w-full">
+                        <h1 className="text-[18px] sm:text-2xl font-bold">Stay in the heart of City</h1>
+                        <p className="text-[12px] sm:text-[15px] text-md mt-5">
                         Located a 5-minute walk from St. Florian's Gate in Krakow, Tower
                         Street Apartments has accommodations with air conditioning and
                         free WiFi. The units come with hardwood floors and feature a
@@ -148,9 +150,9 @@ function Hotel() {
                         </p>
                     </div>
 
-                    <div className="bg-[#ebf3ff] p-2 flex flex-col space-y-3 w-1/4 mt-4">
-                        <h1 className="text-md text-[#555]">Perfect for a 9-night stay!</h1>
-                        <span className="text-md">
+                    <div className="bg-[#ebf3ff] p-2 flex flex-col space-y-3 w-full sm:w-1/4 mt-4">
+                        <h1 className="text-[12px] sm:text-[15px] text-md text-[#555]">Perfect for a 9-night stay!</h1>
+                        <span className="text-[12px] sm:text-[15px] text-md">
                             Located in the real heart of Krakow, this property has an
                             excellent location score of 9.8!
                         </span >
