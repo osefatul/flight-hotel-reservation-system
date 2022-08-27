@@ -166,7 +166,7 @@ function Hotel() {
         </div>
 
         <div>
-            <div className="bg-slate-900 w-full">
+            <div className=" w-full">
                 <MailList />
             </div>
             <Footer />
