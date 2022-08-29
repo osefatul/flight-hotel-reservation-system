@@ -1,4 +1,6 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
+
+
 const HotelSchema = new mongoose.Schema({
 name: {
 type: String,
@@ -49,4 +51,4 @@ default: false,
 },
 });
 
-export default mongoose.model("Hotel", HotelSchema)
+module.exports = {Hotel: mongoose.model("Hotel", HotelSchema)}

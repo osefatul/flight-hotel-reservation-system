@@ -9,9 +9,9 @@ const cors = require("cors");
 require("dotenv").config();
 
 const authRoute = require("./routes/auth.js")
-// const usersRoute = require( "./routes/users.js");
-// const hotelsRoute = require( "./routes/hotels.js");
-// const roomsRoute = require("./routes/rooms.js");
+const usersRoute = require( "./routes/user.js");
+const hotelsRoute = require( "./routes/hotel.js");
+const roomsRoute = require("./routes/room.js");
 
 const PORT = process.env.PORT || 5000;
 
@@ -34,9 +34,9 @@ mongoose.connect(process.env.MONGO_URL).then(
 
 
 app.use("/v1/auth", authRoute);
-// app.use("/v1/users", usersRoute);
-// app.use("/v1/hotels", hotelsRoute);
-// app.use("/v1/rooms", roomsRoute);
+app.use("/v1/users", usersRoute);
+app.use("/v1/hotels", hotelsRoute);
+app.use("/v1/rooms", roomsRoute);
 
 
 app.listen(PORT, ()=>{

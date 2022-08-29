@@ -1,0 +1,29 @@
+### Create a new User
+POST http://localhost:5000/v1/hotels/
+Content-Type: application/json
+
+{"name": "New Hotel", 
+"type":"hotel",
+"city":"Vancouver",
+"address":"1235 hastings st",
+"distance":"500",
+"title": "Best Hotel",
+"desc": "Hoteell",
+"cheapestPrice": 100
+}
+
+
+
+
+### User sign up endpoint
+POST http://localhost:5000/v1/auth/register
+Content-Type: application/json
+
+{"username": "New Hotel", 
+"email":"sefat@gmail.com",
+"password": "Password5%",
+"phone":"12341235",
+"city":"Vancouver",
+"country": "Canada",
+"isAdmin": true
+}

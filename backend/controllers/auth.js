@@ -1,7 +1,9 @@
-const User = require ("../models/User.js");
+const {User} = require ("../models/User.js");
 const bcrypt = require("bcrypt");
 const { createError } = require("../utils/error.js");
 const jwt = require("jsonwebtoken");
+
+
 
 const register = async (req, res, next) => {
     try {
@@ -55,5 +57,4 @@ const login = async (req, res, next) => {
 module.exports = {
     register,
     login
-
 }
