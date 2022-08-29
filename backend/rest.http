@@ -1,8 +1,8 @@
-### Create a new User
+### Create a new UseHotel
 POST http://localhost:5000/v1/hotels/
 Content-Type: application/json
 
-{"name": "New Hotel", 
+{"name": "Serina Hotel", 
 "type":"hotel",
 "city":"Vancouver",
 "address":"1235 hastings st",
@@ -12,18 +12,72 @@ Content-Type: application/json
 "cheapestPrice": 100
 }
 
+### Update Hotel
+PUT http://localhost:5000/v1/hotels/630c967e53d42cf2f5e538c7
+Content-Type: application/json
+
+{"name": "Intercontenintal Hotel", 
+"type":"hotel",
+"city":"Kabul",
+"address":"Bagh bala st",
+"distance":"500",
+"title": "Best Hotel",
+"desc": "Hoteell",
+"cheapestPrice": 100
+}
+
+
+### Delete a Hotel
+DELETE http://localhost:5000/v1/hotels/630c7f5542e193fd8c0016cb
+Content-Type: application/json
+
+
+### Get a Hotel
+GET http://localhost:5000/v1/hotels/hotel/630c755e4a55a78f7588f441
+Content-Type: application/json
 
 
 
-### User sign up endpoint
+
+# ------------------------------------------------------------------
+
+### User sign up
 POST http://localhost:5000/v1/auth/register
 Content-Type: application/json
 
-{"username": "New Hotel", 
-"email":"sefat@gmail.com",
+{"username": "noAdminUser", 
+"email":"sefat3@gmail.com",
 "password": "Password5%",
 "phone":"12341235",
 "city":"Vancouver",
 "country": "Canada",
-"isAdmin": true
+"isAdmin": false
 }
+
+
+### User sign in
+POST http://localhost:5000/v1/auth/login
+Content-Type: application/json
+
+{"username": "noAdminUser", 
+"password": "Password5%"
+}
+
+
+### Checking User Authentication, it also wokrs without mentioning cookies.
+GET http://localhost:5000/v1/users/checkauthentication
+headers: Cookie: {"access_token": ""}
+Content-Type: application/json
+
+
+
+### Checking User verification.
+GET http://localhost:5000/v1/users/checkuser/630c96f619b49ba0cca1b056
+headers: Cookie: {"access_token": ""}
+Content-Type: application/json
+
+
+### Verifying is User Admin verification.
+GET http://localhost:5000/v1/users/checkadmin/630c96f619b49ba0cca1b056
+headers: Cookie: {"access_token": ""}
+Content-Type: application/json

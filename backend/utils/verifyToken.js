@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { createError } = require("./error.js");
+const createError = require("./error.js");
 
 
 const verifyToken = (req, res, next) => {
@@ -18,24 +18,26 @@ const verifyToken = (req, res, next) => {
 
 
 const verifyUser = (req, res, next) => {
-    verifyToken(req, res, next, () => {
+    
+    //Getting req.user from first Middleware verifyToken
     if (req.user.id === req.params.id || req.user.isAdmin) {
     next();
     } else {
     return next(createError(403, "You are not authorized!"));
     }
-});
 };
 
+
 const verifyAdmin = (req, res, next) => {
-verifyToken(req, res, next, () => {
+    
+    //req.user we are getting from middleware verifyToken.
     if (req.user.isAdmin) {
     next();
     } else {
-    return next(createError(403, "You are not authorized!"));
+    return next(createError(403, "You are not authorized!"))
     }
-});
 };
+
 
 
 module.exports = {

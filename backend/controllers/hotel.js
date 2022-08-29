@@ -19,7 +19,7 @@ const updateHotel = async (req, res, next) => {
         const updatedHotel = await Hotel.findByIdAndUpdate(
             req.params.id,
             { $set: req.body },
-            { new: true }
+            { new: true }//return new object
         );
         res.status(200).json(updatedHotel);
     } catch (err) {

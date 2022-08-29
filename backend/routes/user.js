@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { verifyAdmin, verifyUser } = require("../utils/verifyToken.js");
+const { verifyAdmin, verifyUser,verifyToken } = require("../utils/verifyToken.js");
 
 const {
     updateUser,
@@ -11,17 +11,21 @@ const {
 
 
 
-// router.get("/checkauthentication", verifyToken, (req,res,next)=>{
-//   res.send("hello user, you are logged in")
-// })
+// Check Authentication
+router.get("/checkauthentication", verifyToken, (req,res,next)=>{
+    res.json({message:"hello user, you are logged in", token: req.user})
+})
 
-// router.get("/checkuser/:id", verifyUser, (req,res,next)=>{
-//   res.send("hello user, you are logged in and you can delete your account")
-// })
+// Check User
+router.get("/checkuser/:id",verifyToken, verifyUser, (req,res,next)=>{
+    res.send("hello user, you are logged in and you can delete your account")
+})
 
-// router.get("/checkadmin/:id", verifyAdmin, (req,res,next)=>{
-//   res.send("hello admin, you are logged in and you can delete all accounts")
-// })
+// Check if Admin
+router.get("/checkadmin/:id",verifyToken, verifyAdmin, (req,res,next)=>{
+    res.json({message:"hello admin, you are logged in", token: req.user})
+})
+
 
 //UPDATE
 router.put("/:id", verifyUser, updateUser);
