@@ -1,4 +1,4 @@
-const Room = require("../models/Room.js");
+const {Room} = require("../models/Room.js");
 const Hotel = require("../models/Hotel.js");
 const { createError } = require("../utils/error.js");
 

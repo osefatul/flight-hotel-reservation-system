@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { verifyAdmin } = require("../utils/verifyToken.js");
+const { verifyAdmin , verifyToken} = require("../utils/verifyToken.js");
 const {
     createRoom,
     deleteRoom,
@@ -15,18 +15,20 @@ const {
 
 
 //CREATE
-router.post("/:hotelid", verifyAdmin, createRoom);
+router.post("/:hotelid", verifyToken, verifyAdmin, createRoom);
+
 
 //UPDATE
 router.put("/availability/:id", updateRoomAvailability);
 router.put("/:id", verifyAdmin, updateRoom);
+
 //DELETE
 router.delete("/:id/:hotelid", verifyAdmin, deleteRoom);
+
 //GET
-
 router.get("/:id", getRoom);
-//GET ALL
 
+//GET ALL
 router.get("/", getRooms);
 
 

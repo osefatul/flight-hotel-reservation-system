@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {verifyAdmin} =require("../utils/verifyToken.js")
+const {verifyAdmin, verifyToken} =require("../utils/verifyToken.js")
 
 const {
     countByCity,
@@ -15,9 +15,9 @@ const {
 
 
 // Admin Users
-router.post("/", verifyAdmin, createHotel);
-router.put("/:id", verifyAdmin, updateHotel);
-router.delete("/:id", verifyAdmin, deleteHotel);
+router.post("/", verifyToken, verifyAdmin, createHotel);
+router.put("/:id",verifyToken, verifyAdmin,updateHotel);
+router.delete("/:id",verifyToken, verifyAdmin, deleteHotel);
 
 
 router.get("/hotel/:id", getHotel );

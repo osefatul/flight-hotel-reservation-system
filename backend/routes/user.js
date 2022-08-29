@@ -12,19 +12,21 @@ const {
 
 
 // Check Authentication
-router.get("/checkauthentication", verifyToken, (req,res,next)=>{
-    res.json({message:"hello user, you are logged in", token: req.user})
-})
+// router.get("/checkauthentication", verifyToken, (req,res,next)=>{
+//     res.json({message:"hello user, you are logged in", token: req.user})
+// })
 
 // Check User
-router.get("/checkuser/:id",verifyToken, verifyUser, (req,res,next)=>{
-    res.send("hello user, you are logged in and you can delete your account")
-})
+// router.get("/checkuser/:id",verifyToken, verifyUser, (req,res,next)=>{
+//     res.send("hello user, you are logged in and you can delete your account")
+// })
 
 // Check if Admin
-router.get("/checkadmin/:id",verifyToken, verifyAdmin, (req,res,next)=>{
-    res.json({message:"hello admin, you are logged in", token: req.user})
-})
+// router.get("/checkadmin/:id",verifyToken, verifyAdmin, (req,res,next)=>{
+//     res.json({message:"hello admin, you are logged in", token: req.user})
+// })
+
+
 
 
 //UPDATE

@@ -2,7 +2,7 @@
 POST http://localhost:5000/v1/hotels/
 Content-Type: application/json
 
-{"name": "Serina Hotel", 
+{"name": "Serina Hotel2", 
 "type":"hotel",
 "city":"Vancouver",
 "address":"1235 hastings st",
@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ### Update Hotel
-PUT http://localhost:5000/v1/hotels/630c967e53d42cf2f5e538c7
+PUT http://localhost:5000/v1/hotels/630c96f619b49ba0cca1b056
 Content-Type: application/json
 
 {"name": "Intercontenintal Hotel", 
@@ -28,7 +28,7 @@ Content-Type: application/json
 
 
 ### Delete a Hotel
-DELETE http://localhost:5000/v1/hotels/630c7f5542e193fd8c0016cb
+DELETE http://localhost:5000/v1/hotels/630c755e4a55a78f7588f441
 Content-Type: application/json
 
 
@@ -59,7 +59,7 @@ Content-Type: application/json
 POST http://localhost:5000/v1/auth/login
 Content-Type: application/json
 
-{"username": "noAdminUser", 
+{"username": "user2", 
 "password": "Password5%"
 }
 
@@ -81,3 +81,18 @@ Content-Type: application/json
 GET http://localhost:5000/v1/users/checkadmin/630c96f619b49ba0cca1b056
 headers: Cookie: {"access_token": ""}
 Content-Type: application/json
+
+
+
+# ------------------------------------------------------------------
+### Create a new UseHotel
+POST http://localhost:5000/v1/rooms/630c755e4a55a78f7588f441
+Content-Type: application/json
+
+{
+"title": "Best Hotel",
+"desc": "Hoteell",
+"price":100,
+"maxPeople":2,
+"roomNumbers": [{"number":102}, {"number":102}]
+}

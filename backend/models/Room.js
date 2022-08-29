@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const RoomSchema = new mongoose.Schema(
 {
 title: {
@@ -22,4 +23,6 @@ roomNumbers: [{ number: Number, unavailableDates: {type: [Date]}}],
 { timestamps: true }
 );
 
-module.exports = {RoomSchema: mongoose.model("Room", RoomSchema)};
+module.exports = {
+    Room: mongoose.model("Room", RoomSchema)
+};
