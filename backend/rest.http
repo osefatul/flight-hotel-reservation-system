@@ -85,7 +85,9 @@ Content-Type: application/json
 
 
 # ------------------------------------------------------------------
-### Create a new UseHotel
+
+
+### Create a new Room
 POST http://localhost:5000/v1/rooms/630c755e4a55a78f7588f441
 Content-Type: application/json
 

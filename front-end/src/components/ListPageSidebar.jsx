@@ -21,10 +21,10 @@ function ListPageSidebar() {
 return (
 <div>
     <div 
-        className="bg-[#febb02] p-2 rounded-sm space-y-6 ">
-        <div className='space-y-3'>
+        className="bg-[#febb02] text-[12px] p-2 rounded-sm space-y-4 ">
+        <div className='space-y-1 text-[12px]'>
 
-            <h1 className="text-[##555] text-md font-bold">Search</h1>
+            <h1 className="text-[##555] text-sm font-bold">Search</h1>
             <div className="flex flex-col space-y-1">
                 <label className='text-sm'>Destination</label>
                 <input className="!border-none !outline-none h-5 bg-slate-100 rounded-md pl-1" placeholder={destination} type="text" />
@@ -73,7 +73,7 @@ return (
         </div>
 
 
-        <div className="flex flex-col space-y-3 mb-3">
+        <div className="flex flex-col space-y-1 mb-3 text-[12px]">
             <label className='font-bold '>Options</label>
             
             <div className="p-2">
@@ -128,6 +128,7 @@ return (
                 </div>
             </div>
         </div>
+
         <button className='w-full flex items-center justify-center bg-slate-900 text-white rounded-sm'>Search</button>
     </div>
 </div>
