@@ -33,6 +33,12 @@ Content-Type: application/json
 
 
 ### Get a Hotel
+GET http://localhost:5000/v1/hotels/
+Content-Type: application/json
+
+
+
+### Get a Hotel
 GET http://localhost:5000/v1/hotels/hotel/630c755e4a55a78f7588f441
 Content-Type: application/json
 
@@ -98,3 +104,9 @@ Content-Type: application/json
 "maxPeople":2,
 "roomNumbers": [{"number":102}, {"number":102}]
 }
+
+
+
+### Delete a Room
+DELETE http://localhost:5000/v1/rooms/630d98e907c4334e0df3f90c/630c755e4a55a78f7588f441
+Content-Type: application/json

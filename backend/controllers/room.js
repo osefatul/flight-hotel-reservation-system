@@ -1,5 +1,5 @@
 const {Room} = require("../models/Room.js");
-const Hotel = require("../models/Hotel.js");
+const {Hotel} = require("../models/Hotel.js");
 const { createError } = require("../utils/error.js");
 
 
@@ -11,6 +11,7 @@ const createRoom = async (req, res, next) => {
     try {
     const savedRoom = await newRoom.save();
     try {
+        // Push the rooms Id into the hotel
         await Hotel.findByIdAndUpdate(hotelId, {
         $push: { rooms: savedRoom._id },
         });
@@ -22,6 +23,7 @@ const createRoom = async (req, res, next) => {
     next(err);
     }
 };
+
 
 
 const updateRoom = async (req, res, next) => {
