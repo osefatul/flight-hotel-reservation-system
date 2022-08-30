@@ -2,6 +2,10 @@ const {Hotel} = require("../models/Hotel");
 const Room = require("../models/Room");
 
 
+
+
+
+
 const createHotel = async (req, res, next) => {
     const newHotel = new Hotel (req.body);
 
@@ -65,6 +69,7 @@ const getHotels = async (req, res, next) => {
 const countByCity = async (req, res, next) => {
     const cities = req.query.cities.split(",");
     try {
+        //We are using promise.all because each return has another map of arrays.
     const list = await Promise.all(
         cities.map((city) => {
         return Hotel.countDocuments({ city: city });
@@ -112,6 +117,8 @@ const getHotelRooms = async (req, res, next) => {
     next(err);
     }
 };
+
+
 
 
 module.exports = {

@@ -2,9 +2,9 @@
 POST http://localhost:5000/v1/hotels/
 Content-Type: application/json
 
-{"name": "Serina Hotel2", 
+{"name": "Spogmay Hotel2", 
 "type":"hotel",
-"city":"Vancouver",
+"city":"California",
 "address":"1235 hastings st",
 "distance":"500",
 "title": "Best Hotel",
@@ -32,17 +32,23 @@ DELETE http://localhost:5000/v1/hotels/630c755e4a55a78f7588f441
 Content-Type: application/json
 
 
-### Get a Hotel
+### Get Hotels
 GET http://localhost:5000/v1/hotels/
 Content-Type: application/json
 
 
 
-### Get a Hotel
+### Get a hotel by id
 GET http://localhost:5000/v1/hotels/hotel/630c755e4a55a78f7588f441
 Content-Type: application/json
 
 
+
+### Get hotels count based on citites.
+##Queries is case-sensitive
+#[1,2,3]... 
+GET http://localhost:5000/v1/hotels/countByCity?cities=Vancouver,Kabul,Richmond,Seatal
+Content-Type: application/json
 
 
 # ------------------------------------------------------------------
@@ -98,15 +104,24 @@ POST http://localhost:5000/v1/rooms/630c755e4a55a78f7588f441
 Content-Type: application/json
 
 {
-"title": "Best Hotel",
-"desc": "Hoteell",
+"title": "Huge room",
+"desc": "Rooms available for a family",
 "price":100,
 "maxPeople":2,
 "roomNumbers": [{"number":102}, {"number":102}]
 }
 
 
+### Get a Room
+GET http://localhost:5000/v1/rooms/630d9a85ad5759b952860df2/
+Content-Type: application/json
+
+
+### Get Rooms
+GET http://localhost:5000/v1/rooms/
+Content-Type: application/json
+
 
 ### Delete a Room
-DELETE http://localhost:5000/v1/rooms/630d98e907c4334e0df3f90c/630c755e4a55a78f7588f441
+DELETE http://localhost:5000/v1/rooms/630da0391ec1bd093f795b9c/630c755e4a55a78f7588f441
 Content-Type: application/json
