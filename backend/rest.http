@@ -51,6 +51,12 @@ GET http://localhost:5000/v1/hotels/countByCity?cities=Vancouver,Kabul,Richmond,
 Content-Type: application/json
 
 
+
+
+
+
+
+
 # ------------------------------------------------------------------
 
 ### User sign up
@@ -72,7 +78,7 @@ POST http://localhost:5000/v1/auth/login
 Content-Type: application/json
 
 {"username": "user2", 
-"password": "Password5%"
+"password": "Password5"
 }
 
 
@@ -95,6 +101,20 @@ headers: Cookie: {"access_token": ""}
 Content-Type: application/json
 
 
+### Get user 
+GET http://localhost:5000/v1/users/630c96f619b49ba0cca1b056
+Content-Type: application/json
+
+
+### Get users 
+GET http://localhost:5000/v1/users/
+Content-Type: application/json
+
+
+
+### Get user 
+DELETE http://localhost:5000/v1/users/630c96f619b49ba0cca1b056
+Content-Type: application/json
 
 # ------------------------------------------------------------------
 

@@ -19,7 +19,10 @@ function Navbar() {
 
                 <div className=" sm:flex space-x-4 border-b border-amber-400">
                     <button className=" hover:text-amber-400 text-[12px] sm:text-[16px]">Register</button>
+                    
+                    <Link to="/login">
                     <button className=" hover:text-amber-400 text-[12px] sm:text-[16px]">Login</button>
+                    </Link>
                 </div>
 
             </div>

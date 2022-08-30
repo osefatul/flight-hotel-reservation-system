@@ -11,7 +11,7 @@ const createHotel = async (req, res, next) => {
 
     try{
         const savedHotel = await newHotel.save();
-        res.status(200).json(savedHotel);
+        res.status(200).json({message: "Successfully Created", savedHotel});
     }catch(err){
         next(err);
     }
@@ -25,7 +25,7 @@ const updateHotel = async (req, res, next) => {
             { $set: req.body },
             { new: true }//return new object
         );
-        res.status(200).json(updatedHotel);
+        res.status(200).json({message: "Successfully updated", updatedHotel});
     } catch (err) {
         next(err);
     }
@@ -121,6 +121,8 @@ const getHotelRooms = async (req, res, next) => {
 
 
 
+
+
 module.exports = {
     countByCity,
     countByType,
@@ -130,5 +132,4 @@ module.exports = {
     getHotelRooms,
     getHotels,
     updateHotel,
-
 }
