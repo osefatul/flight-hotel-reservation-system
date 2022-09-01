@@ -14,7 +14,8 @@ export const userRegistration = async (formData) =>{
         const res = await axios.post(registerUserUrl, formData);
         console.log(res)
     }catch(error){
-
+        console.log(error)
+        return error;
     }
 }
 

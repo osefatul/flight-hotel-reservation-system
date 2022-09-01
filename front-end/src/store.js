@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import loginReducer from "./features/authSlice/loginSlice"
+import hotelReducer from "./features/hotelSlice/hotelSlice";
 
 const store = configureStore({
     reducer: {
         login:loginReducer,
-        // hotels:ticketReducer,
+        hotels:hotelReducer,
         // rooms:registrationReducer,
         // user: userReducer,
         // openTicket: newTicketReducer,

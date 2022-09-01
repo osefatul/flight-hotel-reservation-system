@@ -52,6 +52,10 @@ Content-Type: application/json
 
 
 
+### Get hotels count based on Types.
+GET http://localhost:5000/v1/hotels/countByType
+Content-Type: application/json
+
 
 
 

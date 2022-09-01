@@ -1,31 +1,62 @@
 import React from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from "react-redux"
+import { fetchingHotelsByCity, fetchingHotelsByType } from '../features/hotelSlice/hotelAction';
 
 function PropertyList() {
+  const dispatch = useDispatch();
+  const {isLoading,
+    error,
+    hotelTypes,} = useSelector(state => state.hotels)
+
+    const images = [
+      "https://cf.bstatic.com/xdata/images/xphoto/square300/57584488.webp?k=bf724e4e9b9b75480bbe7fc675460a089ba6414fe4693b83ea3fdd8e938832a6&o=",
+
+      "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-apartments_300/9f60235dc09a3ac3f0a93adbc901c61ecd1ce72e.jpg",
+
+      "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/bg_resorts/6f87c6143fbd51a0bb5d15ca3b9cf84211ab0884.jpg",
+
+      "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-villas_300/dd0d7f8202676306a661aa4f0cf1ffab31286211.jpg",
+
+      "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg",
+    ];
+  
+
+  useEffect(() =>{
+    dispatch(fetchingHotelsByType())
+  },[])
+
+
 
   return (
 
     <div className="w-full flex space-between space-x-4">
-      
-      <div className="cursor-pointer w-full "> 
+
+      {
+        hotelTypes && images.map((image, i)=> (
+
+          <div key = {i} className="cursor-pointer w-full "> 
         <img
-          src="https://cf.bstatic.com/xdata/images/xphoto/square300/57584488.webp?k=bf724e4e9b9b75480bbe7fc675460a089ba6414fe4693b83ea3fdd8e938832a6&o="
+          src= {image}
           alt=""
           className="w-full h-20 sm:h-36 object-cover rounded-md "/>
         <div className="">
           <h1 className="text-[12px] sm:text-lg font-bold" >Hotels</h1>
-          <h2 className="text-[11px] sm:text-lg">233 hotels</h2>
+          <h2 className="text-[11px] sm:text-lg capitalize" >{hotelTypes[i].count + " " + hotelTypes[i].type} </h2>
         </div>
       </div>
+          ))
+        }
 
 
-      <div className="cursor-pointer w-full">
+      {/* <div className="cursor-pointer w-full">
         <img
           src="https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-apartments_300/9f60235dc09a3ac3f0a93adbc901c61ecd1ce72e.jpg"
           alt=""
           className="w-full h-20 sm:h-36 object-cover rounded-md "/>
         <div className="">
           <h1 className="text-[12px] sm:text-lg font-bold" >Apartments</h1>
-          <h2 className="text-[11px] sm:text-lg">2331 hotels</h2>
+          <h2 className="text-[11px] sm:text-lg">{hotelTypes[1].count + " " + hotelTypes[1].type} </h2>
         </div>
       </div>
 
@@ -37,7 +68,7 @@ function PropertyList() {
           className="w-full h-20 sm:h-36 object-cover rounded-md "/>
         <div className="">
           <h1 className="text-[12px] sm:text-lg font-bold">Resorts</h1>
-          <h2 className="text-[11px] sm:text-lg">2331 hotels</h2>
+          <h2 className="text-[11px] sm:text-lg">{hotelTypes[2].count + " " + hotelTypes[2].type} </h2>
         </div>
       </div>
 
@@ -63,7 +94,9 @@ function PropertyList() {
           <h1 className="text-[12px] sm:text-lg font-bold">Cabins</h1>
           <h2 className="text-[11px] sm:text-lg">2331 hotels</h2>
         </div>
-      </div>
+      </div> */}
+
+
     </div>
   ); 
 }

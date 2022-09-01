@@ -10,10 +10,8 @@ function Navbar() {
     const [userToken, setUserToken] = useState(
         sessionStorage.getItem("accessJWT")
         );
-
     const dispatch = useDispatch();
 
-    console.log(user, userToken)
     useEffect(() => {
     
         user && userToken && dispatch(loginSuccess(user));
@@ -25,6 +23,7 @@ function Navbar() {
         setUserToken(sessionStorage.removeItem("accessJWT"));
     }
 
+    
     return (
         <div className="text-white h-[40px] bg-black flex justify-center w-[75%] mx-auto">
 

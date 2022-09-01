@@ -1,6 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from "react-redux"
+import { fetchingHotelsByCity, fetchingHotelsByType } from '../features/hotelSlice/hotelAction';
 
 function Featured() {
+
+  const dispatch = useDispatch();
+  const {isLoading,
+    error,
+    HotelsInTheCities,
+    } = useSelector(state => state.hotels)
+
+
+  useEffect(() =>{
+    dispatch(fetchingHotelsByCity())
+  },[])
+
+
   return (
     <div className="w-full flex justify-between space-x-2 ">
       
@@ -11,8 +27,8 @@ function Featured() {
           className="object-cover h-full w-full rounded-lg"
         />
         <div className="absolute bottom-4 left-4 text-white font-bold text-[12px] space-y-2 md:text-xl lg:text-3xl">
-          <h1>Dublin</h1>
-          <h2>123 properties</h2>
+          <h1>Vancouver</h1>
+          <h2 className='text-md'>{HotelsInTheCities[0]} properties</h2>
         </div>
       
       </div>
@@ -24,8 +40,8 @@ function Featured() {
           className="object-cover h-full w-full rounded-lg"
         />
         <div className="absolute bottom-4 left-4 text-white font-bold text-[12px] space-y-2 md:text-xl lg:text-3xl">
-          <h1>Reno</h1>
-          <h2>533 properties</h2>
+          <h1>Kabul</h1>
+          <h2>{HotelsInTheCities[1]} properties</h2>
         </div>
       </div>
 
@@ -36,8 +52,8 @@ function Featured() {
           className="object-cover h-full w-full rounded-lg"
         />
         <div className="absolute bottom-4 left-4 text-white font-bold text-[12px] space-y-2 md:text-xl lg:text-3xl">
-          <h1>Austin</h1>
-          <h2>532 properties</h2>
+          <h1>Richmond</h1>
+          <h2>{HotelsInTheCities[2]} properties</h2>
         </div>
       </div>
   </div>
