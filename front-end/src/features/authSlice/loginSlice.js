@@ -6,7 +6,7 @@ const initialState = {
     error: "",
     demoAdminLogin: false,
     demoUserLogin: false,
-    user: JSON.parse(localStorage.getItem("user")) || null,
+    user: null,
 
 }
 

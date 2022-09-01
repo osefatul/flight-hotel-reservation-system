@@ -22,7 +22,7 @@ function Header({type}) {
 
 
     return (
-        <div className="bg-black text-white flex flex-col py-3 pt-8 w-[75%] mx-auto ">
+        <div className="bg-black text-white flex flex-col py-3 pt-4 w-[75%] mx-auto ">
             
             <div className={type === "list"? "w-full": "space-y-4" }>
                 <div className="flex justify-between items-center space-x-4">

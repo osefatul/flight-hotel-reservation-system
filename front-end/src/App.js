@@ -10,7 +10,7 @@ import List from "./pages/list/List";
 
 function App() {
   return (
-   
+    
     <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="hotels" element={<List/>}/>

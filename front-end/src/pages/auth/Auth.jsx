@@ -30,11 +30,12 @@ const Auth = () => {
 
     const handleClick = async (e) => {
         e.preventDefault();
+
         dispatch(loginPending());
         try {
-
         const res = await loginUser(credentials)
         const AuthResponse = res?.response?.data?.message
+
         //Error
         if (AuthResponse){
             setMessageAddedAlert(true)//To turn on message alert
@@ -42,6 +43,7 @@ const Auth = () => {
         }
 
         //console.log(isAuth)
+        localStorage.setItem("user", JSON.stringify(res.details))
         dispatch(loginSuccess(res.details));
         navigate("/")
         } catch (err) {

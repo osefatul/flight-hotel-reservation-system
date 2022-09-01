@@ -27,7 +27,7 @@ export const loginUser = async (formData) =>{
         const res = await axios.post(loginUserUrl, formData);
 
         if(res.status === 200){
-            sessionStorage.setItem("accessJW", res.data.token);
+            sessionStorage.setItem("accessJWT", res.data.token);
         return res.data;
         }
         return res
