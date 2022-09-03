@@ -1,27 +1,54 @@
 import React from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from "react-redux"
+import { fetchingHotels, fetchingHotelsByCity, fetchingHotelsByFeature, fetchingHotelsByType } from '../features/hotelSlice/hotelAction';
 
 function FeaturedProperties() {
+
+
+    const dispatch = useDispatch();
+    const {isLoading,
+    error,
+    hotels,
+    hotelsFeatured
+    } = useSelector(state => state.hotels)
+
+
+    useEffect(() =>{
+    dispatch(fetchingHotelsByFeature())
+    },[])
+
+
     return (
             <div className="w-full flex space-between space-x-4">
             
-                <div className="w-full flex flex-col justify-between space-y-2 ">
+            {hotelsFeatured.map((hotel) => (
+
+                <div key={hotel._id} className="w-full flex flex-col justify-between space-y-2 ">
                     <img
-                    src="https://cf.bstatic.com/xdata/images/hotel/square600/13125860.webp?k=e148feeb802ac3d28d1391dad9e4cf1e12d9231f897d0b53ca067bde8a9d3355&o=&s=1"
+                    src={hotel.photos[0]}
                     alt=""
                     className="w-full h-28 sm:h-32 object-cover rounded-lg"/>
                     
                     <div className='flex flex-col justify-between space-y-3'>
 
-                    <span className=" text-[12px] sm:text-[18px] text-[#333] font-bold">Aparthotel Stare Miasto</span>
-                    <span className="text-[11px] sm:text-[15px]">Madrid</span>
-                    <span className="text-[11px] sm:text-[15px] font-bold">Starting from $120</span>
+                    <span className=" text-[12px] sm:text-[18px] text-[#333] font-bold">{hotel.name}</span>
+                    <span className="text-[11px] sm:text-[15px]">{hotel.city}</span>
+                    <span className="text-[11px] sm:text-[15px] font-bold">Starting from ${hotel.cheapestPrice}</span>
+                    
+                    {hotel.rating &&     
                     <div className="">
-                        <button className="bg-[#003580] text-white font-bold p-1 mr-[5px] rounded-md text-[11px] sm:text-[15px]">8.9</button>
+                        <button className="bg-[#003580] text-white font-bold p-1 mr-[5px] rounded-md text-[11px] sm:text-[15px]">{hotel.rating}</button>
                         <span className='text-[11px] sm:h-[15px]'>Excellent</span>
                     </div>
+                    }
+
                     </div>
                 </div>
+            ))}
             
+
+{/* 
                 <div className="w-full flex flex-col justify-between space-y-2 ">
                     <img
                     src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/215955381.jpg?k=ff739d1d9e0c8e233f78ee3ced82743ef0355e925df8db7135d83b55a00ca07a&o=&hp=1"
@@ -75,7 +102,7 @@ function FeaturedProperties() {
                         <span className='text-[11px] sm:h-[15px]'>Excellent</span>
                     </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         );
 }

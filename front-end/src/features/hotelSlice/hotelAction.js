@@ -1,5 +1,5 @@
-import { createHotel, deleteHotel, getHotelRooms, getHotelsByCity, getHotelsByType, updateHotel } from "../../api/hotelApi";
-import { fetchingHotelsInTheCitiesSuccess, fetchingHotelTypesSuccess, hotelPending, HotelsFail } from "./hotelSlice"
+import { createHotel, deleteHotel, getHotelRooms, getHotels, getHotelsByCity, getHotelsByFeature, getHotelsByType, updateHotel } from "../../api/hotelApi";
+import { fetchingHotelsFeaturedSuccess, fetchingHotelsInTheCitiesSuccess, fetchingHotelsSuccess, fetchingHotelTypesSuccess, hotelPending, HotelsFail } from "./hotelSlice"
 
 
 
@@ -15,6 +15,20 @@ export const creatingHotel = (formData) => async (dispatch) => {
         return error;
     }
 }
+
+
+export const fetchingHotels = (formData) => async (dispatch) => {
+    dispatch(hotelPending());
+    try {
+        const result = await getHotels(formData);
+        dispatch(fetchingHotelsSuccess(result.data))
+    }catch(error){
+        console.log(error)
+        dispatch(HotelsFail(error))
+        return error;
+    }
+}
+
 
 
 
@@ -76,6 +90,21 @@ export const fetchingHotelsByType = (roomId) => async (dispatch) => {
     try {
         const result = await getHotelsByType(roomId);
         dispatch(fetchingHotelTypesSuccess(result.data))
+    }catch(error){
+        console.log(error)
+        dispatch(HotelsFail(error))
+        return error;
+    }
+}
+
+
+
+
+export const fetchingHotelsByFeature = () => async (dispatch) => {
+    dispatch(hotelPending());
+    try {
+        const result = await getHotelsByFeature();
+        dispatch(fetchingHotelsFeaturedSuccess(result.data))
     }catch(error){
         console.log(error)
         dispatch(HotelsFail(error))

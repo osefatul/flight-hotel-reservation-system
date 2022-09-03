@@ -8,6 +8,7 @@ const updateHotelUrl = rootUrl + "hotels/";
 const getHotelsByCityUrl = rootUrl + "hotels/countByCity";
 const getHotelRoomsUrl = rootUrl + "hotels/room/";
 const getHotelsByTypeUrl = rootUrl + "hotels/countByType";
+const getHotelsByFeatureUrl = rootUrl + "hotels?featured=true&limit=4&min=10&max=110";
 
 
 
@@ -36,7 +37,7 @@ export const getHotel = async (hotelId) =>{
 
 export const getHotels = async () =>{
     try {
-        const res = await axios.get(getHotel);
+        const res = await axios.get(getHotelUrl);
         return res
     }catch(error){
         console.log(error)
@@ -93,7 +94,20 @@ export const getHotelsByCity = async ()=>{
 
 export const getHotelsByType = async ()=>{
     try {
-        const res = await axios.get(getHotelsByTypeUrl);
+        const res = await axios.get(getHotelsByTypeUrl + "");
+        return res
+    }catch (error){
+        console.log(error)
+        return error;
+    }
+}
+
+
+
+
+export const getHotelsByFeature = async ()=>{
+    try {
+        const res = await axios.get(getHotelsByFeatureUrl);
         return res
     }catch (error){
         console.log(error)

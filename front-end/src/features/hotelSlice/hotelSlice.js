@@ -3,10 +3,10 @@ import {createSlice} from "@reduxjs/toolkit"
 const initialState = {
     isLoading: false,
     error: "",
-    hotels: null,
+    hotels: {},
     HotelsInTheCities: {},
     hotelTypes:{},
-    
+    hotelsFeatured:{},
 }
 
 const hotelSlice = createSlice ({
@@ -32,12 +32,28 @@ const hotelSlice = createSlice ({
 
         },
 
+        
         fetchingHotelTypesSuccess: (state, action)=>{
             state.isLoading = false
             state.error = ""
             state.hotelTypes = action.payload
 
         },
+
+        fetchingHotelsFeaturedSuccess: (state, action)=>{
+            state.isLoading = false
+            state.error = ""
+            state.hotelsFeatured = action.payload
+
+        },
+
+        fetchingSuccess: (state, action)=>{
+            state.isLoading = false
+            state.error = ""
+            state.hotelTypes = action.payload
+
+        },
+
         HotelsFail: (state, action)=>{
             state.isLoading = false
             state.error = action.payload
@@ -53,6 +69,7 @@ export const  {
     fetchingHotelsSuccess, 
     fetchingHotelsInTheCitiesSuccess, 
     fetchingHotelTypesSuccess,
+    fetchingHotelsFeaturedSuccess,
     HotelsFail
 } = actions
 
