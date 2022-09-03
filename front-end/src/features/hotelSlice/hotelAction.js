@@ -1,5 +1,5 @@
 import { createHotel, deleteHotel, getHotelRooms, getHotels, getHotelsByCity, getHotelsByDestination, getHotelsByFeature, getHotelsByType, updateHotel } from "../../api/hotelApi";
-import { fetchingHotelsByDestinationSuccess, fetchingHotelsFeaturedSuccess, fetchingHotelsInTheCitiesSuccess, fetchingHotelsSuccess, fetchingHotelTypesSuccess, hotelPending, HotelsFail } from "./hotelSlice"
+import { FeaturedHotelPending, fetchingHotelsByDestinationSuccess, fetchingHotelsFeaturedSuccess, fetchingHotelsInTheCitiesSuccess, fetchingHotelsSuccess, fetchingHotelTypesSuccess, hotelPending, HotelsFail } from "./hotelSlice"
 
 
 
@@ -93,8 +93,9 @@ export const fetchingHotelsByType = (roomId) => async (dispatch) => {
 
 
 export const fetchingHotelsByFeature = () => async (dispatch) => {
-    dispatch(hotelPending());
     try {
+        dispatch(hotelPending());
+        dispatch(FeaturedHotelPending());
         const result = await getHotelsByFeature();
         dispatch(fetchingHotelsFeaturedSuccess(result.data))
     }catch(error){

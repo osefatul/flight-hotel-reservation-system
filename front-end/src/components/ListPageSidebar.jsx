@@ -4,16 +4,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
+import { useDispatch, useSelector } from "react-redux"
+import { fetchingHotelsByDestination } from "../features/hotelSlice/hotelAction";
 
-function ListPageSidebar() {
+function ListPageSidebar({destination, setDestination}) {
 
-    const [toggle, setToggle] = useState(false);
-    const location = useLocation();// this will get states passed to Navigate
-
-    const [destination, setDestination] = useState(location.state.destination);
-    const [date, setDate] = useState(location.state.date);
+    // this will get states passed to Navigate
+    const location = useLocation();
+    const dispatch = useDispatch();
     const [openDate, setOpenDate] = useState(false);
+    const [date, setDate] = useState(location.state.date);
     const [options, setOptions] = useState(location.state.options);
+
+    const [min, setMin] = useState(10);
+    const [max, setMax] = useState(400);
+
+
+    const refetch =  () => {
+        dispatch(fetchingHotelsByDestination(destination, min, max))
+    }
 
 return (
 <div>
@@ -24,7 +33,10 @@ return (
             <h1 className="text-[##555] text-sm font-bold">Search</h1>
             <div className="flex flex-col space-y-1">
                 <label className='text-sm'>Destination</label>
-                <input className="!border-none !outline-none h-5 bg-slate-100 rounded-md pl-1" placeholder={destination} type="text" />
+                <input className="!border-none !outline-none h-5 bg-slate-100 rounded-md pl-1" 
+                placeholder={destination} 
+                onChange = {e => setDestination(e.target.value)}
+                type="text" />
             </div>
 
             <div className="flex flex-col space-y-1 relative">
@@ -79,7 +91,8 @@ return (
                         Min price <small>per night</small>
                     </span>
                     <input 
-                    type="number"  
+                    type="number"
+                    onChange = {e=> setMin(e.target.value)}
                     className="w-10 pl-1 rounded-sm"
                     />
                 </div>
@@ -89,7 +102,8 @@ return (
                         Max price <small>per night</small>
                     </span>
                     <input 
-                    type="number" 
+                    type="number"
+                    onChange = {e => setMax(e.target.value)}
                     className="w-10 pl-1 rounded-sm"
                     />
                 </div>
@@ -126,7 +140,7 @@ return (
             </div>
         </div>
 
-        <button className='w-full flex items-center justify-center bg-slate-900 text-white rounded-sm'>Search</button>
+        <button className='w-full flex items-center justify-center bg-slate-900 text-white rounded-sm' onClick={refetch}>Search</button>
     </div>
 </div>
 )

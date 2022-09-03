@@ -61,11 +61,11 @@ Content-Type: application/json
 
 
 ### Get hotels where feature is true and ...
-GET http://localhost:5000/v1/hotels?featured=true&limit=2&min=10&max=200
+GET http://localhost:5000/v1/hotels?featured=true&limit=4
 Content-Type: application/json
 
 
-### Get hotels where feature is true and ...
+### Get hotels where destination
 GET http://localhost:5000/v1/hotels?city=Kabul&min=1&max=200
 Content-Type: application/json
 

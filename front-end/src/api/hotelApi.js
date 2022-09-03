@@ -1,5 +1,5 @@
 import axios from "axios"
-import { fetchingHotelsByDestinationSuccess, hotelPending } from "../features/hotelSlice/hotelSlice";
+import { fetchingHotelsByDestinationSuccess, fetchingHotelsFeaturedSuccess, hotelPending } from "../features/hotelSlice/hotelSlice";
 
 const rootUrl = "http://localhost:5000/v1/"
 const createHotelUrl = rootUrl + "hotels/";
@@ -10,7 +10,6 @@ const getHotelsByCityUrl = rootUrl + "hotels/countByCity";
 const getHotelRoomsUrl = rootUrl + "hotels/room/";
 const getHotelsByTypeUrl = rootUrl + "hotels/countByType";
 const getHotelsByFeatureUrl = rootUrl + "hotels?featured=true&limit=4";
-const getHotelsByDestinationUrl = rootUrl + "hotels?";
 
 
 
@@ -82,7 +81,6 @@ export const getHotelRooms = async (roomId) =>{
 
 
 
-
 export const getHotelsByCity = async ()=>{
     try {
         const res = await axios.get(getHotelsByCityUrl + "?cities=Vancouver,Kabul,Richmond,Seatal");
@@ -107,7 +105,6 @@ export const getHotelsByType = async ()=>{
 
 
 
-
 export const getHotelsByFeature = async ()=>{
     try {
         const res = await axios.get(getHotelsByFeatureUrl);
@@ -121,7 +118,6 @@ export const getHotelsByFeature = async ()=>{
 
 
 export const getHotelsByDestination = async(destination, min, max) => {
-    // dispatch(hotelPending());
     try {
         const result = await axios.get(`http://localhost:5000/v1/hotels?city=${destination}&min=${min || 0 }&max=${max || 999}`);
         
@@ -133,12 +129,3 @@ export const getHotelsByDestination = async(destination, min, max) => {
     }
 }
 
-
-// export const updateRoomAvailability = async (id) =>{
-//     try {
-//         const res = await axios.put(updateRoomAvailabilityUrl + id,);
-//         console.log(res)
-//     }catch(error){
-
-//     }
-// }

@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchingHotelsByCity, fetchingHotelsByType } from '../features/hotelSlice/hotelAction';
 
 function PropertyList() {
+
+  
   const dispatch = useDispatch();
   const {isLoading,
     error,

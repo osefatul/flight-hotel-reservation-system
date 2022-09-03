@@ -2,12 +2,13 @@ import {createSlice} from "@reduxjs/toolkit"
 
 const initialState = {
     isLoading: false,
+    FeaturedLoading: false,
     error: "",
     hotels: {},
     HotelsInTheCities: {},
     hotelTypes:{},
-    hotelsFeatured:{},
-    hotelsByDestination:{},
+    hotelsFeatured:[],
+    hotelsByDestination:[],
 }
 
 const hotelSlice = createSlice ({
@@ -18,6 +19,12 @@ const hotelSlice = createSlice ({
         hotelPending: (state, action)=>{
             state.isLoading = true
         },
+
+        FeaturedHotelPending: (state, action)=>{
+            state.isLoading = true
+            state.FeaturedLoading = true
+        },
+
 
         fetchingHotelsSuccess: (state, action)=>{
             state.isLoading = false
@@ -67,7 +74,8 @@ const { reducer, actions} = hotelSlice
 
 
 export const  {
-    hotelPending, 
+    hotelPending,
+    FeaturedHotelPending, 
     fetchingHotelsSuccess, 
     fetchingHotelsInTheCitiesSuccess, 
     fetchingHotelTypesSuccess,
@@ -77,4 +85,3 @@ export const  {
 } = actions
 
 export default reducer;
-

@@ -17,31 +17,23 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import ListPageSidebar from '../../components/ListPageSidebar';
 import { fetchingHotelsByDestination } from '../../features/hotelSlice/hotelAction';
-import { fetchingHotelsByDestinationSuccess } from '../../features/hotelSlice/hotelSlice';
-import axios from "axios";
-import { getHotelsByDestination } from '../../api/hotelApi';
+
 
 
 function List() {
     const [toggle, setToggle] = useState(false);
     const location = useLocation();
     const dispatch = useDispatch();
-    const [min, setMin] = useState(10);
-    const [max, setMax] = useState(200);
 
-    const [destination, setDestination] = useState("Kabul");
-    const [date, setDate] = useState(location.state.date);
+    const [destination, setDestination] = useState(location.state.destination);
+    
     const {isLoading,
     error,
-    hotels,
-    hotelsFeatured,
     hotelsByDestination
     } = useSelector(state => state.hotels)
 
-
     useEffect(() =>{
-
-        dispatch(fetchingHotelsByDestination(destination, min, max))
+        dispatch(fetchingHotelsByDestination(destination))
     },[])
 
 
@@ -59,7 +51,11 @@ function List() {
             
             {/* Sticky Sidebar left for large screens*/}
             <div className="sticky z-50 h-max top-36 hidden sm:flex">
-            <ListPageSidebar/>
+            <ListPageSidebar
+            destination={destination}
+            setDestination={setDestination}
+
+            />
             </div>
             
                 {/* Sidebar Icons for small screens */}
@@ -87,7 +83,10 @@ function List() {
                         toggle ? "translate-x-0" : "-translate-x-80"
                     } ease-out duration-700  shadow-2xl`}
                     >
-                    <ListPageSidebar/>
+                    <ListPageSidebar
+                    destination={destination}
+                    setDestination={setDestination}
+                    />
                     </div>
                     
                 </div>
@@ -95,15 +94,12 @@ function List() {
 
                 {/*Right Side  */}
                 <div className="">
-                    <SearchItem />
-                    <SearchItem />
-                    <SearchItem />
-                    <SearchItem />
-                    <SearchItem />
-                    <SearchItem />
-                    <SearchItem />
-                    <SearchItem />
-                    <SearchItem />
+                    {hotelsByDestination?.map((hotel)=>{
+
+                    return <SearchItem hotel={hotel} key={hotel._id} />
+                    
+                    })}
+
                 </div>
             
             </div>
