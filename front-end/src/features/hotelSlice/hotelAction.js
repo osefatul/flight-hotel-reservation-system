@@ -1,5 +1,5 @@
-import { createHotel, deleteHotel, getHotelRooms, getHotels, getHotelsByCity, getHotelsByDestination, getHotelsByFeature, getHotelsByType, updateHotel } from "../../api/hotelApi";
-import { FeaturedHotelPending, fetchingHotelsByDestinationSuccess, fetchingHotelsFeaturedSuccess, fetchingHotelsInTheCitiesSuccess, fetchingHotelsSuccess, fetchingHotelTypesSuccess, hotelPending, HotelsFail } from "./hotelSlice"
+import { createHotel, deleteHotel, getHotel, getHotelRooms, getHotels, getHotelsByCity, getHotelsByDestination, getHotelsByFeature, getHotelsByType, updateHotel } from "../../api/hotelApi";
+import { FeaturedHotelPending, fetchingAHotelSuccess, fetchingHotelsByDestinationSuccess, fetchingHotelsFeaturedSuccess, fetchingHotelsInTheCitiesSuccess, fetchingHotelsSuccess, fetchingHotelTypesSuccess, hotelPending, HotelsFail } from "./hotelSlice"
 
 
 
@@ -12,6 +12,20 @@ export const creatingHotel = (formData) => async (dispatch) => {
         console.log(result);
     }catch(error){
         console.log(error)
+        return error;
+    }
+}
+
+
+
+export const FetchingAHotel = (hotelId) => async (dispatch) => {
+    dispatch(hotelPending());
+    try {
+        const result = await getHotel(hotelId);
+        dispatch(fetchingAHotelSuccess(result.data))
+    }catch(error){
+        console.log(error)
+        dispatch(HotelsFail(error))
         return error;
     }
 }

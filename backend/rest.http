@@ -34,7 +34,7 @@ Content-Type: application/json
 
 
 ### Get a hotel by id
-GET http://localhost:5000/v1/hotels/hotel/630c755e4a55a78f7588f441
+GET http://localhost:5000/v1/hotels/hotel/630c967e53d42cf2f5e538c7
 Content-Type: application/json
 
 

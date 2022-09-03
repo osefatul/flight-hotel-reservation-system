@@ -5,6 +5,7 @@ const initialState = {
     FeaturedLoading: false,
     error: "",
     hotels: {},
+    hotel: {},
     HotelsInTheCities: {},
     hotelTypes:{},
     hotelsFeatured:[],
@@ -30,6 +31,12 @@ const hotelSlice = createSlice ({
             state.isLoading = false
             state.error = ""
             state.hotels = action.payload
+        },
+
+        fetchingAHotelSuccess: (state, action)=>{
+            state.isLoading = false
+            state.error = ""
+            state.hotel = action.payload
         },
 
         fetchingHotelsInTheCitiesSuccess: (state, action)=>{
@@ -75,7 +82,8 @@ const { reducer, actions} = hotelSlice
 
 export const  {
     hotelPending,
-    FeaturedHotelPending, 
+    FeaturedHotelPending,
+    fetchingAHotelSuccess, 
     fetchingHotelsSuccess, 
     fetchingHotelsInTheCitiesSuccess, 
     fetchingHotelTypesSuccess,

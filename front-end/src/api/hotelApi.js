@@ -27,7 +27,7 @@ export const createHotel = async (formData) =>{
 
 export const getHotel = async (hotelId) =>{
     try {
-        const res = await axios.get(getHotelUrl + "hotel/" + hotelId,);
+        const res = await axios.get(getHotelUrl + "hotel/" + hotelId);
         return res
     }catch(error){
         console.log(error)

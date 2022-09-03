@@ -82,58 +82,59 @@ return (
         </div>
 
 
+
         <div className="flex flex-col space-y-1 mb-3 text-[12px]">
             <label className='font-bold '>Options</label>
             
             <div className="p-2">
-                <div className="flex justify-between text-[#555] text-sm mb-2">
+                <div className="flex justify-between text-[#555] text-[12px] mb-2 space-x-2">
                     <span className="lsOptionText">
-                        Min price <small>per night</small>
+                        Min price per night
                     </span>
                     <input 
                     type="number"
                     onChange = {e=> setMin(e.target.value)}
-                    className="w-10 pl-1 rounded-sm"
+                    className="w-8 h-8  pl-1 rounded-sm"
                     />
                 </div>
                 
-                <div className="flex justify-between text-[#555] text-sm mb-2">
+                <div className="flex justify-between text-[#555] text-[12px] mb-2">
                     <span className="lsOptionText">
-                        Max price <small>per night</small>
+                        Max price per night
                     </span>
                     <input 
                     type="number"
                     onChange = {e => setMax(e.target.value)}
-                    className="w-10 pl-1 rounded-sm"
+                    className="w-8 h-8 pl-1 rounded-sm"
                     />
                 </div>
 
-                <div className="flex justify-between text-[#555] text-sm mb-2">
+                <div className="flex justify-between text-[#555] text-[12px] mb-2">
                     <span className="lsOptionText">Adult</span>
                     <input
                     type="number"
                     min={1}
-                    className="w-10 pl-1 rounded-sm"
+                    className="w-8 pl-1 rounded-sm"
                     placeholder={options.adult}
                     />
                 </div>
                 
-                <div className="flex justify-between text-[#555] text-sm mb-2">
+                <div className="flex justify-between text-[#555] text-[12px] mb-2">
                     <span className="lsOptionText">Children</span>
                     <input
                     type="number"
                     min={0}
-                    className="w-10 pl-1 rounded-sm"
+                    className="w-8 pl-1 rounded-sm"
                     placeholder={options.children}
                     />
                 </div>
                 
-                <div className="flex justify-between text-[#555] text-sm mb-2">
+                <div className="flex justify-between text-[#555] text-[12px] mb-2">
                     <span className="lsOptionText">Room</span>
                     <input
                     type="number"
                     min={1}
-                    className="w-10 pl-1 rounded-sm"
+                    className="w-8 pl-1 rounded-sm"
                     placeholder={options.room}
                 />
                 </div>

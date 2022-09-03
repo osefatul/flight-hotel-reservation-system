@@ -9,16 +9,21 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DateRange } from "react-date-range";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { motion } from "framer-motion"
+import { useDispatch, useSelector } from "react-redux"
+import { newSearch } from '../../features/searchSlice/searchSlice';
 
 
 function StaysOptions() {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const [toggle, setToggle] = useState(false);
     const [destination, setDestination] = useState("");
+
 
     const [openDate, setOpenDate] = useState(false);
     const [date, setDate] = useState([
@@ -50,6 +55,7 @@ function StaysOptions() {
     
 
     const handleSearch = () => {
+        dispatch(newSearch({destination, date, options}))
         navigate("/hotels", { state: { destination, date, options } });
     };
 
@@ -216,7 +222,7 @@ return (
 
         {/* SIDE BAR */}
         <div
-            className={`fixed top-40 right-0 z-40 h-[40vw] w-full 
+            className={`fixed top-32 right-0 z-40 h-[48vw] w-full 
             flex flex-col justify-center items-center 
             bg-black ${
             toggle ? "translate-x-0" : "translate-x-full"

@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from "../../components/Navbar";
 import Header from "../../components/Header/Header";
 import MailList from "../../components/MailList";
 import Footer from "../../components/Footer";
+import { useDispatch, useSelector } from "react-redux"
+
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 faCircleArrowLeft,
@@ -11,15 +14,49 @@ faCircleXmark,
 faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { FetchingAHotel } from '../../features/hotelSlice/hotelAction';
 
 
 function Hotel() {
 
-
-
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const id = location.pathname.split("/")[2];
+    
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
+    const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
 
+
+    const {isLoading,
+        error,
+        hotel
+    } = useSelector(state => state.hotels)
+
+
+    const {date,
+        options
+    } = useSelector(state => state.search)
+    
+    
+
+            
+    function dayDifference(date1, date2) {
+        const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+        const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+        return diffDays;
+    }
+
+    const days = dayDifference(date[0].endDate, date[0].startDate);
+
+
+    
+    console.log(days)
+    useEffect(()=>{
+        dispatch(FetchingAHotel(id))
+    },[])
+    
+    
     const photos = [
         {
         src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707778.jpg?k=56ba0babbcbbfeb3d3e911728831dcbc390ed2cb16c51d88159f82bf751d04c6&o=&hp=1",
@@ -102,28 +139,28 @@ function Hotel() {
 
                 <button className="absolute bg-[#0071c2] text-white p-2 !border-none top-2 sm:top-4 cursor-pointer font-bold rounded-sm right-0 hover:text-amber-500 text-[9px] sm:text-[15px]  ">Reserve or Book Now!</button>
 
-                <h1 className="text-[18px] sm:text-2xl font-bold">Tower Street Apartments</h1>
+                <h1 className="text-[18px] sm:text-2xl font-bold">{hotel.name}</h1>
                 
                 <div className="text-[10px] sm:text-[13px] flex items-center space-x-2">
                     <FontAwesomeIcon icon={faLocationDot} />
-                    <span>Elton St 125 New york</span>
+                    <span>{hotel.address}</span>
                 </div>
 
                 <span className="text-[#0071c2] font-bold text-[12px] sm:text-[15px]">
-                    Excellent location – 500m from center
+                    Excellent location – {hotel.distance}m from center
                 </span>
 
                 <span className="text-[#008009] font-bold text-[12px] sm:text-[15px]">
-                    Book a stay over $114 at this property and get a free airport taxi
+                    Book a stay over ${hotel.cheapestPrice} at this property and get a free airport taxi
                 </span>
 
 
                 <div className="flex flex-wrap justify-between">
-                    {photos.map((photo, i) => (
+                    {hotel?.photos?.map((photo, i) => (
                         <div className="w-[33%]" key={i}>
                         <img
                             onClick={() => handleOpen(i)}
-                            src={photo.src}
+                            src={photo}
                             alt=""
                             className="w-full cursor-pointer object-cover rounded-sm "
                         />
@@ -134,30 +171,20 @@ function Hotel() {
                 <div className="flex sm:flex-row flex-col justify-between space-x-2 w-full">
 
                     <div className="sm:w-3/4 w-full">
-                        <h1 className="text-[18px] sm:text-2xl font-bold">Stay in the heart of City</h1>
+                        <h1 className="text-[18px] sm:text-2xl font-bold">Stay in the {hotel.title}</h1>
                         <p className="text-[12px] sm:text-[15px] text-md mt-5">
-                        Located a 5-minute walk from St. Florian's Gate in Krakow, Tower
-                        Street Apartments has accommodations with air conditioning and
-                        free WiFi. The units come with hardwood floors and feature a
-                        fully equipped kitchenette with a microwave, a flat-screen TV,
-                        and a private bathroom with shower and a hairdryer. A fridge is
-                        also offered, as well as an electric tea pot and a coffee
-                        machine. Popular points of interest near the apartment include
-                        Cloth Hall, Main Market Square and Town Hall Tower. The nearest
-                        airport is John Paul II International Kraków–Balice, 16.1 km
-                        from Tower Street Apartments, and the property offers a paid
-                        airport shuttle service.
+                            {hotel.desc}
                         </p>
                     </div>
 
                     <div className="bg-[#ebf3ff] p-2 flex flex-col space-y-3 w-full sm:w-1/4 mt-4">
-                        <h1 className="text-[12px] sm:text-[15px] text-md text-[#555]">Perfect for a 9-night stay!</h1>
+                        <h1 className="text-[12px] sm:text-[15px] text-md text-[#555]">Perfect for a {days}-night stay!</h1>
                         <span className="text-[12px] sm:text-[15px] text-md">
                             Located in the real heart of Krakow, this property has an
                             excellent location score of 9.8!
                         </span >
                         <h2 className="font-semibold">
-                            <b>$945</b> (9 nights)
+                            <b>${days * hotel.cheapestPrice * options.room}</b> ({days}  nights)
                         </h2>
                         <button className='!borderNone p-2 bg-[#0071c2] text-white font-bold rounded-sm cursor-pointer hover:text-amber-500 '>Reserve or Book Now!</button>
                     </div>
