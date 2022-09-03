@@ -1,5 +1,5 @@
-import { createHotel, deleteHotel, getHotelRooms, getHotels, getHotelsByCity, getHotelsByFeature, getHotelsByType, updateHotel } from "../../api/hotelApi";
-import { fetchingHotelsFeaturedSuccess, fetchingHotelsInTheCitiesSuccess, fetchingHotelsSuccess, fetchingHotelTypesSuccess, hotelPending, HotelsFail } from "./hotelSlice"
+import { createHotel, deleteHotel, getHotelRooms, getHotels, getHotelsByCity, getHotelsByDestination, getHotelsByFeature, getHotelsByType, updateHotel } from "../../api/hotelApi";
+import { fetchingHotelsByDestinationSuccess, fetchingHotelsFeaturedSuccess, fetchingHotelsInTheCitiesSuccess, fetchingHotelsSuccess, fetchingHotelTypesSuccess, hotelPending, HotelsFail } from "./hotelSlice"
 
 
 
@@ -30,8 +30,6 @@ export const fetchingHotels = (formData) => async (dispatch) => {
 }
 
 
-
-
 export const deletingHotel = (hotelId) => async (dispatch) => {
     dispatch(hotelPending());
     try {
@@ -42,7 +40,6 @@ export const deletingHotel = (hotelId) => async (dispatch) => {
         return error;
     }
 }
-
 
 
 export const updatingHotel = (hotelId) => async (dispatch) => {
@@ -69,7 +66,6 @@ export const fetchingHotelRooms = (roomId) => async (dispatch) => {
 }
 
 
-
 export const fetchingHotelsByCity = (roomId) => async (dispatch) => {
     dispatch(hotelPending());
     try {
@@ -81,8 +77,6 @@ export const fetchingHotelsByCity = (roomId) => async (dispatch) => {
         return error;
     }
 }
-
-
 
 
 export const fetchingHotelsByType = (roomId) => async (dispatch) => {
@@ -98,13 +92,29 @@ export const fetchingHotelsByType = (roomId) => async (dispatch) => {
 }
 
 
-
-
 export const fetchingHotelsByFeature = () => async (dispatch) => {
     dispatch(hotelPending());
     try {
         const result = await getHotelsByFeature();
         dispatch(fetchingHotelsFeaturedSuccess(result.data))
+    }catch(error){
+        console.log(error)
+        dispatch(HotelsFail(error))
+        return error;
+    }
+}
+
+
+
+
+export const fetchingHotelsByDestination = (destination, min, max) => async (dispatch) => {
+
+    dispatch(hotelPending());
+    try {
+        const result = await getHotelsByDestination(destination, min, max);
+
+        dispatch(fetchingHotelsByDestinationSuccess(result.data))
+
     }catch(error){
         console.log(error)
         dispatch(HotelsFail(error))

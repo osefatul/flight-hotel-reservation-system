@@ -7,9 +7,6 @@ import { DateRange } from "react-date-range";
 
 function ListPageSidebar() {
 
-
-
-
     const [toggle, setToggle] = useState(false);
     const location = useLocation();// this will get states passed to Navigate
 

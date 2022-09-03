@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from "../../components/Navbar";
 import Header from "../../components/Header/Header";
 import { useLocation } from "react-router-dom";
@@ -9,19 +9,41 @@ import SearchItem from '../../components/SearchItem';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { motion } from "framer-motion"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useDispatch, useSelector } from "react-redux"
+
 import {
     faBars,
-    faBed,
-    faCalendarDays,
     faCircleXmark,
-    faPerson,
 } from "@fortawesome/free-solid-svg-icons";
 import ListPageSidebar from '../../components/ListPageSidebar';
-
+import { fetchingHotelsByDestination } from '../../features/hotelSlice/hotelAction';
+import { fetchingHotelsByDestinationSuccess } from '../../features/hotelSlice/hotelSlice';
+import axios from "axios";
+import { getHotelsByDestination } from '../../api/hotelApi';
 
 
 function List() {
     const [toggle, setToggle] = useState(false);
+    const location = useLocation();
+    const dispatch = useDispatch();
+    const [min, setMin] = useState(10);
+    const [max, setMax] = useState(200);
+
+    const [destination, setDestination] = useState("Kabul");
+    const [date, setDate] = useState(location.state.date);
+    const {isLoading,
+    error,
+    hotels,
+    hotelsFeatured,
+    hotelsByDestination
+    } = useSelector(state => state.hotels)
+
+
+    useEffect(() =>{
+
+        dispatch(fetchingHotelsByDestination(destination, min, max))
+    },[])
+
 
 
     return (

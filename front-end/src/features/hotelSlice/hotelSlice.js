@@ -7,6 +7,7 @@ const initialState = {
     HotelsInTheCities: {},
     hotelTypes:{},
     hotelsFeatured:{},
+    hotelsByDestination:{},
 }
 
 const hotelSlice = createSlice ({
@@ -22,14 +23,12 @@ const hotelSlice = createSlice ({
             state.isLoading = false
             state.error = ""
             state.hotels = action.payload
-
         },
 
         fetchingHotelsInTheCitiesSuccess: (state, action)=>{
             state.isLoading = false
             state.error = ""
             state.HotelsInTheCities = action.payload
-
         },
 
         
@@ -37,21 +36,24 @@ const hotelSlice = createSlice ({
             state.isLoading = false
             state.error = ""
             state.hotelTypes = action.payload
-
         },
 
         fetchingHotelsFeaturedSuccess: (state, action)=>{
             state.isLoading = false
             state.error = ""
             state.hotelsFeatured = action.payload
+        },
 
+        fetchingHotelsByDestinationSuccess: (state, action)=>{
+            state.isLoading = false
+            state.error = ""
+            state.hotelsByDestination = action.payload
         },
 
         fetchingSuccess: (state, action)=>{
             state.isLoading = false
             state.error = ""
             state.hotelTypes = action.payload
-
         },
 
         HotelsFail: (state, action)=>{
@@ -70,6 +72,7 @@ export const  {
     fetchingHotelsInTheCitiesSuccess, 
     fetchingHotelTypesSuccess,
     fetchingHotelsFeaturedSuccess,
+    fetchingHotelsByDestinationSuccess,
     HotelsFail
 } = actions
 
