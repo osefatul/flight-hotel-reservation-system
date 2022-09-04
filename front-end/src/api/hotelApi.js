@@ -69,9 +69,10 @@ export const updateHotel = async (hotelId) =>{
     }
 }
 
-export const getHotelRooms = async (roomId) =>{
+
+export const getHotelRooms = async (hotelId) =>{
     try {
-        const res = await axios.put(getHotelRoomsUrl + roomId );
+        const res = await axios.get(getHotelRoomsUrl + hotelId );
         return res
     }catch(error){
         console.log(error)

@@ -39,6 +39,13 @@ Content-Type: application/json
 
 
 
+
+### Get a hotel Rooms details by Hotelid
+GET http://localhost:5000/v1/hotels/room/630c755e4a55a78f7588f441
+Content-Type: application/json
+
+
+
 ### Get Hotels
 GET http://localhost:5000/v1/hotels/
 Content-Type: application/json
@@ -59,13 +66,13 @@ Content-Type: application/json
 
 
 
-
 ### Get hotels where feature is true and ...
 GET http://localhost:5000/v1/hotels?featured=true&limit=4
 Content-Type: application/json
 
 
-### Get hotels where destination
+
+### Get hotels based on destination
 GET http://localhost:5000/v1/hotels?city=Kabul&min=1&max=200
 Content-Type: application/json
 
@@ -131,19 +138,21 @@ Content-Type: application/json
 DELETE http://localhost:5000/v1/users/630c96f619b49ba0cca1b056
 Content-Type: application/json
 
+
+
 # ------------------------------------------------------------------
 
 
 ### Create a new Room
-POST http://localhost:5000/v1/rooms/630c755e4a55a78f7588f441
+POST http://localhost:5000/v1/rooms/630c967e53d42cf2f5e538c7
 Content-Type: application/json
 
 {
-"title": "Huge room",
+"title": "Rooms for a family",
 "desc": "Rooms available for a family",
 "price":100,
 "maxPeople":2,
-"roomNumbers": [{"number":102}, {"number":102}]
+"roomNumbers": [{"number":104}, {"number":106}]
 }
 
 
@@ -155,6 +164,13 @@ Content-Type: application/json
 ### Get Rooms
 GET http://localhost:5000/v1/rooms/
 Content-Type: application/json
+
+
+### Update room availability.
+PUT http://localhost:5000/v1/rooms/availability/630d9a85ad5759b952860df3
+Content-Type: application/json
+
+{"dates": ["2022-09-06T05:05:09.330+00:00", "2022-09-04T05:05:09.330+00:00"]}
 
 
 ### Delete a Room

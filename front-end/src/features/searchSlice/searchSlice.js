@@ -32,7 +32,6 @@ const searchSlice = createSlice ({
 
         },
 
-
     }
 })
 

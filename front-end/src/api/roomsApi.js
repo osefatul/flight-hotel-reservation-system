@@ -9,14 +9,14 @@ const updateRoomAvailabilityUrl = rootUrl + "rooms/availability/";
 
 
 
-
-
 export const createRoom = async (formData, hotelId) =>{
     try {
         const res = await axios.post(createRoomUrl + hotelId, formData);
         console.log(res)
+        return res
     }catch(error){
-
+        console.log(error)
+        return error;
     }
 }
 
@@ -25,8 +25,10 @@ export const getRoom = async (id) =>{
     try {
         const res = await axios.get(getRoomUrl + id,);
         console.log(res)
+        return res
     }catch(error){
-
+        console.log(error)
+        return error;
     }
 }
 
@@ -35,8 +37,10 @@ export const getRooms = async (id) =>{
     try {
         const res = await axios.get(getRoomUrl);
         console.log(res)
+        return res
     }catch(error){
-
+        console.log(error)
+        return error;
     }
 }
 
@@ -45,8 +49,10 @@ export const deleteRoom = async (roomId, hotelId) =>{
     try {
         const res = await axios.delete(deleteRoomUrl + roomId + "/" + hotelId );
         console.log(res)
+        return res
     }catch(error){
-
+        console.log(error)
+        return error;
     }
 }
 
@@ -55,17 +61,23 @@ export const updateRoom = async (id) =>{
     try {
         const res = await axios.put(deleteRoomUrl + id );
         console.log(res)
+        return res
     }catch(error){
+        console.log(error)
+        return error;
 
     }
 }
 
 
-export const updateRoomAvailability = async (id) =>{
+export const updateRoomAvailability = async (roomId, dates) =>{
     try {
-        const res = await axios.put(updateRoomAvailabilityUrl + id,);
+        const res = await axios.put(updateRoomAvailabilityUrl + roomId, dates);
         console.log(res)
+        return res;
     }catch(error){
+        console.log(error)
+        return error;
 
     }
 }

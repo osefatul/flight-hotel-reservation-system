@@ -4,12 +4,13 @@ const initialState = {
     isLoading: false,
     FeaturedLoading: false,
     error: "",
-    hotels: {},
     hotel: {},
+    hotels: {},
     HotelsInTheCities: {},
     hotelTypes:{},
     hotelsFeatured:[],
     hotelsByDestination:[],
+    hotelRoomsDetails: []
 }
 
 const hotelSlice = createSlice ({
@@ -64,10 +65,10 @@ const hotelSlice = createSlice ({
             state.hotelsByDestination = action.payload
         },
 
-        fetchingSuccess: (state, action)=>{
+        fetchingHotelRoomsDetailsSuccess : (state, action)=>{
             state.isLoading = false
             state.error = ""
-            state.hotelTypes = action.payload
+            state.hotelRoomsDetails = action.payload
         },
 
         HotelsFail: (state, action)=>{
@@ -89,6 +90,7 @@ export const  {
     fetchingHotelTypesSuccess,
     fetchingHotelsFeaturedSuccess,
     fetchingHotelsByDestinationSuccess,
+    fetchingHotelRoomsDetailsSuccess,
     HotelsFail
 } = actions
 

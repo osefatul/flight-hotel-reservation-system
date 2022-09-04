@@ -2,6 +2,8 @@ import { configureStore } from '@reduxjs/toolkit'
 import loginReducer from "./features/authSlice/loginSlice"
 import hotelReducer from "./features/hotelSlice/hotelSlice";
 import searchReducer from "./features/searchSlice/searchSlice";
+import roomReducer from "./features/roomSlice/roomSlice";
+
 
 
 const store = configureStore({
@@ -9,7 +11,7 @@ const store = configureStore({
         login:loginReducer,
         hotels:hotelReducer,
         search:searchReducer,
-        // rooms:registrationReducer,
+        rooms:roomReducer,
         // user: userReducer,
         // openTicket: newTicketReducer,
         // resetPassword: resetPasswordReducer,

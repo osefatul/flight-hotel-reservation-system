@@ -15,23 +15,25 @@ faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { FetchingAHotel } from '../../features/hotelSlice/hotelAction';
+import Reservation from '../../components/Reservation';
 
 
 function Hotel() {
 
     const dispatch = useDispatch();
     const location = useLocation();
-    const id = location.pathname.split("/")[2];
+    const navigate = useNavigate();
+    const hotelId = location.pathname.split("/")[2];
     
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
+
     const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
 
 
-    const {isLoading,
-        error,
-        hotel
-    } = useSelector(state => state.hotels)
+    const {hotel} = useSelector(state => state.hotels)
+    const {isAuth} = useSelector(state => state.login);
 
 
     const {date,
@@ -40,7 +42,6 @@ function Hotel() {
     
     
 
-            
     function dayDifference(date1, date2) {
         const timeDiff = Math.abs(date2.getTime() - date1.getTime());
         const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
@@ -50,11 +51,42 @@ function Hotel() {
     const days = dayDifference(date[0].endDate, date[0].startDate);
 
 
-    
-    console.log(days)
+    const handleReserve = () => {
+        if(isAuth){
+            setOpenModal(true);
+        }else{
+            navigate("/login")
+        }
+    }
+
+
+
     useEffect(()=>{
-        dispatch(FetchingAHotel(id))
+        dispatch(FetchingAHotel(hotelId))
     },[])
+
+
+
+    
+    const handleOpen = (i) => {
+        setSlideNumber(i);
+        setOpen(true);
+    };
+
+        
+    const handleMove = (direction) => {
+        let newSlideNumber;
+    
+        if (direction === "l") {
+        newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
+        } else {
+        newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
+        }
+        setSlideNumber(newSlideNumber)
+    };
+
+
+
     
     
     const photos = [
@@ -79,22 +111,6 @@ function Hotel() {
     ];
 
 
-
-    const handleOpen = (i) => {
-        setSlideNumber(i);
-        setOpen(true);
-    };
-        
-    const handleMove = (direction) => {
-        let newSlideNumber;
-    
-        if (direction === "l") {
-        newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
-        } else {
-        newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
-        }
-        setSlideNumber(newSlideNumber)
-    };
 
 
 
@@ -134,13 +150,10 @@ function Hotel() {
 
 
         <div className="flex flex-col space-y-2 items-center px-5 sm:px-0 w-full sm:w-[75%] mx-auto mt-4 ">
-
             <div className="w-full flex flex-col space-y-2 relative ">
-
                 <button className="absolute bg-[#0071c2] text-white p-2 !border-none top-2 sm:top-4 cursor-pointer font-bold rounded-sm right-0 hover:text-amber-500 text-[9px] sm:text-[15px]  ">Reserve or Book Now!</button>
 
-                <h1 className="text-[18px] sm:text-2xl font-bold">{hotel.name}</h1>
-                
+                <h1 className="text-[18px] sm:text-2xl font-bold">{hotel.name}</h1>   
                 <div className="text-[10px] sm:text-[13px] flex items-center space-x-2">
                     <FontAwesomeIcon icon={faLocationDot} />
                     <span>{hotel.address}</span>
@@ -186,12 +199,13 @@ function Hotel() {
                         <h2 className="font-semibold">
                             <b>${days * hotel.cheapestPrice * options.room}</b> ({days}  nights)
                         </h2>
-                        <button className='!borderNone p-2 bg-[#0071c2] text-white font-bold rounded-sm cursor-pointer hover:text-amber-500 '>Reserve or Book Now!</button>
+                        <button 
+                        onClick={handleReserve}
+                        className='!borderNone p-2 bg-[#0071c2] text-white font-bold rounded-sm cursor-pointer hover:text-amber-500 '>Reserve or Book Now!</button>
                     </div>
 
                 </div>
             </div>
-
         </div>
 
         <div>
@@ -199,6 +213,10 @@ function Hotel() {
                 <MailList />
             </div>
             <Footer />
+        </div>
+
+        <div className=''>
+        {openModal && <Reservation setOpenModal={setOpenModal} hotelId = {hotelId}/>}
         </div>
 
 
