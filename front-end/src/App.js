@@ -3,6 +3,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import { ProtectedRoutes } from "./ProtectedRoutes/ProtectedRoutes";
 import Auth from "./pages/auth/Auth";
 import Home from "./pages/home/Home";
 import Hotel from "./pages/hotel/Hotel";
@@ -14,8 +15,11 @@ function App() {
     <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="hotels" element={<List/>}/>
-      <Route path="hotels/:id" element={<Hotel/>}/>
       <Route path="login" element={<Auth/>}/>
+
+      <Route path="/" element={<ProtectedRoutes/>}>
+        <Route path="hotels/:id" element={<Hotel/>}/>
+      </Route>
     </Routes>
 
   );

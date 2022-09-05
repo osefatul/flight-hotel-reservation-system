@@ -4,7 +4,7 @@ const rootUrl = "http://localhost:5000/v1/"
 const createRoomUrl = rootUrl + "rooms/";
 const getRoomUrl =  rootUrl + "rooms/";
 const deleteRoomUrl = rootUrl + "rooms/";
-const updateRoomAvailabilityUrl = rootUrl + "rooms/availability/";
+const updateRoomAvailabilityUrl = getRoomUrl + "/availability/";
 
 
 
@@ -72,8 +72,11 @@ export const updateRoom = async (id) =>{
 
 export const updateRoomAvailability = async (roomId, dates) =>{
     try {
-        const res = await axios.put(updateRoomAvailabilityUrl + roomId, dates);
-        console.log(res)
+
+        const res = axios.put(updateRoomAvailabilityUrl + roomId, {
+                    dates: dates,
+                });
+
         return res;
     }catch(error){
         console.log(error)

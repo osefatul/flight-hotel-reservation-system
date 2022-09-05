@@ -5,7 +5,7 @@ import MailList from "../../components/MailList";
 import Footer from "../../components/Footer";
 import { useDispatch, useSelector } from "react-redux"
 
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation,Navigate, useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 faCircleArrowLeft,
@@ -23,26 +23,27 @@ function Hotel() {
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
-    const hotelId = location.pathname.split("/")[2];
-    
+
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
     const [openModal, setOpenModal] = useState(false);
-
+    
+    const hotelId = location.pathname.split("/")[2];
     const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
-
 
     const {hotel} = useSelector(state => state.hotels)
     const {isAuth} = useSelector(state => state.login);
+    const from = location.state?.from?.pathname || "/"
+
 
 
     const {date,
         options
     } = useSelector(state => state.search)
     
-    
 
     function dayDifference(date1, date2) {
+        //getTime will convert the date to a milliseconds.
         const timeDiff = Math.abs(date2.getTime() - date1.getTime());
         const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
         return diffDays;
@@ -54,11 +55,11 @@ function Hotel() {
     const handleReserve = () => {
         if(isAuth){
             setOpenModal(true);
-        }else{
-            navigate("/login")
         }
+        //else{
+        //     navigate('/login', {replace:true})
+        // }
     }
-
 
 
     useEffect(()=>{
@@ -67,7 +68,6 @@ function Hotel() {
 
 
 
-    
     const handleOpen = (i) => {
         setSlideNumber(i);
         setOpen(true);
@@ -87,7 +87,6 @@ function Hotel() {
 
 
 
-    
     
     const photos = [
         {
@@ -151,7 +150,7 @@ function Hotel() {
 
         <div className="flex flex-col space-y-2 items-center px-5 sm:px-0 w-full sm:w-[75%] mx-auto mt-4 ">
             <div className="w-full flex flex-col space-y-2 relative ">
-                <button className="absolute bg-[#0071c2] text-white p-2 !border-none top-2 sm:top-4 cursor-pointer font-bold rounded-sm right-0 hover:text-amber-500 text-[9px] sm:text-[15px]  ">Reserve or Book Now!</button>
+                <button className="absolute bg-[#0071c2] text-white p-2 !border-none top-2 sm:top-4 cursor-pointer font-bold rounded-sm right-0 hover:text-amber-500 text-[9px] sm:text-[15px]  " onClick="">Reserve or Book Now!</button>
 
                 <h1 className="text-[18px] sm:text-2xl font-bold">{hotel.name}</h1>   
                 <div className="text-[10px] sm:text-[13px] flex items-center space-x-2">

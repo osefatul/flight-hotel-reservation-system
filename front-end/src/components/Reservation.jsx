@@ -56,7 +56,6 @@ function Reservation({setOpenModal, hotelId}) {
             ? [...selectedRooms, value]
             : selectedRooms.filter((item) => item !== value)
         );
-        console.log(selectedRooms)
     };
 
 
@@ -64,12 +63,11 @@ function Reservation({setOpenModal, hotelId}) {
         try {
             await Promise.all(
                 selectedRooms.map((roomId) => {
-                const res = axios.put(`http://localhost:5000/v1/rooms/availability/${roomId}`, {
-                    dates: allDates,
-                });
+                // const res = axios.put(`http://localhost:5000/v1/rooms/availability/${roomId}`, {
+                //     dates: allDates,
+                // });
+                return dispatch(updatingRoomAvailability({roomId, dates:allDates}))
 
-                return res.data;
-                // dispatch(updatingRoomAvailability(roomId, allDates))
             })
         );
                 setOpenModal(false);
@@ -82,13 +80,13 @@ function Reservation({setOpenModal, hotelId}) {
     useEffect(()=>{
         dispatch(fetchingHotelRooms(hotelId))
     },[])
-    
+
 
 
     return (
     <div className="text-black fixed top-0 left-0 right-0 bottom-0  flex items-center justify-center bg-black  bg-opacity-70 ">
         
-        <div className='h-max w-max w-1/3 bg-slate-300 flex flex-col space-y-4 px-10 py-8 relative'>
+        <div className='h-max w-max sm:w-1/3 bg-slate-300 flex flex-col space-y-4 px-10 py-8 relative'>
             
             <div className="absolute -top-2 -right-4 w-12 flex items-center justify-center cursor-pointer">
                 <FontAwesomeIcon
@@ -112,9 +110,9 @@ function Reservation({setOpenModal, hotelId}) {
                         <div className="font-bold text-[16px]">{item.price}</div>
                     </div>
 
-                    <div className="flex space-x-3">
+                    <div className="flex space-x-2">
                         {item.roomNumbers.map((roomNumber) => (
-                            <div className="flex flex-col text-[12px]">
+                            <div className="flex flex-col text-[10px]">
                                 <label>{roomNumber.number}</label>
                                 <input
                                     type="checkbox"

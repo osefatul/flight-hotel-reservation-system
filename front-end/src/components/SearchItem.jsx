@@ -1,7 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useLocation,Navigate, useNavigate, useParams } from "react-router-dom";
 
 function SearchItem({hotel}) {
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const handleAvailability = ()=>{
+        
+        // if(location.state?.from){
+        //     navigate(location.state.fom)
+        // }
+
+        navigate(`/hotels/${hotel._id}`)
+    }
+
+
+
     return (
         <div className="border p-2 rounded-sm flex flex-col sm:flex-row  justify-between space-x-2 sm:space-x-4 mb-4">
 
@@ -43,10 +59,10 @@ function SearchItem({hotel}) {
                         <span className="text-[13px] sm:text-lg">${hotel.cheapestPrice}</span>
                         <span className="text-[12px] sm:text-md text-gray-500">Includes taxes and fees</span>
 
-                        <Link to={`/hotels/${hotel._id}`}>
+                        {/* <Link to={`/hotels/${hotel._id}`}> */}
                         
-                        <button className="bg-[#0071c2] text-white font-bold p-1 cursor-pointer rounded-sm text-[10px] sm:text-md h-6 sm:h-10 w-24">See availability</button>
-                        </Link>
+                        <button className="bg-[#0071c2] text-white font-bold p-1 cursor-pointer rounded-sm text-[10px] sm:text-md h-6 sm:h-10 w-24" onClick = {handleAvailability} >See availability</button>
+                        {/* </Link> */}
                     </div>
                 </div>
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./auth.css";
 import { loginFail, loginPending, loginSuccess } from "../../features/authSlice/loginSlice";
@@ -17,12 +17,13 @@ const Auth = () => {
     });
 
       //Redux states
-    const {isLoading, isAuth, error, demoAdminLogin, demoUserLogin} = useSelector(state => state.login)
+    const {error, isAuth, user} = useSelector(state => state.login)
 
     const navigate = useNavigate()
     const dispatch = useDispatch();
-
-
+    const location = useLocation();
+    
+    const from = location.state?.from?.pathname || "/"
 
     const handleChange = (e) => {
         setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -45,11 +46,17 @@ const Auth = () => {
         //console.log(isAuth)
         localStorage.setItem("user", JSON.stringify(res.details))
         dispatch(loginSuccess(res.details));
-        navigate("/")
+
+        navigate(from , {replace:true})
+
         } catch (err) {
             dispatch(loginFail(err))
         }
     };
+
+    useEffect(()=>{
+        isAuth && user && navigate(from , {replace:true})
+    },[isAuth, user])
 
 
     useEffect(()=>{
