@@ -6,7 +6,7 @@ const initialState = {
     error: "",
     demoAdminLogin: false,
     demoUserLogin: false,
-    user: null,
+    user: {},
 
 }
 

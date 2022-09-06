@@ -13,12 +13,6 @@ import { loginSuccess } from '../../features/authSlice/loginSlice'
 
 function Home() {
 
-    // const user = JSON.parse(localStorage.getItem("user"))
-    // const dispatch = useDispatch();
-    
-    // useEffect(()=>{
-    //     user && dispatch(loginSuccess(user));
-    // },[])
 
     
     return (

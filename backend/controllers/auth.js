@@ -42,14 +42,14 @@ const login = async (req, res, next) => {
         process.env.JWT
         );
 
-        const { password, isAdmin, ...otherDetails } = user._doc;
+        const { password, ...otherDetails } = user._doc;
 
         return res
         .cookie("access_token", token, {
             httpOnly: true,
         })
         .status(200)
-        .json({ details: { ...otherDetails }, isAdmin, token });
+        .json({ details: { ...otherDetails }, token });
 
     } catch (error) {
         console.log(error);

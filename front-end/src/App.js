@@ -24,16 +24,18 @@ function App() {
       <Route path="hotels" element={<List/>}/>
       <Route path="login" element={<Auth/>}/>
 
-      <Route path="admin" element={<AdminHome/>}/>
-      <Route path="admin/newUser" element={<NewUser/>}/>
-      <Route path="admin/users" element={<UserList/>} />
-      <Route path="admin/users/:id" element={<User/>}/>
-      <Route path="admin/newProduct" element={<NewProduct/>} />
-      <Route path="admin/products/" element={<ProductList/>} />
-      <Route path="admin/products/:id" element={<Product/>}/>
 
       <Route path="/" element={<ProtectedRoutes/>}>        
         <Route path="hotels/:id" element={<Hotel/>}/>
+        
+        <Route path="admin" element={<AdminHome/>}/>
+        <Route path="admin/newUser" element={<NewUser/>}/>
+        <Route path="admin/users" element={<UserList/>} />
+        <Route path="admin/users/:id" element={<User/>}/>
+        <Route path="admin/newProduct" element={<NewProduct/>} />
+        <Route path="admin/products/" element={<ProductList/>} />
+        <Route path="admin/products/:id" element={<Product/>}/>
+        
       </Route>
     </Routes>
 

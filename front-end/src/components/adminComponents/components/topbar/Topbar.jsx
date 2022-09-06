@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./topbar.css";
-
+import { useDispatch, useSelector } from "react-redux";
 import { NotificationsNone, Language, Settings } from "@mui/icons-material";
 
+import { useNavigate } from "react-router-dom";
+import { loginSuccess } from "../../../../features/authSlice/loginSlice";
+
 function Topbar() {
+
+  const navigate = useNavigate()
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+    const [userToken, setUserToken] = useState(
+        sessionStorage.getItem("accessJWT")
+        );
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if(user && userToken) dispatch(loginSuccess(user));
+
+    },[user,userToken ])
+
+
+
+
   return (
-    <div className="topbar bg-black ">
+    <div className="topbar bg-black mb-2 ">
       <div className="topbarWrapper">
         <div className="topLeft">
           <span className="text-white font-bold border-b border-amber-400 cursor-pointer hover:text-amber-400 text-lg sm:text-2xl">T&S Booking Admin Panel </span>
