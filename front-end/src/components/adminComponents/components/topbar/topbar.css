@@ -1,7 +1,6 @@
 .topbar {
-  height: 50px;
+  height: 60px;
   width: 100%;
-  background-color: white;
   position: sticky;
   top: 0;
   z-index: 999;
@@ -17,10 +16,7 @@
 }
 
 .logo{
-  font-weight: bold;
-  font-size: 24px;
-  color: rgb(33, 85, 197);
-  cursor: pointer;
+
 }
 
 /* --------------------------------------------------------------------- */

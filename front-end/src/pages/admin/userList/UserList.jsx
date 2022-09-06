@@ -6,6 +6,8 @@ import { DeleteOutline } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { userRows } from "../../../dummyData";
+import Topbar from "../../../components/adminComponents/components/topbar/Topbar";
+import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar";
 
 export default function UserList() {
   //using state hook in order to comply with changing as we are deleteing rows
@@ -48,7 +50,7 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/user/" + params.row.id}>
+            <Link to={"/admin/users/" + params.row.id}>
               <button className="userListEdit">Edit</button>
             </Link>
             <DeleteOutline
@@ -61,15 +63,30 @@ export default function UserList() {
     },
   ];
 
+
+
   return (
-    <div className="userList">
-      <DataGrid
-        rows={data}
-        disableSelectionOnClick
-        columns={columns}
-        pageSize={8}
-        checkboxSelection
-      />
+    <div>
+
+      <Topbar className = "" />
+
+      <div className="flex w-full">
+        <div className="w-[20%]">
+          <Sidebar />
+        </div>
+
+        <div className="userList">
+          <DataGrid
+          rows={data}
+          disableSelectionOnClick
+          columns={columns}
+          pageSize={8}
+          checkboxSelection
+        />
+        </div>
+      </div>
+
     </div>
+
   );
 }

@@ -9,125 +9,141 @@ import {
   Publish,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import Topbar from "../../../components/adminComponents/components/topbar/Topbar";
+import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar";
 
 function User() {
   return (
-    <div className="user">
+    <div>
+      <Topbar className = "" />
+      
+      <div className="flex w-full">
 
-      <div className="userTitleContainer">
-        <h1 className="userTitle">Edit User</h1>
-        <Link to="/newUser">
-          <button className="userAddButton">Create</button>
-        </Link>
-      </div>
-
-      <div className="userContainer">
-
-        <div className="userShow">
-          <div className="userShowTop">
-            <img
-              src="https://www.dulcedo.com/wp-content/uploads/2019/03/mh07p077crop-315x445.jpg"
-              alt=""
-              className="userShowImg"
-            />
-            <div className="userShowTopTitle">
-              <span className="userShowUsername">Adam Smith</span>
-              <span className="userShowUserTitle">Electrical Engineer</span>
-            </div>
-          </div>
-          <div className="userShowBottom">
-            <span className="userShowTitle">Account Details</span>
-            <div className="userShowInfo">
-              <PermIdentity className="userShowIcon" />
-              <span className="userShowInfoTitle">adamsmith007</span>
-            </div>
-            <div className="userShowInfo">
-              <CalendarToday className="userShowIcon" />
-              <span className="userShowInfoTitle">13-08-1994</span>
-            </div>
-            <span className="userShowTitle">Contact Details</span>
-            <div className="userShowInfo">
-              <PhoneAndroid className="userShowIcon" />
-              <span className="userShowInfoTitle">+1 7789577976</span>
-            </div>
-            <div className="userShowInfo">
-              <MailOutline className="userShowIcon" />
-              <span className="userShowInfoTitle">adamsmith@gmail.com</span>
-            </div>
-            <div className="userShowInfo">
-              <LocationSearching className="userShowIcon" />
-              <span className="userShowInfoTitle">Vancouver, Canada</span>
-            </div>
-          </div>
+        <div className="w-[20%]">
+          <Sidebar />
         </div>
 
+        <div className="user">
 
-        <div className="userUpdate">
-          <span className="userUpdateTitle">Edit</span>
-          <form className="userUpdateForm">
+          <div className="userTitleContainer">
+            <h1 className="userTitle">Edit User</h1>
+            <Link to="/admin/newUser">
+              <button className="userAddButton">Create</button>
+            </Link>
+          </div>
 
-            <div className="userUpdateLeft">
-              <div className="userUpdateItem">
-                <label>Username</label>
-                <input
-                  type="text"
-                  placeholder="annabeck99"
-                  className="userUpdateInput"
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Full Name</label>
-                <input
-                  type="text"
-                  placeholder="Anna Becker"
-                  className="userUpdateInput"
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Email</label>
-                <input
-                  type="text"
-                  placeholder="annabeck99@gmail.com"
-                  className="userUpdateInput"
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Phone</label>
-                <input
-                  type="text"
-                  placeholder="+1 123 456 67"
-                  className="userUpdateInput"
-                />
-              </div>
-              <div className="userUpdateItem">
-                <label>Address</label>
-                <input
-                  type="text"
-                  placeholder="New York | USA"
-                  className="userUpdateInput"
-                />
-              </div>
-            </div>
+          <div className="userContainer">
 
-            <div className="userUpdateRight">
-              <div className="userUpdateUpload">
+            <div className="userShow">
+              <div className="userShowTop">
                 <img
-                  className="userUpdateImg"
-                  src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                  src="https://www.dulcedo.com/wp-content/uploads/2019/03/mh07p077crop-315x445.jpg"
                   alt=""
+                  className="userShowImg"
                 />
-                <label htmlFor="file">
-                  <Publish className="userUpdateIcon" />
-                </label>
-                <input type="file" id="file" style={{ display: "none" }} />
+                <div className="userShowTopTitle">
+                  <span className="userShowUsername">Adam Smith</span>
+                  <span className="userShowUserTitle">Electrical Engineer</span>
+                </div>
               </div>
-              <button className="userUpdateButton">Update</button>
+              <div className="userShowBottom">
+                <span className="userShowTitle">Account Details</span>
+                <div className="userShowInfo">
+                  <PermIdentity className="userShowIcon" />
+                  <span className="userShowInfoTitle">adamsmith007</span>
+                </div>
+                <div className="userShowInfo">
+                  <CalendarToday className="userShowIcon" />
+                  <span className="userShowInfoTitle">13-08-1994</span>
+                </div>
+                <span className="userShowTitle">Contact Details</span>
+                <div className="userShowInfo">
+                  <PhoneAndroid className="userShowIcon" />
+                  <span className="userShowInfoTitle">+1 7789577976</span>
+                </div>
+                <div className="userShowInfo">
+                  <MailOutline className="userShowIcon" />
+                  <span className="userShowInfoTitle">adamsmith@gmail.com</span>
+                </div>
+                <div className="userShowInfo">
+                  <LocationSearching className="userShowIcon" />
+                  <span className="userShowInfoTitle">Vancouver, Canada</span>
+                </div>
+              </div>
             </div>
-            
-          </form>
+
+
+            <div className="userUpdate">
+              <span className="userUpdateTitle">Edit</span>
+              <form className="userUpdateForm">
+
+                <div className="userUpdateLeft">
+                  <div className="userUpdateItem">
+                    <label>Username</label>
+                    <input
+                      type="text"
+                      placeholder="annabeck99"
+                      className="userUpdateInput"
+                    />
+                  </div>
+                  <div className="userUpdateItem">
+                    <label>Full Name</label>
+                    <input
+                      type="text"
+                      placeholder="Anna Becker"
+                      className="userUpdateInput"
+                    />
+                  </div>
+                  <div className="userUpdateItem">
+                    <label>Email</label>
+                    <input
+                      type="text"
+                      placeholder="annabeck99@gmail.com"
+                      className="userUpdateInput"
+                    />
+                  </div>
+                  <div className="userUpdateItem">
+                    <label>Phone</label>
+                    <input
+                      type="text"
+                      placeholder="+1 123 456 67"
+                      className="userUpdateInput"
+                    />
+                  </div>
+                  <div className="userUpdateItem">
+                    <label>Address</label>
+                    <input
+                      type="text"
+                      placeholder="New York | USA"
+                      className="userUpdateInput"
+                    />
+                  </div>
+                </div>
+
+                <div className="userUpdateRight">
+                  <div className="userUpdateUpload">
+                    <img
+                      className="userUpdateImg"
+                      src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                      alt=""
+                    />
+                    <label htmlFor="file">
+                      <Publish className="userUpdateIcon" />
+                    </label>
+                    <input type="file" id="file" style={{ display: "none" }} />
+                  </div>
+                  <button className="userUpdateButton">Update</button>
+                </div>
+                
+              </form>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
+
+
   );
 }
 

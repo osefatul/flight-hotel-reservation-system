@@ -1,7 +1,7 @@
 .sidebar {
   flex: 1;
   height: calc(100vh - 60px);
-  background-color: rgb(251, 251, 255);
+  /* background-color: rgb(251, 251, 255); */
   position: sticky;
   top: 60px;
   
@@ -50,7 +50,7 @@ background-color:transparent
 }
 
 .sidebarTitle{
-  font-size: 12px;
+  font-size: 15px;
   color: rgb(187,186,186);
 }
 

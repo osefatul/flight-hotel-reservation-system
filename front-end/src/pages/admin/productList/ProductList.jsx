@@ -6,6 +6,8 @@ import { DeleteOutline } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { productRows } from "../../../dummyData";
+import Topbar from "../../../components/adminComponents/components/topbar/Topbar";
+import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar";
 
 function ProductList() {
   const [data, setData] = useState(productRows);
@@ -47,7 +49,7 @@ function ProductList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/product/" + params.row.id}>
+            <Link to={"/admin/products/" + params.row.id}>
               <button className="productListEdit">Edit</button>
             </Link>
             <DeleteOutline
@@ -61,15 +63,26 @@ function ProductList() {
   ];
 
   return (
-    <div className="productList">
-      <DataGrid
-        rows={data}
-        disableSelectionOnClick
-        columns={columns}
-        pageSize={8}
-        checkboxSelection
-      />
+    <div>
+      <Topbar className = "" />
+      
+      <div className="flex w-full">
+          <div className="w-[20%]">
+          <Sidebar />
+          </div>
+
+        <div className="productList">
+          <DataGrid
+            rows={data}
+            disableSelectionOnClick
+            columns={columns}
+            pageSize={8}
+            checkboxSelection
+          />
+        </div>
+      </div>
     </div>
+
   );
 }
 

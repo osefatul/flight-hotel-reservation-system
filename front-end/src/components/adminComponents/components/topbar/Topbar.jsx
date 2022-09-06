@@ -5,10 +5,10 @@ import { NotificationsNone, Language, Settings } from "@mui/icons-material";
 
 function Topbar() {
   return (
-    <div className="topbar">
+    <div className="topbar bg-black ">
       <div className="topbarWrapper">
         <div className="topLeft">
-          <span className="logo">T&S Booking Admin Panel </span>
+          <span className="text-white font-bold border-b border-amber-400 cursor-pointer hover:text-amber-400 text-lg sm:text-2xl">T&S Booking Admin Panel </span>
         </div>
         <div className="topRight">
           <div className="topbarIconContainer">

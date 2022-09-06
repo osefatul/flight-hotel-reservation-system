@@ -10,28 +10,35 @@ import "./adminHome.css";
 
 function AdminHome() {
   return (
+
     <div>
-      <Topbar className = "" />
-
-
-      <div>
-        <Sidebar />
-        <div className="home mt-2">
-          <FeaturedInfo />
-          <Charts
-            data={userData}
-            title="User Analytics"
-            grid
-            dataKey="Active User"
-            />
-          <div className="homeWidgets">
-            <WidgetSmall />
-            <WidgetLarge />
-          </div>
-        </div>
-      </div>
       
+      <Topbar className = "" />
+      
+      <div className="flex w-full">
+        <div className="w-[20%]">
+        <Sidebar />
+        </div>
+
+        <div className="w-[70%] mt-2 ">
+              <FeaturedInfo />
+              <Charts
+                data={userData}
+                title="User Analytics"
+                grid
+                dataKey="Active User"
+                />
+              <div className="homeWidgets">
+                <WidgetSmall />
+                <WidgetLarge />
+              </div>
+        </div>
+      
+      
+      </div>
     </div>
+    
+    
   );
 }
 
