@@ -4,6 +4,7 @@ const initialState = {
     isLoading: false,
     error: "",
     roomAvailable: "",
+    room: {}
 }
 
 const roomSlice = createSlice ({
@@ -13,6 +14,11 @@ const roomSlice = createSlice ({
     reducers: {
         roomPending: (state, action)=>{
             state.isLoading = true
+        },
+        fetchingRoomData: (state, action)=>{
+            state.isLoading = false
+            state.room = action.payload
+            state.error = ""
         },
 
         fetchingRoomAvailabilitySuccess: (state, action)=>{
@@ -33,6 +39,7 @@ const { reducer, actions} = roomSlice
 
 export const  {
     roomPending,
+    fetchingRoomData,
     fetchingRoomAvailabilitySuccess,
     roomsFail
 } = actions

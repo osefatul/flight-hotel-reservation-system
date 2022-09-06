@@ -1,18 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { useLocation,Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SearchItem({hotel}) {
 
-    const location = useLocation();
     const navigate = useNavigate();
-
+    
     const handleAvailability = ()=>{
-        
-        // if(location.state?.from){
-        //     navigate(location.state.fom)
-        // }
-
         navigate(`/hotels/${hotel._id}`)
     }
 
@@ -31,7 +24,7 @@ function SearchItem({hotel}) {
                 <div className="flex flex-col space-y-1">
                     <h1 className="text-[13px] sm:text-lg font-bold text-[#0071c2]">{hotel.name}</h1>
                     <span className="text-[10px] sm:text-sm">500m from center</span>
-                    <span className="text-gray-500 text-[10px] sm:text-sm">Free airport taxi</span>
+                    <span className="text-slate-100 text-[10px] sm:text-sm bg-green-700 w-28 sm:w-44 pl-2 rounded-sm">Free airport taxi</span>
                     <span className="font-bold text-[10px] sm:text-sm">
                     Studio Apartment with Air conditioning
                     </span>
@@ -59,10 +52,12 @@ function SearchItem({hotel}) {
                         <span className="text-[13px] sm:text-lg">${hotel.cheapestPrice}</span>
                         <span className="text-[12px] sm:text-md text-gray-500">Includes taxes and fees</span>
 
-                        {/* <Link to={`/hotels/${hotel._id}`}> */}
-                        
-                        <button className="bg-[#0071c2] text-white font-bold p-1 cursor-pointer rounded-sm text-[10px] sm:text-md h-6 sm:h-10 w-24" onClick = {handleAvailability} >See availability</button>
-                        {/* </Link> */}
+                        <button 
+                        className="bg-[#0071c2] text-white font-bold p-1 cursor-pointer rounded-sm text-[10px] sm:text-md h-6 sm:h-10 w-24" 
+                        onClick = {handleAvailability}>
+                            See availability
+                        </button>
+
                     </div>
                 </div>
 

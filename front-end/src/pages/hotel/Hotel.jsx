@@ -5,7 +5,7 @@ import MailList from "../../components/MailList";
 import Footer from "../../components/Footer";
 import { useDispatch, useSelector } from "react-redux"
 
-import { useLocation,Navigate, useNavigate, useParams } from "react-router-dom";
+import { useLocation, } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 faCircleArrowLeft,
@@ -22,7 +22,6 @@ function Hotel() {
 
     const dispatch = useDispatch();
     const location = useLocation();
-    const navigate = useNavigate();
 
     const [slideNumber, setSlideNumber] = useState(0);
     const [open, setOpen] = useState(false);
@@ -53,17 +52,12 @@ function Hotel() {
 
 
     const handleReserve = () => {
-        if(isAuth){
             setOpenModal(true);
-        }
-        //else{
-        //     navigate('/login', {replace:true})
-        // }
     }
 
 
     useEffect(()=>{
-        dispatch(FetchingAHotel(hotelId))
+        if(isAuth) dispatch(FetchingAHotel(hotelId))
     },[])
 
 
@@ -86,8 +80,6 @@ function Hotel() {
     };
 
 
-
-    
     const photos = [
         {
         src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707778.jpg?k=56ba0babbcbbfeb3d3e911728831dcbc390ed2cb16c51d88159f82bf751d04c6&o=&hp=1",

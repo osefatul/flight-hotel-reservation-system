@@ -1,0 +1,80 @@
+.sidebar {
+  flex: 1;
+  height: calc(100vh - 60px);
+  background-color: rgb(251, 251, 255);
+  position: sticky;
+  top: 60px;
+  
+}
+
+
+/* --------------------------------------------------------- */
+
+/* DESIGN/CUSTOMIZE SCROLLBAR FOR CHROME */
+::-webkit-scrollbar{
+  width:5px;
+}
+/* This is the entire rod or track or lane where the bar is scrolling on */
+::-webkit-scrollbar-track{
+background-color:transparent
+}
+/* Now for the most important part: the scrollbar thumb.the scrollbar thumb is the main part of the scrollbar which is clicked and dragged by the user. It is selected by the ::-webkit-scrollbar-thumb selector. */
+::-webkit-scrollbar-thumb{
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+}
+/* darker effect once it is hover */
+::-webkit-scrollbar-thumb:hover{
+  background-color: #3a4548;
+}
+
+
+/* DESIGN/CUSTOMIZE SCROLLBAR FOR FIREFOX */
+.sidebar{
+  /* the first color is the thumb and second the track */
+  scrollbar-color: #d6dee1 transparent;
+  scrollbar-width:thin; 
+}
+
+
+
+
+.sidebarWrapper{
+  padding: 20px;
+  color: #555;
+}
+
+.sidebarMenu{
+  margin-bottom: 10px;
+}
+
+.sidebarTitle{
+  font-size: 12px;
+  color: rgb(187,186,186);
+}
+
+.sidebarList{
+  list-style: none;
+  padding: 5px;
+
+}
+
+.sidebarListItem{
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  font-size: 12px;
+
+}
+
+.sidebarListItem.active, .sidebarListItem:hover{
+  background-color: rgb(228,228,250);
+}
+
+.sidebarIcon{
+  margin-right: 5px;
+  font-size: 20px !important;
+}

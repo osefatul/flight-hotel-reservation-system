@@ -22,7 +22,7 @@ const Auth = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const location = useLocation();
-    
+
     const from = location.state?.from?.pathname || "/"
 
     const handleChange = (e) => {
@@ -46,7 +46,6 @@ const Auth = () => {
         //console.log(isAuth)
         localStorage.setItem("user", JSON.stringify(res.details))
         dispatch(loginSuccess(res.details));
-
         navigate(from , {replace:true})
 
         } catch (err) {

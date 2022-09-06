@@ -3,9 +3,11 @@ import { motion } from "framer-motion"
 import {Link} from "react-router-dom"
 import { loginSuccess } from '../features/authSlice/loginSlice';
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
 
+    const navigate = useNavigate()
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
     const [userToken, setUserToken] = useState(
         sessionStorage.getItem("accessJWT")
@@ -13,14 +15,16 @@ function Navbar() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-    
-        user && userToken && dispatch(loginSuccess(user));
+        if(user && userToken) dispatch(loginSuccess(user));
+
     },[user,userToken ])
 
 
     const handleLogout = ()=>{
-        setUser (localStorage.removeItem("user"));
-        setUserToken(sessionStorage.removeItem("accessJWT"));
+
+            setUser (localStorage.removeItem("user"));
+            setUserToken(sessionStorage.removeItem("accessJWT"));
+
     }
 
     

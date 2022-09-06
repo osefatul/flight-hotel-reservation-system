@@ -63,9 +63,6 @@ function Reservation({setOpenModal, hotelId}) {
         try {
             await Promise.all(
                 selectedRooms.map((roomId) => {
-                // const res = axios.put(`http://localhost:5000/v1/rooms/availability/${roomId}`, {
-                //     dates: allDates,
-                // });
                 return dispatch(updatingRoomAvailability({roomId, dates:allDates}))
 
             })
@@ -74,7 +71,6 @@ function Reservation({setOpenModal, hotelId}) {
                 // navigate("/");
         } catch (err) {}
     };
-
 
 
     useEffect(()=>{
@@ -86,7 +82,7 @@ function Reservation({setOpenModal, hotelId}) {
     return (
     <div className="text-black fixed top-0 left-0 right-0 bottom-0  flex items-center justify-center bg-black  bg-opacity-70 ">
         
-        <div className='h-max w-max sm:w-1/3 bg-slate-300 flex flex-col space-y-4 px-10 py-8 relative'>
+        <div className='h-max w-max sm:w-1/3 bg-slate-100 flex flex-col space-y-4 px-10 py-8 relative'>
             
             <div className="absolute -top-2 -right-4 w-12 flex items-center justify-center cursor-pointer">
                 <FontAwesomeIcon
@@ -118,6 +114,7 @@ function Reservation({setOpenModal, hotelId}) {
                                     type="checkbox"
                                     value={roomNumber._id}
                                     onChange={handleSelect}
+                                    checked= {!isAvailable(roomNumber)}//if the isAvailable === false, or use below disabled method
                                     disabled={!isAvailable(roomNumber)}//if the isAvailable === false,
                                 />
                         </div>
