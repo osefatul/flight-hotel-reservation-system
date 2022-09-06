@@ -1,5 +1,4 @@
 import {
-  BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
@@ -8,6 +7,15 @@ import Auth from "./pages/auth/Auth";
 import Home from "./pages/home/Home";
 import Hotel from "./pages/hotel/Hotel";
 import List from "./pages/list/List";
+import AdminHome from "./pages/admin/adminHome/adminHome";
+import NewUser from "./pages/admin/newUser/NewUser";
+import UserList from "./pages/admin/userList/UserList";
+import User from "./pages/admin/user/User";
+import NewProduct from "./pages/admin/newProduct/NewProduct";
+import ProductList from "./pages/admin/productList/ProductList";
+import Product from "./pages/admin/product/Product";
+import Topbar from "./components/adminComponents/components/topbar/Topbar";
+import Sidebar from "./components/adminComponents/components/sidebar/Sidebar";
 
 function App() {
   return (
@@ -18,7 +26,24 @@ function App() {
       <Route path="login" element={<Auth/>}/>
 
       <Route path="/" element={<ProtectedRoutes/>}>
+        
         <Route path="hotels/:id" element={<Hotel/>}/>
+
+        <Route path="admin/" element={<AdminHome/>}>
+          <Route path="newUser" element={<NewUser/>}/>
+          
+          <Route path="users/" element={<UserList/>}>
+            <Route path=":id" element={<User/>}/>
+          </Route>
+
+          <Route path= "newProduct" element={<NewProduct/>} />
+          <Route path="products/" element={<ProductList/>}>
+            <Route path=":id" element={<Product/>}/>
+          </Route>
+
+        </Route>
+
+
       </Route>
     </Routes>
 
