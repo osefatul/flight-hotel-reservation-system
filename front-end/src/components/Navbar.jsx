@@ -34,28 +34,30 @@ function Navbar() {
     }
 
     const handleAdminPanel = ()=>{
-
         if (!isAdminPanel) {
             dispatch(AdminPanelMode())
             navigate("/admin")
         }
-
         else{
             dispatch(NotAdminPanelMode())
             navigate("/")
         }
     }
+
+
     
     return (
         <div className="text-white h-[50px] bg-black flex flex-col justify-center w-[75%] mx-auto ">
 
             <div className='w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0'>
+                <Link to ={isAdminPanel? "/admin" : "/"}>
                 <motion.h1 
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.9 }}
                     className="font-bold border-b border-amber-400 cursor-pointer hover:text-amber-400 text-lg sm:text-xl" >
                         {!isAdminPanel? "Travel & Stay Booking System": "Travel & Stay Admin Panel" }
                 </motion.h1>
+                </Link>
 
                 <div className='flex items-center justify-center space-x-5 '>
                     {user.isAdmin && (

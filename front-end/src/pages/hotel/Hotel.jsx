@@ -106,7 +106,6 @@ function Hotel() {
 
 
 
-
     return (
     <div className='relative'>
 
