@@ -27,7 +27,8 @@ export const loginUser = async (formData) =>{
     
     try {
         const res = await axios.post(loginUserUrl,
-            formData, axios.defaults.withCredentials = true
+            formData, 
+            axios.defaults.withCredentials = true //use this for sending cookies
         );
         if(res.status === 200){
             sessionStorage.setItem("accessJWT", res.data.token);
@@ -45,7 +46,9 @@ export const loginUser = async (formData) =>{
 
 export const fetchAllUsers = async () =>{
     try {
-        const res = await axios.get(allUsersProfileUrl, axios.defaults.withCredentials = true)
+        const res = await axios.get(allUsersProfileUrl, 
+            axios.defaults.withCredentials = true //for sending cookies.
+            )
         console.log(res)
         return res.data
     }catch(error){
