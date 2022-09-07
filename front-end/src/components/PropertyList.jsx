@@ -43,8 +43,8 @@ function PropertyList() {
           alt=""
           className="w-full h-20 sm:h-36 object-cover rounded-md "/>
         <div className="">
-          <h1 className="text-[12px] sm:text-lg font-bold" >Hotels</h1>
-          <h2 className="text-[11px] sm:text-lg capitalize" >{hotelTypes[i]?.count + " " + hotelTypes[i]?.type} </h2>
+          <h1 className="text-[12px] sm:text-md font-bold capitalize" >{hotelTypes[i]?.type}</h1>
+          <h2 className="text-[11px] sm:text-md capitalize" >{hotelTypes[i]?.count + " " + hotelTypes[i]?.type} </h2>
         </div>
       </div>
           ))

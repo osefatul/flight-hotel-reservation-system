@@ -24,7 +24,7 @@ function SearchItem({hotel}) {
                 <div className="flex flex-col space-y-1">
                     <h1 className="text-[13px] sm:text-lg font-bold text-[#0071c2]">{hotel.name}</h1>
                     <span className="text-[10px] sm:text-sm">500m from center</span>
-                    <span className="text-slate-100 text-[10px] sm:text-sm bg-green-700 w-28 sm:w-44 pl-2 rounded-sm">Free airport taxi</span>
+                    <span className="text-slate-100 text-[10px] sm:text-sm bg-green-700 w-max px-2 rounded-sm">Free airport taxi</span>
                     <span className="font-bold text-[10px] sm:text-sm">
                     Studio Apartment with Air conditioning
                     </span>

@@ -40,7 +40,8 @@ const getUsers = async (req,res,next)=>{
         const users = await User.find();
         res.status(200).json(users);
     } catch (err) {
-        next(err);
+        console.log(err);
+        res.status(404).json({ message: err.message });
     }
 }
 

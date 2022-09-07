@@ -24,9 +24,9 @@ function Home() {
             
             <div className="mt-2 sm:mt-10 flex flex-col items-center space-y-4 w-[75%] mx-auto relative">
                 <Featured/>
-                <h1 className="w-full font-bold text-[14px] lg:text-2xl">Browse by property type</h1>
+                <h1 className="w-full font-bold text-[13px] lg:text-xl">Browse by property type</h1>
                 <PropertyList/>
-                <h1 className="w-full font-bold text-[14px] lg:text-2xl">Homes guests love</h1>
+                <h1 className="w-full font-bold [13px] lg:text-xl">Homes guests love</h1>
                 <FeaturedProperties/>
             </div>
                 <MailList/>

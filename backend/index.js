@@ -15,12 +15,26 @@ const roomsRoute = require("./routes/room.js");
 
 const PORT = process.env.PORT || 5000;
 
+app.use(cookieParser());
+
+
+
+
+const corsOptions = {
+    origin: "http://localhost:3000",
+    credentials: true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+
+
 //Logger
 app.use(morgan("combined"));
 //API security
 app.use(helmet());
-app.use(cookieParser());
-app.use(cors())
+
+
 
 // Set body bodyParser: In order to get access to the post data we have to use body-parser . Basically what the body-parser is which allows express to read the body and then parse that into a Json object that we can understand.
 app.use(bodyParser.urlencoded({ extended: true }));

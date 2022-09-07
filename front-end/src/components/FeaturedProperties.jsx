@@ -38,9 +38,9 @@ function FeaturedProperties() {
                     
                     <div className='flex flex-col justify-between space-y-3'>
 
-                    <span className=" text-[12px] sm:text-[18px] text-[#333] font-bold">{hotel.name}</span>
-                    <span className="text-[11px] sm:text-[15px]">{hotel.city}</span>
-                    <span className="text-[11px] sm:text-[15px] font-bold">Starting from ${hotel.cheapestPrice}</span>
+                    <span className=" text-[12px] sm:text-[15px] text-[#333] font-bold">{hotel.name}</span>
+                    <span className="text-[11px] sm:text-[13px]">{hotel.city}</span>
+                    <span className="text-[11px] sm:text-[13px] font-bold">Starting from ${hotel.cheapestPrice}</span>
                     
                     {hotel.rating &&     
                     <div className="">

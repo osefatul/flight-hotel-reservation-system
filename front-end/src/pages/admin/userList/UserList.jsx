@@ -1,5 +1,5 @@
 import "./userList.css";
-import React from "react";
+import React, { useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutline } from "@mui/icons-material";
 
@@ -9,10 +9,18 @@ import { userRows } from "../../../dummyData";
 import Topbar from "../../../components/adminComponents/components/topbar/Topbar";
 import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar";
 import Navbar from "../../../components/Navbar";
+import { useDispatch } from "react-redux";
+import { getUsersData } from "../../../features/usersSlice/usersAction";
 
 export default function UserList() {
-  //using state hook in order to comply with changing as we are deleteing rows
+
+  const dispatch = useDispatch();
+  //using state hook in order to comply with changing as we are deleting rows
   const [data, setData] = useState(userRows);
+
+  useEffect(()=>{
+    dispatch(getUsersData())
+  },[])
 
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id)); //map all those that are not equal to the selected row id
@@ -33,6 +41,8 @@ export default function UserList() {
         );
       },
     },
+
+
     { field: "email", headerName: "Email", width: 200 },
     {
       field: "status",

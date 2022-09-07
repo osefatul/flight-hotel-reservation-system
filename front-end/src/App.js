@@ -14,6 +14,7 @@ import User from "./pages/admin/user/User";
 import NewProduct from "./pages/admin/newProduct/NewProduct";
 import ProductList from "./pages/admin/productList/ProductList";
 import Product from "./pages/admin/product/Product";
+import Register from "./pages/auth/Register";
 
 
 function App() {
@@ -23,6 +24,8 @@ function App() {
       <Route path="/" element={<Home/>}/>
       <Route path="hotels" element={<List/>}/>
       <Route path="login" element={<Auth/>}/>
+      <Route path="register" element={<Register/>}/>
+
 
 
       <Route path="/" element={<ProtectedRoutes/>}>        
@@ -35,7 +38,7 @@ function App() {
         <Route path="admin/newProduct" element={<NewProduct/>} />
         <Route path="admin/products/" element={<ProductList/>} />
         <Route path="admin/products/:id" element={<Product/>}/>
-        
+
       </Route>
     </Routes>
 

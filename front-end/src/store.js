@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import loginReducer from "./features/authSlice/loginSlice"
+import registerReducer from "./features/authSlice/registerSlice"
 import hotelReducer from "./features/hotelSlice/hotelSlice";
 import searchReducer from "./features/searchSlice/searchSlice";
 import roomReducer from "./features/roomSlice/roomSlice";
 import adminPanelReducer from "./features/adminPanel/adminPanel";
+import usersReducer from "./features/usersSlice/usersSlice";
 
 
 
@@ -11,14 +13,15 @@ import adminPanelReducer from "./features/adminPanel/adminPanel";
 const store = configureStore({
     reducer: {
         login:loginReducer,
+        register:registerReducer,
         hotels:hotelReducer,
         search:searchReducer,
         rooms:roomReducer,
-        adminPanelMode:adminPanelReducer
+        adminPanelMode:adminPanelReducer,
+        users: usersReducer,
         // user: userReducer,
         // openTicket: newTicketReducer,
         // resetPassword: resetPasswordReducer,
-        // allUsers: usersReducer,
         // homeTabs: tabsReducer,
         // closeTicketModal: CloseTicketModalReducer
     }

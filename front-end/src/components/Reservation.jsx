@@ -114,7 +114,7 @@ function Reservation({setOpenModal, hotelId}) {
                                     type="checkbox"
                                     value={roomNumber._id}
                                     onChange={handleSelect}
-                                    checked= {!isAvailable(roomNumber)}//if the isAvailable === false, or use below disabled method
+                                    // checked= {!isAvailable(roomNumber)}//if the isAvailable === false, or use below disabled method
                                     disabled={!isAvailable(roomNumber)}//if the isAvailable === false,
                                 />
                         </div>

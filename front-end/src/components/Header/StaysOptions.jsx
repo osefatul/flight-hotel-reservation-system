@@ -64,14 +64,14 @@ function StaysOptions() {
 return (
 <div>
 
-    <div className='hidden md:flex justify-between h-[50px] border-y bg-black border-y-[#febb02] items-center w-full px-2  '>
+    <div className='hidden md:flex justify-between h-[35px] border-y bg-black border-y-[#febb02] items-center w-full px-2  '>
 
-        <div className="space-x-2 ">
+        <div className="space-x-2 text-[12px] ">
             <FontAwesomeIcon icon={faBed} className="text-slate-400" />
             <input
             type="text"
             placeholder="Where are you going?"
-            className="rounded-md pl-1 bg-slate-900 !outline-none  placeholder:text-sm"
+            className="rounded-md pl-1 bg-slate-900 !outline-none  placeholder:text-[12px]"
             onChange={(e) => setDestination(e.target.value)}
             />
         </div>
@@ -81,7 +81,7 @@ return (
             
             <span
             onClick={() => setOpenDate(!openDate)}
-            className="cursor-pointer text-slate-400"
+            className="cursor-pointer text-slate-400 text-[12px]"
             >
                 {`${format(date[0].startDate, "MM/dd/yyyy")}
                 to                         
@@ -103,7 +103,7 @@ return (
             )}
         </div>
 
-        <div className="space-x-2">
+        <div className="space-x-2 text-[12px]">
             <FontAwesomeIcon icon={faPerson} className="text-slate-400" />
             
             <span
@@ -354,7 +354,7 @@ return (
 
                 <motion.div className="ml-4">
                     <button 
-                        className="rounded border border-yellow-500 px-2 hover:bg-yellow-500 hover:text-black w-56" 
+                        className="text-[12px] rounded border border-yellow-500 px-2 hover:bg-yellow-500 hover:text-black w-56" 
                         onClick={handleSearch}>
                         Search
                     </button>
