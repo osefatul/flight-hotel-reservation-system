@@ -4,24 +4,27 @@ import {Link} from "react-router-dom"
 import { loginSuccess } from '../features/authSlice/loginSlice';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { AdminPanelMode, NotAdminPanelMode } from '../features/adminPanel/adminPanel';
 
 function Navbar() {
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     //We get user data from localStorage as they are saved there after authentication..
-    //Home page doesn't go thourgh protected routes so it doesn't get user data from there. we need to request user data again.
+    //Home page doesn't go through protected routes so it doesn't get user data from there. we need to request user data again.
     const [users, setUser] = useState(JSON.parse(localStorage.getItem("user")));
     const [userToken, setUserToken] = useState(
         sessionStorage.getItem("accessJWT")
         );
-    const dispatch = useDispatch();
+    
+    const {user} = useSelector(state => state.login);//we are using this to get user from redux
+    const {isAdminPanel} = useSelector(state => state.adminPanelMode);
 
-    const {user} = useSelector(state => state.login);
-
-
+    
     useEffect(() => {
         if(users && userToken) dispatch(loginSuccess(users));
     },[users,userToken ])
-
 
 
     const handleLogout = ()=>{
@@ -30,35 +33,45 @@ function Navbar() {
             window.location.reload()
     }
 
+    const handleAdminPanel = ()=>{
+
+        if (!isAdminPanel) {
+            dispatch(AdminPanelMode())
+            navigate("/admin")
+        }
+
+        else{
+            dispatch(NotAdminPanelMode())
+            navigate("/")
+        }
+    }
     
     return (
-        <div className="text-white h-[80px] bg-black flex flex-col justify-center w-[75%] mx-auto pt-2">
+        <div className="text-white h-[50px] bg-black flex flex-col justify-center w-[75%] mx-auto ">
 
             <div className='w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0'>
-                <Link to="/">
                 <motion.h1 
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.9 }}
-                    className="font-bold border-b border-amber-400 cursor-pointer hover:text-amber-400 text-lg sm:text-2xl" >Travel & Stay Booking System
+                    className="font-bold border-b border-amber-400 cursor-pointer hover:text-amber-400 text-lg sm:text-xl" >
+                        {!isAdminPanel? "Travel & Stay Booking System": "Travel & Stay Admin Panel" }
                 </motion.h1>
-                </Link>
 
                 <div className='flex items-center justify-center space-x-5 '>
-
                     {user.isAdmin && (
-                        <Link to="/admin">
                         <motion.h1 
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.9 }}
-                            className='font-bold text-green-500 border-r border-amber-400 pr-4 cursor-pointer hover:text-amber-400 text-md sm:text-xl w-max mx-auto ' >Admin Panel
+                            className='font-bold text-green-500 border-r border-amber-400 pr-4 cursor-pointer hover:text-amber-400 text-md w-max mx-auto '
+                            onClick={handleAdminPanel}
+                            >
+                                {!isAdminPanel? "Admin Panel": "T&S Home" }
                         </motion.h1>
-                        </Link>
                         )
                         }
-
                     
                     {userToken && user ? 
-                    <div onClick = {handleLogout} className='cursor-pointer text-[12px] sm:text-[16px] hover:text-amber-400'>
+                    <div onClick = {handleLogout} className='cursor-pointer text-[12px] sm:text-md hover:text-amber-400'>
                         Welcome @{user.username} 
                     </div> :
                     <div className=" sm:flex space-x-4 border-b border-amber-400">

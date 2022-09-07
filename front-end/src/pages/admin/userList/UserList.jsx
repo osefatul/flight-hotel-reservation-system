@@ -8,6 +8,7 @@ import { useState } from "react";
 import { userRows } from "../../../dummyData";
 import Topbar from "../../../components/adminComponents/components/topbar/Topbar";
 import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar";
+import Navbar from "../../../components/Navbar";
 
 export default function UserList() {
   //using state hook in order to comply with changing as we are deleteing rows
@@ -68,7 +69,9 @@ export default function UserList() {
   return (
     <div>
 
-      <Topbar className = "" />
+      <div className = "bg-black sticky z-50 top-0 ">
+        <Navbar  />
+      </div>
 
       <div className="flex w-full">
         <div className="w-[20%]">

@@ -2,12 +2,15 @@ import "./newProduct.css";
 import React from "react";
 import Topbar from "../../../components/adminComponents/components/topbar/Topbar";
 import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar";
+import Navbar from "../../../components/Navbar";
 
 export default function NewProduct() {
   return (
 
     <div>
-      <Topbar className = "" />
+       <div className = "bg-black sticky z-50 top-0 ">
+        <Navbar  />
+      </div>
 
       <div className="flex w-full">
 

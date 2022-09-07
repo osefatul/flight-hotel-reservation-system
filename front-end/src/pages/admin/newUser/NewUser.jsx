@@ -1,12 +1,15 @@
 import React from "react";
 import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar";
 import Topbar from "../../../components/adminComponents/components/topbar/Topbar";
+import Navbar from "../../../components/Navbar";
 import "./newUser.css";
 function NewUser() {
   return (
     <div>
     
-      <Topbar className = "" />
+    <div className = "bg-black sticky z-50 top-0 ">
+        <Navbar  />
+      </div>
       
       <div className="flex w-full">
         <div className="w-[20%]">

@@ -11,6 +11,7 @@ import CopyRightMark from "../../../components/CopyRightMark";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../../../features/authSlice/loginSlice";
+import Navbar from "../../../components/Navbar";
 
 
 
@@ -32,7 +33,11 @@ function AdminHome() {
 
     <div>
       
-      <Topbar className = "" />
+      {/* <Topbar className = "" />
+       */}
+      <div className = "bg-black sticky z-50 top-0 ">
+        <Navbar  />
+      </div>
       
       <div className="flex w-full">
         <div className="w-[20%]">

@@ -11,11 +11,14 @@ import {
 import { Link } from "react-router-dom";
 import Topbar from "../../../components/adminComponents/components/topbar/Topbar";
 import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar";
+import Navbar from "../../../components/Navbar";
 
 function User() {
   return (
     <div>
-      <Topbar className = "" />
+      <div className = "bg-black sticky z-50 top-0 ">
+        <Navbar  />
+      </div>
       
       <div className="flex w-full">
 
