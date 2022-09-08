@@ -16,7 +16,6 @@ import ProductList from "./pages/admin/productList/ProductList";
 import Product from "./pages/admin/product/Product";
 import Register from "./pages/auth/Register";
 
-
 function App() {
   return (
     

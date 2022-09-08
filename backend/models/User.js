@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 
+// We are adding virtual, because mongodb "id" along with "_id".
+const opts = { toJSON: { virtuals: true } };
+
 const UserSchema = new mongoose.Schema(
 {
 username: {
@@ -36,8 +39,9 @@ isAdmin: {
     default: false,
 },
 },
-{ timestamps: true }
-);
+{ timestamps: true },
+
+opts);
 
 
 module.exports = {

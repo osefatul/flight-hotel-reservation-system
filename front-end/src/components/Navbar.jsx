@@ -5,11 +5,13 @@ import { loginSuccess } from '../features/authSlice/loginSlice';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AdminPanelMode, NotAdminPanelMode } from '../features/adminPanel/adminPanel';
+import { useCookies } from "react-cookie"; 
 
 function Navbar() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+  
 
     //We get user data from localStorage as they are saved there after authentication..
     //Home page doesn't go through protected routes so it doesn't get user data from there. we need to request user data again.
@@ -30,6 +32,7 @@ function Navbar() {
     const handleLogout = ()=>{
             setUser (localStorage.removeItem("user"));
             setUserToken(sessionStorage.removeItem("accessJWT"));
+            document.cookie = "access_token = ; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
             window.location.reload()
     }
 
