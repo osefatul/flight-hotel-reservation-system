@@ -49,10 +49,10 @@ function Sidebar() {
               </li>
             </Link>
 
-            <Link to="/admin/products" className="link">
+            <Link to="/admin/hotels" className="link">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
-                Products
+                Hotels
               </li>
             </Link>
             <li className="sidebarListItem">

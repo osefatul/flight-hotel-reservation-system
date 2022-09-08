@@ -11,10 +11,10 @@ import AdminHome from "./pages/admin/adminHome/adminHome";
 import NewUser from "./pages/admin/newUser/NewUser";
 import UserList from "./pages/admin/userList/UserList";
 import User from "./pages/admin/user/User";
-import NewProduct from "./pages/admin/newProduct/NewProduct";
-import ProductList from "./pages/admin/productList/ProductList";
-import Product from "./pages/admin/product/Product";
+import HotelDetails from "./pages/admin/hotel/HotelDetails";
 import Register from "./pages/auth/Register";
+import HotelList from "./pages/admin/hotelList/HotelList";
+import NewHotel from "./pages/admin/newHotel/NewHotel";
 
 function App() {
   return (
@@ -34,9 +34,9 @@ function App() {
         <Route path="admin/newUser" element={<NewUser/>}/>
         <Route path="admin/users" element={<UserList/>} />
         <Route path="admin/users/:id" element={<User/>}/>
-        <Route path="admin/newProduct" element={<NewProduct/>} />
-        <Route path="admin/products/" element={<ProductList/>} />
-        <Route path="admin/products/:id" element={<Product/>}/>
+        <Route path="admin/new-hotel" element={<NewHotel/>} />
+        <Route path="admin/hotels/" element={<HotelList/>} />
+        <Route path="admin/hotels/:id" element={<HotelDetails/>}/>
 
       </Route>
     </Routes>

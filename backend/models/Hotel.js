@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+// We are adding virtual, because mongodb "id" along with "_id".
+const opts = { toJSON: { virtuals: true } };
 
 const HotelSchema = new mongoose.Schema({
 name: {
@@ -49,6 +51,6 @@ featured: {
 type: Boolean,
 default: false,
 },
-});
+}, opts);
 
 module.exports = {Hotel: mongoose.model("Hotel", HotelSchema)}

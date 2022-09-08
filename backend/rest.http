@@ -85,8 +85,8 @@ Content-Type: application/json
 POST http://localhost:5000/v1/auth/register
 Content-Type: application/json
 
-{"username": "noAdminUser", 
-"email":"sefat3@gmail.com",
+{"username": "testUser2", 
+"email":"test2@gmail.com",
 "password": "Password5%",
 "phone":"12341235",
 "city":"Vancouver",

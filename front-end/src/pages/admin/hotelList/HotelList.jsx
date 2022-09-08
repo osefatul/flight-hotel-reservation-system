@@ -1,39 +1,40 @@
-import "./userList.css";
 import React, { useEffect } from "react";
+import "./hotelList.css";
 import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutline } from "@mui/icons-material";
+// import { productRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { userRows } from "../../../dummyData";
+import { productRows } from "../../../dummyData";
 import Topbar from "../../../components/adminComponents/components/topbar/Topbar";
 import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar";
 import Navbar from "../../../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
-import { DeletingUser, getUsersData } from "../../../features/usersSlice/usersAction";
+import { fetchingHotels } from "../../../features/hotelSlice/hotelAction";
 
-export default function UserList() {
+
+
+function HotelList() {
 
   const dispatch = useDispatch();
-  const {isLoading, users} = useSelector(state => state.users);
-  const [data, setData] = useState(users);
+  const {isLoading, hotels} = useSelector(state => state.hotels)
+  const [data, setData] = useState(hotels);
 
-
-  useEffect(() =>{
-    dispatch(getUsersData())
-  },[])
 
   useEffect(()=>{
-    setData(users)
-  },[users])
+    dispatch(fetchingHotels())
+  },[])
+
+
+  useEffect(()=>{
+    setData(hotels)
+  },[hotels])
 
 
   const handleDelete = async (id) => {
-    await dispatch(DeletingUser(id))
     setData(data.filter((item) => item._id !== id));
-    //map all those that are not equal to the selected row id
-    dispatch(getUsersData())
-
   };
+
 
 
 
@@ -43,65 +44,83 @@ export default function UserList() {
       return (
         // <Link to={`/ticket_communication/${params.row._id}`}>
           <div className="text-[12px]">
-            U- {params.row._id.slice(0,10)}...
+            hotel-{params.row._id.slice(0,10)}...
           </div>
         // </Link>
       );
     }},
 
     {
-      field: "username",
-      headerName: "User",
-      width: 120,
+      field: "name",
+      headerName: "Name",
+      width: 200,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
-            {/* <img className="userListImg" src={params.row.avatar} alt="" /> */}
-            {params.row.username}
+            {params.row.name}
           </div>
         );
       },
     },
-
-
-    { field: "email", headerName: "Email", width: 200,
-    renderCell : (params) => {
-      return (
-        <div className="text-[12px]">
-          {params.row.email}
-        </div>
-      )
-    }
-  },
     {
-      field: "country",
-      headerName: "Country",
+      field: "type",
+      headerName: "Type",
       width: 120,
-      renderCell : (params) => (
-        <div className="text-[12px]">
-          {params.row.country}
-        </div>
-      )
+      renderCell: (params) => {
+        return (
+          <div className="text-[12px]">
+            {params.row.type}
+          </div>
+        );
+      },
     },
     {
       field: "city",
       headerName: "City",
       width: 120,
-      renderCell : (params) => (
-        <div className="text-[12px]">
-          {params.row.city}
-        </div>
-      )
+      renderCell: (params) => {
+        return (
+          <div className="text-[12px]">
+            {params.row.city}
+          </div>
+        );
+      },
     },
     {
-      field: "phone",
-      headerName: "Phone Number",
+      field: "address",
+      headerName: "Address",
       width: 120,
-      renderCell : (params) => (
-        <div className="text-[12px]">
-          +{params.row.phone}
-        </div>
-      )
+      renderCell: (params) => {
+        return (
+          <div className="text-[12px]">
+            {params.row.address}
+          </div>
+        );
+      },
+    },
+    {
+      field: "distance",
+      headerName: "Distance",
+      width: 120,
+      renderCell: (params) => {
+        return (
+          <div className="text-[12px]">
+            {params.row.distance}
+          </div>
+        );
+      },
+    },
+    {
+      field: "price",
+      headerName: "Price",
+      width: 160,
+      renderCell: (params) => {
+        return (
+          <div className="text-[12px]">
+            {params.row.cheapestPrice}
+          </div>
+        );
+      },
     },
     {
       field: "action",
@@ -110,8 +129,8 @@ export default function UserList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/admin/users/" + params.row._id}>
-              <button className="bg-green-500 w-max px-2 py-[3px] rounded-sm text-white text-[11px]">Edit</button>
+            <Link to={"/admin/hotels/" + params.row._id}>
+            <button className="bg-green-500 w-max px-2 py-[3px] rounded-sm text-white text-[11px]">Edit</button>
             </Link>
             <DeleteOutline
               className="productListDelete"
@@ -120,27 +139,24 @@ export default function UserList() {
           </>
         );
       },
-    }
+    },
   ];
-
 
 
 
   return (
     <div>
-
       <div className = "bg-black sticky z-50 top-0 ">
         <Navbar  />
       </div>
-
+      
       <div className="flex w-full">
-        <div className="w-[20%]">
+          <div className="w-[20%]">
           <Sidebar />
-        </div>
-
+          </div>
+          
         {isLoading ? "Loading..." : (
-
-        <div className="userList  mt-10">
+        <div className="userList mt-10">
           <DataGrid
           sx={{
             border: 0, // also tried setting to none 
@@ -157,9 +173,11 @@ export default function UserList() {
           />
           </div>
         )}
-      </div>
 
+      </div>
     </div>
 
   );
 }
+
+export default HotelList;

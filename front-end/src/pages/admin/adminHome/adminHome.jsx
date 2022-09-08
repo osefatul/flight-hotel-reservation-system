@@ -60,8 +60,6 @@ function AdminHome() {
       
       
       </div>
-
-      <CopyRightMark />
     </div>
     
     

@@ -1,5 +1,5 @@
 import React from "react";
-import "./product.css";
+import "./hotelDetails.css";
 
 import { productData } from "../../../dummyData";
 import { Publish } from "@mui/icons-material";
@@ -10,7 +10,7 @@ import Sidebar from "../../../components/adminComponents/components/sidebar/Side
 import Navbar from "../../../components/Navbar";
 
 
-function Product() {
+function HotelDetails() {
   return (
 
     <div>
@@ -24,9 +24,9 @@ function Product() {
           </div>
 
           <div className="product">
-            <div className="productTitleContainer">
-              <h1 className="productTitle">Product</h1>
-              <Link to="/admin/newProduct">
+            <div className="productTitleContainer px-5 mt-10">
+              <h1 className="productTitle font-bold">Hotel</h1>
+              <Link to="/admin/new-hotel">
                 <button className="productAddButton">Create</button>
               </Link>
             </div>
@@ -102,4 +102,4 @@ function Product() {
   );
 }
 
-export default Product;
+export default HotelDetails;
