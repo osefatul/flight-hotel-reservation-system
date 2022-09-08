@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     users: [],
+    requestedUser:{},
     isLoading: false,
     error: "",
     searchUsersList: [],
@@ -13,6 +14,11 @@ const userSlice = createSlice({
         reducers: {
     getUsersPending: (state) => { 
         state.isLoading = true;
+    },
+    getRequestedUserSuccess: (state, { payload }) => {
+        state.isLoading = false;
+        state.requestedUser = payload;
+        state.error = "";
     },
     getUsersSuccess: (state, { payload }) => {
         state.isLoading = false;
@@ -39,6 +45,7 @@ const userSlice = createSlice({
 
 export const {
     getUsersPending,
+    getRequestedUserSuccess,
     getUsersSuccess,
     searchUsers,
     getUsersFail,

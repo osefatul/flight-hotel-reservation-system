@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./user.css";
 import {
   PermIdentity,
@@ -8,12 +8,25 @@ import {
   LocationSearching,
   Publish,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Topbar from "../../../components/adminComponents/components/topbar/Topbar";
 import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar";
 import Navbar from "../../../components/Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserData } from "../../../features/usersSlice/usersAction";
 
 function User() {
+  const dispatch = useDispatch()
+  const {id} = useParams()
+  const {isLoading ,error, requestedUser} = useSelector(state => state.users)
+
+
+  useEffect(()=>{
+    dispatch(getUserData(id))
+  },[])
+
+
+
   return (
     <div>
       <div className = "bg-black sticky z-50 top-0 ">
@@ -44,16 +57,13 @@ function User() {
                   alt=""
                   className="userShowImg"
                 />
-                <div className="userShowTopTitle">
-                  <span className="userShowUsername">Adam Smith</span>
-                  <span className="userShowUserTitle">Electrical Engineer</span>
-                </div>
+              
               </div>
               <div className="userShowBottom">
                 <span className="userShowTitle">Account Details</span>
                 <div className="userShowInfo">
                   <PermIdentity className="userShowIcon" />
-                  <span className="userShowInfoTitle">adamsmith007</span>
+                  <span className="userShowInfoTitle">{requestedUser.username}</span>
                 </div>
                 <div className="userShowInfo">
                   <CalendarToday className="userShowIcon" />
@@ -62,15 +72,15 @@ function User() {
                 <span className="userShowTitle">Contact Details</span>
                 <div className="userShowInfo">
                   <PhoneAndroid className="userShowIcon" />
-                  <span className="userShowInfoTitle">+1 7789577976</span>
+                  <span className="userShowInfoTitle">+1 {requestedUser.phone}</span>
                 </div>
                 <div className="userShowInfo">
                   <MailOutline className="userShowIcon" />
-                  <span className="userShowInfoTitle">adamsmith@gmail.com</span>
+                  <span className="userShowInfoTitle">{requestedUser.email}</span>
                 </div>
                 <div className="userShowInfo">
                   <LocationSearching className="userShowIcon" />
-                  <span className="userShowInfoTitle">Vancouver, Canada</span>
+                  <span className="userShowInfoTitle">{requestedUser.city}, {requestedUser.country}</span>
                 </div>
               </div>
             </div>
@@ -85,23 +95,16 @@ function User() {
                     <label>Username</label>
                     <input
                       type="text"
-                      placeholder="annabeck99"
+                      placeholder={requestedUser.username}
                       className="userUpdateInput"
                     />
                   </div>
-                  <div className="userUpdateItem">
-                    <label>Full Name</label>
-                    <input
-                      type="text"
-                      placeholder="Anna Becker"
-                      className="userUpdateInput"
-                    />
-                  </div>
+
                   <div className="userUpdateItem">
                     <label>Email</label>
                     <input
                       type="text"
-                      placeholder="annabeck99@gmail.com"
+                      placeholder={requestedUser.email}
                       className="userUpdateInput"
                     />
                   </div>
@@ -109,7 +112,7 @@ function User() {
                     <label>Phone</label>
                     <input
                       type="text"
-                      placeholder="+1 123 456 67"
+                      placeholder={`+ ${requestedUser.phone}`}
                       className="userUpdateInput"
                     />
                   </div>
@@ -117,7 +120,7 @@ function User() {
                     <label>Address</label>
                     <input
                       type="text"
-                      placeholder="New York | USA"
+                      placeholder={`${requestedUser.city} | ${requestedUser.country}`}
                       className="userUpdateInput"
                     />
                   </div>

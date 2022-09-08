@@ -6,7 +6,7 @@ import { loginSuccess } from "../features/authSlice/loginSlice";
 const rootUrl = "http://localhost:5000/v1/"
 const registerUserUrl = rootUrl + "auth/register";
 const loginUserUrl =    rootUrl + "auth/login";
-const allUsersProfileUrl = rootUrl + "users";
+const allUsersProfileUrl = rootUrl + "users/";
 const deleteUserUrl = rootUrl + "users/";
 
 export const userRegistration = async (formData) =>{
@@ -49,6 +49,20 @@ export const fetchAllUsers = async () =>{
         const res = await axios.get(allUsersProfileUrl, 
             axios.defaults.withCredentials = true //for sending cookies.
             )
+        return res.data
+    }catch(error){
+        console.log(error);
+        return(error.message);
+    }
+}
+
+
+
+export const fetchUser = async (id) =>{
+    try {
+        const res = await axios.get(allUsersProfileUrl + id, 
+            axios.defaults.withCredentials = true //for sending cookies.
+            )
         console.log(res)
         return res.data
     }catch(error){
@@ -56,6 +70,8 @@ export const fetchAllUsers = async () =>{
         return(error.message);
     }
 }
+
+
 
 
 
