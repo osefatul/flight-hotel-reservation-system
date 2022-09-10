@@ -23,8 +23,6 @@ export const userRegistration = async (formData) =>{
 
 
 export const loginUser = async (formData) =>{
-    
-    
     try {
         const res = await axios.post(loginUserUrl,
             formData, 
@@ -63,7 +61,6 @@ export const fetchUser = async (id) =>{
         const res = await axios.get(allUsersProfileUrl + id, 
             axios.defaults.withCredentials = true //for sending cookies.
             )
-        console.log(res)
         return res.data
     }catch(error){
         console.log(error);
