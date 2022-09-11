@@ -53,8 +53,8 @@ export default function UserList() {
       width: 120,
       renderCell: (params) => {
         return (
-          <div className="text-[12px]">
-            {/* <img className="userListImg" src={params.row.avatar} alt="" /> */}
+          <div className="flex text-[12px] items-center">
+            <img className="userListImg" src={params.row.img ? params.row.img : "https://dcpcsb.org/themes/copycat/images/profile.png"  } alt="" />
             {params.row.username}
           </div>
         );

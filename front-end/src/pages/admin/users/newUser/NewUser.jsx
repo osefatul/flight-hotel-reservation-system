@@ -108,7 +108,7 @@ function NewUser() {
               src={file? URL.createObjectURL(file): "https://dcpcsb.org/themes/copycat/images/profile.png"} alt="" />
               
               <div>
-                <label htmlFor="file" className="border rounded-md shadow-lg p-2">Upload Image: <DriveFolderUploadOutlinedIcon className="icon" /></label>
+                <label htmlFor="file" className="border rounded-md shadow-lg p-2"><DriveFolderUploadOutlinedIcon className="icon"/> Upload Picture</label>
                 <input type="file"
                   id="file"
                   onChange={(e)=> setFile(e.target.files[0])}

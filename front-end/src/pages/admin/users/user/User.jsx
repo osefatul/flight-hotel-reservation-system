@@ -9,7 +9,6 @@ import {
   Publish,
 } from "@mui/icons-material";
 import { Link, useParams } from "react-router-dom";
-import Topbar from "../../../../components/adminComponents/components/topbar/Topbar";
 import Sidebar from "../../../../components/adminComponents/components/sidebar/Sidebar";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -43,7 +42,7 @@ function User() {
         <div className="user">
 
           <div className="userTitleContainer">
-            <h1 className="userTitle">Edit User</h1>
+            <h1 className="userTitle font-bold">Edit User</h1>
           
           </div>
 
@@ -52,7 +51,7 @@ function User() {
             <div className="userShow">
               <div className="userShowTop">
                 <img
-                  src="https://www.dulcedo.com/wp-content/uploads/2019/03/mh07p077crop-315x445.jpg"
+                  src={requestedUser.img? requestedUser.img : "https://dcpcsb.org/themes/copycat/images/profile.png"}
                   alt=""
                   className="userShowImg"
                 />
@@ -129,7 +128,7 @@ function User() {
                   <div className="userUpdateUpload">
                     <img
                       className="userUpdateImg"
-                      src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                      src={requestedUser.img? requestedUser.img : "https://dcpcsb.org/themes/copycat/images/profile.png"}
                       alt=""
                     />
                     <label htmlFor="file">

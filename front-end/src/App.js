@@ -25,8 +25,6 @@ function App() {
       <Route path="login" element={<Auth/>}/>
       <Route path="register" element={<Register/>}/>
 
-
-
       <Route path="/" element={<ProtectedRoutes/>}>        
         <Route path="hotels/:id" element={<Hotel/>}/>
         
