@@ -1,8 +1,7 @@
 import "./newHotel.css";
 import React from "react";
-import Topbar from "../../../components/adminComponents/components/topbar/Topbar";
-import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar";
-import Navbar from "../../../components/Navbar";
+import Sidebar from "../../../../components/adminComponents/components/sidebar/Sidebar";
+import Navbar from "../../../../components/Navbar";
 
 export default function NewHotel() {
   return (

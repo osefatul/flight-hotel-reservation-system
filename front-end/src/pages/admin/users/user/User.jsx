@@ -9,11 +9,12 @@ import {
   Publish,
 } from "@mui/icons-material";
 import { Link, useParams } from "react-router-dom";
-import Topbar from "../../../components/adminComponents/components/topbar/Topbar";
-import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar";
-import Navbar from "../../../components/Navbar";
+import Topbar from "../../../../components/adminComponents/components/topbar/Topbar";
+import Sidebar from "../../../../components/adminComponents/components/sidebar/Sidebar";
+
 import { useDispatch, useSelector } from "react-redux";
-import { getUserData } from "../../../features/usersSlice/usersAction";
+import { getUserData } from "../../../../features/usersSlice/usersAction";
+import Navbar from "../../../../components/Navbar";
 
 function User() {
   const dispatch = useDispatch()
@@ -43,9 +44,7 @@ function User() {
 
           <div className="userTitleContainer">
             <h1 className="userTitle">Edit User</h1>
-            <Link to="/admin/newUser">
-              <button className="userAddButton">Create</button>
-            </Link>
+          
           </div>
 
           <div className="userContainer">

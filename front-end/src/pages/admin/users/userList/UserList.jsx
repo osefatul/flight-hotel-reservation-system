@@ -4,12 +4,10 @@ import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutline } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { userRows } from "../../../dummyData";
-import Topbar from "../../../components/adminComponents/components/topbar/Topbar";
-import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar";
-import Navbar from "../../../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
-import { DeletingUser, getUsersData } from "../../../features/usersSlice/usersAction";
+import { DeletingUser, getUsersData } from "../../../../features/usersSlice/usersAction";
+import Navbar from "../../../../components/Navbar";
+import Sidebar from "../../../../components/adminComponents/components/sidebar/Sidebar";
 
 export default function UserList() {
 
@@ -134,30 +132,43 @@ export default function UserList() {
       </div>
 
       <div className="flex w-full">
+
         <div className="w-[20%]">
           <Sidebar />
         </div>
 
-        {isLoading ? "Loading..." : (
-
-        <div className="userList  mt-10">
-          <DataGrid
-          sx={{
-            border: 0, // also tried setting to none 
-            borderRadius: 2,
-            p: 2,
-            minWidth: 200,
-          }}
-          getRowId = {(row) => row._id}
-          rows={data}
-          disableSelectionOnClick
-          columns={columns}
-          pageSize={8}
-          checkboxSelection
-          />
+        <div className="flex flex-col w-full  mt-10 ">
+          <div className=" pl-5">
+              <Link to="/admin/newUser">
+                <button className="w-24 bg-green-900 text-white rounded-sm">Create</button>
+              </Link>
           </div>
-        )}
+
+
+
+          {isLoading ? "Loading..." : (
+
+          <div className="userList ">
+            <DataGrid
+            sx={{
+              border: 0, // also tried setting to none 
+              borderRadius: 2,
+              p: 2,
+              minWidth: 200,
+            }}
+            getRowId = {(row) => row._id}
+            rows={data}
+            disableSelectionOnClick
+            columns={columns}
+            pageSize={8}
+            checkboxSelection
+            />
+            </div>
+          )}
+        </div>
+
       </div>
+
 
     </div>
 

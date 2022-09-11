@@ -8,13 +8,13 @@ import Home from "./pages/home/Home";
 import Hotel from "./pages/hotel/Hotel";
 import List from "./pages/list/List";
 import AdminHome from "./pages/admin/adminHome/adminHome";
-import NewUser from "./pages/admin/newUser/NewUser";
-import UserList from "./pages/admin/userList/UserList";
-import User from "./pages/admin/user/User";
-import HotelDetails from "./pages/admin/hotel/HotelDetails";
+import NewUser from "./pages/admin/users/newUser/NewUser";
+import UserList from "./pages/admin/users/userList/UserList";
+import User from "./pages/admin/users/user/User";
+import HotelDetails from "./pages/admin/hotels/hotel/HotelDetails";
 import Register from "./pages/auth/Register";
-import HotelList from "./pages/admin/hotelList/HotelList";
-import NewHotel from "./pages/admin/newHotel/NewHotel";
+import HotelList from "./pages/admin/hotels/hotelList/HotelList";
+import NewHotel from "./pages/admin/hotels/newHotel/NewHotel";
 
 function App() {
   return (

@@ -1,13 +1,13 @@
 import React from "react";
 import "./hotelDetails.css";
 
-import { productData } from "../../../dummyData";
+import { productData } from "../../../../dummyData";
 import { Publish } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import Charts from "../../../components/adminComponents/components/charts/Charts";
-import Topbar from "../../../components/adminComponents/components/topbar/Topbar";
-import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar";
-import Navbar from "../../../components/Navbar";
+import Charts from "../../../../components/adminComponents/components/charts/Charts";
+import Sidebar from "../../../../components/adminComponents/components/sidebar/Sidebar";
+import Navbar from "../../../../components/Navbar";
+
 
 
 function HotelDetails() {
@@ -26,9 +26,7 @@ function HotelDetails() {
           <div className="product">
             <div className="productTitleContainer px-5 mt-10">
               <h1 className="productTitle font-bold">Hotel</h1>
-              <Link to="/admin/new-hotel">
-                <button className="productAddButton">Create</button>
-              </Link>
+            
             </div>
             <div className="productTop">
               <div className="productTopLeft">
