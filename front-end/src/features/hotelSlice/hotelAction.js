@@ -37,7 +37,6 @@ export const fetchingHotels = () => async (dispatch) => {
     dispatch(hotelPending());
     try {
         const result = await getHotels();
-        console.log(result)
         dispatch(fetchingHotelsSuccess(result.data))
     }catch(error){
         console.log(error)

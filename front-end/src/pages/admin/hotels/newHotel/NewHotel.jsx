@@ -9,6 +9,7 @@ import axios from "axios"
 import { creatingHotel } from "../../../../features/hotelSlice/hotelAction";
 
 export default function NewHotel() {
+
   const dispatch = new useDispatch()
   const[MessageAddedAlert, setMessageAddedAlert] = useState(false)
   const {isLoading, error, rooms} = useSelector(state => state.rooms)
@@ -17,12 +18,23 @@ export default function NewHotel() {
   const [info, setInfo] = useState({});
   const [selectRooms, setSelectRooms] = useState([]);
 
+
+  const uploadMultipleImages = (e)=>{
+    e.preventDefault()
+    let images = [];
+    for (let i=0; i< e.target.files.length; i++) {
+      images.push(URL.createObjectURL(e.target.files[i]));
+    }
+    setFiles([...images]);
+    // console.log(files)
+  }
+
+
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
   const handleSelect = (e) => {
-    // console.log(e.target.selectedOptions)
     // Create array from selectedOptions, only take value property of the option.
     const value = Array.from(
       e.target.selectedOptions,
@@ -65,7 +77,6 @@ export default function NewHotel() {
 
   // }
 
-  console.log(files)
 
   useEffect(() => {
     dispatch(fetchingRooms())
@@ -94,25 +105,28 @@ export default function NewHotel() {
           {/* Left Side */}
             <div className="w-[40%] flex flex-col items-center justify-center">      
               <div className="flex flex-col items-center justify-center space-y-10">
-                
-                {
-                  files?
-                  files.map(
-                    file =>(
+
+                <div className="flex flex-wrap space-x-1">
+                  {
+                    files.length>0 ?
+                    files.map(
+                      file => (
                       <img
-                  className="w-56 h-56 borderRadius object-cover"
-                  src={URL.createObjectURL(file)} alt="" /> 
-                    )
-                  )
-                  : <div className="text-gray-500">No image found</div>
-                }
+                      className="w-12 h-12 object-cover rounded-sm"
+                      src={file} alt="" />
+                      ))
+                    : <div className="text-gray-500">No image found</div>
+                  }
+                </div>
+              
                 
                 <div>
                   <label htmlFor="file" className="border rounded-md shadow-lg p-2 text-[12px]"> <DriveFolderUploadOutlinedIcon className="icon" /> Upload Images</label>
                   <input type="file"
                     id="file"
                     multiple
-                    onChange={(e)=> setFiles(e.target.files)}
+                    onChange={uploadMultipleImages}
+                    // onChange={(e)=> setFiles(e.target.files[0])}
                     style={{ display: "none" }}
                   />
                 </div>
