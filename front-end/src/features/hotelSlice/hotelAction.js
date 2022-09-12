@@ -10,8 +10,10 @@ export const creatingHotel = (formData) => async (dispatch) => {
     try {
         const result = await createHotel(formData);
         console.log(result);
+        dispatch(fetchingAHotelSuccess(result.data))
     }catch(error){
         console.log(error)
+        dispatch(HotelsFail(error))
         return error;
     }
 }

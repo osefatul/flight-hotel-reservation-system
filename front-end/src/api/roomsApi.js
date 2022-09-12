@@ -33,10 +33,10 @@ export const getRoom = async (id) =>{
 }
 
 
-export const getRooms = async (id) =>{
+export const getRooms = async () =>{
     try {
         const res = await axios.get(getRoomUrl);
-        console.log(res)
+
         return res
     }catch(error){
         console.log(error)
