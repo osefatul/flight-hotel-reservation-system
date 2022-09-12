@@ -11,7 +11,9 @@ const updateRoomAvailabilityUrl = getRoomUrl + "/availability/";
 
 export const createRoom = async (formData, hotelId) =>{
     try {
-        const res = await axios.post(createRoomUrl + hotelId, formData);
+        const res = await axios.post(createRoomUrl + hotelId, formData,
+        axios.defaults.withCredentials = true //use this for sending cookies
+            );
         console.log(res)
         return res
     }catch(error){

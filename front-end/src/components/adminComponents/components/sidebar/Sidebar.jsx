@@ -13,6 +13,7 @@ import {
   Timeline,
   TrendingUp,
   WorkOutline,
+  Room
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
@@ -55,10 +56,13 @@ function Sidebar() {
                 Hotels
               </li>
             </Link>
-            <li className="sidebarListItem">
-              <AttachMoney className="sidebarIcon" />
-              Transactions
-            </li>
+
+            <Link to="/admin/rooms">
+              <li className="sidebarListItem">
+                <Room className="sidebarIcon" />
+                Room
+              </li>
+            </Link>
             <li className="sidebarListItem">
               <BarChart className="sidebarIcon" />
               Reports

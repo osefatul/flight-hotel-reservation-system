@@ -16,7 +16,9 @@ const getHotelsByFeatureUrl = rootUrl + "hotels?featured=true&limit=4";
 
 export const createHotel = async (formData) =>{
     try {
-        const res = await axios.post(createHotelUrl , formData);
+        const res = await axios.post(createHotelUrl , formData, 
+            axios.defaults.withCredentials = true //for sending cookies.
+        );
         return res
     }catch(error){
         console.log(error)

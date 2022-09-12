@@ -41,7 +41,7 @@ export default function UserList() {
       return (
         // <Link to={`/ticket_communication/${params.row._id}`}>
           <div className="text-[12px]">
-            U- {params.row._id.slice(0,10)}...
+            U{params.row._id.slice(0,10)}...
           </div>
         // </Link>
       );
@@ -109,7 +109,7 @@ export default function UserList() {
         return (
           <>
             <Link to={"/admin/users/" + params.row._id}>
-              <button className="bg-green-500 w-max px-2 py-[3px] rounded-sm text-white text-[11px]">Edit</button>
+              <button className="bg-green-800 w-max px-2 py-[3px] rounded-sm text-white text-[11px]">Edit</button>
             </Link>
             <DeleteOutline
               className="productListDelete"

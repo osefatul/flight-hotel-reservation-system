@@ -18,7 +18,7 @@ const createRoom = async (req, res, next) => {
     } catch (err) {
         next(err);
     }
-    res.status(200).json(savedRoom);
+    res.status(200).json({message : "Room has been created successfully."});
     } catch (err) {
     next(err);
     }

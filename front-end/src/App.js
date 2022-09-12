@@ -15,6 +15,8 @@ import HotelDetails from "./pages/admin/hotels/hotel/HotelDetails";
 import Register from "./pages/auth/Register";
 import HotelList from "./pages/admin/hotels/hotelList/HotelList";
 import NewHotel from "./pages/admin/hotels/newHotel/NewHotel";
+import RoomsList from "./pages/admin/rooms/roomsList/RoomsList";
+import NewRoom from "./pages/admin/rooms/newRoom/NewRoom";
 
 function App() {
   return (
@@ -35,6 +37,9 @@ function App() {
         <Route path="admin/new-hotel" element={<NewHotel/>} />
         <Route path="admin/hotels/" element={<HotelList/>} />
         <Route path="admin/hotels/:id" element={<HotelDetails/>}/>
+        <Route path="admin/new-room/" element={<NewRoom/>}/>
+        <Route path="admin/rooms/" element={<RoomsList/>}/>
+
 
       </Route>
     </Routes>

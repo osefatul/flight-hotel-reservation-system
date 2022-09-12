@@ -5,7 +5,7 @@ const initialState = {
     FeaturedLoading: false,
     error: "",
     hotel: {},
-    hotels: {},
+    hotels: [],
     HotelsInTheCities: {},
     hotelTypes:{},
     hotelsFeatured:[],

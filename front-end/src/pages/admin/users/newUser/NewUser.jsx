@@ -170,7 +170,7 @@ function NewUser() {
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
                 </select> */}
-                <button  onClick={handleClick} className="newUserButton w-full ">Create</button>
+                <button onClick={handleClick} className=" border border-1 bg-blue-800 mt-4 text-white rounded-sm w-full p-1  ">Create</button>
               </div>
           </div>
 
