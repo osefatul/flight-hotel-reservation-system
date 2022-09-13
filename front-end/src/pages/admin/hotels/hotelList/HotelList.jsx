@@ -113,12 +113,12 @@ function HotelList() {
     },
     {
       field: "price",
-      headerName: "Price",
+      headerName: "Cheapest Price",
       width: 160,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
-            {params.row.cheapestPrice}
+            ${params.row.cheapestPrice}
           </div>
         );
       },

@@ -62,7 +62,7 @@ function RoomsList() {
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
-            {params.row.price}
+            ${params.row.price}
           </div>
         );
       },

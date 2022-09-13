@@ -50,16 +50,13 @@ function Hotel() {
 
     const days = dayDifference(date[0].endDate, date[0].startDate);
 
-
     const handleReserve = () => {
             setOpenModal(true);
     }
 
-
     useEffect(()=>{
         if(isAuth) dispatch(FetchingAHotel(hotelId))
     },[])
-
 
 
     const handleOpen = (i) => {
