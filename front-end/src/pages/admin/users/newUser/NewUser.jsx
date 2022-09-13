@@ -40,7 +40,8 @@ function NewUser() {
       const uploadRes = await axios.post(
         //I used the foldername as: hotelReservation/newUser in the cloudinary
         "https://api.cloudinary.com/v1_1/ddgn3r0t2/image/upload",
-        data
+        data,
+        data, axios.defaults.withCredentials = false
       );
 
       const { url } = uploadRes.data;

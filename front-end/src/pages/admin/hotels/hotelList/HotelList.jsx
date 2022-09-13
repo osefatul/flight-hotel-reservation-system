@@ -8,7 +8,7 @@ import { useState } from "react";
 import Sidebar from "../../../../components/adminComponents/components/sidebar/Sidebar";
 import Navbar from "../../../../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchingHotels } from "../../../../features/hotelSlice/hotelAction";
+import { deletingHotel, fetchingHotels } from "../../../../features/hotelSlice/hotelAction";
 
 
 
@@ -30,9 +30,12 @@ function HotelList() {
 
 
   const handleDelete = async (id) => {
+    await dispatch(deletingHotel(id))
     setData(data.filter((item) => item._id !== id));
-  };
+    //map all those that are not equal to the selected row id
+    dispatch(fetchingHotels())
 
+  };
 
 
 

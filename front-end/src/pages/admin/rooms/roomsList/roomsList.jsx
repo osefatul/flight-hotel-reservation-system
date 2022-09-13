@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Sidebar from '../../../../components/adminComponents/components/sidebar/Sidebar';
 import Navbar from '../../../../components/Navbar';
-import { fetchingRooms } from '../../../../features/roomSlice/roomAction';
+import { deletingRoom, fetchingRooms } from '../../../../features/roomSlice/roomAction';
 
 function RoomsList() {
 
@@ -25,6 +25,7 @@ function RoomsList() {
 
 
   const handleDelete = async (id) => {
+    await dispatch(deletingRoom(id))
     setData(data.filter((item) => item._id !== id));
   };
 
@@ -97,7 +98,7 @@ function RoomsList() {
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
-            R{params.row.desc.slice(0,10)}...
+            {params.row.desc.slice(0,10)}...
           </div>
         );
       },

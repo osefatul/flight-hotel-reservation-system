@@ -51,8 +51,10 @@ export const deletingHotel = (hotelId) => async (dispatch) => {
     try {
         const result = await deleteHotel(hotelId);
         console.log(result);
+        dispatch(fetchingAHotelSuccess(result.data))
     }catch(error){
         console.log(error)
+        dispatch(HotelsFail(error))
         return error;
     }
 }

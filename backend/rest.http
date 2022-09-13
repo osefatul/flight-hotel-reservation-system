@@ -161,6 +161,11 @@ GET http://localhost:5000/v1/rooms/630d9a85ad5759b952860df2/
 Content-Type: application/json
 
 
+### Get hotels based on room Id
+GET http://localhost:5000/v1/rooms/getHotel/630d9a85ad5759b952860df2/
+Content-Type: application/json
+
+
 ### Get Rooms
 GET http://localhost:5000/v1/rooms/
 Content-Type: application/json
@@ -174,5 +179,5 @@ Content-Type: application/json
 
 
 ### Delete a Room
-DELETE http://localhost:5000/v1/rooms/630da0391ec1bd093f795b9c/630c755e4a55a78f7588f441
+DELETE http://localhost:5000/v1/rooms/632015abf13cbed7a4845b6e
 Content-Type: application/json

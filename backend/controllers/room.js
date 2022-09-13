@@ -59,16 +59,16 @@ const updateRoomAvailability = async (req, res, next) => {
 
 
 const deleteRoom = async (req, res, next) => {
-    const hotelId = req.params.hotelid;
     try {
+
+        await Hotel.updateMany({rooms: req.params.id}, {
+            $pull: { rooms: req.params.id } 
+        })
         await Room.findByIdAndDelete(req.params.id);
-        try {
-        await Hotel.findByIdAndUpdate(hotelId, {
-            $pull: { rooms: req.params.id },
-        });
-        } catch (err) {
-        next(err);
-        }
+        // try {
+        // await Hotel.findByIdAndUpdate(hotelId, {
+        //     $pull: { rooms: req.params.id },
+        // });
         res.status(200).json("Room has been deleted.");
     } catch (err) {
         next(err);
@@ -81,6 +81,16 @@ const getRoom = async (req, res, next) => {
     try {
         const room = await Room.findById(req.params.id);
         res.status(200).json(room);
+    } catch (err) {
+        next(err);
+    }
+};
+
+
+const findHotels = async (req, res, next) => {
+    try {
+        const hotels = await Hotel.find({rooms: req.params.id});
+        res.status(200).json(hotels);
     } catch (err) {
         next(err);
     }
@@ -105,5 +115,6 @@ module.exports = {
     getRoom,
     getRooms,
     updateRoom,
+    findHotels,
     updateRoomAvailability
 }
