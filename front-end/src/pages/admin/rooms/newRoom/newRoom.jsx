@@ -55,13 +55,13 @@ useEffect(()=>{
       {message.message && <div className=" bg-green-600 w-full text-white text-small rounded flex items-center justify-center m-2">{message.message}</div> }
       
       <div className="flex w-full">
-        <div className="">
+        <div className="w-[15%]">
         <Sidebar />
         </div>
 
         <h1 className=" absolute font-bold text-[18px] top-20 left-40">Create New Room</h1>
 
-        <form className="flex w-full items-center justify-center relative pl-20">
+        <form className="flex w-[85%] items-center justify-center relative pl-20">
           <div className=" w-[50%] flex flex-col space-y-1 justify-center p-10 ">
             
               {/* Inputs */}

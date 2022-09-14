@@ -1,13 +1,12 @@
-import { DeleteOutline } from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import Sidebar from '../../../../components/adminComponents/components/sidebar/Sidebar';
-import Navbar from '../../../../components/Navbar';
-import { deletingRoom, fetchingRooms } from '../../../../features/roomSlice/roomAction';
+import { useNavigate } from 'react-router-dom';
+import Sidebar from '../../../../components/adminComponents/components/sidebar/Sidebar'
+import Navbar from '../../../../components/Navbar'
+import { fetchingRooms } from '../../../../features/roomSlice/roomAction';
 
-function RoomsList() {
+function ReservedRoom() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,7 +24,6 @@ function RoomsList() {
   },[rooms])
 
 
-
   const navigateUser = (params) =>{
     const userId = params.row.roomNumbers.filter( i => {
       return i.reservedBy !== undefined
@@ -36,10 +34,9 @@ function RoomsList() {
 
 
   const handleDelete = async (id) => {
-    await dispatch(deletingRoom(id))
+    // await dispatch(deletingRoom(id))
     setData(data.filter((item) => item._id !== id));
   };
-
 
 
   const columns = [
@@ -160,27 +157,25 @@ function RoomsList() {
         );
       },
     },
-    {
-      field: "action",
-      headerName: "Action",
-      width: 150,
-      renderCell: (params) => {
-        return (
-          <>
-            <Link to={"/admin/rooms/" + params.row._id}>
-            <button className="bg-green-800 w-max px-2 py-[3px] rounded-sm text-white text-[11px]">Edit</button>
-            </Link>
-            <DeleteOutline
-              className="productListDelete"
-              onClick={() => handleDelete(params.row._id)}
-            />
-          </>
-        );
-      },
-    },
+    // {
+    //   field: "action",
+    //   headerName: "Action",
+    //   width: 150,
+    //   renderCell: (params) => {
+    //     return (
+    //       <>
+    //         <Link to={"/admin/rooms/" + params.row._id}>
+    //         <button className="bg-green-800 w-max px-2 py-[3px] rounded-sm text-white text-[11px]">Edit</button>
+    //         </Link>
+    //         <DeleteOutline
+    //           className="productListDelete"
+    //           onClick={() => handleDelete(params.row._id)}
+    //         />
+    //       </>
+    //     );
+    //   },
+    // },
   ];
-
-
 
   return (
     <div>
@@ -194,11 +189,6 @@ function RoomsList() {
           </div>
 
         <div className="flex flex-col w-[85%]  mt-10 ">
-          <div className=" pl-5">
-            <Link to="/admin/new-room">
-                <button className="w-24 bg-green-900 text-white rounded-sm">Create</button>
-            </Link>
-          </div>
           
           {isLoading ? "Loading..." : (
           <div className="userList">
@@ -221,8 +211,7 @@ function RoomsList() {
         </div>
       </div>
     </div>
-
-  );
+  )
 }
 
-export default RoomsList
+export default ReservedRoom

@@ -95,11 +95,11 @@ function NewUser() {
       
       <div className="flex w-full">
 
-        <div className="">
+        <div className="w-[15%]">
         <Sidebar />
         </div>
 
-        <form className="flex w-full relative">
+        <form className="flex w-[85%] relative">
           <h1 className=" absolute font-bold text-[18px] pt-10 pl-10">Create New User</h1>
           <div className="w-[40%] flex flex-col items-center justify-center">      
             <div className="flex flex-col items-center justify-center space-y-10">

@@ -21,7 +21,13 @@ desc: {
     type: String,
     required: true,
 },
-roomNumbers: [{ number: Number, unavailableDates: {type: [Date]}, reservedBy: {type: String} } ],
+roomNumbers: [
+    { number: Number, 
+    unavailableDates: {type: [Date]}, 
+    reservedBy: {type: String},
+    totalPrice: Number 
+},
+],
 
 },
 { timestamps: true }

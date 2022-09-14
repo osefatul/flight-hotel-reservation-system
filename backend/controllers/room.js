@@ -63,7 +63,8 @@ const updateRoomAvailability = async (req, res, next) => {
             // "roomNumbers.$.reservedBy": req.body.userId
             roomNumbers: {
                 unavailableDates :req.body.dates,
-                reservedBy : req.body.userId
+                reservedBy : req.body.userId,
+                totalPrice : req.body.totalPrice,
             }
             },
         }

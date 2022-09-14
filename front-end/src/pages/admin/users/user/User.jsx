@@ -35,11 +35,11 @@ function User() {
       
       <div className="flex w-full">
 
-        <div className="w-[20%]">
+        <div className="w-[15%]">
           <Sidebar />
         </div>
 
-        <div className="user">
+        <div className="user w-[85%]">
 
           <div className="userTitleContainer">
             <h1 className="userTitle font-bold">Edit User</h1>

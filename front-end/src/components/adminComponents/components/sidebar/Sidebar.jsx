@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./sidebar.css";
 import {
   AttachMoney,
@@ -15,81 +15,59 @@ import {
   WorkOutline,
   Room
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion"
+import { getSelected } from "../../../../features/selectedSidebar/selectedSidebarSlice";
 
 function Sidebar() {
+
+  // UseState doesn't work in this case as it has delay.
+  const {selected}  = useSelector(state => state.selectedSidebar)
+
+  const [toggle, setToggle] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  
+  const tabs = [
+    {id:0, title:"Home", url:"" ,Icon: LineStyle },
+    {id:1, title:"Users", url:"users", Icon:PermIdentity}, 
+    {id:2, title:"Hotels", url:"hotels", Icon:Room},
+    {id:3, title:"Room", url:"rooms", Icon: Storefront},
+    {id:4, title:"Reserved", url:"reserved-rooms", Icon: Timeline}
+] 
+
+
+
+const handleSubmit =  (index, url) =>{
+  dispatch(getSelected(index))
+  navigate(`/admin/${url}`)        
+  }
   return (
-    <div className="sidebar ">
-      <div className="sidebarWrapper">
-        <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Dashboard</h3>
-          <ul className="sidebarList">
-            <Link to="/admin" className="link">
-              <li className="sidebarListItem active">
-                <LineStyle className="sidebarIcon" />
-                Home
-              </li>
-            </Link>
-            <li className="sidebarListItem">
-              <Timeline className="sidebarIcon" />
-              Analytics
-            </li>
-            <li className="sidebarListItem">
-              <TrendingUp className="sidebarIcon" />
-              Sales
-            </li>
-          </ul>
-        </div>
-        <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Quick Menu</h3>
-          <ul className="sidebarList">
-            <Link to="/admin/users" className="link">
-              <li className="sidebarListItem">
-                <PermIdentity className="sidebarIcon" />
-                Users
-              </li>
-            </Link>
 
-            <Link to="/admin/hotels" className="link">
-              <li className="sidebarListItem">
-                <Storefront className="sidebarIcon" />
-                Hotels
-              </li>
-            </Link>
-
-            <Link to="/admin/rooms">
-              <li className="sidebarListItem">
-                <Room className="sidebarIcon" />
-                Room
-              </li>
-            </Link>
-            <li className="sidebarListItem">
-              <BarChart className="sidebarIcon" />
-              Reports
-            </li>
-          </ul>
-        </div>
-        <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Notifications</h3>
-          <ul className="sidebarList">
-            <li className="sidebarListItem">
-              <MailOutline className="sidebarIcon" />
-              Mail
-            </li>
-            <li className="sidebarListItem">
-              <DynamicFeed className="sidebarIcon" />
-              Feedback
-            </li>
-            <li className="sidebarListItem">
-              <ChatBubbleOutline className="sidebarIcon" />
-              Messages
-            </li>
-          </ul>
-        </div>
-
-      </div>
+    <div className="homeHeight hidden sm:flex flex-col sticky z-50 top-[50px]">
+          <h3 className="px-2 text-gray-400 font-bold pb-4">Dashboard</h3>
+          <div className='flex flex-col space-y-4 text-sm '>
+            {tabs.map((tab ,index)=>(
+                <motion.div 
+                key={index}
+                
+                className={`${index === selected && " border-l-4 border-blue-800 bg-slate-300 hover:shadow-md  "} w-full h-8 flex text-[12px] items-center justify-start px-2 hover:bg-slate-300 hover:shadow-md ` }
+                onClick={() => handleSubmit(index, tab.url)}
+                >
+                    <motion.p 
+                    className=" cursor-pointer"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.9 }}
+                    >
+                      <tab.Icon /> {tab.title}
+                    </motion.p>
+                </motion.div>
+            ))}
+          </div>
     </div>
-  );
+
+    )
 }
 
 export default Sidebar;

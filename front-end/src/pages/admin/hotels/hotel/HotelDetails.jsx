@@ -19,11 +19,13 @@ function HotelDetails() {
       </div>
 
       <div className="flex w-full">
-          <div className="w-[20%]">
-          <Sidebar />
+          <div className="w-[15%]">
+            <Sidebar />
           </div>
 
-          <div className="product">
+
+
+          <div className="w-[85%] product ">
             <div className="productTitleContainer px-5 mt-10">
               <h1 className="productTitle font-bold">Hotel</h1>
             

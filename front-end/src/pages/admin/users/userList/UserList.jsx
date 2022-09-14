@@ -133,11 +133,11 @@ export default function UserList() {
 
       <div className="flex w-full">
 
-        <div className="w-[20%]">
+        <div className="w-[15%]">
           <Sidebar />
         </div>
 
-        <div className="flex flex-col w-full  mt-10 ">
+        <div className="flex flex-col w-[85%]  mt-10 ">
           <div className=" pl-5">
               <Link to="/admin/newUser">
                 <button className="w-24 bg-green-900 text-white rounded-sm">Create</button>

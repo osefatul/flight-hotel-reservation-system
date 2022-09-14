@@ -40,11 +40,11 @@ function AdminHome() {
       </div>
       
       <div className="flex w-full">
-        <div className="w-[20%]">
+        <div className="w-[15%]">
         <Sidebar />
         </div>
 
-        <div className="w-[70%] mt-2 ">
+        <div className="w-[85%] mt-2 ">
               <FeaturedInfo />
               <Charts
                 data={userData}

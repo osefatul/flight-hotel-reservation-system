@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { updatingRoomAvailability } from '../features/roomSlice/roomAction';
 import axios from "axios"
 
-function Reservation({setOpenModal, hotelId}) {
+function Reservation({setOpenModal, hotelId, totalPrice}) {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -67,7 +67,7 @@ function Reservation({setOpenModal, hotelId}) {
         try {
             await Promise.all(
                 selectedRooms.map((roomId) => {
-                return dispatch(updatingRoomAvailability({roomId, dates:allDates, userId: user._id}))
+                return dispatch(updatingRoomAvailability({roomId, dates:allDates, userId: user._id, totalPrice}))
 
             })
         );
@@ -102,12 +102,12 @@ function Reservation({setOpenModal, hotelId}) {
                 <div className="flex justify-between items-center space-x-10 sm:space-x-6 md: space-x-2" key={item._id}>
 
                     <div className="text-[12px] sm:text-[14px]">
-                        <div className="rTitle">{item.title}</div>
+                        <div className="rTitle ">{item.title}</div>
                         <div className="rDesc">{item.desc}</div>
                         <div className="rMax">
                             Max people: <b>{item.maxPeople}</b>
                         </div>
-                        <div className="font-bold text-[16px]">{item.price}</div>
+                        <div className="font-semibold  text-[16px]">${item.price}</div>
                     </div>
 
                     <div className="flex space-x-2 items-center justify-center">

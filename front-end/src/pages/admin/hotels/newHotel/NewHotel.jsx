@@ -97,11 +97,11 @@ export default function NewHotel() {
       
       <div className="flex w-full">
 
-        <div className="">
+        <div className="w-[15%]">
         <Sidebar />
         </div>
 
-        <form className="flex w-full relative">
+        <form className="flex w-[85%] relative">
           <h1 className=" absolute font-bold text-[18px] pt-10 pl-10">Create New Hotel</h1>
           
         {/* Left Side */}

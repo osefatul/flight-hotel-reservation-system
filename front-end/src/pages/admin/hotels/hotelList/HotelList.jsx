@@ -152,36 +152,36 @@ function HotelList() {
       </div>
       
       <div className="flex w-full">
-          <div className="w-[20%]">
+          <div className="w-[15%]">
           <Sidebar />
           </div>
 
-        <div className="flex flex-col w-full  mt-10 ">
-          <div className=" pl-5">
-            <Link to="/admin/new-hotel">
-                <button className="w-24 bg-green-900 text-white rounded-sm">Create</button>
-            </Link>
-          </div>
-          
-          {isLoading ? "Loading..." : (
-          <div className="userList">
-            <DataGrid
-            sx={{
-              border: 0, // also tried setting to none 
-              borderRadius: 2,
-              p: 2,
-              minWidth: 200,
-            }}
-            getRowId = {(row) => row._id}
-            rows={data}
-            disableSelectionOnClick
-            columns={columns}
-            pageSize={8}
-            checkboxSelection
-            />
+          <div className="flex flex-col w-[85%]  mt-10 ">
+            <div className=" pl-5">
+              <Link to="/admin/new-hotel">
+                  <button className="w-24 bg-green-900 text-white rounded-sm">Create</button>
+              </Link>
             </div>
-          )}
-        </div>
+            
+            {isLoading ? "Loading..." : (
+            <div className="userList">
+              <DataGrid
+              sx={{
+                border: 0, // also tried setting to none 
+                borderRadius: 2,
+                p: 2,
+                minWidth: 200,
+              }}
+              getRowId = {(row) => row._id}
+              rows={data}
+              disableSelectionOnClick
+              columns={columns}
+              pageSize={8}
+              checkboxSelection
+              />
+              </div>
+            )}
+          </div>
       </div>
     </div>
 

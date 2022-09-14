@@ -33,22 +33,23 @@ function Hotel() {
     const {hotel} = useSelector(state => state.hotels)
     const {isAuth} = useSelector(state => state.login);
     const from = location.state?.from?.pathname || "/"
-
-
-
+    
+    
+    
     const {date,
         options
     } = useSelector(state => state.search)
     
-
+    
     function dayDifference(date1, date2) {
         //getTime will convert the date to a milliseconds.
         const timeDiff = Math.abs(date2.getTime() - date1.getTime());
         const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
         return diffDays;
     }
-
+    
     const days = dayDifference(date[0].endDate, date[0].startDate);
+    const totalPrice = days * hotel.cheapestPrice * options.room
 
     const handleReserve = () => {
             setOpenModal(true);
@@ -119,7 +120,7 @@ function Hotel() {
                     onClick={() => handleMove("l")}
                 />
                 <div className="w-screen sm:w-full h-full flex items-center justify-center">
-                    <img src={photos[slideNumber].src} alt="" className="w-[90%] sm:w-[80%] h-44 sm:h-[80%] rounded-md" />
+                    <img src={hotel.photos[slideNumber]} alt="" className="w-[90%] sm:w-[80%] h-44 sm:h-[80%] rounded-md" />
                 </div>
                 <FontAwesomeIcon
                     icon={faCircleArrowRight}
@@ -184,7 +185,7 @@ function Hotel() {
                             excellent location score of 9.8!
                         </span >
                         <h2 className="font-semibold">
-                            <b>${days * hotel.cheapestPrice * options.room}</b> ({days}  nights)
+                            <b>${totalPrice}</b> ({days}  nights)
                         </h2>
                         <button 
                         onClick={handleReserve}
@@ -203,7 +204,7 @@ function Hotel() {
         </div>
 
         <div className=''>
-        {openModal && <Reservation setOpenModal={setOpenModal} hotelId = {hotelId}/>}
+        {openModal && <Reservation setOpenModal={setOpenModal} hotelId = {hotelId} totalPrice={totalPrice}/>}
         </div>
 
 
