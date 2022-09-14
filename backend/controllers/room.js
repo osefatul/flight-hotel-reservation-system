@@ -5,19 +5,32 @@ const { createError } = require("../utils/error.js");
 
 
 const createRoom = async (req, res, next) => {
+
+    /* # How to do it.
+    1- Create new room.
+    2- Add the newRoom id into the hotel.
+    3- Get the hotel_id and Name and add it to the room.
+    */
+
     const hotelId = req.params.hotelid;
     const newRoom = new Room(req.body);
 
     try {
     const savedRoom = await newRoom.save();
-    try {
+
         // Push the rooms Id into the hotel
-        await Hotel.findByIdAndUpdate(hotelId, {
+        const hotel = await Hotel.findByIdAndUpdate(hotelId, {
         $push: { rooms: savedRoom._id },
         });
-    } catch (err) {
-        next(err);
-    }
+    
+        await Room.findByIdAndUpdate(savedRoom._id, {
+            $push: {
+                hotel: {
+                    hotelName: hotel.name,
+                    hotelId: hotel._id
+                }
+            }
+        })
     res.status(200).json({message : "Room has been created successfully."});
     } catch (err) {
     next(err);
@@ -46,7 +59,12 @@ const updateRoomAvailability = async (req, res, next) => {
         { "roomNumbers._id": req.params.id },
         {
             $push: {
-            "roomNumbers.$.unavailableDates": req.body.dates
+            // "roomNumbers.$.unavailableDates": req.body.dates,
+            // "roomNumbers.$.reservedBy": req.body.userId
+            roomNumbers: {
+                unavailableDates :req.body.dates,
+                reservedBy : req.body.userId
+            }
             },
         }
         );
@@ -63,7 +81,7 @@ const deleteRoom = async (req, res, next) => {
 
         await Hotel.updateMany({rooms: req.params.id}, {
             $pull: { rooms: req.params.id } 
-        })
+        }, )
         await Room.findByIdAndDelete(req.params.id);
         // try {
         // await Hotel.findByIdAndUpdate(hotelId, {

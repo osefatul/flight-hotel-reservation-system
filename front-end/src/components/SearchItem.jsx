@@ -29,7 +29,7 @@ function SearchItem({hotel}) {
                     Studio Apartment with Air conditioning
                     </span>
                     <span className="text-[10px] sm:text-sm">
-                    {hotel.desc}
+                    {hotel.desc.slice(0,250)}...
                     </span>
                     <span className="font-bold text-[10px] sm:text-sm text-[#008009]">Free cancellation </span>
                     <span className="text-[10px] sm:text-sm text-[#008009]">
@@ -40,7 +40,7 @@ function SearchItem({hotel}) {
                 <div className="flex flex-col justify-between text-right">
                     <div className="space-x-2">
                         
-                        <span className='text-[11px] sm:text-lg font-semibold'>Excellent</span>
+                        <span className='text-[11px] sm:text-[15px] text-white font-semibold bg-amber-600 w-max px-2 rounded-sm'>Excellent</span>
                         
                         {hotel.rating && 
                         <button className='bg-[#003580] text-white w-5 sm:w-7 rounded-t-md rounded-r-md text-[11px] sm:text-md'>{hotel.rating}</button>

@@ -68,17 +68,17 @@ function List() {
                     />
                     ) : (
                     <motion.div 
-                    className=" z-50"
+                    className=" z-50 absolute top-10 left-28  w-[30px] h-[25px] cursor-pointer"
                     >
                     <FontAwesomeIcon icon={faCircleXmark}
-                        className="fixed left-[140px] top-38 w-[25px] h-[25px] cursor-pointer "
+                        className="w-[20px] h-[20px] "
                         onClick={() => setToggle(false)}
                     />
                     </motion.div>
                     )}
 
                     <div
-                    className={`fixed top-40 left-0 z-40  w-[40%] 
+                    className={`fixed top-40 left-0 z-40   
                     flex flex-col justify-start items-start ${
                         toggle ? "translate-x-0" : "-translate-x-80"
                     } ease-out duration-700  shadow-2xl`}

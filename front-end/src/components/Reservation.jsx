@@ -12,8 +12,12 @@ function Reservation({setOpenModal, hotelId}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [selectedRooms, setSelectedRooms] = useState([]);
+
     const {date} = useSelector(state => state.search)
     const {hotelRoomsDetails, hotel} = useSelector(state => state.hotels)
+    const {user} = useSelector(state => state.login)
+
+
 
 
     const getDatesInRange = (startDate, endDate) => {
@@ -63,7 +67,7 @@ function Reservation({setOpenModal, hotelId}) {
         try {
             await Promise.all(
                 selectedRooms.map((roomId) => {
-                return dispatch(updatingRoomAvailability({roomId, dates:allDates}))
+                return dispatch(updatingRoomAvailability({roomId, dates:allDates, userId: user._id}))
 
             })
         );
@@ -106,9 +110,9 @@ function Reservation({setOpenModal, hotelId}) {
                         <div className="font-bold text-[16px]">{item.price}</div>
                     </div>
 
-                    <div className="flex space-x-2">
+                    <div className="flex space-x-2 items-center justify-center">
                         {item.roomNumbers.map((roomNumber) => (
-                            <div className="flex flex-col text-[10px]">
+                            <div className="flex flex-col text-[9px] items-center justify-center">
                                 <label>{roomNumber.number}</label>
                                 <input
                                     type="checkbox"

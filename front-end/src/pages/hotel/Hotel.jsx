@@ -138,7 +138,7 @@ function Hotel() {
 
         <div className="flex flex-col space-y-2 items-center px-5 sm:px-0 w-full sm:w-[75%] mx-auto mt-4 ">
             <div className="w-full flex flex-col space-y-2 relative ">
-                <button className="absolute bg-[#0071c2] text-white p-2 !border-none top-2 sm:top-4 cursor-pointer font-bold rounded-sm right-0 hover:text-amber-500 text-[9px] sm:text-[15px]  " onClick="">Reserve or Book Now!</button>
+                {/* <button className="absolute bg-[#0071c2] text-white p-2 !border-none top-2 sm:top-4 cursor-pointer font-bold rounded-sm right-0 hover:text-amber-500 text-[9px] sm:text-[15px]  " onClick="">Reserve or Book Now!</button> */}
 
                 <h1 className="text-[18px] sm:text-2xl font-bold">{hotel.name}</h1>   
                 <div className="text-[10px] sm:text-[13px] flex items-center space-x-2">

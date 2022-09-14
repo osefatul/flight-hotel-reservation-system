@@ -16,13 +16,13 @@ function Home() {
 
     
     return (
-        <div className="relative">
+        <div className="relative bg-slate-100">
             <div className="sticky z-30 top-0 bg-black " >
             <Navbar/>
             <Header />
             </div>
             
-            <div className="mt-2 sm:mt-10 flex flex-col items-center space-y-4 w-[75%] mx-auto relative">
+            <div className="mt-2 sm:mt-10 flex flex-col items-center space-y-4 w-[75%] mx-auto relative ">
                 <Featured/>
                 <h1 className="w-full font-bold text-[13px] lg:text-xl">Browse by property type</h1>
                 <PropertyList/>

@@ -3,10 +3,10 @@ import axios from "axios"
 import { createRoom, deleteRoom, getRooms, updateRoom, updateRoomAvailability } from "../../api/roomsApi"
 
 
-export const updatingRoomAvailability = ({roomId, dates}) => async (dispatch) =>{
+export const updatingRoomAvailability = ({roomId, dates, userId}) => async (dispatch) =>{
     dispatch(roomPending())
     try {
-        const res = await updateRoomAvailability(roomId, dates)
+        const res = await updateRoomAvailability(roomId, dates, userId)
         dispatch(fetchingRoomAvailabilitySuccess(res.data))
     }catch(err) {
         console.log(err)

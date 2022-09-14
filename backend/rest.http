@@ -144,15 +144,15 @@ Content-Type: application/json
 
 
 ### Create a new Room
-POST http://localhost:5000/v1/rooms/630c967e53d42cf2f5e538c7
+POST http://localhost:5000/v1/rooms/630c755e4a55a78f7588f441
 Content-Type: application/json
 
 {
-"title": "Rooms for a family",
+"title": "New Room ",
 "desc": "Rooms available for a family",
 "price":100,
 "maxPeople":2,
-"roomNumbers": [{"number":104}, {"number":106}]
+"roomNumbers": [{"number":101}, {"number":106}]
 }
 
 
@@ -172,10 +172,12 @@ Content-Type: application/json
 
 
 ### Update room availability.
-PUT http://localhost:5000/v1/rooms/availability/630d9a85ad5759b952860df3
+PUT http://localhost:5000/v1/rooms/availability/63204e13720c07dd3e0d2fda
 Content-Type: application/json
 
-{"dates": ["2022-09-06T05:05:09.330+00:00", "2022-09-04T05:05:09.330+00:00"]}
+{"dates": ["2022-09-06T05:05:09.330+00:00", "2022-09-04T05:05:09.330+00:00"],
+"userId":"omar"
+}
 
 
 ### Delete a Room

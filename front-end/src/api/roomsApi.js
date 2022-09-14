@@ -67,11 +67,12 @@ export const updateRoom = async (id) =>{
 }
 
 
-export const updateRoomAvailability = async (roomId, dates) =>{
+export const updateRoomAvailability = async (roomId, dates, userId) =>{
     try {
 
         const res = axios.put(updateRoomAvailabilityUrl + roomId, {
                     dates: dates,
+                    userId
                 });
         return res;
     }catch(error){

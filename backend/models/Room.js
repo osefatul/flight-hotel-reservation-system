@@ -7,10 +7,7 @@ title: {
     required: true,
 },
 
-hotelName: {
-    type: String,
-    required: true,
-},
+hotel: [{ hotelName: {type: String}, hotelId:{type: String}}],
 
 price: {
     type: Number,
@@ -24,7 +21,8 @@ desc: {
     type: String,
     required: true,
 },
-roomNumbers: [{ number: Number, unavailableDates: {type: [Date]}, reservedByUser: {type: String} }],
+roomNumbers: [{ number: Number, unavailableDates: {type: [Date]}, reservedBy: {type: String} } ],
+
 },
 { timestamps: true }
 );

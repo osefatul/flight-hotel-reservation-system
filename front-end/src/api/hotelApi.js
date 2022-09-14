@@ -86,7 +86,7 @@ export const getHotelRooms = async (hotelId) =>{
 
 export const getHotelsByCity = async ()=>{
     try {
-        const res = await axios.get(getHotelsByCityUrl + "?cities=Vancouver,Kabul,Richmond,Seatal");
+        const res = await axios.get(getHotelsByCityUrl + "?cities=Vancouver,New York,Dubai,Toronto");
         return res
     }catch (error){
         console.log(error)

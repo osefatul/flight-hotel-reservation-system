@@ -2,7 +2,7 @@ import { DeleteOutline } from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Sidebar from '../../../../components/adminComponents/components/sidebar/Sidebar';
 import Navbar from '../../../../components/Navbar';
 import { deletingRoom, fetchingRooms } from '../../../../features/roomSlice/roomAction';
@@ -10,6 +10,7 @@ import { deletingRoom, fetchingRooms } from '../../../../features/roomSlice/room
 function RoomsList() {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {isLoading, error, rooms} = useSelector(state => state.rooms)
   const [data, setData] = useState(rooms);
 
@@ -22,6 +23,16 @@ function RoomsList() {
   useEffect(()=>{
     setData(rooms)
   },[rooms])
+
+
+
+  const navigateUser = (params) =>{
+    const userId = params.row.roomNumbers.filter( i => {
+      return i.reservedBy !== undefined
+    })
+    // console.log(userId)
+    navigate("/admin/users/" + userId[0].reservedBy)
+  }
 
 
   const handleDelete = async (id) => {
@@ -46,7 +57,7 @@ function RoomsList() {
     {
       field: "title",
       headerName: "Title",
-      width: 200,
+      width: 130,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
@@ -55,6 +66,52 @@ function RoomsList() {
         );
       },
     },
+    {
+      field: "hotelName",
+      headerName: "Hotel",
+      width: 200,
+      renderCell: (params) => {
+        return (
+          <div className="text-[12px]">
+            {params.row.hotel.map( i => {
+              return i.hotelName
+            })}
+          </div>
+        );
+      },
+    },
+    {
+      field: "hotelId",
+      headerName: "Hotel ID",
+      width: 200,
+      renderCell: (params) => {
+        return (
+          <div className="text-[12px] underline">
+
+            H{params.row.hotel.map( i => {
+              return i.hotelId.slice(0,10) 
+            })}
+          </div>
+        );
+      },
+    },
+    // {
+    //   field: "reservedBy",
+    //   headerName: "Reserved By",
+    //   width: 160,
+    //   renderCell: (params) => {
+    //     return (
+    //         <div className="text-[12px]"
+    //         onClick={() =>  navigateUser(params)}
+    //         >
+    //           U{params.row.roomNumbers.map( i => {
+    //             return i?.reservedBy?.slice(0,10)
+    //           })}...
+    //         </div>
+
+    //     );
+    //   },
+    // },
     {
       field: "price",
       headerName: "Price",
@@ -82,7 +139,7 @@ function RoomsList() {
     {
       field: "roomNumbers",
       headerName: "No. of Room",
-      width: 160,
+      width: 100,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
