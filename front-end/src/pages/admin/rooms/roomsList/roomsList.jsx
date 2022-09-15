@@ -26,13 +26,7 @@ function RoomsList() {
 
 
 
-  const navigateUser = (params) =>{
-    const userId = params.row.roomNumbers.filter( i => {
-      return i.reservedBy !== undefined
-    })
-    // console.log(userId)
-    navigate("/admin/users/" + userId[0].reservedBy)
-  }
+
 
 
   const handleDelete = async (id) => {

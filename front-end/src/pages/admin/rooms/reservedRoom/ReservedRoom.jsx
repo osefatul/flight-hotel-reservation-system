@@ -40,7 +40,7 @@ function ReservedRoom() {
 
 
   const columns = [
-    { field: "id", headerName: "ID", width: 180,
+    { field: "id", headerName: "Room ID", width: 180,
     renderCell: (params) => {
       return (
         // <Link to={`/ticket_communication/${params.row._id}`}>
@@ -52,9 +52,27 @@ function ReservedRoom() {
     }},
 
     {
+      field: "reservedBy",
+      headerName: "Reserved By",
+      width: 160,
+      renderCell: (params) => {
+        return (
+            <div className="text-[12px] font-bold text-green-800"
+            onClick={() =>  navigateUser(params)}
+            >
+              U{params.row.roomNumbers.map( i => {
+                return i?.reservedBy?.slice(0,10)
+              })}...
+            </div>
+
+        );
+      },
+    },
+
+    {
       field: "title",
       headerName: "Title",
-      width: 130,
+      width: 150,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
@@ -63,20 +81,20 @@ function ReservedRoom() {
         );
       },
     },
-    {
-      field: "hotelName",
-      headerName: "Hotel",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="text-[12px]">
-            {params.row.hotel.map( i => {
-              return i.hotelName
-            })}
-          </div>
-        );
-      },
-    },
+    // {
+    //   field: "hotelName",
+    //   headerName: "Hotel",
+    //   width: 200,
+    //   renderCell: (params) => {
+    //     return (
+    //       <div className="text-[12px]">
+    //         {params.row.hotel.map( i => {
+    //           return i.hotelName
+    //         })}
+    //       </div>
+    //     );
+    //   },
+    // },
     {
       field: "hotelId",
       headerName: "Hotel ID",
@@ -92,31 +110,17 @@ function ReservedRoom() {
         );
       },
     },
-    // {
-    //   field: "reservedBy",
-    //   headerName: "Reserved By",
-    //   width: 160,
-    //   renderCell: (params) => {
-    //     return (
-    //         <div className="text-[12px]"
-    //         onClick={() =>  navigateUser(params)}
-    //         >
-    //           U{params.row.roomNumbers.map( i => {
-    //             return i?.reservedBy?.slice(0,10)
-    //           })}...
-    //         </div>
-
-    //     );
-    //   },
-    // },
+    
     {
       field: "price",
-      headerName: "Price",
+      headerName: "Total Price",
       width: 120,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
-            ${params.row.price}
+            ${params.row.roomNumbers.map( i => {
+                return i?.totalPrice
+              })}
           </div>
         );
       },
@@ -195,8 +199,8 @@ function ReservedRoom() {
             <DataGrid
             sx={{
               border: 0, // also tried setting to none 
-              borderRadius: 2,
-              p: 2,
+              borderRadius: 0,
+              
               minWidth: 200,
             }}
             getRowId = {(row) => row._id}

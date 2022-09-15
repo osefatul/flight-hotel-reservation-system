@@ -50,7 +50,7 @@ function Navbar() {
 
     
     return (
-        <div className={`text-white h-[50px] bg-black flex flex-col justify-center ${isAdminPanel ? "w-full px-8" : "w-[75%]"} mx-auto `}>
+        <div className={`text-white h-[50px] bg-black flex flex-col justify-center ${isAdminPanel ? "w-full px-2" : "w-[75%]"} mx-auto `}>
 
             <div className='w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0'>
                 <Link to ={isAdminPanel? "/admin" : "/"}>
