@@ -27,7 +27,11 @@ const store = configureStore({
         // resetPassword: resetPasswordReducer,
         // homeTabs: tabsReducer,
         // closeTicketModal: CloseTicketModalReducer
-    }
+    },
+    middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+    serializableCheck: false,
+    }),
 })
 
 export default store;

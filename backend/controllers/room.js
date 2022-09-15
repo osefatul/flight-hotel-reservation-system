@@ -1,5 +1,7 @@
 const {Room} = require("../models/Room.js");
 const {Hotel} = require("../models/Hotel.js");
+const {ReservedRoom} = require("../models/ReservedRoom.js");
+
 const { createError } = require("../utils/error.js");
 
 
@@ -55,20 +57,31 @@ const updateRoom = async (req, res, next) => {
 
 const updateRoomAvailability = async (req, res, next) => {
     try {
+
+        const {totalPrice, 
+        reservedBy, 
+        roomId,
+        dates, 
+        hotel,
+        selectedRoomsNumber} = req.body
+        
+
         await Room.updateOne(
         { "roomNumbers._id": req.params.id },
         {
+            // We use push with an array-".$." means in roomNumbers"
             $push: {
-            // "roomNumbers.$.unavailableDates": req.body.dates,
-            // "roomNumbers.$.reservedBy": req.body.userId
-            roomNumbers: {
-                unavailableDates :req.body.dates,
-                reservedBy : req.body.userId,
-                totalPrice : req.body.totalPrice,
-            }
+            "roomNumbers.$.unavailableDates": dates,
             },
-        }
-        );
+        });
+
+        const createReservedRoom =  new ReservedRoom({
+            totalPrice, reservedBy, roomId, reservedDates:dates, hotel,
+            roomNumbers:selectedRoomsNumber
+        })
+
+        await createReservedRoom.save()
+        
         res.status(200).json("Room status has been updated.");
     } catch (err) {
         next(err);
@@ -89,6 +102,16 @@ const deleteRoom = async (req, res, next) => {
         //     $pull: { rooms: req.params.id },
         // });
         res.status(200).json("Room has been deleted.");
+    } catch (err) {
+        next(err);
+    }
+};
+
+
+const getReservedRoom = async (req, res, next) => {
+    try {
+        const rooms = await ReservedRoom.find();
+        res.status(200).json(rooms);
     } catch (err) {
         next(err);
     }
@@ -128,6 +151,7 @@ const getRooms = async (req, res, next) => {
 
 
 
+
 module.exports = {
     createRoom,
     deleteRoom,
@@ -135,5 +159,6 @@ module.exports = {
     getRooms,
     updateRoom,
     findHotels,
+    getReservedRoom,
     updateRoomAvailability
 }

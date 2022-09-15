@@ -157,17 +157,22 @@ Content-Type: application/json
 
 
 ### Get a Room
-GET http://localhost:5000/v1/rooms/630d9a85ad5759b952860df2/
+GET http://localhost:5000/v1/rooms/6322fdf96520d4cb926a40de/
 Content-Type: application/json
 
 
 ### Get hotels based on room Id
-GET http://localhost:5000/v1/rooms/getHotel/630d9a85ad5759b952860df2/
+GET http://localhost:5000/v1/rooms/getHotel/6322fdf96520d4cb926a40de/
 Content-Type: application/json
 
 
 ### Get Rooms
 GET http://localhost:5000/v1/rooms/
+Content-Type: application/json
+
+
+### Get Reserved Rooms
+GET http://localhost:5000/v1/rooms/reservedRooms
 Content-Type: application/json
 
 

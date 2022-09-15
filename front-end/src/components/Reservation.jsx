@@ -12,6 +12,9 @@ function Reservation({setOpenModal, hotelId, totalPrice}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [selectedRooms, setSelectedRooms] = useState([]);
+    const [selectedRoomsNumber, setSelectedRoomsNumber] = useState([]);
+    // let SelectedRoomsNumber = [];
+
 
     const {date} = useSelector(state => state.search)
     const {hotelRoomsDetails, hotel} = useSelector(state => state.hotels)
@@ -52,9 +55,15 @@ function Reservation({setOpenModal, hotelId, totalPrice}) {
 
 
 
-    const handleSelect = (e) => {
+    const handleSelect = (e, roomNum) => {
         const checked = e.target.checked;
         const value = e.target.value;
+
+
+        setSelectedRoomsNumber(
+            checked? [...selectedRoomsNumber, roomNum]: selectedRoomsNumber.filter((item)=> item !== roomNum)
+        )
+
         setSelectedRooms(
         checked
             ? [...selectedRooms, value]
@@ -64,10 +73,18 @@ function Reservation({setOpenModal, hotelId, totalPrice}) {
 
 
     const handleClick = async () => {
+        console.log("this is room numbers", selectedRoomsNumber)
         try {
             await Promise.all(
-                selectedRooms.map((roomId) => {
-                return dispatch(updatingRoomAvailability({roomId, dates:allDates, userId: user._id, totalPrice}))
+                selectedRooms.map((roomId,index) => {
+                return dispatch(updatingRoomAvailability({
+                    roomId,
+                    dates:allDates, 
+                    reservedBy:user._id, 
+                    totalPrice:totalPrice, 
+                    hotel:hotelRoomsDetails[0].hotel,
+                    selectedRoomsNumber:selectedRoomsNumber[index]
+                }))
 
             })
         );
@@ -99,25 +116,25 @@ function Reservation({setOpenModal, hotelId, totalPrice}) {
             <h1 className='font-bold'>Select your rooms:</h1>
 
             {hotelRoomsDetails.map(item => (
-                <div className="flex justify-between items-center space-x-10 sm:space-x-6 md: space-x-2" key={item._id}>
+                <div className="flex justify-between items-center space-x-10 sm:space-x-6 md: space-x-2" key={item?._id}>
 
                     <div className="text-[12px] sm:text-[14px]">
-                        <div className="rTitle ">{item.title}</div>
-                        <div className="rDesc">{item.desc}</div>
+                        <div className="rTitle ">{item?.title}</div>
+                        <div className="rDesc">{item?.desc}</div>
                         <div className="rMax">
-                            Max people: <b>{item.maxPeople}</b>
+                            Max people: <b>{item?.maxPeople}</b>
                         </div>
-                        <div className="font-semibold  text-[16px]">${item.price}</div>
+                        <div className="font-semibold  text-[16px]">${item?.price}</div>
                     </div>
 
                     <div className="flex space-x-2 items-center justify-center">
-                        {item.roomNumbers.map((roomNumber) => (
-                            <div className="flex flex-col text-[9px] items-center justify-center">
-                                <label>{roomNumber.number}</label>
+                        {item?.roomNumbers.map((roomNumber) => (
+                            <div key={roomNumber._id} className="flex flex-col text-[9px] items-center justify-center">
+                                <label>{roomNumber?.number}</label>
                                 <input
                                     type="checkbox"
                                     value={roomNumber._id}
-                                    onChange={handleSelect}
+                                    onChange={e => handleSelect(e, roomNumber.number)}
                                     // checked= {!isAvailable(roomNumber)}//if the isAvailable === false, or use below disabled method
                                     disabled={!isAvailable(roomNumber)}//if the isAvailable === false,
                                 />

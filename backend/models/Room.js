@@ -22,10 +22,11 @@ desc: {
     required: true,
 },
 roomNumbers: [
-    { number: Number, 
+    { 
+    // totalPrice: {type: Number}, 
+    // reservedBy: {type: String},
+    number: Number, 
     unavailableDates: {type: [Date]}, 
-    reservedBy: {type: String},
-    totalPrice: Number 
 },
 ],
 

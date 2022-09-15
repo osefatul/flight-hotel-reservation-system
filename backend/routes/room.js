@@ -8,7 +8,8 @@ const {
     getRooms,
     updateRoom,
     updateRoomAvailability,
-    findHotels
+    findHotels,
+    getReservedRoom
 } = require("../controllers/room.js");
 
 
@@ -19,21 +20,29 @@ const {
 router.post("/:hotelid", verifyToken, verifyAdmin, createRoom);
 
 
-//UPDATE
+//UPDATE a room
 router.put("/:id", verifyAdmin, updateRoom);
+
+//Update a room/s availability date.
 router.put("/availability/:id", updateRoomAvailability);
 
-//DELETE
+//DELETE a room
 router.delete("/:id",verifyToken, verifyAdmin, deleteRoom);
 
-//GET
-router.get("/:id", getRoom);
+//GET rooms
+router.get("/reservedRooms", getReservedRoom);
 
-//FindHotel by room id
-router.get("/getHotel/:id", findHotels)
+//GET a room
+router.get("/:id", getRoom);
 
 //GET ALL
 router.get("/", getRooms);
+
+
+
+//FindHotel through room id
+router.get("/getHotel/:id", findHotels)
+
 
 
 

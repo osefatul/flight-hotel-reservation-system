@@ -1,27 +1,29 @@
+
 import { DataGrid } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Sidebar from '../../../../components/adminComponents/components/sidebar/Sidebar'
 import Navbar from '../../../../components/Navbar'
-import { fetchingRooms } from '../../../../features/roomSlice/roomAction';
+import { fetchingReservedRooms } from '../../../../features/roomSlice/roomAction';
 
 function ReservedRoom() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {isLoading, error, rooms} = useSelector(state => state.rooms)
-  const [data, setData] = useState(rooms);
+  const {isLoading, error, reservedRooms} = useSelector(state => state.rooms)
+  const [data, setData] = useState(reservedRooms);
+  
 
 
   useEffect(()=>{
-    dispatch(fetchingRooms())
+    dispatch(fetchingReservedRooms())
   },[])
 
 
   useEffect(()=>{
-    setData(rooms)
-  },[rooms])
+    setData(reservedRooms)
+  },[reservedRooms])
 
 
   const navigateUser = (params) =>{
@@ -33,152 +35,114 @@ function ReservedRoom() {
   }
 
 
-  const handleDelete = async (id) => {
-    // await dispatch(deletingRoom(id))
-    setData(data.filter((item) => item._id !== id));
-  };
-
 
   const columns = [
-    { field: "id", headerName: "Room ID", width: 180,
-    renderCell: (params) => {
-      return (
-        // <Link to={`/ticket_communication/${params.row._id}`}>
-          <div className="text-[12px]">
-            R{params.row._id.slice(0,10)}...
-          </div>
-        // </Link>
-      );
-    }},
-
     {
       field: "reservedBy",
       headerName: "Reserved By",
-      width: 160,
+      width: 140,
       renderCell: (params) => {
         return (
-            <div className="text-[12px] font-bold text-green-800"
-            onClick={() =>  navigateUser(params)}
-            >
-              U{params.row.roomNumbers.map( i => {
-                return i?.reservedBy?.slice(0,10)
-              })}...
+            <Link to={`/admin/users/${params.row.reservedBy}`}>
+            <div className="text-[12px] text-blue-600">
+              U{params.row.reservedBy.slice(0,10)}
             </div>
-
+            </Link>
         );
       },
     },
-
-    {
-      field: "title",
-      headerName: "Title",
-      width: 150,
-      renderCell: (params) => {
-        return (
-          <div className="text-[12px]">
-            {params.row.title}
+    { field: "roomId", headerName: "Room ID", width: 140,
+    renderCell: (params) => {
+      return (
+        <Link to={`/admin/rooms/${params.row.roomId}`}>
+          <div className="text-[12px] text-blue-600">
+            R{params.row.roomId.slice(0,12)}
           </div>
-        );
-      },
-    },
-    // {
-    //   field: "hotelName",
-    //   headerName: "Hotel",
-    //   width: 200,
-    //   renderCell: (params) => {
-    //     return (
-    //       <div className="text-[12px]">
-    //         {params.row.hotel.map( i => {
-    //           return i.hotelName
-    //         })}
-    //       </div>
-    //     );
-    //   },
-    // },
+        </Link>
+      );
+    }},
+
+    
     {
       field: "hotelId",
       headerName: "Hotel ID",
-      width: 200,
+      width: 140,
       renderCell: (params) => {
         return (
-          <div className="text-[12px] underline">
-
-            H{params.row.hotel.map( i => {
-              return i.hotelId.slice(0,10) 
-            })}
+          <Link to ={`/admin/hotels/${params.row.hotel[0].hotelId}`}>
+          <div className="text-[12px] text-blue-600">
+            {params.row.hotel[0].hotelId.slice(0,12)}
           </div>
+          </Link>
         );
       },
     },
     
     {
-      field: "price",
+      field: "totalPrice",
       headerName: "Total Price",
       width: 120,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
-            ${params.row.roomNumbers.map( i => {
-                return i?.totalPrice
-              })}
+            ${params.row.totalPrice}
           </div>
         );
       },
     },
-    {
-      field: "maxPeople",
-      headerName: "No. of People",
-      width: 120,
-      renderCell: (params) => {
-        return (
-          <div className="text-[12px]">
-            {params.row.maxPeople}
-          </div>
-        );
-      },
-    },
+
     {
       field: "roomNumbers",
-      headerName: "No. of Room",
+      headerName: "Room No.",
       width: 100,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
-            {params.row.roomNumbers.length}
+            {params.row.roomNumbers[0]}
           </div>
         );
       },
     },
+
     {
-      field: "des",
-      headerName: "Description",
-      width: 120,
+      field: "Total No. of Days",
+      headerName: "Days",
+      width: 100,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
-            {params.row.desc.slice(0,10)}...
+            {params.row.reservedDates.length}
           </div>
         );
       },
     },
-    // {
-    //   field: "action",
-    //   headerName: "Action",
-    //   width: 150,
-    //   renderCell: (params) => {
-    //     return (
-    //       <>
-    //         <Link to={"/admin/rooms/" + params.row._id}>
-    //         <button className="bg-green-800 w-max px-2 py-[3px] rounded-sm text-white text-[11px]">Edit</button>
-    //         </Link>
-    //         <DeleteOutline
-    //           className="productListDelete"
-    //           onClick={() => handleDelete(params.row._id)}
-    //         />
-    //       </>
-    //     );
-    //   },
-    // },
+
+    {
+      field: "checkIn/checkOut",
+      headerName: "checkIn/checkOut",
+      width: 170,
+      renderCell: (params) => {
+        return (
+          <div className="text-[12px] text-green-600">
+            {new Date(params.row.reservedDates[0]).toLocaleString()}
+          </div>
+        );
+      },
+    },
+
+    {
+      field: "checkOut",
+      headerName: "Check out",
+      width: 170,
+      renderCell: (params) => {
+        return (
+          <div className="text-[12px] text-red-600">
+            {new Date(params.row.reservedDates[params.row.reservedDates.length-1]).toLocaleString()}
+          </div>
+        );
+      },
+    },
+
   ];
 
   return (
@@ -193,9 +157,15 @@ function ReservedRoom() {
           </div>
 
         <div className="flex flex-col w-[85%]  mt-10 ">
+
+          
+          <div className="pl-2 pt-2 flex items-center w-[100%]">
+                <button className="text-lg font-bold w-[15%] flex items-center justify-start">Reserved Rooms</button>
+                <hr className='w-[80%]' />
+          </div>
           
           {isLoading ? "Loading..." : (
-          <div className="userList">
+          <div className="userList mt-4">
             <DataGrid
             sx={{
               border: 0, // also tried setting to none 

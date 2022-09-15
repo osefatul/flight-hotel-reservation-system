@@ -44,6 +44,17 @@ export const getRooms = async () =>{
 }
 
 
+export const getReservedRooms = async () =>{
+    try {
+        const res = await axios.get(getRoomUrl + "reservedRooms");
+        return res
+    }catch(error){
+        console.log(error)
+        return error;
+    }
+}
+
+
 export const deleteRoom = async (roomId) =>{
     try {
         const res = await axios.delete(deleteRoomUrl + roomId );
@@ -67,14 +78,22 @@ export const updateRoom = async (id) =>{
 }
 
 
-export const updateRoomAvailability = async (roomId, dates, userId, totalPrice) =>{
+export const updateRoomAvailability = async (roomId,
+    dates, 
+    reservedBy, 
+    totalPrice, 
+    hotel,
+    selectedRoomsNumber) =>{
     try {
 
         const res = axios.put(updateRoomAvailabilityUrl + roomId, {
-                    dates: dates,
-                    userId,
-                    totalPrice
-                });
+            roomId,
+            dates, 
+            reservedBy, 
+            totalPrice, 
+            hotel,
+            selectedRoomsNumber
+            });
         return res;
     }catch(error){
         console.log(error)

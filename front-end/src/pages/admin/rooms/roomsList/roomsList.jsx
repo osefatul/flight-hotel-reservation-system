@@ -24,9 +24,13 @@ function RoomsList() {
     setData(rooms)
   },[rooms])
 
-
-
-
+  const navigateUser = (params) =>{
+    // const userId = params.row.roomNumbers.filter( i => {
+    //   return i.reservedBy !== undefined
+    // })
+    // // console.log(userId)
+    // navigate("/admin/users/" + userId[0].reservedBy)
+  }
 
 
   const handleDelete = async (id) => {
@@ -63,7 +67,7 @@ function RoomsList() {
     {
       field: "hotelName",
       headerName: "Hotel",
-      width: 200,
+      width: 160,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
@@ -77,35 +81,26 @@ function RoomsList() {
     {
       field: "hotelId",
       headerName: "Hotel ID",
-      width: 200,
+      width: 160,
       renderCell: (params) => {
         return (
-          <div className="text-[12px] underline">
 
-            H{params.row.hotel.map( i => {
-              return i.hotelId.slice(0,10) 
+          <div
+          >
+            {params.row.hotel.map( i => {
+              return (
+                <Link to ={`/admin/hotels/${i.hotelId}`}>
+                <div className="text-[12px] text-blue-600">
+                H{i.hotelId.slice(0,10)} 
+                </div>
+                </Link>
+              )
             })}
           </div>
         );
       },
     },
-    // {
-    //   field: "reservedBy",
-    //   headerName: "Reserved By",
-    //   width: 160,
-    //   renderCell: (params) => {
-    //     return (
-    //         <div className="text-[12px]"
-    //         onClick={() =>  navigateUser(params)}
-    //         >
-    //           U{params.row.roomNumbers.map( i => {
-    //             return i?.reservedBy?.slice(0,10)
-    //           })}...
-    //         </div>
-
-    //     );
-    //   },
-    // },
+  
     {
       field: "price",
       headerName: "Price",
@@ -120,7 +115,7 @@ function RoomsList() {
     },
     {
       field: "maxPeople",
-      headerName: "No. of People",
+      headerName: "Max People",
       width: 120,
       renderCell: (params) => {
         return (
@@ -145,7 +140,7 @@ function RoomsList() {
     {
       field: "des",
       headerName: "Description",
-      width: 120,
+      width: 150,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">

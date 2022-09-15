@@ -8,7 +8,7 @@ import { EraseRoomMessage } from '../../../../features/roomSlice/roomSlice';
 
 function NewRoom() {
 
-  const dispatch = new useDispatch()
+  const dispatch =  useDispatch()
   const [info, setInfo] = useState({});
   const [hotelId, setHotelId] = useState(undefined);
   const [rooms, setRooms] = useState([]);
