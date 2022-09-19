@@ -18,6 +18,7 @@ import NewHotel from "./pages/admin/hotels/newHotel/NewHotel";
 import RoomsList from "./pages/admin/rooms/roomsList/RoomsList";
 import NewRoom from "./pages/admin/rooms/newRoom/NewRoom";
 import ReservedRoom from "./pages/admin/rooms/reservedRoom/ReservedRoom";
+import TravelHome from "./pages/TravelPages/homePage/TravelHome";
 
 function App() {
   return (
@@ -41,6 +42,9 @@ function App() {
         <Route path="admin/new-room/" element={<NewRoom/>}/>
         <Route path="admin/rooms/" element={<RoomsList/>}/>
         <Route path="admin/reserved-rooms/" element={<ReservedRoom/>}/>
+
+        <Route path="flights" element={<TravelHome/>}/>
+
 
 
 

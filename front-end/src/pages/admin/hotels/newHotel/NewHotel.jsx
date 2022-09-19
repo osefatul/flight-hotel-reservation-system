@@ -142,9 +142,9 @@ export default function NewHotel() {
         {/* Right Side */}
           <div className=" w-[50%] flex flex-col space-y-1 items-center justify-center">
             
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 w-full">
               {/* Inputs */}
-              <div className="flex flex-col space-y-2">
+              <div className="flex flex-col space-y-2 w-full">
                 <div className="text-[12px] w-full ">
                   <input 
                   className="border border-1 border-black placeholder:pl-1 rounded-sm w-full"
@@ -241,7 +241,7 @@ export default function NewHotel() {
             </div>
           
           {/* submit button */}
-            <div className="flex flex-col items-start w-[50%] ">
+            <div className="flex flex-col items-start w-full ">
               <button  
               onClick={handleClick} 
               className=" border border-1 bg-blue-800 mt-4 text-white rounded-sm w-full">Create</button>

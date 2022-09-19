@@ -11,7 +11,6 @@ function Navbar() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-  
 
     //We get user data from localStorage as they are saved there after authentication..
     //Home page doesn't go through protected routes so it doesn't get user data from there. we need to request user data again.

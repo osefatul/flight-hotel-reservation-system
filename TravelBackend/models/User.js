@@ -15,7 +15,7 @@ firstName: {
     required: true,
     unique: true,
 },
-LastName: {
+lastName: {
     type: String,
     required: true,
     unique: true,
@@ -50,6 +50,12 @@ password: {
     type: String,
     required: true,
 },
+flights: [
+    {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Flight",
+    },
+],
 isAdmin: {
     type: Boolean,
     default: false,

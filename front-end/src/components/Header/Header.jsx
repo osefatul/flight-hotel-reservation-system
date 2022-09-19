@@ -11,7 +11,7 @@ import { motion } from "framer-motion"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; 
 import { useState } from "react";
@@ -41,7 +41,9 @@ const {user} = useSelector(state => state.login);
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.9 }}>
                         <FontAwesomeIcon icon={faPlane} />
+                        <Link to ="/flights" >
                         <span>Travels</span>
+                        </Link>
                     </motion.div >
                 </div>
 

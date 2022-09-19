@@ -118,8 +118,8 @@ function ReservedRoom() {
     },
 
     {
-      field: "checkIn/checkOut",
-      headerName: "checkIn/checkOut",
+      field: "checkIn",
+      headerName: "check in",
       width: 170,
       renderCell: (params) => {
         return (
@@ -158,10 +158,9 @@ function ReservedRoom() {
 
         <div className="flex flex-col w-[85%]  mt-10 ">
 
-          
           <div className="pl-2 pt-2 flex items-center w-[100%]">
-                <button className="text-lg font-bold w-[15%] flex items-center justify-start">Reserved Rooms</button>
-                <hr className='w-[80%]' />
+                <button className="text-lg font-bold w-[15%] flex items-center justify-start text-green-800">Reserved Rooms</button>
+                <hr className='w-[80%] bg-slate-300' />
           </div>
           
           {isLoading ? "Loading..." : (

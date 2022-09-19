@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./user.css";
 import {
   PermIdentity,
@@ -16,6 +16,7 @@ import { getUserData } from "../../../../features/usersSlice/usersAction";
 import Navbar from "../../../../components/Navbar";
 
 function User() {
+  const [file, setFiles] = useState()
   const dispatch = useDispatch()
   const {id} = useParams()
   const {isLoading ,error, requestedUser} = useSelector(state => state.users)
@@ -128,13 +129,13 @@ function User() {
                   <div className="userUpdateUpload">
                     <img
                       className="userUpdateImg"
-                      src={requestedUser.img? requestedUser.img : "https://dcpcsb.org/themes/copycat/images/profile.png"}
+                      src={file ? URL.createObjectURL(file) : requestedUser.img ? requestedUser.img: "https://dcpcsb.org/themes/copycat/images/profile.png" }
                       alt=""
                     />
                     <label htmlFor="file">
                       <Publish className="userUpdateIcon" />
                     </label>
-                    <input type="file" id="file" style={{ display: "none" }} />
+                    <input type="file" id="file" onChange= {(e) => setFiles(e.target.files[0])} style={{ display: "none" }} />
                   </div>
                   <button className="userUpdateButton">Update</button>
                 </div>

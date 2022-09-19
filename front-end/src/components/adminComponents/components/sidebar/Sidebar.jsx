@@ -45,7 +45,7 @@ const handleSubmit =  (index, url) =>{
   }
   return (
 
-    <div className="homeHeight hidden sm:flex flex-col sticky z-50 top-[50px]">
+    <div className="homeHeight flex flex-col sticky z-50 top-[50px]">
           <h3 className="px-2 text-gray-400 font-bold pb-4">Dashboard</h3>
           <div className='flex flex-col space-y-4 text-sm '>
             {tabs.map((tab ,index)=>(
@@ -60,7 +60,7 @@ const handleSubmit =  (index, url) =>{
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.9 }}
                     >
-                      <tab.Icon /> {tab.title}
+                      <tab.Icon/> {tab.title}
                     </motion.p>
                 </motion.div>
             ))}

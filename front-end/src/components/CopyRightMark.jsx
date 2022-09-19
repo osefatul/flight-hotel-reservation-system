@@ -2,9 +2,9 @@ import React from 'react'
 
 function CopyRightMark() {
 return (
-<div className="sticky bottom-0 flex justify-center items-center pb-2 bg-black text-white text-[12px]">
-    Copyright © 2022 Sefatullah Omar.
-</div>
+<div className="flex items-center justify-center text-white bg-black h-[24px] text-[10px] fixed w-full bottom-0 z-50">
+    &copy;Developed by Sefatullah Omar. All rights reserved - 2022.
+    </div>
 )
 }
 
