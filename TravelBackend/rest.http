@@ -1,0 +1,56 @@
+### Create a new Flight
+POST http://localhost:8000/v1/flights/
+Content-Type: application/json
+
+{"airline": "Qatar Airways", 
+"code":"QA",
+"from":"Vancouver",
+"to":"Dubai",
+"date": "2023-09-28",
+"fare": 950
+}
+
+
+
+### Update Flight
+PUT http://localhost:5000/v1/flights/updateAFlight/63204e13720c07dd3e0d2fda
+Content-Type: application/json
+
+{"name": "Intercontenintal Hotel", 
+"type":"hotel",
+"city":"Kabul",
+"address":"Bagh bala st",
+"distance":"500",
+"title": "Best Hotel",
+"desc": "Hoteell",
+"cheapestPrice": 100
+}
+
+
+### Delete a flight
+DELETE http://localhost:8000/v1/flights/deleteAFlight/6328148e84557c0e9f7ee9ea
+Content-Type: application/json
+
+
+
+### Get a aflight by id
+GET http://localhost:8000/v1/flights/getAFlight/6328148e84557c0e9f7ee9ea
+Content-Type: application/json
+
+
+
+### Get flights
+GET http://localhost:8000/v1/flights/
+Content-Type: application/json
+
+
+### Search a flight by id
+POST http://localhost:8000/v1/flights/searchAFlight
+Content-Type: application/json
+
+{
+"from":"Dubai",
+"to":"Vancouver",
+"date": "2022-09-25"
+}
+

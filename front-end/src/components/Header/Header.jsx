@@ -21,6 +21,11 @@ import { useSelector } from 'react-redux';
 function Header({type}) {
 
 const {user} = useSelector(state => state.login);
+const navigate = useNavigate();
+
+const handleClick = (e) =>{
+    navigate("/flights")
+}
 
     return (
         <div className="bg-black text-white flex flex-col py-3 pt-4 w-[75%] mx-auto ">
@@ -39,11 +44,11 @@ const {user} = useSelector(state => state.login);
 
                     <motion.div className="flex items-center space-x-2 pl-2 cursor-pointer w-full bg-amber-500 text-black rounded-sm"
                     whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.9 }}>
+                    whileTap={{ scale: 0.9 }}
+                    onClick = {handleClick}
+                    >
                         <FontAwesomeIcon icon={faPlane} />
-                        <Link to ="/flights" >
                         <span>Travels</span>
-                        </Link>
                     </motion.div >
                 </div>
 

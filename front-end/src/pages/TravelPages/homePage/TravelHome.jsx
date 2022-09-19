@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 import {
-    Button,
-    Alert,
-    Card,
-    Modal,
-    Breadcrumb,
+
     Spinner,
 } from "react-bootstrap";
 import CopyRightMark from '../../../components/CopyRightMark';
@@ -12,11 +8,17 @@ import Navbar from '../../../components/Navbar';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import { useDispatch, useSelector } from 'react-redux';
+import { FetchingAFlight, SearchingFlights } from '../../../features/flightsSlice/flightAction';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 
 
 
 const cities = [
     { city: "", code: "" },
+    { city: "Dubai", code: "" },
+    { city: "Vancouver", code: "" },
     { city: "Mumbai", code: "BOM" },
     { city: "Bangalore", code: "BLR" },
     { city: "Chennai", code: "MAA" },
@@ -55,27 +57,49 @@ const cities = [
 
 
 
-
-
-
 function TravelHome() {
+
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const {isLoading, error, flights} = useSelector(state => state.flights)
+
     const [show, setShow] = useState(false);
     const [swap, setSwap] = useState(false);
-    const [from, setFrom] = useState({city:"", code:""});
-    const [to, setTo] = useState({city:"", code:""});
-    const [date, setDate] = useState("");
-    const [loading, setLoading] = useState(false)
 
-    const [value, setValue] = React.useState(cities[0].city);
-    const [inputValue, setInputValue] = React.useState('');
+    const [from, setFrom] = useState("");
+    const [to, setTo] = useState();
+    const [date, setDate] = useState();
 
 
 
+    const handleBooking = async (id)=>{
+        await dispatch(FetchingAFlight(id))
+        await navigate("/booking", {state: {date}})
+    }
 
 
-const handleSubmit = (e) => {
-    e.preventDefault()
-};
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        if(swap){
+            const swapper = from;
+            setFrom(to);
+            setTo(swapper);
+            setSwap(false)
+        }
+
+        const formData = {
+            from: from,
+            to: to,
+            date: date
+        }
+        console.log(formData)
+
+        await dispatch(SearchingFlights(formData))
+        await setShow(true)
+    };
     
 return (
     <div className="">
@@ -99,17 +123,14 @@ return (
                             {swap ? (
 
                             <div >
-
                                 <Autocomplete
-                                    value={value}
+                                    value={to || ""}
                                     onChange={(event, newValue) => {
-                                        setValue(newValue);
+                                        setTo(newValue)
+                                        console.log(to)
                                     }}
-                                    inputValue={inputValue}
-                                    onInputChange={(event, newInputValue) => {
-                                        setInputValue(newInputValue);
-                                    }}
-                                    id="controllable-states-demo"
+                                    freeSolo
+                                    id="to"
                                     options={cities.map(option => option.city)}
                                     // sx={{ width: 300 }}
                                     renderInput={(params) => <TextField {...params} label="To" />}
@@ -118,24 +139,17 @@ return (
 
                             ) : (
 
-                            // <div className='space-x-3 flex items-center justify-start w-[50%] bg-slate-200 px-2 '>
-                            //     <label htmlFor="to">To</label>
-                            //     <input className='w-full bg-slate-200 !border-0 !outline-0' type="text" />
-                            // </div>
-
                             <div className=''>
                                 <Autocomplete
-                                    value={value}
+                                    value={from || ""}
                                     onChange={(event, newValue) => {
-                                        setValue(newValue);
+                                        setFrom(newValue)
+                                        console.log(from)
                                     }}
-                                    inputValue={inputValue}
-                                    onInputChange={(event, newInputValue) => {
-                                        setInputValue(newInputValue);
-                                    }}
-                                    id="controllable-states-demo"
+                                    freeSolo
+                                    id="from"
                                     options={cities.map(option => option.city)}
-                                    // sx={{ width: 300 }}
+                                    // sx={{ width: 300,  }}
                                     renderInput={(params) => <TextField {...params} label="From" />}
                                     />
                             </div>
@@ -157,15 +171,13 @@ return (
                                 <div className=''>
 
                                 <Autocomplete
-                                    value={value}
+                                    value={to || ""}
                                     onChange={(event, newValue) => {
-                                        setValue(newValue);
+                                        setTo(newValue)
+                                        console.log(to)
                                     }}
-                                    inputValue={inputValue}
-                                    onInputChange={(event, newInputValue) => {
-                                        setInputValue(newInputValue);
-                                    }}
-                                    id="controllable-states-demo"
+                                    freeSolo
+                                    id="to"
                                     options={cities.map(option => option.city)}
                                     // sx={{ width: 300 }}
                                     renderInput={(params) => <TextField {...params} label="To" />}
@@ -176,15 +188,13 @@ return (
                                 <div className=''>
 
                                     <Autocomplete
-                                        value={value}
+                                        value={from || ""}
                                         onChange={(event, newValue) => {
-                                            setValue(newValue);
+                                            setFrom(newValue)
+                                            console.log(from)
                                         }}
-                                        inputValue={inputValue}
-                                        onInputChange={(event, newInputValue) => {
-                                            setInputValue(newInputValue);
-                                        }}
-                                        id="controllable-states-demo"
+                                        freeSolo
+                                        id="from"
                                         options={cities.map(option => option.city)}
                                         // sx={{ width: 300 }}
                                         renderInput={(params) => <TextField {...params} label="From" />}
@@ -198,15 +208,17 @@ return (
                             className=" w-full px-2 border"
                             name="date"
                             type="date"
-                            id="date
-                            // label="Journey date
-                            defaultValue={Date.now()}
+                            id="date"
+                            onChange={
+                                (e) => {setDate(e.target.value)
+                                console.log(new Date (date))}
+                            }
                             // component={CustomInput}
                             />
                         </div>
 
-                        <button variant="primary" type="submit" className="flex items-center justify-center bg-green-800 text-white w-full ">
-                            {loading ? (
+                        <button type="submit" className="flex items-center justify-center bg-green-800 text-white w-full ">
+                            {isLoading ? (
                             <Spinner animation="border" size="sm" />
                             ) : null}{" "}
                             Search
@@ -219,76 +231,79 @@ return (
 
 
              {/* Right Side */}
-            <div className='w-[40%] flex flex-col space-y-4 text-white'>
-                
-                {/* <div>
-                    <h1 >Search Flight</h1>
-                </div>
-                <div>
-                        <form onSubmit={handleSubmit()}>
-                        <div>
-                            {swap ? (
-                            <div>
-                                <label htmlFor="from">From</label>
-                                <input type="text" />
-                            </div>
-                            ) : (
-                            <div>
-                                <label htmlFor="to">To</label>
-                                <input type="text" />
-                            </div>
-                            )}
-                        </div>
+            {
+                show &&
+                <div className='w-full flex flex-col space-y-4 text-black'>
 
-                        <Button
-                        className="bg-white"
-                            style={{
-                            textAlignLast: "center",
-                            width: "100%",
-                            marginBottom: "1rem",
-                            marginTop: "1rem",
-                            }}
-                            onClick={() => this.handleSwap()}
-                        >
-                            <b>↑↓</b>
-                        </Button>
+                    <div className='bg-slate-600 rounded-sm text-white text-xl font-bold px-2'>
+                        <h1 >Flights</h1>
+                    </div>
+                    <div className='flex flex-col space-y-4' >
+                        {flights?.map(flight => (
+                            <div className='border border-slate-400 rounded-sm p-2 '>
+                                <div className='text-[10px] text-slate-700 font-bold '>
+                                    <p className='border-b border-amber-500 w-max'>
+                                    {flight.code}2342
+                                    </p>
+                                </div>
+                                
+                                <div className='space-y-3'>
+                                    <p className='text-md font-bold'>{flight.airline}</p>
+                                    
+                                    <div className='flex space-x-3 items-center justify-between text-[12px]'>
+                                        <p >{flight.from}</p>
+
+                                        <span>
+                                            <svg
+                                                clip-rule="evenodd"
+                                                fill-rule="evenodd"
+                                                height="25"
+                                                width="25"
+                                                image-rendering="optimizeQuality"
+                                                shape-rendering="geometricPrecision"
+                                                text-rendering="geometricPrecision"
+                                                viewBox="0 0 500 500"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                <g stroke="#222">
+                                                    <line
+                                                    fill="none"
+                                                    stroke-linecap="round"
+                                                    stroke-width="30"
+                                                    x1="300"
+                                                    x2="55"
+                                                    y1="390"
+                                                    y2="390"
+                                                    />
+                                                    <path
+                                                    d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z"
+                                                    fill="#222"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="10"
+                                                    />
+                                                </g>
+                                            </svg>
+                                        </span>
+
+                                        <p>{flight.to}</p>
+                                        <p className='font-bold'>${flight.fare}</p>
+
+                                        <button 
+                                        className='bg-green-800 p-1 text-white rounded-sm'
+                                        onClick={(e) => handleBooking(flight._id)}
+                                        >Book now</button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        ))}
                         
-                        <div>
-                            {!swap ? (
-                            <div>
-                                <label htmlFor="to">To</label>
-                                <input type="text" />
-                            </div>
-                            ) : (
-                            <div>
-                                    <label htmlFor="from">From</label>
-                                    <input type="text" />
-                            </div>
-                            )}
-                        </div>
+                    </div>
 
-                        <div>
-                            <div
-                            name="date"
-                            type="date"
-                            id="date"
-                            // label="Journey date
-                            // defaultValue={Date.now()}
-                            // component={CustomInput}
-                            ></input>
-                        </div>
-
-                        <Button variant="primary" type="submit">
-                            {loading ? (
-                            <Spinner animation="border" size="sm" />
-                            ) : null}{" "}
-                            Search
-                        </Button>
-                        </form>
-
-                </div> */}
+                </div>
+            }
             
-            </div>
 
         </div>
 

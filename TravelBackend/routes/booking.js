@@ -12,6 +12,6 @@ router.post ("/", addNewBooking);
 router.get("/", getAllBookings)
 router.get("/getABooking/:id", getABooking);
 router.get("/getUserDetailsBooking/:id", getUserDetailsBooking);
-router.delete("/cancelBooking", cancelBooking);
+router.delete("/cancelBooking/:id", cancelBooking);
 
 module.exports = router

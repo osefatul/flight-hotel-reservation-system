@@ -4,10 +4,11 @@ import registerReducer from "./features/authSlice/registerSlice"
 import hotelReducer from "./features/hotelSlice/hotelSlice";
 import searchReducer from "./features/searchSlice/searchSlice";
 import selectedSidebarReducer from "./features/selectedSidebar/selectedSidebarSlice";
-
 import roomReducer from "./features/roomSlice/roomSlice";
 import adminPanelReducer from "./features/adminPanel/adminPanel";
 import usersReducer from "./features/usersSlice/usersSlice";
+import flightReducer from "./features/flightsSlice/flightSlice";
+
 
 
 
@@ -21,7 +22,8 @@ const store = configureStore({
         rooms:roomReducer,
         adminPanelMode:adminPanelReducer,
         users: usersReducer,
-        selectedSidebar: selectedSidebarReducer
+        selectedSidebar: selectedSidebarReducer,
+        flights:flightReducer
         // user: userReducer,
         // openTicket: newTicketReducer,
         // resetPassword: resetPasswordReducer,

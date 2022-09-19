@@ -1,7 +1,6 @@
 const {Booking} = require("../models/Booking");
 const {Flight} = require("../models/Flight");
-const {User} = require("../models/User");
-
+const {UserDetail} = require("../models/UserDetail");
 
 
 
@@ -11,7 +10,7 @@ const addNewBooking = async (req, res, next) => {
         const flightId = req.body.flight;
 
         const flight = await Flight.findById(flightId);
-        const user = await User.findById(userId);
+        const user = await UserDetail.findById(userId);
 
         let bookingId = customId({
             name: flight.from + flight.to + flight.airlines,
@@ -70,7 +69,7 @@ const cancelBooking = async (req, res, next) => {
 
         console.log(bookingId, userId, flightId);
         const result = await Booking.findByIdAndDelete(bookingId);
-        const user = await User.findById(userId);
+        const user = await UserDetail.findById(userId);
         const flight = await Flight.findById(flightId);
         user.flights.pull(flight);
         await user.save();

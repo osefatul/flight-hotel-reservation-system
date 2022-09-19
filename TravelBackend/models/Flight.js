@@ -6,7 +6,7 @@ const flightSchema = new Schema ({
         type: String,
         required: true
     },
-    name:{
+    code:{
         type: String,
         required: true
     },
@@ -20,7 +20,6 @@ const flightSchema = new Schema ({
     },
     date: {
         type: Date,
-        required: true,
     },
     fare: {
         type:Number,

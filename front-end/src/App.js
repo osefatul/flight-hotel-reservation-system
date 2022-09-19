@@ -19,6 +19,7 @@ import RoomsList from "./pages/admin/rooms/roomsList/RoomsList";
 import NewRoom from "./pages/admin/rooms/newRoom/NewRoom";
 import ReservedRoom from "./pages/admin/rooms/reservedRoom/ReservedRoom";
 import TravelHome from "./pages/TravelPages/homePage/TravelHome";
+import Booking from "./pages/TravelPages/booking/Booking";
 
 function App() {
   return (
@@ -28,10 +29,12 @@ function App() {
       <Route path="hotels" element={<List/>}/>
       <Route path="login" element={<Auth/>}/>
       <Route path="register" element={<Register/>}/>
+      <Route path="flights" element={<TravelHome/>}/>
+      <Route path="booking" element={<Booking/>}/>
+
 
       <Route path="/" element={<ProtectedRoutes/>}>        
         <Route path="hotels/:id" element={<Hotel/>}/>
-        
         <Route path="admin" element={<AdminHome/>}/>
         <Route path="admin/newUser" element={<NewUser/>}/>
         <Route path="admin/users" element={<UserList/>} />
@@ -43,7 +46,6 @@ function App() {
         <Route path="admin/rooms/" element={<RoomsList/>}/>
         <Route path="admin/reserved-rooms/" element={<ReservedRoom/>}/>
 
-        <Route path="flights" element={<TravelHome/>}/>
 
 
 

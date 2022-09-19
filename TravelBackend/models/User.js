@@ -56,6 +56,12 @@ flights: [
     ref: "Flight",
     },
 ],
+userDetails: [
+    {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "UserDetail",
+    },
+],
 isAdmin: {
     type: Boolean,
     default: false,

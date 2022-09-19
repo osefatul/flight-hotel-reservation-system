@@ -71,6 +71,8 @@ const searchAFlight = async (req, res, next) => {
 
         const findFlight = await Flight.find({from, to, data:{$gte: startDate, $lt: endDate}})
 
+        res.status(200).json(findFlight);
+
     }catch(error){
         console.log(error);
         res.status(500).json({message:error.message});

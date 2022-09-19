@@ -12,6 +12,8 @@ const pdfTemplate = require("./doc");
 
 const FlightRoute = require("./routes/flight.js")
 const BookingRoute = require( "./routes/booking.js");
+const UserDetailsRoute = require( "./routes/userDetails.js");
+
 
 const PORT = process.env.PORT || 8000;
 
@@ -42,8 +44,11 @@ console.log("Connected to MongoDB")
 mongoose.connect(process.env.MONGO_URL).then(
 ).catch(err => console.error(err));
 
+
 app.use("/v1/flights", FlightRoute);
 app.use("/v1/bookings", BookingRoute);
+app.use("/v1/userDetails", UserDetailsRoute);
+
 
 
 app.post("/v1/create-pdf", (req, res) => {
