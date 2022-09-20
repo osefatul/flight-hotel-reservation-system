@@ -38,7 +38,7 @@ const getAFlight = async (req, res, next) => {
 
 const deleteAFlight = async (req, res, next) => {
     try{
-        const theFlight = await Flight.findByIdAndDelete({_id: req.params.id});
+        await Flight.findByIdAndDelete({_id: req.params.id});
         res.status(200).json({message: 'flight successfully deleted'});
     }catch(error){
         console.log(error);

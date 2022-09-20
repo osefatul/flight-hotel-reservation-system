@@ -5,7 +5,7 @@ const getUserDetailsUrl =userDetailsUrl + "loggedInUser/"
 
 export const addNewUserDetails = async (id, formData) =>{
     try {
-        const res = await axios.post(userDetailsUrl + id, {formData});
+        const res = await axios.post(userDetailsUrl + id, formData);
         return res
     }catch(error){
         console.log(error)
@@ -18,6 +18,17 @@ export const addNewUserDetails = async (id, formData) =>{
 export const getUserDetailsForCurrentUser = async (id) =>{
     try {
         const res = await axios.get(getUserDetailsUrl + id,);
+        return res
+    }catch(error){
+        console.log(error)
+        return error;
+    }
+}
+
+
+export const getUserDetail = async (id) =>{
+    try {
+        const res = await axios.get(userDetailsUrl + id,);
         return res
     }catch(error){
         console.log(error)

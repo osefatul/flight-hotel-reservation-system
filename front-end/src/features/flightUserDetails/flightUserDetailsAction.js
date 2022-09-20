@@ -1,5 +1,5 @@
-import { addNewUserDetails, getUserDetailsForCurrentUser } from "../../api/TravelApi/userDetails";
-import {fetchingAFlightUserDetailSuccess, fetchingFlightUsersDetailSuccess, flightUserDetailFail, flightUserDetailPending} from "../../features/flightUserDetails/flightUserDetailsSlice"
+import { addNewUserDetails, getUserDetailsForCurrentUser, getUserDetail } from "../../api/TravelApi/userDetails";
+import {fetchingAFlightUserDetailSuccess, fetchingFlightUsersDetailSuccess, fetchUserDetailSuccess, flightUserDetailFail, flightUserDetailPending} from "../../features/flightUserDetails/flightUserDetailsSlice"
 
 
 
@@ -30,5 +30,17 @@ export const FetchingAFlightUserDetail = (id) => async (dispatch) => {
     }
 }
 
+
+
+export const FetchingUserDetail = (id) => async (dispatch) => {
+    try {
+        const result = await getUserDetail(id);
+        dispatch(fetchUserDetailSuccess(result.data))
+    }catch(error){
+        console.log(error)
+        dispatch(flightUserDetailFail(error))
+        return error;
+    }
+}
 
 

@@ -5,6 +5,8 @@ const initialState = {
     error: "",
     userDetail: {},
     UsersDetail: [],
+    SelectedUsersDetail: [],
+
 }
 
 const flightUserDetailSlice = createSlice ({
@@ -23,9 +25,12 @@ const flightUserDetailSlice = createSlice ({
         },
 
         fetchingAFlightUserDetailSuccess: (state, action)=>{
-            state.isLoading = false
-            state.error = ""
             state.userDetail = action.payload
+        },
+
+        fetchUserDetailSuccess : (state, action)=>{
+            state.error = ""
+            state.SelectedUsersDetail = action.payload
         },
 
         flightUserDetailFail: (state, action)=>{
@@ -41,7 +46,8 @@ const { reducer, actions} = flightUserDetailSlice
 export const  {
     flightUserDetailPending,
     fetchingFlightUsersDetailSuccess,
-    fetchingAFlightUserDetailSuccess, 
+    fetchingAFlightUserDetailSuccess,
+    fetchUserDetailSuccess,
     flightUserDetailFail
 } = actions
 
