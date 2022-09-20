@@ -54,3 +54,24 @@ Content-Type: application/json
 "date": "2022-09-25"
 }
 
+
+
+//--------------------------------------------------------------------------------
+
+
+### Create a new addUserDetail
+POST http://localhost:8000/v1/userDetails/630c8f707740928186e01216
+Content-Type: application/json
+
+{
+"firstName": "Sefatullah", 
+"lastName": "Omar",
+"birthdate": "1993-09-28",
+"flights": "63280b9d153fee8f3309b332"
+}
+
+
+
+### Create a new addUserDetail
+GET http://localhost:8000/v1/userDetails/loggedInUser/630c8f707740928186e01216
+Content-Type: application/json

@@ -1,4 +1,4 @@
-import { fetchAllUsers, fetchUser, userDelete } from "../../api/userApi";
+import { fetchAllUsers, fetchUser, userDelete, fetchCurrentUser } from "../../api/userApi";
 import { getRequestedUserSuccess, getUsersFail, getUsersPending, getUsersSuccess } from "./usersSlice";
 
 
@@ -21,6 +21,18 @@ export const getUserData =(id) => async dispatch => {
     dispatch(getUsersPending());
     try {
         const result = await fetchUser(id);
+        dispatch(getRequestedUserSuccess(result));
+        return result
+    } catch (error) {
+        dispatch(getUsersFail(error));
+    }
+}
+
+
+export const getCurrentUserData =(id) => async dispatch => {
+    dispatch(getUsersPending());
+    try {
+        const result = await fetchCurrentUser(id);
         dispatch(getRequestedUserSuccess(result));
         return result
     } catch (error) {

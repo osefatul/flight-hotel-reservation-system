@@ -24,8 +24,18 @@ const deleteUser = async (req,res,next)=>{
     }
 }
 
-
+// get user for edit
 const getUser = async (req,res,next)=>{
+    try {
+        const user = await User.findById(req.params.id);
+        res.status(200).json(user);
+    } catch (err) {
+        next(err);
+    }
+}
+
+// get current user updated details
+const getCurrentUser = async (req,res,next)=>{
     try {
         const user = await User.findById(req.params.id);
         res.status(200).json(user);
@@ -51,4 +61,5 @@ module.exports = {
     deleteUser,
     getUser,
     getUsers,
+    getCurrentUser
 }

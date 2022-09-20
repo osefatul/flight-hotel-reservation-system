@@ -2,6 +2,52 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Navbar from '../../../components/Navbar'
+import { Button, Alert, Card, Modal, Breadcrumb, Table } from "react-bootstrap";
+import { DataGrid } from '@mui/x-data-grid';
+import { getCurrentUserData } from '../../../features/usersSlice/usersAction';
+
+
+const columns = [
+    { field: "name", headerName: "Name", width: 180,
+    renderCell: (params) => {
+        return (
+            <div className="text-[12px]">
+                R{params.row._id.slice(0,10)}...
+            </div>
+
+        );
+    }},
+
+    {
+    field: "birthday",
+    headerName: "Birthday",
+    width: 130,
+    renderCell: (params) => {
+        return (
+        <div className="text-[12px]">
+            {params.row.title}
+        </div>
+        );
+    },
+    },
+
+    {
+    field: "booking",
+    headerName: "Booking",
+    width: 160,
+    renderCell: (params) => {
+        return (
+        <div className="text-[12px]">
+            {params.row.hotel.map( i => {
+            return i.hotelName
+            })}
+        </div>
+        );
+    },
+    },
+]
+
+
 
 function Booking() {
 
@@ -9,12 +55,16 @@ function Booking() {
     const date = location.state.date;
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const {isLoading, error, flight} = useSelector(state => state.flights)
 
-    console.log(date)
+    const {user} = useSelector(state => state.login);
+    const {isLoading, error, flight} = useSelector(state => state.flights)
+    console.log(user._id)
+
 
     useEffect(() => {
+        dispatch(getCurrentUserData(user._id))
     })
+    
 
 return (
     <div>
@@ -94,12 +144,30 @@ return (
 
                 <hr className='bg-black'/>
 
-                <div className='p-2'>
+                <div className='p-2 space-y-5'>
                     <h1 className='text-xl font-bold'>
                         Booking Flight List
                     </h1>
-
                     
+                    {/* {isLoading ? "Loading..." : (
+                    <div className="userList">
+                        <DataGrid
+                        sx={{
+                        border: 0, // also tried setting to none 
+                        borderRadius: 2,
+                        p: 2,
+                        minWidth: 200,
+                        }}
+                        getRowId = {(row) => row._id}
+                        // rows={data}
+                        disableSelectionOnClick
+                        columns={columns}
+                        pageSize={8}
+                        checkboxSelection
+                        />
+                    </div>
+                    )} */}
+
                 </div>
 
             </div>

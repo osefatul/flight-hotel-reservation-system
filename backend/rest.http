@@ -128,9 +128,17 @@ GET http://localhost:5000/v1/users/630c96f619b49ba0cca1b056
 Content-Type: application/json
 
 
+
+### Get current user 
+GET http://localhost:5000/v1/users/currentUser/630c8f707740928186e01216
+Content-Type: application/json
+
+
+
 ### Get users 
 GET http://localhost:5000/v1/users/
 Content-Type: application/json
+
 
 
 

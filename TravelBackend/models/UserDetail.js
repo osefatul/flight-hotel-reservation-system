@@ -4,15 +4,15 @@ const Schema = mongoose.Schema;
 var userDetailsSchema = new Schema({
     firstName: {
         type: String,
-        required: true,
+        // required: true,
     },
     lastName: {
         type: String,
-        required: true,
+        // required: true,
     },
     birthdate: {
         type: Date,
-        required: true,
+        // required: true,
     },
     flights: [
         {

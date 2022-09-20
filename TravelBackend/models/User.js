@@ -12,18 +12,18 @@ username: {
 },
 firstName: {
     type: String,
-    required: true,
+    // required: true,
     unique: true,
 },
 lastName: {
     type: String,
-    required: true,
+    // required: true,
     unique: true,
 },
 
 birthDate: {
     type: Date,
-    required: true,
+    // required: true,
 },
 
 email: {

@@ -70,6 +70,21 @@ export const fetchUser = async (id) =>{
 
 
 
+export const fetchCurrentUser = async (id) =>{
+    try {
+        const res = await axios.get("http://localhost:5000/v1/users/currentUser/"+ id, 
+            axios.defaults.withCredentials = true //for sending cookies.
+            )
+        console.log(res)
+        return res.data
+    }catch(error){
+        console.log(error);
+        return(error.message);
+    }
+}
+
+
+
 
 
 //Delete User

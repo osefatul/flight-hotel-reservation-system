@@ -7,6 +7,7 @@ const {
     deleteUser,
     getUser,
     getUsers,
+    getCurrentUser
 } = require("../controllers/user.js");
 
 
@@ -35,8 +36,14 @@ router.put("/:id", verifyToken, verifyUser, updateUser);
 //DELETE
 router.delete("/:id",verifyToken, verifyUser, deleteUser);
 
+
+//Get current user.
+router.get("/currentUser/:id",verifyToken, verifyUser, getCurrentUser);
+
+
 //GET
 router.get("/:id",verifyToken, verifyUser, getUser);
+
 
 //GET ALL
 router.get("/",verifyToken, verifyAdmin, getUsers);

@@ -12,18 +12,15 @@ username: {
 },
 firstName: {
     type: String,
-    required: true,
     unique: true,
 },
 lastName: {
     type: String,
-    required: true,
     unique: true,
 },
 
 birthDate: {
     type: Date,
-    required: true,
 },
 
 email: {
@@ -58,7 +55,7 @@ flights: [
 ],
 userDetails: [
     {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "UserDetail",
     },
 ],
