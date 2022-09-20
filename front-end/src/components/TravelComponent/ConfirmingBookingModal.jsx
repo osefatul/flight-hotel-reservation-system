@@ -23,15 +23,14 @@ function ConfirmingBookingModal({setModalOpen}) {
                 </div>
     
                 <div className='space-y-6'>
-
                     <div>
                         <h1 className=' text-lg  font-bold border-b border-slate-300'>Review Details</h1>
                     </div>
 
-                    <div className='space-y-2'>
-                        <h1>Flight Details</h1>
+                    <div className='p-2'>
+                        <h1 className='w-full bg-slate-300 pl-1'>Flight Details</h1>
 
-                        <div className='text-[12px] space-y-3'>
+                        <div className='text-[12px] space-y-3 pl-1 border '>
                             <p className='w-max border-b border-b-amber-600 font-bold'>{flight.airline} {flight.code}</p>
 
                             <div>
@@ -42,10 +41,10 @@ function ConfirmingBookingModal({setModalOpen}) {
                         </div>
                     </div>
 
-                    <div className='space-y-2'>
-                        <h1>Traveler Details</h1>
+                    <div className='p-2'>
+                        <h1 className='w-full bg-slate-300 pl-1 '>Traveler Details</h1>
 
-                        <div className='text-[12px]'>
+                        <div className='text-[12px] pl-1 border pt-2'>
                                 <p>Name:
                                     <span className="font-bold">{" "}
                                     {SelectedUsersDetail.firstName} {SelectedUsersDetail.lastName} 
@@ -63,7 +62,6 @@ function ConfirmingBookingModal({setModalOpen}) {
 
                     <div>
                     </div>
-
 
                 </div>
 
