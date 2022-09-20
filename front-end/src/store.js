@@ -8,6 +8,8 @@ import roomReducer from "./features/roomSlice/roomSlice";
 import adminPanelReducer from "./features/adminPanel/adminPanel";
 import usersReducer from "./features/usersSlice/usersSlice";
 import flightReducer from "./features/flightsSlice/flightSlice";
+import flightUserDetailsReducer from "./features/flightUserDetails/flightUserDetailsSlice";
+
 
 
 
@@ -23,12 +25,9 @@ const store = configureStore({
         adminPanelMode:adminPanelReducer,
         users: usersReducer,
         selectedSidebar: selectedSidebarReducer,
-        flights:flightReducer
-        // user: userReducer,
-        // openTicket: newTicketReducer,
-        // resetPassword: resetPasswordReducer,
-        // homeTabs: tabsReducer,
-        // closeTicketModal: CloseTicketModalReducer
+        flights:flightReducer,
+        flightsUserDetail:flightUserDetailsReducer
+
     },
     middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

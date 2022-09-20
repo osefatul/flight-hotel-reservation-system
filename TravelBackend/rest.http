@@ -72,6 +72,6 @@ Content-Type: application/json
 
 
 
-### Create a new addUserDetail
+### get a addUserDetail
 GET http://localhost:8000/v1/userDetails/loggedInUser/630c8f707740928186e01216
 Content-Type: application/json

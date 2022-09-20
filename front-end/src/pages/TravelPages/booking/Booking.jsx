@@ -5,14 +5,15 @@ import Navbar from '../../../components/Navbar'
 import { Button, Alert, Card, Modal, Breadcrumb, Table } from "react-bootstrap";
 import { DataGrid } from '@mui/x-data-grid';
 import { getCurrentUserData } from '../../../features/usersSlice/usersAction';
+import { FetchingAFlightUserDetail } from '../../../features/flightUserDetails/flightUserDetailsAction';
 
 
 const columns = [
-    { field: "name", headerName: "Name", width: 180,
+    { field: "firstName", headerName: "Name", width: 180,flex: 1,
     renderCell: (params) => {
         return (
             <div className="text-[12px]">
-                R{params.row._id.slice(0,10)}...
+                {params.row.firstName + " " + params.row.lastName}
             </div>
 
         );
@@ -21,11 +22,12 @@ const columns = [
     {
     field: "birthday",
     headerName: "Birthday",
-    width: 130,
+    width: 180,
+    flex: 1,
     renderCell: (params) => {
         return (
         <div className="text-[12px]">
-            {params.row.title}
+            {new Date(params.row.birthdate).toDateString()}
         </div>
         );
     },
@@ -35,13 +37,13 @@ const columns = [
     field: "booking",
     headerName: "Booking",
     width: 160,
+    flex: 1,
     renderCell: (params) => {
         return (
-        <div className="text-[12px]">
-            {params.row.hotel.map( i => {
-            return i.hotelName
-            })}
-        </div>
+            <>
+            <button className="bg-green-800 w-[80%] px-2 py-[3px] rounded-sm text-white text-[13px]">Book</button>
+            
+            </>
         );
     },
     },
@@ -57,14 +59,17 @@ function Booking() {
     const navigate = useNavigate()
 
     const {user} = useSelector(state => state.login);
-    const {isLoading, error, flight} = useSelector(state => state.flights)
-    console.log(user._id)
+    const {error, flight} = useSelector(state => state.flights)
+    const { isLoading, UsersDetail} = useSelector(state => state.flightsUserDetail)
 
+    useEffect(  () => {
+            dispatch(getCurrentUserData(user._id))
+            dispatch(FetchingAFlightUserDetail(user._id))
 
-    useEffect(() => {
-        dispatch(getCurrentUserData(user._id))
-    })
-    
+    },[])
+
+    console.log(UsersDetail.birthday)
+
 
 return (
     <div>
@@ -75,7 +80,7 @@ return (
         <div className="h-main flex sm:flex-row space-x-10 mt-10 items-start
         justify-center w-[75%] mx-auto relative">
 
-            <div className='w-full space-y-5'>
+            <div className='w-full space-y-5 h-full'>
                 <div className='w-full flex flex-col space-y-4 text-black'>
                     <div className='bg-slate-600 rounded-sm text-white text-xl font-bold p-2'>
                         <h1 >Book Flight</h1>
@@ -144,29 +149,35 @@ return (
 
                 <hr className='bg-black'/>
 
-                <div className='p-2 space-y-5'>
+                <div className='p-2  space-y-1 w-full'>
                     <h1 className='text-xl font-bold'>
                         Booking Flight List
                     </h1>
-                    
-                    {/* {isLoading ? "Loading..." : (
-                    <div className="userList">
+
+                    {isLoading ? "Loading..." : (
+                    <div className=" w-full h-48">
                         <DataGrid
                         sx={{
                         border: 0, // also tried setting to none 
                         borderRadius: 2,
-                        p: 2,
-                        minWidth: 200,
+                        
+                        minWidth: 300,
                         }}
                         getRowId = {(row) => row._id}
-                        // rows={data}
+                        rows={UsersDetail}
                         disableSelectionOnClick
                         columns={columns}
-                        pageSize={8}
+                        autoPageSize={true}
                         checkboxSelection
                         />
                     </div>
-                    )} */}
+                    )}
+
+                    <div className='-mt-5'>
+                        <button className='bg-slate-600 w-max p-1 text-white rounded-sm'>
+                            Add New User Details
+                        </button>
+                    </div>
 
                 </div>
 
