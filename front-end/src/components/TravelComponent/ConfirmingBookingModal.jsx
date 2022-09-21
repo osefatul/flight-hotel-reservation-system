@@ -1,4 +1,4 @@
-import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+import { faCircleXmark, faPlaneDeparture, faUserTie } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { useSelector } from 'react-redux'
@@ -28,21 +28,30 @@ function ConfirmingBookingModal({setModalOpen}) {
                     </div>
 
                     <div className='p-2'>
-                        <h1 className='w-full bg-slate-300 pl-1'>Flight Details</h1>
+                        <h1 className='w-full bg-slate-300 pl-1'>
+                        <FontAwesomeIcon 
+                        icon= {faPlaneDeparture}
+                        /> Flight Details</h1>
 
-                        <div className='text-[12px] space-y-3 pl-1 border '>
+                        <div className='text-[12px] space-y-3 pl-1 border pt-1 '>
                             <p className='w-max border-b border-b-amber-600 font-bold'>{flight.airline} {flight.code}</p>
 
                             <div>
                                 <p>From:<span className="font-bold"> {flight.from}</span></p> 
                                 <p>To:<span className="font-bold"> {flight.to}</span></p>
-                                <p>To:<span className="font-bold"> ${flight.fare}</span></p>
+                                <p>Fare:<span className="font-bold"> ${flight.fare}</span></p>
                             </div>
                         </div>
                     </div>
 
                     <div className='p-2'>
-                        <h1 className='w-full bg-slate-300 pl-1 '>Traveler Details</h1>
+                        <h1 className='w-full bg-slate-300 pl-1 '>
+                            <FontAwesomeIcon 
+                                icon= {faUserTie} 
+                                className="pr-1"
+                                />
+                            Traveler Details
+                        </h1>
 
                         <div className='text-[12px] pl-1 border pt-2'>
                                 <p>Name:
@@ -60,7 +69,11 @@ function ConfirmingBookingModal({setModalOpen}) {
                         </div>
                     </div>
 
-                    <div>
+                    <div className='flex items-center justify-center space-x-5'>
+                        <button className='text-white text-[12px] bg-blue-800 w-max px-2 p-1 rounded-sm'
+                        onClick= {(e) => setModalOpen(false) }>
+                            Cancel</button>
+                        <button className='text-white text-[12px] bg-green-900 w-max px-2 p-1 rounded-sm'>Confirm</button>
                     </div>
 
                 </div>

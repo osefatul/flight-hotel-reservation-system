@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Navbar from '../../../components/Navbar'
-import { Button, Alert, Card, Modal, Breadcrumb, Table } from "react-bootstrap";
 import { DataGrid } from '@mui/x-data-grid';
 import { getCurrentUserData } from '../../../features/usersSlice/usersAction';
 import { AddingFlightsUserDetails, FetchingAFlightUserDetail, FetchingUserDetail } from '../../../features/flightUserDetails/flightUserDetailsAction';
 import { addNewUserDetails } from '../../../api/TravelApi/userDetails';
 import ConfirmingBookingModal from '../../../components/TravelComponent/ConfirmingBookingModal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlaneArrival, faPlaneDeparture, faPlaneUp, faTicket, faTrash, } from '@fortawesome/free-solid-svg-icons';
+import { GiCommercialAirplane } from 'react-icons/gi';
+import {MdAirplaneTicket} from "react-icons/md"
+import { motion } from "framer-motion"
 
 
 
@@ -61,6 +65,7 @@ function Booking() {
         await dispatch(AddingFlightsUserDetails(user._id, lastForm))
         await dispatch(FetchingAFlightUserDetail(user._id))
         setFormData(initialValue)
+        setAddPassenger(false)
     }
 
 
@@ -97,12 +102,34 @@ function Booking() {
         flex: 1,
         renderCell: (params) => {
             return (
-                <>
-                <button className="bg-green-800 w-[80%] px-2 py-[3px] rounded-sm text-white text-[13px]"
+                <div className=" w-full flex space-x-3">
+                <motion.button className="bg-green-700 hover:bg-green-800 w-full flex items-center justify-center space-x-2 px-2 py-[3px] rounded-sm text-white text-[12px]"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={(e) => confirmBooking(e , params.row._id)}>
+                    <MdAirplaneTicket 
+                    className="text-[22px]"
+                    />
+                    <span className='text-white '>
+                    Book Ticket
+                    </span>
+                </motion.button>
+
+                <motion.button className="bg-green-700 hover:bg-green-800 w-full flex items-center justify-center space-x-2 px-2 py-[3px] rounded-sm text-white  text-[13px]"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.9 }}
                 onClick={(e) => confirmBooking(e , params.row._id)}
-                >Book</button>
+                >    
+                    <FontAwesomeIcon 
+                        icon= {faTrash}
+                        className=""
+                    />
+                    <span className='text-white'>
+                        Delete
+                    </span>
+                </motion.button>
                 
-                </>
+                </div>
             );
         },
         },
@@ -126,7 +153,7 @@ return (
             <div className='w-full space-y-3 h-full pt-5'>
                 <div className='w-full flex flex-col space-y-4 text-black'>
                     <div className='bg-slate-600 rounded-sm text-white text-xl font-bold p-2'>
-                        <h1 >Book Flight</h1>
+                        <h1>Book Flight</h1>
                     </div>
 
                     <div className='flex flex-col space-y-4' >
@@ -139,44 +166,29 @@ return (
                             </div>
                             
                             <div className='space-y-5'>
-                                <p className='text-[16px] font-bold'>{flight.airline}</p>
+                                <p className='text-[18px] font-bold'>{flight.airline}</p>
                                 
-                                <div className='flex space-x-3 items-center justify-between text-[14px]'>
-                                    <p >{flight.from}</p>
+                                <div className='flex space-x-3 items-center justify-between text-[14px] font-semibold'>
+                                    <p >
+                                    {flight.from}
+                                    <FontAwesomeIcon 
+                                    icon= {faPlaneDeparture}
+                                    className="text-[20px] pl-2"
+                                    />
+                                    </p>
 
-                                    <span>
-                                        <svg
-                                            clip-rule="evenodd"
-                                            fill-rule="evenodd"
-                                            height="25"
-                                            width="25"
-                                            image-rendering="optimizeQuality"
-                                            shape-rendering="geometricPrecision"
-                                            text-rendering="geometricPrecision"
-                                            viewBox="0 0 500 500"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            >
-                                            <g stroke="#222">
-                                                <line
-                                                fill="none"
-                                                stroke-linecap="round"
-                                                stroke-width="30"
-                                                x1="300"
-                                                x2="55"
-                                                y1="390"
-                                                y2="390"
-                                                />
-                                                <path
-                                                d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z"
-                                                fill="#222"
-                                                stroke-linejoin="round"
-                                                stroke-width="10"
-                                                />
-                                            </g>
-                                        </svg>
-                                    </span>
+                                    <GiCommercialAirplane 
+                                    className="text-[50px]"
+                                    />
+                                    
+                                    <p >
+                                    {flight.to}
+                                    <FontAwesomeIcon 
+                                    icon= {faPlaneArrival}
+                                    className="text-[20px] pl-2"
+                                    />
+                                    </p>
 
-                                    <p>{flight.to}</p>
                                     <p className='font-bold'>${flight.fare}</p>
                                     <p className=''>{date}</p>
 
@@ -218,11 +230,13 @@ return (
 
                     {!addPassenger && 
                         <div className='' >
-                            <button className='bg-slate-600 w-max p-1 text-white rounded-sm'
+                            <motion.button className='bg-slate-600 w-max p-1 text-white rounded-sm px-2 hover:bg-black'
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.9 }}
                             onClick = {(e) => setAddPassenger(true)}
                             >
-                                Add Passenger
-                            </button>
+                                Add Traveler
+                            </motion.button>
                         </div>
                     }
                 </div>
@@ -231,7 +245,7 @@ return (
                     <div className=' flex w-[60%] mx-auto mt-4'>
                     <form className="flex flex-col space-y-3 pb-10 w-full pr-10 text-[12px]"    onSubmit = {handleSubmit} >
 
-                        <h1 className='mx-auto font-bold text-lg'>Add New Passenger</h1>
+                        <h1 className='mx-auto font-bold text-lg'>Add New Traveler </h1>
                         <input className='border pl-1'  type="text" name="firstName" id="firstName" 
                         placeholder='Enter Passenger first name'
                         onChange={handleChange}
