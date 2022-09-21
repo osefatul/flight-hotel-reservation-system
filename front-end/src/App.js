@@ -20,6 +20,7 @@ import NewRoom from "./pages/admin/rooms/newRoom/NewRoom";
 import ReservedRoom from "./pages/admin/rooms/reservedRoom/ReservedRoom";
 import TravelHome from "./pages/TravelPages/homePage/TravelHome";
 import Booking from "./pages/TravelPages/booking/Booking";
+import Payments from "./pages/TravelPages/payments/Payments";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
       <Route path="register" element={<Register/>}/>
       <Route path="flights" element={<TravelHome/>}/>
       <Route path="booking" element={<Booking/>}/>
+      <Route path="payments" element={<Payments/>}/>
 
 
       <Route path="/" element={<ProtectedRoutes/>}>        

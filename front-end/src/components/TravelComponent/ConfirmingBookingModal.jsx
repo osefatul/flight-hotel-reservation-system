@@ -2,11 +2,19 @@ import { faCircleXmark, faPlaneDeparture, faUserTie } from '@fortawesome/free-so
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link, useNavigate } from "react-router-dom";
 
 function ConfirmingBookingModal({setModalOpen}) {
 
     const {flight} = useSelector(state => state.flights)
     const { isLoading, SelectedUsersDetail} = useSelector(state => state.flightsUserDetail)
+
+    const navigate = useNavigate()
+
+
+    const handleConfirmation = (e) => {
+        navigate("/payments")
+    }
 
 
     return (
@@ -73,7 +81,14 @@ function ConfirmingBookingModal({setModalOpen}) {
                         <button className='text-white text-[12px] bg-blue-800 w-max px-2 p-1 rounded-sm'
                         onClick= {(e) => setModalOpen(false) }>
                             Cancel</button>
-                        <button className='text-white text-[12px] bg-green-900 w-max px-2 p-1 rounded-sm'>Confirm</button>
+
+                        <Link to='/payments'>
+                        <button className='text-white text-[12px] bg-green-900 w-max px-2 p-1 rounded-sm'
+                        // onClick={(e) => handleConfirmation()}
+                        >
+                            Confirm
+                        </button>
+                        </Link>
                     </div>
 
                 </div>
