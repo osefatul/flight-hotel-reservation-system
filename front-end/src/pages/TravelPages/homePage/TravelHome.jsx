@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import {
-
     Spinner,
 } from "react-bootstrap";
 import CopyRightMark from '../../../components/CopyRightMark';
@@ -11,6 +10,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { useDispatch, useSelector } from 'react-redux';
 import { FetchingAFlight, SearchingFlights } from '../../../features/flightsSlice/flightAction';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { GiCommercialAirplane } from 'react-icons/gi';
 
 
 
@@ -102,38 +102,43 @@ function TravelHome() {
     };
     
 return (
-    <div className="">
+    <div  >
+
 
         <div className ="bg-black sticky z-50 top-0 ">
             <Navbar  />
         </div>
 
-        <div className="h-main flex sm:flex-row space-x-10 items-center justify-center  w-[75%] mx-auto relative">
+        <div className='h-full w-full'>
+            <img className="w-full object-cover h-32" src="https://www.wallpapertip.com/wmimgs/9-90685_travel-background-hd.jpg" alt="" />
+        </div>
+
+
+        <div className={`h-[h-main - h-24] pt-10  flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-4 items-center justify-center w-[75%] mx-auto relative overflow-auto`}>
+
 
             {/* Left Side */}
-            <div className='w-full flex flex-col space-y-4 '>
-                <div className='text-xl font-bold'>
+            <div className={`w-full flex flex-col space-y-4 items-center  justify-center`}>
+            <div className='bg-slate-600 w-[60%] rounded-sm text-white text-xl font-bold px-2 '>
                     <h1 >Search Flight</h1>
                 </div>
             
-                <div  className="w-full ">
-                    <form className='w-[60%] space-y-5' onSubmit={handleSubmit}>
+                <div  className={`w-full flex flex-col space-y-4 items-center  justify-center  `}>
+                    <form className='w-[60%]  space-y-5' onSubmit={handleSubmit}>
 
                         <div className=''>
                             {swap ? (
 
                             <div >
                                 <Autocomplete
+                                    style={{ height: 30,}}
                                     value={to || ""}
-                                    onChange={(event, newValue) => {
-                                        setTo(newValue)
-                                        console.log(to)
-                                    }}
+                                    onChange={(event, newValue) => {setTo(newValue)}}
                                     freeSolo
                                     id="to"
                                     options={cities.map(option => option.city)}
                                     // sx={{ width: 300 }}
-                                    renderInput={(params) => <TextField {...params} label="To" />}
+                                    renderInput={(params) => <TextField {...params}  size="small" label="To" />}
                                     />
                             </div>
 
@@ -141,16 +146,15 @@ return (
 
                             <div className=''>
                                 <Autocomplete
+                                    style={{ height: 30,}}
                                     value={from || ""}
                                     onChange={(event, newValue) => {
-                                        setFrom(newValue)
-                                        console.log(from)
-                                    }}
+                                        setFrom(newValue)}}
                                     freeSolo
                                     id="from"
                                     options={cities.map(option => option.city)}
                                     // sx={{ width: 300,  }}
-                                    renderInput={(params) => <TextField {...params} label="From" />}
+                                    renderInput={(params) => <TextField {...params}  size="small" label="From" />}
                                     />
                             </div>
                             
@@ -169,8 +173,8 @@ return (
                         <div>
                             {!swap ? (
                                 <div className=''>
-
                                 <Autocomplete
+                                style={{ height: 30,}}
                                     value={to || ""}
                                     onChange={(event, newValue) => {
                                         setTo(newValue)
@@ -180,7 +184,7 @@ return (
                                     id="to"
                                     options={cities.map(option => option.city)}
                                     // sx={{ width: 300 }}
-                                    renderInput={(params) => <TextField {...params} label="To" />}
+                                    renderInput={(params) => <TextField {...params} label="To"  size="small" />}
                                     />
                                 </div>
 
@@ -188,6 +192,7 @@ return (
                                 <div className=''>
 
                                     <Autocomplete
+                                    style={{ height: 30,}}
                                         value={from || ""}
                                         onChange={(event, newValue) => {
                                             setFrom(newValue)
@@ -197,7 +202,7 @@ return (
                                         id="from"
                                         options={cities.map(option => option.city)}
                                         // sx={{ width: 300 }}
-                                        renderInput={(params) => <TextField {...params} label="From" />}
+                                        renderInput={(params) => <TextField {...params}  size="small" label="From" />}
                                         />
                                 </div>
                             )}
@@ -233,12 +238,13 @@ return (
              {/* Right Side */}
             {
                 show &&
-                <div className='w-full flex flex-col space-y-4 text-black'>
+                <div className='w-full flex flex-col space-y-6 space-y-4 text-black overflow-auto pb-24 sm:pb-0'>
 
                     <div className='bg-slate-600 rounded-sm text-white text-xl font-bold px-2'>
                         <h1 >Flights</h1>
                     </div>
-                    <div className='flex flex-col space-y-4' >
+
+                    <div className='flex flex-col space-y-5' >
                         {flights?.map(flight => (
                             <div className='border border-slate-400 rounded-sm p-2 '>
                                 <div className='text-[10px] text-slate-700 font-bold '>
@@ -254,35 +260,9 @@ return (
                                         <p >{flight.from}</p>
 
                                         <span>
-                                            <svg
-                                                clip-rule="evenodd"
-                                                fill-rule="evenodd"
-                                                height="25"
-                                                width="25"
-                                                image-rendering="optimizeQuality"
-                                                shape-rendering="geometricPrecision"
-                                                text-rendering="geometricPrecision"
-                                                viewBox="0 0 500 500"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                >
-                                                <g stroke="#222">
-                                                    <line
-                                                    fill="none"
-                                                    stroke-linecap="round"
-                                                    stroke-width="30"
-                                                    x1="300"
-                                                    x2="55"
-                                                    y1="390"
-                                                    y2="390"
-                                                    />
-                                                    <path
-                                                    d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z"
-                                                    fill="#222"
-                                                    stroke-linejoin="round"
-                                                    stroke-width="10"
-                                                    />
-                                                </g>
-                                            </svg>
+                                        <GiCommercialAirplane 
+                                            className="text-[25px]"
+                                            />
                                         </span>
 
                                         <p>{flight.to}</p>
@@ -301,8 +281,9 @@ return (
                         
                     </div>
 
-                </div>
+                </div> 
             }
+
             
 
         </div>

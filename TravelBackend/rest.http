@@ -83,3 +83,24 @@ GET http://localhost:8000/v1/userDetails/63292e686689a2eac5718329
 Content-Type: application/json
 
 
+# -----------------------------------------------------------------------------------------
+
+###StripAPI
+POST http://localhost:8000/v1/payments
+Content-Type: application/json
+
+{
+"line_items": [
+    {
+        "quantity": 1,
+        "price_data": {
+        "currency": "usd",
+        "unit_amount": 200,
+        "product_data":{
+            "name": "Airline Ticket",
+            "description": "This is a one way aireline ticket"
+        }
+    }
+    }
+]
+}

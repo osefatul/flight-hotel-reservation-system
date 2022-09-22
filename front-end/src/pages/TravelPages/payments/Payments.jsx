@@ -8,6 +8,7 @@ import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios'
 import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
+import {  useNavigate } from 'react-router-dom'
 
 const MySwal = withReactContent(Swal);
 
@@ -15,16 +16,18 @@ const MySwal = withReactContent(Swal);
 function Payments() {
 
     const {flight} = useSelector(state => state.flights)
+    const navigate = useNavigate()
     const { isLoading, SelectedUsersDetail} = useSelector(state => state.flightsUserDetail)
     const publishableKey = process.env.REACT_APP_PUBLISHABLE_KEY
 
 
-    const handleSuccess = () => {
-        MySwal.fire({
+    const handleSuccess = async () => {
+        await MySwal.fire({
         icon: 'success',
         title: 'Payment was successful',
         time: 4000,
         });
+        await navigate("/")
     };
 
 
@@ -56,10 +59,6 @@ function Payments() {
         }
     }
 
-
-    const ProceedToCheckout = (e) =>[
-
-    ]
 
 return (
     <div className='relative'>
@@ -123,23 +122,13 @@ return (
                         </div>
 
 
-                        <div className='flex items-center justify-center pt-5'>
-                            <motion.div 
+                        <div className='flex items-center justify-center mx-auto bg-[#febb02] p-1 w-[40%]'>
+                            <motion.div
+                            className='font-bold text-[15px]'
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.9 }}
                             >
-                                <StripeCheckout
-                                stripeKey ={publishableKey}
-                                name="Pay With Credit Card"
-                                label = "Proceed to checkout"
-                                billingAddress
-                                shippingAddress
-                                amount={flight.fare}
-                                description = {`Your total is $${flight.fare}`}
-                                token={payNow}
-                                
-                                
-                                />
+                            Proceed to checkout
                             </motion.div>
                         </div>
                     </div>

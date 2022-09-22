@@ -150,8 +150,8 @@ return (
         <div className="h-main flex sm:flex-row space-x-10 items-start
         justify-center w-[75%] mx-auto relative">
 
-            <div className='w-full space-y-3 h-full pt-5'>
-                <div className='w-full flex flex-col space-y-4 text-black'>
+            <div className='w-full space-y-3 h-full pt-2'>
+                <div className='w-full flex flex-col space-y-3 text-black'>
                     <div className='bg-slate-600 rounded-sm text-white text-xl font-bold p-2'>
                         <h1>Book Flight</h1>
                     </div>
@@ -204,7 +204,7 @@ return (
 
                 <hr className='bg-black'/>
 
-                <div className=' space-y-1 w-full'>
+                <div className=' space-y-1 w-full relative'>
                     <h1 className='text-xl font-bold'>
                         Booking Flight List
                     </h1>
@@ -229,7 +229,7 @@ return (
                     )}
 
                     {!addPassenger && 
-                        <div className='' >
+                        <div className='absolute bottom-0' >
                             <motion.button className='bg-slate-600 w-max p-1 text-white rounded-sm px-2 hover:bg-black'
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.9 }}

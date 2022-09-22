@@ -6,7 +6,13 @@ import store from "./store";
 import './index.css';
 import App from './App';
 
-import { CookiesProvider } from "react-cookie";
+
+// Stripe library functions
+import {Elements} from "@stripe/react-stripe-js"
+import {loadStripe} from "@stripe/stripe-js"
+const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY)
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,9 +20,9 @@ root.render(
 
     <BrowserRouter>
       <Provider store={store}>
-        <CookiesProvider>
+        <Elements stripe={stripePromise}>
           <App />
-        </CookiesProvider>,
+        </Elements>
       </Provider>
     </BrowserRouter>
 </React.StrictMode>
