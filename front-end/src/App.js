@@ -21,6 +21,7 @@ import ReservedRoom from "./pages/admin/rooms/reservedRoom/ReservedRoom";
 import TravelHome from "./pages/TravelPages/homePage/TravelHome";
 import Booking from "./pages/TravelPages/booking/Booking";
 import Payments from "./pages/TravelPages/payments/Payments";
+import CheckoutSuccess from "./pages/TravelPages/payments/stripeCheckout/CheckoutSuccess";
 
 function App() {
   return (
@@ -31,8 +32,8 @@ function App() {
       <Route path="login" element={<Auth/>}/>
       <Route path="register" element={<Register/>}/>
       <Route path="flights" element={<TravelHome/>}/>
-      <Route path="booking" element={<Booking/>}/>
-      <Route path="payments" element={<Payments/>}/>
+  
+
 
 
       <Route path="/" element={<ProtectedRoutes/>}>        
@@ -47,6 +48,10 @@ function App() {
         <Route path="admin/new-room/" element={<NewRoom/>}/>
         <Route path="admin/rooms/" element={<RoomsList/>}/>
         <Route path="admin/reserved-rooms/" element={<ReservedRoom/>}/>
+
+        <Route path="booking" element={<Booking/>}/>
+        <Route path="payments" element={<Payments/>}/>
+        <Route path="checkout-success" element={<CheckoutSuccess/>}/>
 
 
 

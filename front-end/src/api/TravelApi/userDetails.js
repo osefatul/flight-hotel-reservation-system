@@ -35,3 +35,15 @@ export const getUserDetail = async (id) =>{
         return error;
     }
 }
+
+
+
+export const deleteUserDetail = async (id) =>{
+    try {
+        const res = await axios.delete(userDetailsUrl + id,);
+        return res
+    }catch(error){
+        console.log(error)
+        return error;
+    }
+}

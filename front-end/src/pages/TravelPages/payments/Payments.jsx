@@ -4,11 +4,12 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import Navbar from '../../../components/Navbar'
 import {motion} from "framer-motion"
-import StripeCheckout from 'react-stripe-checkout';
+// import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios'
 import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
 import {  useNavigate } from 'react-router-dom'
+import StripeCheckout from './stripeCheckout/StripeCheckout'
 
 const MySwal = withReactContent(Swal);
 
@@ -18,46 +19,42 @@ function Payments() {
     const {flight} = useSelector(state => state.flights)
     const navigate = useNavigate()
     const { isLoading, SelectedUsersDetail} = useSelector(state => state.flightsUserDetail)
-    const publishableKey = process.env.REACT_APP_PUBLISHABLE_KEY
 
 
-    const handleSuccess = async () => {
-        await MySwal.fire({
-        icon: 'success',
-        title: 'Payment was successful',
-        time: 4000,
-        });
-        await navigate("/")
-    };
-
-
-    const handleFailure = () => {
-        MySwal.fire({
-        icon: 'error',
-        title: 'Payment was not successful',
-        time: 4000,
-        });
-    };
-
-
-    const payNow = async (token) => {
-        try {
-            const response = await axios({
-            url: 'http://localhost:8000/v1/payments/',
-            method: 'post',
-            data: {
-            amount: flight.fare,
-            token,
-            },
-        });
-        if (response.status === 200) {
-            handleSuccess();
-        }
-        } catch (error) {
-        handleFailure();
-        console.log(error);
-        }
-    }
+    // const publishableKey = process.env.REACT_APP_PUBLISHABLE_KEY
+    // const handleSuccess = async () => {
+    //     await MySwal.fire({
+    //     icon: 'success',
+    //     title: 'Payment was successful',
+    //     time: 4000,
+    //     });
+    //     await navigate("/")
+    // };
+    // const handleFailure = () => {
+    //     MySwal.fire({
+    //     icon: 'error',
+    //     title: 'Payment was not successful',
+    //     time: 4000,
+    //     });
+    // };
+    // const payNow = async (token) => {
+    //     try {
+    //         const response = await axios({
+    //         url: 'http://localhost:8000/v1/payments/',
+    //         method: 'post',
+    //         data: {
+    //         amount: flight.fare,
+    //         token,
+    //         },
+    //     });
+    //     if (response.status === 200) {
+    //         handleSuccess();
+    //     }
+    //     } catch (error) {
+    //     handleFailure();
+    //     console.log(error);
+    //     }
+    // }
 
 
 return (
@@ -121,15 +118,8 @@ return (
                             <p>Total:<span > ${flight.fare}</span></p>
                         </div>
 
-
-                        <div className='flex items-center justify-center mx-auto bg-[#febb02] p-1 w-[40%]'>
-                            <motion.div
-                            className='font-bold text-[15px]'
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.9 }}
-                            >
-                            Proceed to checkout
-                            </motion.div>
+                        <div>
+                            <StripeCheckout/>
                         </div>
                     </div>
 

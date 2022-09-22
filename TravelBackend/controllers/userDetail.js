@@ -28,8 +28,18 @@ getUserDetail: async (req, res, next) => {
 
 deleteUserDetail: async (req, res, next) => {
     const { userDetailId } = req.params;
-    const result = await UserDetail.findByIdAndDelete(userDetailId);
-    res.status(200).json({ success: "true" });
+
+    try{
+        await User.updateMany({userDetails: userDetailId}, {
+            $pull: {userDetails: userDetailId}
+        })
+        await UserDetail.findByIdAndDelete(userDetailId); 
+        res.status(200).json({ message: "Successfully deleted" });
+
+    }catch(error){
+        console.log(error);
+        res.status(500).json({message:error.message});
+    }
 },
 
 replaceUserDetail: async (req, res, next) => {

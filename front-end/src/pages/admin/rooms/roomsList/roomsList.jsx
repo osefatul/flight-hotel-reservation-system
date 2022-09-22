@@ -11,7 +11,7 @@ function RoomsList() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {isLoading, error, rooms} = useSelector(state => state.rooms)
+  const {isLoading, rooms} = useSelector(state => state.rooms)
   const [data, setData] = useState(rooms);
 
 
@@ -24,13 +24,6 @@ function RoomsList() {
     setData(rooms)
   },[rooms])
 
-  const navigateUser = (params) =>{
-    // const userId = params.row.roomNumbers.filter( i => {
-    //   return i.reservedBy !== undefined
-    // })
-    // // console.log(userId)
-    // navigate("/admin/users/" + userId[0].reservedBy)
-  }
 
 
   const handleDelete = async (id) => {

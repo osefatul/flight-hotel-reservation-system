@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Navbar from '../../../components/Navbar'
 import { DataGrid } from '@mui/x-data-grid';
 import { getCurrentUserData } from '../../../features/usersSlice/usersAction';
-import { AddingFlightsUserDetails, FetchingAFlightUserDetail, FetchingUserDetail } from '../../../features/flightUserDetails/flightUserDetailsAction';
+import { AddingFlightsUserDetails, deletingUserDetail, FetchingAFlightUserDetail, FetchingUserDetail } from '../../../features/flightUserDetails/flightUserDetailsAction';
 import { addNewUserDetails } from '../../../api/TravelApi/userDetails';
 import ConfirmingBookingModal from '../../../components/TravelComponent/ConfirmingBookingModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,6 +12,7 @@ import { faPlaneArrival, faPlaneDeparture, faPlaneUp, faTicket, faTrash, } from 
 import { GiCommercialAirplane } from 'react-icons/gi';
 import {MdAirplaneTicket} from "react-icons/md"
 import { motion } from "framer-motion"
+import AddTraveler from '../../../components/TravelComponent/AddTraveler';
 
 
 
@@ -19,32 +20,29 @@ import { motion } from "framer-motion"
 
 function Booking() {
 
-    const initialValue = {
-        firstName: "",
-        lastName: "",
-        birthdate: "",
-    }
-
-
     const location = useLocation()
     const date = location.state.date;
     const dispatch = useDispatch()
-    const navigate = useNavigate()
 
 
     const [addPassenger, setAddPassenger] = useState(false)
-    const [formData, setFormData] = useState(initialValue)
     const [modalOpen, setModalOpen] = useState(false);
-
-
+    
     const {user} = useSelector(state => state.login);
     const {flight} = useSelector(state => state.flights)
     const { isLoading, UsersDetail} = useSelector(state => state.flightsUserDetail)
+    const [data, setData] = useState(UsersDetail)
+
 
     useEffect(  () => {
             dispatch(getCurrentUserData(user._id))
             dispatch(FetchingAFlightUserDetail(user._id))
     },[])
+
+    useEffect(() => {
+        setData(UsersDetail)
+    },[UsersDetail])
+
 
 
     const confirmBooking = (e, id) =>{
@@ -53,19 +51,10 @@ function Booking() {
         dispatch(FetchingUserDetail(id))
     }
 
-    const handleChange = (e) =>{
-        setFormData(prev => ({...prev, [e.target.name]:e.target.value}))
-        console.log(formData)
-    }
-
-    const handleSubmit = async (e) =>{
-        e.preventDefault()
-        const lastForm = {...formData, flights:flight._id}
-
-        await dispatch(AddingFlightsUserDetails(user._id, lastForm))
-        await dispatch(FetchingAFlightUserDetail(user._id))
-        setFormData(initialValue)
-        setAddPassenger(false)
+    const confirmDeleting = async (e, id) =>{
+        e.preventDefault();
+        await setData(data.filter(user => user._id !== id));
+        await dispatch(deletingUserDetail(id))
     }
 
 
@@ -115,16 +104,16 @@ function Booking() {
                     </span>
                 </motion.button>
 
-                <motion.button className="bg-green-700 hover:bg-green-800 w-full flex items-center justify-center space-x-2 px-2 py-[3px] rounded-sm text-white  text-[13px]"
+                <motion.button className="bg-red-700 hover:bg-red-800 w-full flex items-center justify-center space-x-2 px-2 py-[3px] rounded-sm text-white text-[13px]"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.9 }}
-                onClick={(e) => confirmBooking(e , params.row._id)}
+                onClick={(e) => confirmDeleting(e , params.row._id)}
                 >    
                     <FontAwesomeIcon 
                         icon= {faTrash}
                         className=""
                     />
-                    <span className='text-white'>
+                    <span className=' '>
                         Delete
                     </span>
                 </motion.button>
@@ -219,7 +208,7 @@ return (
                         minWidth: 300,
                         }}
                         getRowId = {(row) => row._id}
-                        rows={UsersDetail}
+                        rows={data}
                         disableSelectionOnClick
                         columns={columns}
                         autoPageSize={true}
@@ -230,7 +219,7 @@ return (
 
                     {!addPassenger && 
                         <div className='absolute bottom-0' >
-                            <motion.button className='bg-slate-600 w-max p-1 text-white rounded-sm px-2 hover:bg-black'
+                            <motion.button className='bg-slate-600 w-max p-1 text-white rounded-sm px-2 hover:bg-black border border-black'
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.9 }}
                             onClick = {(e) => setAddPassenger(true)}
@@ -242,32 +231,7 @@ return (
                 </div>
 
                 {addPassenger && 
-                    <div className=' flex w-[60%] mx-auto mt-4'>
-                    <form className="flex flex-col space-y-3 pb-10 w-full pr-10 text-[12px]"    onSubmit = {handleSubmit} >
-
-                        <h1 className='mx-auto font-bold text-lg'>Add New Traveler </h1>
-                        <input className='border pl-1'  type="text" name="firstName" id="firstName" 
-                        placeholder='Enter Passenger first name'
-                        onChange={handleChange}
-                        />
-
-                        <input className='border pl-1' type="text" name="lastName" id="lastName" 
-                        placeholder='Enter passenger last name'
-                        onChange={handleChange}
-
-                        />
-
-                        <div className='flex flex-col text-slate-400'>
-                            <label htmlFor="birthdate">Enter passenger birth date:</label>
-                            <input className='border pl-1' type="date" name="birthdate" id="birthdate"
-                            onChange={handleChange}
-
-                            />
-                        </div>
-
-                        <button type="submit" className='w-full p-1 bg-green-800 text-white'>Submit</button>
-                    </form>
-                    </div>
+                    <AddTraveler setAddPassenger={setAddPassenger} user={user} flight={flight}/>
                 }
 
             </div>

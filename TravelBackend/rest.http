@@ -83,6 +83,12 @@ GET http://localhost:8000/v1/userDetails/63292e686689a2eac5718329
 Content-Type: application/json
 
 
+
+### delete a UserDetail
+Delete http://localhost:8000/v1/userDetails/632c05f8f0a597cbd9f7b897
+Content-Type: application/json
+
+
 # -----------------------------------------------------------------------------------------
 
 ###StripAPI
