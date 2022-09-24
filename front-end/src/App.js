@@ -22,6 +22,7 @@ import TravelHome from "./pages/TravelPages/homePage/TravelHome";
 import Booking from "./pages/TravelPages/booking/Booking";
 import Payments from "./pages/TravelPages/payments/Payments";
 import CheckoutSuccess from "./pages/TravelPages/payments/stripeCheckout/CheckoutSuccess";
+import Cart from "./pages/cart/Cart";
 
 function App() {
   return (
@@ -48,6 +49,8 @@ function App() {
         <Route path="admin/new-room/" element={<NewRoom/>}/>
         <Route path="admin/rooms/" element={<RoomsList/>}/>
         <Route path="admin/reserved-rooms/" element={<ReservedRoom/>}/>
+
+        <Route path="cart" element={<Cart/>}/>
 
         <Route path="booking" element={<Booking/>}/>
         <Route path="payments" element={<Payments/>}/>
