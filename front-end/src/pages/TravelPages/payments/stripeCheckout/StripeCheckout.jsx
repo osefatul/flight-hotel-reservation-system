@@ -14,7 +14,7 @@ function StripeCheckout() {
     const {user} = useSelector(state => state.login)
 
     const navigate = useNavigate()
-    const { isLoading, SelectedUsersDetail} = useSelector(state => state.flightsUserDetail)
+    const { cartItems, cartTotalAmount} = useSelector(state => state.cart)
 
 
     const handleCheckout = async (e)=>{
@@ -24,7 +24,7 @@ function StripeCheckout() {
             quantity: 1,
             price_data: {
                 currency: "usd",
-                unit_amount: flight.fare * 100,
+                unit_amount: cartTotalAmount * 100,
                 product_data: {
                     name:flight.airline,
                     description: `An airline ticket ${flight.from} to ${flight.to}`
@@ -36,7 +36,7 @@ function StripeCheckout() {
         const res = await axios({
             method:"post", 
             url:"http://localhost:8000/v1/payments" , 
-            data:{line_items, userId:user._id}
+            data:{cartItems , userId:user._id}
         })
 
         const {url} = res.data;

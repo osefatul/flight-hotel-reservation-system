@@ -90,7 +90,15 @@ function Reservation({setOpenModal, hotelId, totalPrice}) {
             })
             );
 
-            await dispatch(addToCart({hotelRoomsDetails, selectedRoomsNumber}))
+            await dispatch(addToCart({
+                hotel:hotelRoomsDetails[0].hotel,
+                id:hotelRoomsDetails[0]._id, 
+                name:hotelRoomsDetails[0].hotel[0].hotelName,
+                title: hotelRoomsDetails[0].title,
+                price: hotelRoomsDetails[0].price,
+                desc: "Hotel stay",
+                selectedRoomsNumber}))
+
             setOpenModal(false);
                 // navigate("/");
         } catch (err) {}

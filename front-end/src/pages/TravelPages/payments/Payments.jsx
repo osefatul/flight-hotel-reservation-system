@@ -21,42 +21,6 @@ function Payments() {
     const { isLoading, SelectedUsersDetail} = useSelector(state => state.flightsUserDetail)
 
 
-    // const publishableKey = process.env.REACT_APP_PUBLISHABLE_KEY
-    // const handleSuccess = async () => {
-    //     await MySwal.fire({
-    //     icon: 'success',
-    //     title: 'Payment was successful',
-    //     time: 4000,
-    //     });
-    //     await navigate("/")
-    // };
-    // const handleFailure = () => {
-    //     MySwal.fire({
-    //     icon: 'error',
-    //     title: 'Payment was not successful',
-    //     time: 4000,
-    //     });
-    // };
-    // const payNow = async (token) => {
-    //     try {
-    //         const response = await axios({
-    //         url: 'http://localhost:8000/v1/payments/',
-    //         method: 'post',
-    //         data: {
-    //         amount: flight.fare,
-    //         token,
-    //         },
-    //     });
-    //     if (response.status === 200) {
-    //         handleSuccess();
-    //     }
-    //     } catch (error) {
-    //     handleFailure();
-    //     console.log(error);
-    //     }
-    // }
-
-
 return (
     <div className='relative'>
         

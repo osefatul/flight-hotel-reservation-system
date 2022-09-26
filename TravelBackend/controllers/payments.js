@@ -6,19 +6,36 @@ const { Order } = require("../models/Order");
 const StripePayment = async (req, res, next) => {
 
     const domainUrl = process.env.DOMAIN_URL;
-    const {line_items} = req.body;
 
     const customer = await stripe.customers.create({
         metadata: {
         userId: req.body.userId,
-        item: JSON.stringify(req.body.line_items),
+        cart: JSON.stringify(req.body.cartItems),
         },
     });
     
 
+    const line_items = req.body.cartItems.map((item) => {
+        return {
+            price_data: {
+                currency: "usd",
+                product_data: {
+                name: item.name,
+                description: item.desc,
+                metadata: {
+                    id: item.id || item._id,
+                },
+                },
+                unit_amount: item.price * 100,
+            },
+            quantity: item.itemQuantity,
+            };
+    });
+
     if(!line_items) {
         return res.status(400).json({error: "missing required session parameters"});
     }
+
 
     try {
         const session = await stripe.checkout.sessions.create({
@@ -85,24 +102,22 @@ const StripePayment = async (req, res, next) => {
         console.log(error);
         res.status(500).json({ error: error.message});
     }
-
-
 }
 
 
 
 // Create order function
 const createOrder = async (customer, data) => {
-    const Items = JSON.parse(customer.metadata.item);
+    const Items = JSON.parse(customer.metadata.cart);
 
     const products = Items.map((item) => {
-        return {
-        productId: item.id,
-        quantity: item.quantity,
+    return {
+    productId: item.id || item._id,
+    quantity: item.itemQuantity,
     };
-    });
+});
 
-    const newOrder = new Order({
+const newOrder = new Order({
     userId: customer.metadata.userId,
     customerId: data.customer,
     paymentIntentId: data.payment_intent,
@@ -115,9 +130,12 @@ const createOrder = async (customer, data) => {
 
 try {
     const savedOrder = await newOrder.save();
+    //You can send email here... email(savedOrder)
     console.log("Processed Order:", savedOrder);
+    
 } catch (err) {
-    console.log(err);
+    console.log(err);     
+
 }
 };
 
@@ -162,9 +180,17 @@ const webhook = async(req, res) =>{
         case 'checkout.session.completed':
             stripe.customers
                 .retrieve(data.customer)
-                    .then((customer) => {
-                        console.log(customer);
-                        console.log("data:", data)
+                    .then(async (customer) => {
+                        // console.log(customer);
+                        // console.log("data:", data)
+
+                    // Create Order:
+                        try{
+                            createOrder(customer, data);
+                        }catch(error){
+                            console.log(typeof createOrder);
+                            console.log(error);
+                        }
                 }).catch(error => (console.log(error)))
 
             break;

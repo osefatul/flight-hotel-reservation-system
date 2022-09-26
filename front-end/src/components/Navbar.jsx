@@ -58,9 +58,9 @@ function Navbar() {
     }
 
     return (
-        <div className={`text-white sm:h-[70px] sm:h-[50px] bg-black flex flex-col justify-center ${isAdminPanel ? "w-full px-2" : "w-[75%]"} mx-auto `}>
+        <div className={`text-white sm:h-[70px] sm:h-[50px] bg-black flex flex-col justify-center ${isAdminPanel ? "w-full pl-2 pr-8" : "w-[75%]"} mx-auto `}>
 
-            <div className='w-full flex sm:flex-row pt-2 sm:pt-5 justify-between items-center sm:items-center space-y-1 sm:space-y-0'>
+            <div className='w-full flex sm:flex-row pt-2 sm:py-5 justify-between items-center sm:items-center space-y-1 sm:space-y-0'>
 
                 <Link to ={isAdminPanel? "/admin" : "/"}>
                     <motion.h1 
@@ -91,7 +91,7 @@ function Navbar() {
                         <img className='w-10 h-10 rounded-full object-cover' src={user.img?user.img: "https://foodforhungryminds.org/new/wp-content/uploads/2020/10/no-profile-pic.jpg"} alt="" 
                         onClick={(e) => setSelectOption(!selectOption)}
                         />
-                        <div className='absolute bg-yellow-400 text-black font-bold text-[15px] rounded-full w-6 h-6 top-5 -right-2 flex items-center justify-center'>
+                        <div className='absolute bg-yellow-400 text-black font-bold text-[15px] rounded-full w-4 h-4 top-5 -right-2 flex items-center justify-center'>
                             {cartItems? cartItems.length : 0}
                         </div>
                         {selectOption &&

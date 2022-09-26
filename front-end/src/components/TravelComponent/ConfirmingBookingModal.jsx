@@ -8,7 +8,6 @@ import { addToCart } from '../../features/cartSlice/cartSlice';
 function ConfirmingBookingModal({setModalOpen}) {
 
     const dispatch = useDispatch() 
-
     const {flight} = useSelector(state => state.flights)
     const { isLoading, SelectedUsersDetail} = useSelector(state => state.flightsUserDetail)
 
@@ -16,7 +15,15 @@ function ConfirmingBookingModal({setModalOpen}) {
 
 
     const handleConfirmation = (e) => {
-        dispatch(addToCart(flight))
+
+        const newObj = {...flight}
+
+        newObj["name"] = `Flight on ${flight.airline} `;
+        newObj["desc"] = `Airline ticket`;
+
+        newObj["price"]= newObj["fare"]
+
+        dispatch(addToCart(newObj))
         navigate("/payments")
     }
 
