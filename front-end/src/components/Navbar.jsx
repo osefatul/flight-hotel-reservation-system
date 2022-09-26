@@ -28,7 +28,7 @@ function Navbar() {
     
     const {user} = useSelector(state => state.login);//we are using this to get user from redux
     const {isAdminPanel} = useSelector(state => state.adminPanelMode);
-    const { cartTotalQuantity } = useSelector((state) => state.cart);
+    const { cartItems } = useSelector((state) => state.cart);
 
     
     useEffect(() => {
@@ -92,7 +92,7 @@ function Navbar() {
                         onClick={(e) => setSelectOption(!selectOption)}
                         />
                         <div className='absolute bg-yellow-400 text-black font-bold text-[15px] rounded-full w-6 h-6 top-5 -right-2 flex items-center justify-center'>
-                            {cartTotalQuantity? cartTotalQuantity : 3}
+                            {cartItems? cartItems.length : 0}
                         </div>
                         {selectOption &&
                         <div className='absolute z-50 bg-white text-black -right-4 sm:right-6 top-6 h-max sm:h-20 w-max sm:w-20 p-2 sm:p-3 space-y-3 rounded-md font-bold '>
@@ -122,6 +122,13 @@ function Navbar() {
                                     <span>
                                         Cart
                                     </span>
+
+                                    {
+                                    cartItems &&
+                                    <span className='rounded-full bg-yellow-500 text-black w-3 h-3 flex items-center justify-center'>
+                                    {cartItems.length}
+                                    </span>
+                                    }
                                 </motion.p>
                             </Link>
 
