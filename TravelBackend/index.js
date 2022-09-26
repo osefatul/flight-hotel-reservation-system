@@ -35,7 +35,7 @@ app.use(morgan("combined"));
 app.use(helmet());
 
 
-
+app.use("/api/checkout/webhook", bodyParser.raw({ type: "*/*" })); 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 

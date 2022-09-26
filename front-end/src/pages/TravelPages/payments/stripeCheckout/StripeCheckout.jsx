@@ -11,6 +11,8 @@ function StripeCheckout() {
     const stripe = useStripe();
 
     const {flight} = useSelector(state => state.flights)
+    const {user} = useSelector(state => state.login)
+
     const navigate = useNavigate()
     const { isLoading, SelectedUsersDetail} = useSelector(state => state.flightsUserDetail)
 
@@ -34,7 +36,7 @@ function StripeCheckout() {
         const res = await axios({
             method:"post", 
             url:"http://localhost:8000/v1/payments" , 
-            data:{line_items}
+            data:{line_items, userId:user._id}
         })
 
         const {url} = res.data;

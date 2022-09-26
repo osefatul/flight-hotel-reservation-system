@@ -90,7 +90,7 @@ function Navbar() {
                     {userToken && user ? 
                     <div 
                         className='flex items-center justify-center cursor-pointer text-[12px] sm:text-md hover:text-amber-400 relative'>
-                        <img className='w-8 h-8 rounded-full object-cover' src={user.img} alt="" 
+                        <img className='w-8 h-8 rounded-full object-cover' src={user.img?user.img: "https://foodforhungryminds.org/new/wp-content/uploads/2020/10/no-profile-pic.jpg"} alt="" 
                         onClick={(e) => setSelectOption(!selectOption)}
                         />
                         {selectOption &&
