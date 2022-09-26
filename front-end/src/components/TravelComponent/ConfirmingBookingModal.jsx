@@ -1,10 +1,13 @@
 import { faCircleXmark, faPlaneDeparture, faUserTie } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from "react-router-dom";
+import { addToCart } from '../../features/cartSlice/cartSlice';
 
 function ConfirmingBookingModal({setModalOpen}) {
+
+    const dispatch = useDispatch() 
 
     const {flight} = useSelector(state => state.flights)
     const { isLoading, SelectedUsersDetail} = useSelector(state => state.flightsUserDetail)
@@ -13,6 +16,7 @@ function ConfirmingBookingModal({setModalOpen}) {
 
 
     const handleConfirmation = (e) => {
+        dispatch(addToCart(flight))
         navigate("/payments")
     }
 
@@ -82,13 +86,11 @@ function ConfirmingBookingModal({setModalOpen}) {
                         onClick= {(e) => setModalOpen(false) }>
                             Cancel</button>
 
-                        <Link to='/payments'>
                         <button className='text-white text-[12px] bg-green-900 w-max px-2 p-1 rounded-sm'
-                        // onClick={(e) => handleConfirmation()}
+                        onClick={(e) => handleConfirmation()}
                         >
                             Confirm
                         </button>
-                        </Link>
                     </div>
 
                 </div>

@@ -33,6 +33,7 @@
     "react-scripts": "5.0.1",
     "react-stripe": "^0.1.0",
     "react-stripe-checkout": "^2.6.3",
+    "react-toastify": "^9.0.8",
     "recharts": "^2.1.13",
     "sweetalert2-react-content": "^5.0.3",
     "web-vitals": "^2.1.4"

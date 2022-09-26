@@ -9,7 +9,7 @@ import { useCookies } from "react-cookie";
 import {BsFillCartFill} from "react-icons/bs"
 import {FiLogOut} from "react-icons/fi"
 import {MdAdminPanelSettings} from "react-icons/md"
-
+import { toast } from "react-toastify";
 
 
 function Navbar() {
@@ -28,6 +28,7 @@ function Navbar() {
     
     const {user} = useSelector(state => state.login);//we are using this to get user from redux
     const {isAdminPanel} = useSelector(state => state.adminPanelMode);
+    const { cartTotalQuantity } = useSelector((state) => state.cart);
 
     
     useEffect(() => {
@@ -37,6 +38,7 @@ function Navbar() {
 
     const handleLogout = ()=>{
             setSelectOption(false)
+            toast.warning("Logged out!", { position: "bottom-left" });
             setUser (localStorage.removeItem("user"));
             setUserToken(sessionStorage.removeItem("accessJWT"));
             document.cookie = "access_token = ; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
@@ -55,20 +57,16 @@ function Navbar() {
         }
     }
 
-    
-
-
-    
     return (
-        <div className={`text-white h-[65px] sm:h-[50px] bg-black flex flex-col justify-center ${isAdminPanel ? "w-full px-2" : "w-[75%]"} mx-auto `}>
+        <div className={`text-white sm:h-[70px] sm:h-[50px] bg-black flex flex-col justify-center ${isAdminPanel ? "w-full px-2" : "w-[75%]"} mx-auto `}>
 
-            <div className='w-full flex sm:flex-row justify-between items-center sm:items-center space-y-1 sm:space-y-0'>
+            <div className='w-full flex sm:flex-row pt-2 sm:pt-5 justify-between items-center sm:items-center space-y-1 sm:space-y-0'>
 
                 <Link to ={isAdminPanel? "/admin" : "/"}>
                     <motion.h1 
                         whileHover={{ scale: 1.03 }}
                         whileTap={{ scale: 0.9 }}
-                        className="pt-2 sm:pt-0 font-bold sm:border-b border-amber-400 cursor-pointer hover:text-amber-400 text-lg sm:text-xl" >
+                        className="pt-2 sm:pt-0 font-bold sm:border-b border-amber-400 cursor-pointer hover:text-amber-400 text-xl sm:text-2xl" >
                             {!isAdminPanel? "Travel & Stay Booking System": "Travel & Stay Admin Panel" }
                     </motion.h1>
                 </Link>
@@ -90,9 +88,12 @@ function Navbar() {
                     {userToken && user ? 
                     <div 
                         className='flex items-center justify-center cursor-pointer text-[12px] sm:text-md hover:text-amber-400 relative'>
-                        <img className='w-8 h-8 rounded-full object-cover' src={user.img?user.img: "https://foodforhungryminds.org/new/wp-content/uploads/2020/10/no-profile-pic.jpg"} alt="" 
+                        <img className='w-10 h-10 rounded-full object-cover' src={user.img?user.img: "https://foodforhungryminds.org/new/wp-content/uploads/2020/10/no-profile-pic.jpg"} alt="" 
                         onClick={(e) => setSelectOption(!selectOption)}
                         />
+                        <div className='absolute bg-yellow-400 text-black font-bold text-[15px] rounded-full w-6 h-6 top-5 -right-2 flex items-center justify-center'>
+                            {cartTotalQuantity? cartTotalQuantity : 3}
+                        </div>
                         {selectOption &&
                         <div className='absolute z-50 bg-white text-black -right-4 sm:right-6 top-6 h-max sm:h-20 w-max sm:w-20 p-2 sm:p-3 space-y-3 rounded-md font-bold '>
                             <motion.p
@@ -140,12 +141,13 @@ function Navbar() {
 
                         </div>
                         }
-                    </div> :
-                    <div className=" sm:flex items-center justify-center space-x-4 border-b w-max border-amber-400">
+                    </div> 
+                    :
+                    <div className="flex items-center justify-center space-x-4 sm:border-b w-max border-amber-400">
                         <button className="hidden sm:flex hover:text-amber-400 text-[12px] sm:text-[14px]">Register</button>
                         
                         <Link to="/login">
-                        <button className="hover:text-amber-400 text-[12px] sm:text-[14px]">Login</button>
+                        <button className="sm:flex hover:text-amber-400 text-[12px] sm:text-[14px]">Login</button>
                         </Link>
                     </div>
                     }

@@ -6,6 +6,7 @@ import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { updatingRoomAvailability } from '../features/roomSlice/roomAction';
 import axios from "axios"
+import { addToCart } from '../features/cartSlice/cartSlice';
 
 function Reservation({setOpenModal, hotelId, totalPrice}) {
 
@@ -87,8 +88,10 @@ function Reservation({setOpenModal, hotelId, totalPrice}) {
                 }))
 
             })
-        );
-                setOpenModal(false);
+            );
+
+            await dispatch(addToCart({hotelRoomsDetails, selectedRoomsNumber}))
+            setOpenModal(false);
                 // navigate("/");
         } catch (err) {}
     };
