@@ -108,9 +108,20 @@ const deleteRoom = async (req, res, next) => {
 };
 
 
+// All reserved rooms
 const getReservedRoom = async (req, res, next) => {
     try {
         const rooms = await ReservedRoom.find();
+        res.status(200).json(rooms);
+    } catch (err) {
+        next(err);
+    }
+};
+
+// reservedRooms by a specific user
+const getAReservedRoomByUser = async (req, res, next) => {
+    try {
+        const rooms = await ReservedRoom.find({reservedBy: req.params.id});
         res.status(200).json(rooms);
     } catch (err) {
         next(err);
@@ -160,5 +171,6 @@ module.exports = {
     updateRoom,
     findHotels,
     getReservedRoom,
-    updateRoomAvailability
+    getAReservedRoomByUser,
+    updateRoomAvailability,
 }

@@ -3,7 +3,11 @@ const Schema = mongoose.Schema;
 
 var bookingSchema = new Schema({
     bookingId: { type: String, required: true },
-    user: {
+    accountUser: {
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"User"
+    },
+    bookedUser: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "UserDetail",
     },
@@ -11,6 +15,9 @@ var bookingSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Flight",
     },
+    departureDate:{
+        type: Date
+    }
 });
 
 module.exports = {Booking: mongoose.model("Booking", bookingSchema)};

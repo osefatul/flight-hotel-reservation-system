@@ -10,6 +10,8 @@ import usersReducer from "./features/usersSlice/usersSlice";
 import flightReducer from "./features/flightsSlice/flightSlice";
 import flightUserDetailsReducer from "./features/flightUserDetails/flightUserDetailsSlice";
 import cartReducer from "./features/cartSlice/cartSlice";
+import BookingReducer from "./features/bookingSlice/bookingSlice";
+
 
 
 
@@ -28,7 +30,8 @@ const store = configureStore({
         selectedSidebar: selectedSidebarReducer,
         flights:flightReducer,
         flightsUserDetail:flightUserDetailsReducer,
-        cart:cartReducer
+        cart:cartReducer,
+        booking: BookingReducer
 
     },
     middleware: getDefaultMiddleware =>

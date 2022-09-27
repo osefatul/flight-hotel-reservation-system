@@ -1,6 +1,6 @@
 import { fetchingReservedRoomsData, fetchingRoomAvailabilitySuccess, fetchingRoomData, fetchingRoomsData, fetchingRoomSuccess, roomPending, roomsFail } from "./roomSlice"
 import axios from "axios"
-import { createRoom, deleteRoom, getRooms, updateRoom, updateRoomAvailability, getReservedRooms } from "../../api/roomsApi"
+import { createRoom, deleteRoom, getRooms, updateRoom, updateRoomAvailability, getReservedRooms, getReservedRoomsByUser } from "../../api/roomsApi"
 
 
 export const updatingRoomAvailability = ({
@@ -67,6 +67,19 @@ export const fetchingReservedRooms = ()=>  async(dispatch) => {
     }
 }
 
+
+
+export const fetchingReservedRoomsByUser = (id)=>  async(dispatch) => {
+    dispatch(roomPending())
+    try{
+        const res = await getReservedRoomsByUser(id);
+        dispatch(fetchingReservedRoomsData(res.data));
+    }catch(e){
+        console.log(e);
+        dispatch(roomsFail(e))
+        return e
+    }
+}
 
 
 

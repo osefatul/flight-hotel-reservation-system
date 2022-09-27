@@ -60,14 +60,7 @@ function Cart() {
                         <StripeCheckout/>
                         </div>
                     </div>
-
-
-
             </div>
-
-
-    
-    
         </div>
     
     )

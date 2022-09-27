@@ -5,10 +5,10 @@ import { loginSuccess } from '../features/authSlice/loginSlice';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AdminPanelMode, NotAdminPanelMode } from '../features/adminPanel/adminPanel';
-import { useCookies } from "react-cookie"; 
 import {BsFillCartFill} from "react-icons/bs"
 import {FiLogOut} from "react-icons/fi"
 import {MdAdminPanelSettings} from "react-icons/md"
+import {BsFillCartCheckFill, BsCartPlusFill } from "react-icons/bs"
 import { toast } from "react-toastify";
 
 
@@ -94,15 +94,16 @@ function Navbar() {
                         <div className='absolute bg-yellow-400 text-black font-bold text-[15px] rounded-full w-4 h-4 top-5 -right-2 flex items-center justify-center'>
                             {cartItems? cartItems.length : 0}
                         </div>
+
                         {selectOption &&
-                        <div className='absolute z-50 bg-white text-black -right-4 sm:right-6 top-6 h-max sm:h-20 w-max sm:w-20 p-2 sm:p-3 space-y-3 rounded-md font-bold '>
+                        <div className='absolute z-50 bg-white text-black -right-3 sm:right-6 top-8 sm:top-6 h-max sm:h-24 w-max sm:w-max p-2 sm:p-3  rounded-md font-bold '>
                             <motion.p
                             className='pt-1 flex sm:hidden font-bold text-green-500 cursor-pointer hover:text-amber-400 text-sm sm:text-md w-max mx-auto '
                             onClick={handleAdminPanel}
                             >
                                 {!isAdminPanel? 
                                 
-                                <div className="flex items-center">
+                                <div className="flex items-center pb-2">
                                     <MdAdminPanelSettings/> Admin Panel
                                 </div>:
                                 
@@ -112,11 +113,11 @@ function Navbar() {
 
                             <Link to="/cart">
                                 <motion.p
-                                className='flex space-x-1 items-center border-y sm:border-0 border-black pt-1 sm:py-0'
+                                className='flex space-x-1 items-center pb-2'
                                 onClick={(e) => setSelectOption(false)}
                                 >
                                     <span>
-                                        <BsFillCartFill/>
+                                        <BsCartPlusFill/>
                                     </span> 
                                     
                                     <span>
@@ -132,8 +133,25 @@ function Navbar() {
                                 </motion.p>
                             </Link>
 
+                            <Link to="/order-history">
+                                <motion.p
+                                className='flex space-x-1 items-center pb-2 '
+                                onClick={(e) => setSelectOption(false)}
+                                >
+                                    <span>
+                                        <BsFillCartCheckFill/>
+                                    </span> 
+                                    
+                                    <span>
+                                        Order History
+                                    </span>
+
+                                </motion.p>
+                            </Link>
+
+
                             <motion.p
-                            className="flex space-x-1 items-center"
+                            className="flex space-x-1 items-center pb-4"
                             onClick = {handleLogout} 
                             >
                                 <span>

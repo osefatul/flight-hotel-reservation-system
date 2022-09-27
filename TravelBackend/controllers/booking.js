@@ -1,34 +1,37 @@
 const {Booking} = require("../models/Booking");
 const {Flight} = require("../models/Flight");
 const {UserDetail} = require("../models/UserDetail");
+var customId = require("custom-id");
 
 
-
-const addNewBooking = async (req, res, next) => {
+const addNewBooking = async (req, res) => {
     try{
-        const userId = req.body.user;
+        const bookedUser = req.body.bookedUser;
         const flightId = req.body.flight;
+        const accountUser = req.body.accountUser
 
+        //Get flight and user details
         const flight = await Flight.findById(flightId);
-        const user = await UserDetail.findById(userId);
+        const user = await UserDetail.findById(bookedUser);
 
         let bookingId = customId({
-            name: flight.from + flight.to + flight.airlines,
+            name: flight.from + flight.to + flight.airline,
             email: user.firstName + user.lastName,
         });
 
-        console.log(bookingId);
+        //Console.log(bookingId);
         user.flights.push(flight);
         await user.save();
 
-        const newFlight = new Flight(req.body);
-        await newFlight.save();   
-        res.status(200).json({message:"Flight successfully Added !"})
-
-        const newBooking = new Booking({ bookingId, flight, user });
+        const newBooking = new Booking({ 
+            bookingId, 
+            flight, 
+            bookedUser, 
+            accountUser,
+            departureDate:req.body.departureDate, 
+        });
         const booking = await newBooking.save();
-        console.log(booking);
-        res.status(201).json(booking);
+        res.status(200).json(booking);
     }catch(error){
         console.log(error);
         res.status(500).json({message:error.message});
@@ -48,7 +51,20 @@ const getAllBookings = async (req, res, next) => {
 
 
 
-const getABooking = async (req, res, next) => {
+const getBookingsForAccountUser = async (req, res,) => {
+    try{
+        const theBooking = await Booking.find({accountUser: req.params.id});
+        res.status(200).json(theBooking);
+    }catch(error){
+        console.log(error);
+        res.status(500).json({message:error.message});
+    }
+}
+
+
+
+
+const getABooking = async (req, res,) => {
     try{
         const theBooking = await Booking.findById({_id: req.params.id});
         res.status(200).json(theBooking);
@@ -106,6 +122,7 @@ module.exports = {
     getABooking,
     getUserDetailsBooking,
     cancelBooking,
-    addNewBooking
+    addNewBooking,
+    getBookingsForAccountUser
 
 }

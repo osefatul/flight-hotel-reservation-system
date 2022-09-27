@@ -1,0 +1,25 @@
+import axios from "axios";
+const creatingBookingUrl = "http://localhost:8000/v1/bookings/";
+
+
+
+export const CreateBooking = async (formData) => {
+    try {
+        const res = await axios.post(creatingBookingUrl, formData)
+        return res
+    }catch(err){
+        console.log(err);
+        return err
+    }
+}
+
+
+export const fetchBooking = async (id) => {
+    try {
+        const res = await axios.get(creatingBookingUrl + id)
+        return res
+    }catch(err){
+        console.log(err);
+        return err
+    }
+}

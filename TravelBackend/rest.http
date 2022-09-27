@@ -89,7 +89,37 @@ Delete http://localhost:8000/v1/userDetails/632c05f8f0a597cbd9f7b897
 Content-Type: application/json
 
 
-# -----------------------------------------------------------------------------------------
+
+
+
+# ----------------------------------------------------------------------
+# Booking
+
+### AddBooking.
+POST http://localhost:8000/v1/bookings/
+Content-Type: application/json
+
+{
+"bookedUser": "632c3c91c7191d0ae902e8ec",
+"accountUser":"630c8f707740928186e01216",
+"flight": "63280bec153fee8f3309b334",
+"departureDate": "2022-10-30"
+}
+
+
+### Get Booking.
+Get http://localhost:8000/v1/bookings/630c8f707740928186e01216
+Content-Type: application/json
+
+
+
+
+
+
+
+
+
+# ----------------------------------------------------------------------
 
 ###StripAPI
 POST http://localhost:8000/v1/payments

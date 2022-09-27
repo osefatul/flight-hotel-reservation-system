@@ -183,6 +183,10 @@ Content-Type: application/json
 GET http://localhost:5000/v1/rooms/reservedRooms
 Content-Type: application/json
 
+### Get a Reserved Room by specific user
+GET http://localhost:5000/v1/rooms/reservedRooms/630c8f707740928186e01216
+Content-Type: application/json
+
 
 ### Update room availability.
 PUT http://localhost:5000/v1/rooms/availability/63204e13720c07dd3e0d2fda
