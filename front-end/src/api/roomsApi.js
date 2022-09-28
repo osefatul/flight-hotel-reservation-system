@@ -43,7 +43,7 @@ export const getRooms = async () =>{
     }
 }
 
-
+// Get all reserved rooms
 export const getReservedRooms = async () =>{
     try {
         const res = await axios.get(getRoomUrl + "reservedRooms");
@@ -66,9 +66,23 @@ export const getReservedRoomsByUser = async (id) =>{
 }
 
 
+// delete reserved rooms
+export const deleteReservedRooms = async (id, formData) =>{
+    try {
+        const res = await axios.put(getRoomUrl + "unreservedRooms/" + id, formData);
+        return res
+    }catch(error){
+        console.log(error)
+        return error;
+    }
+}
+
+
+
 export const deleteRoom = async (roomId) =>{
     try {
         const res = await axios.delete(deleteRoomUrl + roomId );
+        console.log(res);
         return res
     }catch(error){
         console.log(error)

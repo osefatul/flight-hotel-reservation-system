@@ -4,26 +4,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FetchingBooking } from '../../features/bookingSlice/bookingAction';
 
 function FlightHistory({user}) {
-
     const dispatch = useDispatch();
     const {isLoading, bookingData} = useSelector(state => state.booking);
     const [data, setData] = useState(bookingData)
 
-
-
     useEffect(()=>{
         dispatch(FetchingBooking(user._id))
-        setData(bookingData)
-        
+        setData(bookingData)        
     },[])
 
-
-
+    
     const columns = [
-        { field: "id", headerName: "Booking ID", width: 100, weight:"bold",
+        { field: "id", headerName: "Booking ID", width: 120, weight:"bold",
+        flex: 1,
         renderCell: (params) => {
             return (
-                <div className="text-[12px]">
+                <div className="text-[11px]">
                     {params.row.bookingId }
                 </div>
     
@@ -33,11 +29,11 @@ function FlightHistory({user}) {
         {
         field: "Booked User",
         headerName: "Booked User Details",
-        width: 180,
+        width: 160,
         flex: 1,
         renderCell: (params) => {
             return (
-            <div className="text-[12px]">
+            <div className="text-[11px]">
                 {params.row.bookedUser}
             </div>
             );
@@ -51,7 +47,7 @@ function FlightHistory({user}) {
         flex: 1,
         renderCell: (params) => {
             return (
-                <div>
+                <div className='text-[11px]'>
                     {params.row.flight}
                 </div>
             );
@@ -60,13 +56,26 @@ function FlightHistory({user}) {
 
         {
             field: "Date",
-            headerName: "Departure Date",
+            headerName: "Departure",
             width: 160,
             flex: 1,
             renderCell: (params) => {
                 return (
-                    <div>
+                    <div className='text-[11px]'>
                     {new Date(params.row.departureDate).toDateString()}
+                    </div>
+                );
+            },
+            },
+        {
+            field: "bookingDate",
+            headerName: "Booking Date",
+            width: 160,
+            flex: 1,
+            renderCell: (params) => {
+                return (
+                    <div className="text-green-600 text-[11px]">
+                    {new Date(params.row.openAt).toDateString()}
                     </div>
                 );
             },
@@ -76,17 +85,16 @@ function FlightHistory({user}) {
 
 return (
         <div className="w-full h-[40%]">
-            <h1 className=' text-[15px] font-bold '>
+            <h1 className=' text-[15px] font-bold'>
                 Flight History
             </h1>
 
             {isLoading ? "Loading..." : (
-                    <div className=" w-full h-full">
+                    <div className=" w-full h-full text-[12px]">
                         <DataGrid
                         sx={{
                         border: 0, // also tried setting to none 
                         borderRadius: 2,
-                        
                         minWidth: 300,
                         }}
                         getRowId = {(row) => row._id}

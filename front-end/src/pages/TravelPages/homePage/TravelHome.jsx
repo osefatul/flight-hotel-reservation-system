@@ -234,7 +234,6 @@ return (
             </div>
 
 
-
              {/* Right Side */}
             {
                 show &&
@@ -283,8 +282,6 @@ return (
 
                 </div> 
             }
-
-            
 
         </div>
 

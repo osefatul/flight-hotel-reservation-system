@@ -37,6 +37,7 @@ export default function UserList() {
 
   const columns = [
     { field: "id", headerName: "ID", width: 180,
+    flex: 1,
     renderCell: (params) => {
       return (
         // <Link to={`/ticket_communication/${params.row._id}`}>
@@ -51,6 +52,7 @@ export default function UserList() {
       field: "username",
       headerName: "User",
       width: 120,
+      flex: 1,
       renderCell: (params) => {
         return (
           <div className="flex text-[12px] items-center">
@@ -63,6 +65,7 @@ export default function UserList() {
 
 
     { field: "email", headerName: "Email", width: 200,
+    flex: 1,
     renderCell : (params) => {
       return (
         <div className="text-[12px]">
@@ -75,6 +78,7 @@ export default function UserList() {
       field: "country",
       headerName: "Country",
       width: 120,
+      flex: 1,
       renderCell : (params) => (
         <div className="text-[12px]">
           {params.row.country}
@@ -85,6 +89,7 @@ export default function UserList() {
       field: "city",
       headerName: "City",
       width: 120,
+      flex: 1,
       renderCell : (params) => (
         <div className="text-[12px]">
           {params.row.city}
@@ -95,6 +100,7 @@ export default function UserList() {
       field: "phone",
       headerName: "Phone Number",
       width: 120,
+      flex: 1,
       renderCell : (params) => (
         <div className="text-[12px]">
           +{params.row.phone}
@@ -105,6 +111,7 @@ export default function UserList() {
       field: "action",
       headerName: "Action",
       width: 150,
+      flex: 1,
       renderCell: (params) => {
         return (
           <>
@@ -168,7 +175,6 @@ export default function UserList() {
         </div>
 
       </div>
-
 
     </div>
 

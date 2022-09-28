@@ -1,3 +1,4 @@
+import { DeleteOutline } from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,63 +12,88 @@ function ReservedRoomsByUser({user}) {
 
 
 
+
     const columns = [
+        {
+            field: "hotel",
+            headerName: "Hotel Name",
+            width: 150,
+            flex: 1,
+            renderCell: (params) => {
+                return (
+                    <div className='tex-[11px]'>
+                        {params.row.hotel[0].hotelName}
+                    </div>
+                );
+            },
+            },
+    
         { field: "roomId", headerName: "Room ID", width: 150, weight:"bold",
+        flex: 1,
         renderCell: (params) => {
             return (
-                <div className="text-[12px]">
+                <div className="text-[11px]">
                     {params.row.roomId.slice(0,10)}
                 </div>
-    
             );
         }},
     
         {
         field: "roomNumbers",
         headerName: "Room No",
-        width: 80,
+        width: 130,
         flex: 1,
         renderCell: (params) => {
             return (
-            <div className="text-[12px] flex space-x-2">
+            <div>
+                <div className="text-[11px] flex space-x-2 font-bold">
                 {params.row.roomNumbers.map(roomNumber => roomNumber)}
+                </div>
             </div>
             );
         },
         },
-    
         {
-        field: "hotel",
-        headerName: "Hotel ID",
-        width: 160,
-        flex: 1,
-        renderCell: (params) => {
-            return (
-                <div>
-                    {params.row.hotel[0].hotelName}
-                </div>
-            );
+            field: "checkIn",
+            headerName: "Check In",
+            width: 160,
+            flex: 1,
+            renderCell: (params) => {
+                return (
+                    <div className='text-green-600 text-[11px]'>
+                    {new Date(params.row.reservedDates[0]).toDateString()}
+                    </div>
+                );
+            },
         },
-        },
-
         {
-            field: "reservedDates",
+            field: "checkOut",
+            headerName: "Check Out",
+            width: 160,
+            flex: 1,
+            renderCell: (params) => {
+                return (
+                    <div className='text-red-600 text-[11px]'>
+                    {new Date(params.row.reservedDates[params.row.reservedDates.length -1]).toDateString()}
+                    </div>
+                );
+            },
+        },
+        {
+            field: "ReservationDate",
             headerName: "Reservation Date",
             width: 160,
             flex: 1,
             renderCell: (params) => {
                 return (
-                    <div>
-                    {/* {new Date(params.row.departureDate).toDateString()} */}
-                    {params.row.reservedDates.map(date => (
-                        new Date(date).toDateString()
-                    ))}
+                    <div className='text-[11px]'>
+                    {new Date(params.row.createdAt).toDateString()}
                     </div>
                 );
             },
-            },
+        },
+       
     ]
-
 
     useEffect(()=>{
         dispatch(fetchingReservedRoomsByUser(user._id))
@@ -75,17 +101,13 @@ function ReservedRoomsByUser({user}) {
     },[])
 
 
-
-
 return (
-
     <div className='w-full h-[40%]'>
         <h1 className=' text-[15px] font-bold '>
             Room Reservation History
         </h1>
-
     {isLoading ? "Loading..." : (
-            <div className=" w-full h-full">
+            <div className=" w-full h-full text-[12px]">
                 <DataGrid
                 sx={{
                 border: 0, // also tried setting to none 
@@ -98,16 +120,12 @@ return (
                 disableSelectionOnClick
                 columns={columns}
                 autoPageSize={true}
+                // pageSize={4}
                 checkboxSelection
                 />
             </div>
     )}
-
 </div>
-
-
-)
-
-}
+)}
 
 export default ReservedRoomsByUser

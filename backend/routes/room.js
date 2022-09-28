@@ -10,7 +10,8 @@ const {
     updateRoomAvailability,
     findHotels,
     getReservedRoom,
-    getAReservedRoomByUser
+    getAReservedRoomByUser,
+    UpdateReservedRoom
 } = require("../controllers/room.js");
 
 
@@ -33,6 +34,8 @@ router.delete("/:id",verifyToken, verifyAdmin, deleteRoom);
 //GET all Reserved rooms
 router.get("/reservedRooms", getReservedRoom);
 router.get("/reservedRooms/:id", getAReservedRoomByUser);
+router.put("/unreservedRooms/:id", UpdateReservedRoom);
+
 
 
 //GET a room

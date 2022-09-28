@@ -17,7 +17,12 @@ var bookingSchema = new Schema({
     },
     departureDate:{
         type: Date
-    }
+    },
+    openAt: {
+        type: Date,
+        required: true,
+        default: Date.now(),
+    },
 });
 
 module.exports = {Booking: mongoose.model("Booking", bookingSchema)};

@@ -1,11 +1,12 @@
 
+import { DeleteOutline } from '@mui/icons-material';
 import { DataGrid } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Sidebar from '../../../../components/adminComponents/components/sidebar/Sidebar'
 import Navbar from '../../../../components/Navbar'
-import { fetchingReservedRooms } from '../../../../features/roomSlice/roomAction';
+import { fetchingReservedRooms, fetchingUnReservedRoomsByUser } from '../../../../features/roomSlice/roomAction';
 
 function ReservedRoom() {
 
@@ -26,12 +27,20 @@ function ReservedRoom() {
   },[reservedRooms])
 
 
-  const navigateUser = (params) =>{
+  const navigateHotel = (params) =>{
     const userId = params.row.roomNumbers.filter( i => {
       return i.reservedBy !== undefined
     })
     // console.log(userId)
-    navigate("/admin/users/" + userId[0].reservedBy)
+    navigate("/admin/hotels/" + params.row.hotel[0].hotelId)
+  }
+
+
+  const handleDelete = async(e, id, roomId, reservedDates)=>{
+    e.preventDefault()
+    await setData(data.filter((item) => item._id !== id))
+    await dispatch(fetchingUnReservedRoomsByUser(id, {reservedDates , roomId}))
+    await dispatch(fetchingReservedRooms())
   }
 
 
@@ -41,22 +50,24 @@ function ReservedRoom() {
       field: "reservedBy",
       headerName: "Reserved By",
       width: 140,
+      flex: 1,
       renderCell: (params) => {
         return (
             <Link to={`/admin/users/${params.row.reservedBy}`}>
             <div className="text-[12px] text-blue-600">
-              U{params.row.reservedBy.slice(0,10)}
+              U{params?.row?.reservedBy?.slice(0,10)}
             </div>
             </Link>
         );
       },
     },
     { field: "roomId", headerName: "Room ID", width: 140,
+    flex: 1,
     renderCell: (params) => {
       return (
         <Link to={`/admin/rooms/${params.row.roomId}`}>
           <div className="text-[12px] text-blue-600">
-            R{params.row.roomId.slice(0,12)}
+            R{params?.row.roomId?.slice(0,12)}
           </div>
         </Link>
       );
@@ -67,13 +78,14 @@ function ReservedRoom() {
       field: "hotelId",
       headerName: "Hotel ID",
       width: 140,
+      flex: 1,
       renderCell: (params) => {
         return (
-          <Link to ={`/admin/hotels/${params.row.hotel[0].hotelId}`}>
+        <Link to={`/admin/hotels/${params.row.hotel[0].hotelId}`}>
           <div className="text-[12px] text-blue-600">
-            {params.row.hotel[0].hotelId.slice(0,12)}
+            {params?.row?.hotel[0].hotelId?.slice(0,12)}
           </div>
-          </Link>
+        </Link>
         );
       },
     },
@@ -82,10 +94,11 @@ function ReservedRoom() {
       field: "totalPrice",
       headerName: "Total Price",
       width: 120,
+      flex: 1,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
-            ${params.row.totalPrice}
+            ${params.row?.totalPrice}
           </div>
         );
       },
@@ -95,10 +108,11 @@ function ReservedRoom() {
       field: "roomNumbers",
       headerName: "Room No.",
       width: 100,
+      flex: 1,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
-            {params.row.roomNumbers[0]}
+            {params.row?.roomNumbers?.map(number => number)}
           </div>
         );
       },
@@ -108,10 +122,11 @@ function ReservedRoom() {
       field: "Total No. of Days",
       headerName: "Days",
       width: 100,
+
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
-            {params.row.reservedDates.length}
+            {params.row.reservedDates?.length}
           </div>
         );
       },
@@ -121,10 +136,11 @@ function ReservedRoom() {
       field: "checkIn",
       headerName: "check in",
       width: 170,
+
       renderCell: (params) => {
         return (
           <div className="text-[12px] text-green-600">
-            {new Date(params.row.reservedDates[0]).toLocaleString()}
+            {new Date(params.row.reservedDates[0]).toDateString()}
           </div>
         );
       },
@@ -134,14 +150,32 @@ function ReservedRoom() {
       field: "checkOut",
       headerName: "Check out",
       width: 170,
+
       renderCell: (params) => {
         return (
           <div className="text-[12px] text-red-600">
-            {new Date(params.row.reservedDates[params.row.reservedDates.length-1]).toLocaleString()}
+            {new Date(params.row.reservedDates[params.row.reservedDates.length-1]).toDateString()}
           </div>
         );
       },
     },
+
+    {
+      field: "action",
+      headerName: "Action",
+      width: 150,
+      flex: 1,
+      renderCell: (params) => {
+      return (
+      <>
+          <DeleteOutline
+          className="productListDelete"
+          onClick={(e) => handleDelete(e, params.row._id, params.row.roomId, params.row.reservedDates )}
+          />
+      </>
+      );
+  },
+  },
 
   ];
 
@@ -166,18 +200,18 @@ function ReservedRoom() {
           {isLoading ? "Loading..." : (
           <div className="userList mt-4">
             <DataGrid
-            sx={{
-              border: 0, // also tried setting to none 
-              borderRadius: 0,
-              
-              minWidth: 200,
-            }}
-            getRowId = {(row) => row._id}
-            rows={data}
-            disableSelectionOnClick
-            columns={columns}
-            pageSize={8}
-            checkboxSelection
+                sx={{
+                border: 0, // also tried setting to none 
+                borderRadius: 2,
+                
+                minWidth: 300,
+                }}
+                getRowId = {(row) => row._id+row.roomId}
+                rows={data}
+                disableSelectionOnClick
+                columns={columns}
+                autoPageSize={true}
+                checkboxSelection
             />
             </div>
           )}

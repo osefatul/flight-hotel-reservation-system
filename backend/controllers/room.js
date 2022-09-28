@@ -54,7 +54,7 @@ const updateRoom = async (req, res, next) => {
     }
 };
 
-
+// Set room reserved.
 const updateRoomAvailability = async (req, res, next) => {
     try {
 
@@ -92,7 +92,6 @@ const updateRoomAvailability = async (req, res, next) => {
 
 const deleteRoom = async (req, res, next) => {
     try {
-
         await Hotel.updateMany({rooms: req.params.id}, {
             $pull: { rooms: req.params.id } 
         }, )
@@ -128,6 +127,25 @@ const getAReservedRoomByUser = async (req, res, next) => {
     }
 };
 
+//delete reserved room and updated room availability as well.
+const UpdateReservedRoom= async (req, res, next) => {
+    try {
+        const {dates} = req.body
+        await Room.updateOne(
+        { "roomNumbers._id": req.body.roomId },
+        {
+            // We use pull with an array-".$." means in roomNumbers"
+            $set: {
+            "roomNumbers.$.unavailableDates": "",
+            },
+        });
+
+        const createReservedRoom =  await ReservedRoom.findByIdAndDelete(req.params.id)
+        res.status(200).json("Room status has been updated.");
+    } catch (err) {
+        next(err);
+    }
+};
 
 
 const getRoom = async (req, res, next) => {
@@ -172,5 +190,6 @@ module.exports = {
     findHotels,
     getReservedRoom,
     getAReservedRoomByUser,
+    UpdateReservedRoom,
     updateRoomAvailability,
 }

@@ -91,7 +91,7 @@ function Navbar() {
                         <img className='w-10 h-10 rounded-full object-cover' src={user.img?user.img: "https://foodforhungryminds.org/new/wp-content/uploads/2020/10/no-profile-pic.jpg"} alt="" 
                         onClick={(e) => setSelectOption(!selectOption)}
                         />
-                        <div className='absolute bg-yellow-400 text-black font-bold text-[15px] rounded-full w-4 h-4 top-5 -right-2 flex items-center justify-center'>
+                        <div className='absolute bg-yellow-400 text-black font-bold text-[15px] rounded-full w-4 h-4 top-6 -right-1 flex items-center justify-center'>
                             {cartItems? cartItems.length : 0}
                         </div>
 

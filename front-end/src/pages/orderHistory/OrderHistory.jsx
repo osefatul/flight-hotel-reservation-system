@@ -19,12 +19,12 @@ return (
 
 
     <div className="h-main flex flex-col items-start
-    justify-start pt-10 w-[75%] mx-auto relative">
+    justify-start pt-4 w-[75%] mx-auto relative">
 
-        <div className=' w-full pb-10'>
+        <div className=' w-full pb-3'>
             <h1 className=' text-lg font-bold border-b border-slate-300'>Order History</h1>
         </div>
-        <div className='h-full w-full space-y-5'>
+        <div className='h-full w-full space-y-3'>
             <FlightHistory user={user}/>
             <ReservedRoomsByUser user={user}/>
         </div>
