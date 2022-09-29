@@ -50,7 +50,7 @@ function ReservedRoom() {
       field: "reservedBy",
       headerName: "Reserved By",
       width: 140,
-      flex: 1,
+  
       renderCell: (params) => {
         return (
             <Link to={`/admin/users/${params.row.reservedBy}`}>
@@ -62,7 +62,7 @@ function ReservedRoom() {
       },
     },
     { field: "roomId", headerName: "Room ID", width: 140,
-    flex: 1,
+
     renderCell: (params) => {
       return (
         <Link to={`/admin/rooms/${params.row.roomId}`}>
@@ -78,7 +78,7 @@ function ReservedRoom() {
       field: "hotelId",
       headerName: "Hotel ID",
       width: 140,
-      flex: 1,
+
       renderCell: (params) => {
         return (
         <Link to={`/admin/hotels/${params.row.hotel[0].hotelId}`}>
@@ -94,7 +94,7 @@ function ReservedRoom() {
       field: "totalPrice",
       headerName: "Total Price",
       width: 120,
-      flex: 1,
+
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
@@ -108,7 +108,7 @@ function ReservedRoom() {
       field: "roomNumbers",
       headerName: "Room No.",
       width: 100,
-      flex: 1,
+
       renderCell: (params) => {
         return (
           <div className="text-[12px]">

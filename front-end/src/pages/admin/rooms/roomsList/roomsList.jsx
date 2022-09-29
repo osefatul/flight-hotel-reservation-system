@@ -35,7 +35,7 @@ function RoomsList() {
 
   const columns = [
     { field: "id", headerName: "ID", width: 180,
-    flex: 1,
+
     renderCell: (params) => {
       return (
         // <Link to={`/ticket_communication/${params.row._id}`}>
@@ -50,7 +50,7 @@ function RoomsList() {
       field: "title",
       headerName: "Title",
       width: 130,
-      flex: 1,
+  
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
@@ -63,7 +63,7 @@ function RoomsList() {
       field: "hotelName",
       headerName: "Hotel",
       width: 160,
-      flex: 1,
+  
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
@@ -78,7 +78,7 @@ function RoomsList() {
       field: "hotelId",
       headerName: "Hotel ID",
       width: 160,
-      flex: 1,
+  
       renderCell: (params) => {
         return (
 
@@ -102,7 +102,7 @@ function RoomsList() {
       field: "price",
       headerName: "Price",
       width: 120,
-      flex: 1,
+  
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
@@ -115,7 +115,7 @@ function RoomsList() {
       field: "maxPeople",
       headerName: "Max People",
       width: 120,
-      flex: 1,
+  
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
@@ -128,7 +128,7 @@ function RoomsList() {
       field: "roomNumbers",
       headerName: "No. of Room",
       width: 100,
-      flex: 1,
+  
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
@@ -141,7 +141,7 @@ function RoomsList() {
       field: "des",
       headerName: "Description",
       width: 150,
-      flex: 1,
+  
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
@@ -154,7 +154,7 @@ function RoomsList() {
       field: "action",
       headerName: "Action",
       width: 150,
-      flex: 1,
+  
       renderCell: (params) => {
         return (
           <>

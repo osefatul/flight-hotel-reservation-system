@@ -34,7 +34,7 @@ function Cart() {
 
 
                 <div className=' w-full pb-5'>
-                    <h1 className=' text-lg font-bold border-b border-slate-300'>Review Details</h1>
+                    <h1 className=' text-lg font-bold border-b border-slate-300'>Review Cart Details</h1>
                 </div>
 
                 {cartItems.map((item)=>(
@@ -42,18 +42,16 @@ function Cart() {
                     ?
                     <div className='w-full space-y-2'>
                         <FlightReview item={item}/>
-                        <hr className='border border-yellow-700 w-full'/>
                     </div>
                     :
 
                     <div className='w-full space-y-2'>
                         <RoomReview item={item}/>
-                        <hr className='border border-yellow-700 w-full'/>
                     </div>
                 ))}
 
 
-                    <div className='pt-10 flex flex-col w-full items-center justify-center font-bold text-[15px]'>
+                    <div className='py-10 flex flex-col w-full items-center justify-center font-bold text-[15px]'>
                         <p>Total:<span > ${cartTotalAmount}</span></p>
                         
                         <div className="w-full">
