@@ -2,9 +2,19 @@ import { faBed, faPlaneDeparture, faUserTie } from '@fortawesome/free-solid-svg-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import {FaHotel} from "react-icons/fa"
+import { useDispatch } from 'react-redux'
+import { removeFromCart, removeHotelFromCart } from '../../features/cartSlice/cartSlice'
 
 
 function RoomReview({item}) {
+
+    const dispatch = useDispatch()
+
+    const handleDelete = async (e, item)=>{
+        e.preventDefault()
+        await dispatch(removeHotelFromCart(item))
+    }
+
 
     return (
         <div className=' w-full flex flex-col items-center justify-center pt-2'>
@@ -20,7 +30,9 @@ function RoomReview({item}) {
                             <span>Hotel & Room Details</span>
                         </div>
 
-                        <div className="bg-red-700 text-white px-2 p-1 rounded-sm cursor-pointer text-[12px]" >
+                        <div className="bg-red-700 text-white px-2 p-1 rounded-sm cursor-pointer text-[12px]" 
+                        onClick={(e) => handleDelete(e, item)}
+                        >
                             Delete
                         </div>
                     </div>
@@ -28,10 +40,30 @@ function RoomReview({item}) {
                     <div className='text-[12px] space-y-3 pl-1 border-x pt-1 '>
                         <p className=' border-b border-b-amber-600 font-bold w-max'>{item.hotel[0].hotelName} {item.hotel[0].hotelId.slice(0,5)}</p>
             
-                        <div>
-                            <p>Title:<span className="font-bold"> {item.title}</span></p> 
-                            <p>Room No:<span className="font-bold"> {item.selectedRoomsNumber.map(item => item)}</span></p>
-                            <p>Price:<span className="font-bold"> ${item.price}</span></p>
+                        <div className='grid grid-cols-4 items-center '>
+
+                            <div>
+                                <p>Title:<span className="font-bold"> {item.title}</span></p>
+                                <p className='flex items-center space-x-2'>
+                                    <span>
+                                    Room No:
+                                    </span>
+                                    <span className="font-bold flex items-center space-x-2">
+                                    {item.selectedRoomsNumber.map(item =>
+                                    <div className=''>
+                                        {item}
+                                    </div>
+                                    )}
+                                </span>
+                                </p>
+                            
+                                <p>Stay:<span className="font-bold"> {item.days} Day/s</span></p> 
+                            </div>
+
+                            <div>
+                                <p>Price:<span className="font-bold"> ${item.roomPrice}</span></p>
+                                <p>Total Price:<span className="font-bold"> ${item.price}</span></p>
+                            </div>
                             
                         </div>
                     </div>

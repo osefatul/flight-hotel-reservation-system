@@ -179,7 +179,7 @@ function Hotel() {
         </div>
 
         <div className=''>
-        {openModal && <Reservation setOpenModal={setOpenModal} hotelId = {hotelId} totalPrice={totalPrice}/>}
+        {openModal && <Reservation setOpenModal={setOpenModal} hotelId = {hotelId} totalPrice={totalPrice} totalDays={days}/>}
         </div>
 
 

@@ -11,6 +11,7 @@ import flightReducer from "./features/flightsSlice/flightSlice";
 import flightUserDetailsReducer from "./features/flightUserDetails/flightUserDetailsSlice";
 import cartReducer from "./features/cartSlice/cartSlice";
 import BookingReducer from "./features/bookingSlice/bookingSlice";
+import orderReducer from "./features/ordersSlice/ordersSlice";
 
 
 
@@ -31,7 +32,8 @@ const store = configureStore({
         flights:flightReducer,
         flightsUserDetail:flightUserDetailsReducer,
         cart:cartReducer,
-        booking: BookingReducer
+        booking: BookingReducer,
+        orders:orderReducer
 
     },
     middleware: getDefaultMiddleware =>

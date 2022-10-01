@@ -13,6 +13,7 @@ const pdfTemplate = require("./doc");
 const FlightRoute = require("./routes/flight.js")
 const BookingRoute = require( "./routes/booking.js");
 const UserDetailsRoute = require( "./routes/userDetails.js");
+const OrdersRoute = require( "./routes/orders");
 const PaymentRoute = require("./routes/payments.js")
 
 
@@ -49,6 +50,7 @@ mongoose.connect(process.env.MONGO_URL).then(
 app.use("/v1/flights", FlightRoute);
 app.use("/v1/bookings", BookingRoute);
 app.use("/v1/userDetails", UserDetailsRoute);
+app.use("/v1/orders", OrdersRoute);
 app.use("/v1/payments", PaymentRoute);
 
 

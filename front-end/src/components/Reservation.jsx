@@ -8,7 +8,7 @@ import { updatingRoomAvailability } from '../features/roomSlice/roomAction';
 import axios from "axios"
 import { addToCart } from '../features/cartSlice/cartSlice';
 
-function Reservation({setOpenModal, hotelId, totalPrice}) {
+function Reservation({setOpenModal, hotelId, totalPrice, totalDays}) {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -19,6 +19,7 @@ function Reservation({setOpenModal, hotelId, totalPrice}) {
 
     const {date} = useSelector(state => state.search)
     const {hotelRoomsDetails, hotel} = useSelector(state => state.hotels)
+    
     const {user} = useSelector(state => state.login)
 
 
@@ -95,7 +96,11 @@ function Reservation({setOpenModal, hotelId, totalPrice}) {
                 id:hotelRoomsDetails[0]._id, 
                 name:hotelRoomsDetails[0].hotel[0].hotelName,
                 title: hotelRoomsDetails[0].title,
-                price: hotelRoomsDetails[0].price,
+                roomPrice:hotel.cheapestPrice,
+                price: totalDays*hotel.cheapestPrice*selectedRoomsNumber.length,// using this instead of totalPrice because it doesn't count days after the checkbox.
+                days:totalDays,
+                checkIn:new Date(date[0].startDate).getTime(),
+                checkOut:new Date(date[0].endDate).getTime(),
                 desc: "Hotel stay",
                 selectedRoomsNumber}))
 

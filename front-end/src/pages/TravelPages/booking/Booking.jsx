@@ -240,7 +240,7 @@ return (
         </div>
 
         {
-            modalOpen && <ConfirmingBookingModal setModalOpen={setModalOpen} />
+            modalOpen && <ConfirmingBookingModal setModalOpen={setModalOpen} departureDate = {date} />
         }
 
     </div>

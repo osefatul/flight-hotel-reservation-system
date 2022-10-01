@@ -14,13 +14,12 @@ import StripeCheckout from '../TravelPages/payments/stripeCheckout/StripeCheckou
 function Cart() {
 
     const dispatch = useDispatch() 
-    const{cartTotalAmount} = useSelector(state => state.cart)
+    const {cartItems, cartTotalAmount} = useSelector(state => state.cart)
 
     useEffect(()=>{
         dispatch(getTotals())
     })
 
-    const {cartItems} = useSelector(state => state.cart)
     return (
         <div className='relative'>
             

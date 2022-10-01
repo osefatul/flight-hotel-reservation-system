@@ -1,19 +1,19 @@
 const stripe = require("stripe")(process.env.SECRET_KEY)
+const { Stripe } = require("stripe");
 const { Order } = require("../models/Order");
+const domainUrl = process.env.DOMAIN_URL;
 
+let productsData = [];
 
 //Stripe Payment process...
 const StripePayment = async (req, res, next) => {
 
-    const domainUrl = process.env.DOMAIN_URL;
-
     const customer = await stripe.customers.create({
         metadata: {
         userId: req.body.userId,
-        cart: JSON.stringify(req.body.cartItems),
+        cart: JSON.stringify(req.body.cartItems.length),
         },
     });
-    
 
     const line_items = req.body.cartItems.map((item) => {
         return {
@@ -31,6 +31,8 @@ const StripePayment = async (req, res, next) => {
             quantity: item.itemQuantity,
             };
     });
+
+    productsData = productsData.concat(req.body.cartItems) 
 
     if(!line_items) {
         return res.status(400).json({error: "missing required session parameters"});
@@ -108,10 +110,12 @@ const StripePayment = async (req, res, next) => {
 
 // Create order function
 const createOrder = async (customer, data) => {
-    const Items = JSON.parse(customer.metadata.cart);
+    // const Items = JSON.parse(customer.metadata.cart);
+    // console.log("This is from Items", Items);
 
-    const products = Items.map((item) => {
+    const products = productsData.map((item) => {
     return {
+    productName:item.name,
     productId: item.id || item._id,
     quantity: item.itemQuantity,
     };
@@ -182,8 +186,9 @@ const webhook = async(req, res) =>{
                 .retrieve(data.customer)
                     .then(async (customer) => {
                         // console.log(customer);
-                        // console.log("data:", data)
-
+                        // console.log("this from data:", data)
+                        // console.log("productData:", productsData)
+                        
                     // Create Order:
                         try{
                             createOrder(customer, data);
@@ -193,7 +198,19 @@ const webhook = async(req, res) =>{
                         }
                 }).catch(error => (console.log(error)))
 
+            //Retrieving listLine Items.
+            stripe.checkout.sessions.listLineItems(
+                    data.id,
+                    { limit: 5 },
+                    function(err, lineItems) {
+                      // asynchronously called
+                    console.log("This is from lineItems", lineItems)
+                    console.log("This is from lineItems", lineItems.data.price)
+
+                    }
+                );
             break;
+        
 
     }
     

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from "react-router-dom";
 import { addToCart } from '../../features/cartSlice/cartSlice';
 
-function ConfirmingBookingModal({setModalOpen}) {
+function ConfirmingBookingModal({setModalOpen, departureDate}) {
 
     const dispatch = useDispatch() 
     const {flight} = useSelector(state => state.flights)
@@ -23,7 +23,9 @@ function ConfirmingBookingModal({setModalOpen}) {
 
         newObj["price"]= newObj["fare"]
 
-        dispatch(addToCart(newObj))
+        const joinedObj = {...newObj, firstName:SelectedUsersDetail.firstName, lastName:SelectedUsersDetail.lastName, birthDate:SelectedUsersDetail.birthdate, departureDate}
+
+        dispatch(addToCart(joinedObj))
         navigate("/payments")
     }
 

@@ -24,6 +24,10 @@ import Payments from "./pages/TravelPages/payments/Payments";
 import CheckoutSuccess from "./pages/TravelPages/payments/stripeCheckout/CheckoutSuccess";
 import Cart from "./pages/cart/Cart";
 import OrderHistory from "./pages/orderHistory/OrderHistory";
+import FlightsList from "./pages/admin/flights/flightsList";
+import newFlight from "./pages/admin/flights/newFlight";
+import OrdersList from "./pages/admin/orders/OrdersList";
+
 
 function App() {
   return (
@@ -50,6 +54,12 @@ function App() {
         <Route path="admin/new-room/" element={<NewRoom/>}/>
         <Route path="admin/rooms/" element={<RoomsList/>}/>
         <Route path="admin/reserved-rooms/" element={<ReservedRoom/>}/>
+        <Route path="admin/flights/" element={<FlightsList/>}/>
+        <Route path="admin/newFlight/" element={<newFlight/>}/>
+
+        <Route path="admin/orders/" element={<OrdersList/>}/>
+
+
 
         <Route path="cart" element={<Cart/>}/>
         <Route path="order-history" element={<OrderHistory/>}/>
