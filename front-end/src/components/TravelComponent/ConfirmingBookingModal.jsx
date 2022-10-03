@@ -1,20 +1,32 @@
 import { faCircleXmark, faPlaneDeparture, faUserTie } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useState } from 'react'
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from "react-router-dom";
+import { AddingBooking } from '../../features/bookingSlice/bookingAction';
 import { addToCart } from '../../features/cartSlice/cartSlice';
 
 function ConfirmingBookingModal({setModalOpen, departureDate}) {
 
     const dispatch = useDispatch() 
     const {flight} = useSelector(state => state.flights)
-    const { isLoading, SelectedUsersDetail} = useSelector(state => state.flightsUserDetail)
+    const {user} = useSelector(state => state.login)
+    const {bookingData} = useSelector(state => state.booking)
+    const {SelectedUsersDetail} = useSelector(state => state.flightsUserDetail)
+    const [messageAlert, setMessageAlert] = useState(false)
 
     const navigate = useNavigate()
 
+    useEffect(()=>{
+        setTimeout(()=>{
+            setMessageAlert(false)
+        },3000)
 
-    const handleConfirmation = (e) => {
+    },[messageAlert])
+
+
+    const handleConfirmation = async (e) => {
 
         const newObj = {...flight}
 
@@ -22,11 +34,21 @@ function ConfirmingBookingModal({setModalOpen, departureDate}) {
         newObj["desc"] = `Airline ticket`;
 
         newObj["price"]= newObj["fare"]
+        newObj["type"] = "Travel"
 
-        const joinedObj = {...newObj, firstName:SelectedUsersDetail.firstName, lastName:SelectedUsersDetail.lastName, birthDate:SelectedUsersDetail.birthdate, departureDate}
+        const joinedObj = {...newObj, bookedUser:SelectedUsersDetail._id, firstName:SelectedUsersDetail.firstName, lastName:SelectedUsersDetail.lastName, birthDate:SelectedUsersDetail.birthdate, departureDate}
 
-        dispatch(addToCart(joinedObj))
-        navigate("/payments")
+        try{
+            await dispatch(addToCart(joinedObj))
+            await setMessageAlert(true)
+        }
+        catch(error){
+            console.log(error)
+        }
+        
+        setTimeout(()=>{
+            navigate("/cart")
+        },3000)
     }
 
 
@@ -44,6 +66,9 @@ function ConfirmingBookingModal({setModalOpen, departureDate}) {
                 </div>
     
                 <div className='space-y-6'>
+                    {messageAlert &&
+                    <p className='flex items-center justify-center text-green-800'>Successfully Added</p>
+                    }
                     <div>
                         <h1 className=' text-lg  font-bold border-b border-slate-300'>Review Details</h1>
                     </div>

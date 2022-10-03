@@ -54,6 +54,7 @@ const updateRoom = async (req, res, next) => {
     }
 };
 
+
 // Set room reserved.
 const updateRoomAvailability = async (req, res, next) => {
     try {
@@ -82,7 +83,7 @@ const updateRoomAvailability = async (req, res, next) => {
 
         await createReservedRoom.save()
         
-        res.status(200).json("Room status has been updated.");
+        res.status(200).json("Room has been successfully reserved.");
     } catch (err) {
         next(err);
     }

@@ -9,9 +9,13 @@ function FlightHistory({user}) {
     const [data, setData] = useState(bookingData)
 
     useEffect(()=>{
-        dispatch(FetchingBooking(user._id))
-        setData(bookingData)        
+        dispatch(FetchingBooking(user._id))    
     },[])
+
+    useEffect(()=>{
+        setData(bookingData)
+    },[bookingData])
+    
 
     
     const columns = [
@@ -84,10 +88,8 @@ function FlightHistory({user}) {
 
 
 return (
-        <div className="w-full h-[40%]">
-            <h1 className=' text-[15px] font-bold'>
-                Flight History
-            </h1>
+        <div className="w-full h-full pt-4">
+
 
             {isLoading ? "Loading..." : (
                     <div className=" w-full h-full text-[12px]">

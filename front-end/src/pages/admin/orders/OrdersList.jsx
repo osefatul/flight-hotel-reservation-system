@@ -97,7 +97,7 @@ renderCell : (params) => {
     width: 120,
     renderCell : (params) => (
     <div className="text-[12px]">
-        ${params.row.total}
+        ${params.row.total/100}
     </div>
     )
 },
@@ -121,7 +121,6 @@ renderCell : (params) => {
     </div>
     )
 },
-
 
 {
     field: "OrderDone",

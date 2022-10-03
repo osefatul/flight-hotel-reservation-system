@@ -107,9 +107,15 @@ Content-Type: application/json
 }
 
 
-### Get Booking.
+### Get a Booking.
 Get http://localhost:8000/v1/bookings/630c8f707740928186e01216
 Content-Type: application/json
+
+
+### Get Booking.
+Get http://localhost:8000/v1/bookings/
+Content-Type: application/json
+
 
 
 # ------------------------------------------------------------------------------

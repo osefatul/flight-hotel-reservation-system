@@ -13,6 +13,7 @@ function Reservation({setOpenModal, hotelId, totalPrice, totalDays}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [selectedRooms, setSelectedRooms] = useState([]);
+    const [messageAlert, setMessageAlert] = useState(false)
     const [selectedRoomsNumber, setSelectedRoomsNumber] = useState([]);
     // let SelectedRoomsNumber = [];
 
@@ -102,12 +103,29 @@ function Reservation({setOpenModal, hotelId, totalPrice, totalDays}) {
                 checkIn:new Date(date[0].startDate).getTime(),
                 checkOut:new Date(date[0].endDate).getTime(),
                 desc: "Hotel stay",
-                selectedRoomsNumber}))
+                type:"Stays",
+                selectedRoomsNumber
+            }))
 
-            setOpenModal(false);
-                // navigate("/");
-        } catch (err) {}
+            await setMessageAlert(true)
+
+            setTimeout(()=>{
+                setOpenModal(false);
+                navigate("/cart")
+            },3000)
+
+        } catch (err) {
+            console.log(err)
+        }
     };
+
+
+    useEffect(()=>{
+        setTimeout(()=>{
+            setMessageAlert(false)
+        },3000)
+
+    },[messageAlert])
 
 
     useEffect(()=>{
@@ -128,6 +146,10 @@ function Reservation({setOpenModal, hotelId, totalPrice, totalDays}) {
                 onClick={() => setOpenModal(false)}
                 />
             </div>
+
+            {messageAlert &&
+                    <p className='flex items-center justify-center text-green-800'>Successfully reserved</p>
+            }
 
             <h1 className='font-bold'>Select your rooms:</h1>
 

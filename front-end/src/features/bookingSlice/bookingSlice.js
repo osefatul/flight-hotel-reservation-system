@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 
 const initialState = {
     bookingData:{},
+    bookings:[],
     isLoading: false,
     error: "",
 };
@@ -22,6 +23,12 @@ const BookingSlice = createSlice({
             state.bookingData = action.payload 
         },
 
+        fetchingBookingsSuccess: (state, action)=>{
+            state.isLoading = false
+            state.error = ""
+            state.bookings = action.payload 
+        },
+
         BookingFail: (state, action)=>{
             state.isLoading = false
             state.error = action.payload
@@ -31,7 +38,7 @@ const BookingSlice = createSlice({
     },
 });
 
-export const {BookingPending, fetchingABookingSuccess, BookingFail} =
+export const {BookingPending, fetchingABookingSuccess, fetchingBookingsSuccess, BookingFail} =
 BookingSlice.actions;
 
 export default BookingSlice.reducer;

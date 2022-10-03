@@ -4,25 +4,26 @@ import { DeleteOutline } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FetchingFlights } from "../../../features/flightsSlice/flightAction";
+
+import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar"
+import { FetchingBookings } from "../../../features/bookingSlice/bookingAction";
 import Navbar from "../../../components/Navbar";
-import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar";
 
 
-export default function FlightsList() {
+export default function BookingList() {
 
 const dispatch = useDispatch();
-const {isLoading, flights} = useSelector(state => state.flights);
-const [data, setData] = useState(flights);
+const {isLoading, bookings} = useSelector(state => state.booking);
+const [data, setData] = useState(bookings);
 
 
 useEffect(() =>{
-dispatch(FetchingFlights())
+dispatch(FetchingBookings())
 },[])
 
 useEffect(()=>{
-setData(flights)
-},[flights])
+setData(bookings)
+},[bookings])
 
 
 const handleDelete = async (id) => {
@@ -36,73 +37,67 @@ const handleDelete = async (id) => {
 
 
 const columns = [
-{ field: "id", headerName: "ID", width: 180,
-flex: 1,
+{ field: "id", headerName: "ID", width: 150,
 renderCell: (params) => {
     return (
     // <Link to={`/ticket_communication/${params.row._id}`}>
         <div className="text-[12px]">
-        F{params.row._id.slice(0,10)}...
+        B{params.row._id.slice(0,10)}...
         </div>
     // </Link>
     );
 }},
 
 {
-    field: "airline",
-    headerName: "Airline",
+    field: "bookingId",
+    headerName: "Booking ID",
     width: 120,
-    flex: 1,
     renderCell: (params) => {
     return (
         <div className="flex text-[12px] items-center">
-        {params.row.airline}
+        {params.row.bookingId}
         </div>
     );
     },
 },
 
 
-{ field: "code", headerName: "Airline Code", width: 200,
-flex: 1,
+{ field: "bookedUser", headerName: "Booked User", width: 200,
 renderCell : (params) => {
     return (
     <div className="text-[12px]">
-        {params.row.code}
+        {params.row.bookedUser}
     </div>
     )
 }
 },
 {
-    field: "from",
-    headerName: "From",
-    width: 120,
-    flex: 1,
+    field: "accountUser",
+    headerName: "Registered Account",
+    width: 180,
     renderCell : (params) => (
     <div className="text-[12px]">
-        {params.row.from}
+        U{params.row.accountUser}
     </div>
     )
 },
 {
-    field: "to",
-    headerName: "To",
-    width: 120,
-    flex: 1,
+    field: "departingDate",
+    headerName: "Departing Date",
+    width: 160,
     renderCell : (params) => (
     <div className="text-[12px]">
-        {params.row.to}
+        {new Date(params.row.departureDate).toDateString()}
     </div>
     )
 },
 {
-    field: "fare",
-    headerName: "Fare",
+    field: "bookingDate",
+    headerName: "Booking Date",
     width: 120,
-    flex: 1,
     renderCell : (params) => (
     <div className="text-[12px]">
-        ${params.row.fare}
+        {new Date(params.row.openAt).toDateString()}
     </div>
     )
 },
@@ -110,7 +105,6 @@ renderCell : (params) => {
     field: "action",
     headerName: "Action",
     width: 150,
-    flex: 1,
     renderCell: (params) => {
     return (
         <>

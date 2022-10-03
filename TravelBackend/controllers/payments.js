@@ -32,7 +32,7 @@ const StripePayment = async (req, res, next) => {
             };
     });
 
-    productsData = productsData.concat(req.body.cartItems) 
+    productsData = [...req.body.cartItems] 
 
     if(!line_items) {
         return res.status(400).json({error: "missing required session parameters"});
@@ -46,7 +46,7 @@ const StripePayment = async (req, res, next) => {
         customer:customer.id,
         line_items,
         success_url: `${domainUrl}checkout-success`,
-        cancel_url: `${domainUrl}payments`,
+        cancel_url: `${domainUrl}cart`,
         shipping_address_collection: {allowed_countries: ['US', "GB", "CA"]},
         shipping_options: [
             {

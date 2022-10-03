@@ -1,9 +1,9 @@
 import React from 'react'
 
-function newFlight() {
+function NewFlight() {
     return (
         <div>newFlight</div>
     )
 }
 
-export default newFlight
+export default NewFlight

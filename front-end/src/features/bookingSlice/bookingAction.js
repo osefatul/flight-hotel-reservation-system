@@ -1,5 +1,5 @@
-import { CreateBooking, fetchBooking } from "../../api/TravelApi/booking";
-import { BookingFail, BookingPending, fetchingABookingSuccess } from "./bookingSlice"
+import { CreateBooking, fetchBooking, fetchBookings } from "../../api/TravelApi/booking";
+import { BookingFail, BookingPending, fetchingABookingSuccess, fetchingBookingsSuccess } from "./bookingSlice"
 
 
 
@@ -15,6 +15,18 @@ export const AddingBooking = (formData) => async (dispatch) =>{
     }
 }
 
+
+export const FetchingBookings = (id) => async (dispatch) =>{
+    dispatch(BookingPending);
+    try{
+        const res = await fetchBookings();
+        console.log(res.data);
+        dispatch(fetchingBookingsSuccess(res.data))
+    }catch(error){
+        console.log(error)
+        dispatch(BookingFail)
+    }
+}
 
 
 export const FetchingBooking = (id) => async (dispatch) =>{

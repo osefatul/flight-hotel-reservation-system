@@ -12,6 +12,15 @@ function ReservedRoomsByUser({user}) {
 
 
 
+    useEffect(()=>{
+        dispatch(fetchingReservedRoomsByUser(user._id))
+        setRoomData(reservedRooms)
+    },[])
+
+    useEffect(()=>{
+    setRoomData(reservedRooms)
+    },[reservedRooms])
+    
 
     const columns = [
         {
@@ -92,20 +101,11 @@ function ReservedRoomsByUser({user}) {
                 );
             },
         },
-       
     ]
 
-    useEffect(()=>{
-        dispatch(fetchingReservedRoomsByUser(user._id))
-        setRoomData(reservedRooms)
-    },[])
-
-
 return (
-    <div className='w-full h-[40%]'>
-        <h1 className=' text-[15px] font-bold '>
-            Room Reservation History
-        </h1>
+    <div className='w-full h-full pt-4'>
+
     {isLoading ? "Loading..." : (
             <div className=" w-full h-full text-[12px]">
                 <DataGrid

@@ -24,9 +24,10 @@ import Payments from "./pages/TravelPages/payments/Payments";
 import CheckoutSuccess from "./pages/TravelPages/payments/stripeCheckout/CheckoutSuccess";
 import Cart from "./pages/cart/Cart";
 import OrderHistory from "./pages/orderHistory/OrderHistory";
-import FlightsList from "./pages/admin/flights/flightsList";
-import newFlight from "./pages/admin/flights/newFlight";
+import FlightsList from "./pages/admin/flights/FlightsList";
+import NewFlight from "./pages/admin/flights/NewFlight";
 import OrdersList from "./pages/admin/orders/OrdersList";
+import BookingList from "./pages/admin/bookings/BookingList";
 
 
 function App() {
@@ -55,7 +56,8 @@ function App() {
         <Route path="admin/rooms/" element={<RoomsList/>}/>
         <Route path="admin/reserved-rooms/" element={<ReservedRoom/>}/>
         <Route path="admin/flights/" element={<FlightsList/>}/>
-        <Route path="admin/newFlight/" element={<newFlight/>}/>
+        <Route path="admin/newFlight/" element={<NewFlight/>}/>
+        <Route path="admin/bookings/" element={<BookingList/>}/>
 
         <Route path="admin/orders/" element={<OrdersList/>}/>
 
@@ -65,7 +67,7 @@ function App() {
         <Route path="order-history" element={<OrderHistory/>}/>
 
         <Route path="booking" element={<Booking/>}/>
-        <Route path="payments" element={<Payments/>}/>
+        {/* <Route path="payments" element={<Payments/>}/> */}
         <Route path="checkout-success" element={<CheckoutSuccess/>}/>
 
 

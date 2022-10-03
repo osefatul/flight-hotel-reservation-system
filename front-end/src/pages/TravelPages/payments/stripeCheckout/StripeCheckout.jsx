@@ -4,11 +4,9 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {motion} from "framer-motion"
 import axios from "axios";
-import { StripeApi } from '../../../../api/TravelApi/StripePayments';
+
 
 function StripeCheckout() {
-
-    const stripe = useStripe();
 
     const {flight} = useSelector(state => state.flights)
     const {user} = useSelector(state => state.login)
@@ -19,18 +17,6 @@ function StripeCheckout() {
 
     const handleCheckout = async (e)=>{
         e.preventDefault()
-    
-        const line_items = [{
-            quantity: 1,
-            price_data: {
-                currency: "usd",
-                unit_amount: cartTotalAmount * 100,
-                product_data: {
-                    name:flight.airline,
-                    description: `An airline ticket ${flight.from} to ${flight.to}`
-                }
-            }
-        }]
 
 
         const res = await axios({

@@ -14,6 +14,17 @@ export const CreateBooking = async (formData) => {
 }
 
 
+export const fetchBookings = async () => {
+    try {
+        const res = await axios.get(creatingBookingUrl)
+        return res
+    }catch(err){
+        console.log(err);
+        return err
+    }
+}
+
+
 export const fetchBooking = async (id) => {
     try {
         const res = await axios.get(creatingBookingUrl + id)

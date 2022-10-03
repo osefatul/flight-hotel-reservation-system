@@ -21,7 +21,7 @@ import AddTraveler from '../../../components/TravelComponent/AddTraveler';
 function Booking() {
 
     const location = useLocation()
-    const date = location.state.date;
+    const date = location?.state?.date;
     const dispatch = useDispatch()
 
 

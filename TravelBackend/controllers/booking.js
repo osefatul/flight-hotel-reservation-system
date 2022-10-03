@@ -30,8 +30,8 @@ const addNewBooking = async (req, res) => {
             accountUser,
             departureDate:req.body.departureDate, 
         });
-        const booking = await newBooking.save();
-        res.status(200).json(booking);
+        await newBooking.save();
+        res.status(200).json({message:"You have successfully booked for the ticket."});
     }catch(error){
         console.log(error);
         res.status(500).json({message:error.message});

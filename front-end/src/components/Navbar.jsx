@@ -143,7 +143,7 @@ function Navbar() {
                                     </span> 
                                     
                                     <span>
-                                        Order History
+                                        Orders History
                                     </span>
 
                                 </motion.p>
