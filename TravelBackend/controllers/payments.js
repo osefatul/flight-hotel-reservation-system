@@ -199,16 +199,16 @@ const webhook = async(req, res) =>{
                 }).catch(error => (console.log(error)))
 
             //Retrieving listLine Items.
-            stripe.checkout.sessions.listLineItems(
-                    data.id,
-                    { limit: 5 },
-                    function(err, lineItems) {
-                      // asynchronously called
-                    console.log("This is from lineItems", lineItems)
-                    console.log("This is from lineItems", lineItems.data.price)
+            // stripe.checkout.sessions.listLineItems(
+            //         data.id,
+            //         { limit: 5 },
+            //         function(err, lineItems) {
+            //           // asynchronously called
+            //         console.log("This is from lineItems", lineItems)
+            //         console.log("This is from lineItems", lineItems.data.price)
 
-                    }
-                );
+            //         }
+            //     );
             break;
         
 

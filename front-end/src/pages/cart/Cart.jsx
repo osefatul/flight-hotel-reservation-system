@@ -49,7 +49,7 @@ function Cart() {
                     </div>
                 ))}
 
-
+                {cartTotalAmount > 0?
                     <div className='py-10 flex flex-col w-full items-center justify-center font-bold text-[15px]'>
                         <p>Total:<span > ${cartTotalAmount}</span></p>
                         
@@ -57,6 +57,10 @@ function Cart() {
                         <StripeCheckout/>
                         </div>
                     </div>
+                : <div className='flex items-center justify-center text-slate-500 mx-auto'>
+                    <h1 className='flex items-center justify-center'>Cart is empty</h1>
+                </div>
+            }
             </div>
         </div>
     

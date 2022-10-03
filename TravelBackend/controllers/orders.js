@@ -26,9 +26,10 @@ const getAllOrders = async (req, res, next) => {
 }
 
 
+//get order based on userId for current user
 const getAnOrder = async (req, res, next) => {
     try{
-        const theOrder = await Order.findById({_id: req.params.id});
+        const theOrder = await Order.find({userId: req.params.id});
         res.status(200).json(theOrder);
     }catch(error){
         console.log(error);

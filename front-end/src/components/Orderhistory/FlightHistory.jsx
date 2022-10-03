@@ -2,89 +2,210 @@ import { DataGrid } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { FetchingBooking } from '../../features/bookingSlice/bookingAction';
+import { FetchingAnOrder } from '../../features/ordersSlice/ordersAction';
 
 function FlightHistory({user}) {
     const dispatch = useDispatch();
-    const {isLoading, bookingData} = useSelector(state => state.booking);
-    const [data, setData] = useState(bookingData)
+    // const {isLoading, bookingData} = useSelector(state => state.booking);
+    // const [data, setData] = useState(bookingData)
+    const {isLoading, orders} = useSelector(state => state.orders);
+    const [data, setData] = useState(orders);
+
 
     useEffect(()=>{
-        dispatch(FetchingBooking(user._id))    
+        // dispatch(FetchingBooking(user._id)) 
+        dispatch(FetchingAnOrder(user._id))
     },[])
 
     useEffect(()=>{
-        setData(bookingData)
-    },[bookingData])
-    
+        setData(orders)
+        },[orders])
 
+
+    // const columns = [
+    //     { field: "id", headerName: "Booking ID", width: 120, weight:"bold",
+    //     flex: 1,
+    //     renderCell: (params) => {
+    //         return (
+    //             <div className="text-[11px]">
+    //                 {params.row.bookingId }
+    //             </div>
     
+    //         );
+    //     }},
+    
+    //     {
+    //     field: "Booked User",
+    //     headerName: "Booked User Details",
+    //     width: 160,
+    //     flex: 1,
+    //     renderCell: (params) => {
+    //         return (
+    //         <div className="text-[11px]">
+    //             {params.row.bookedUser}
+    //         </div>
+    //         );
+    //     },
+    //     },
+    
+    //     {
+    //     field: "flight",
+    //     headerName: "Flight ID",
+    //     width: 160,
+    //     flex: 1,
+    //     renderCell: (params) => {
+    //         return (
+    //             <div className='text-[11px]'>
+    //                 {params.row.flight}
+    //             </div>
+    //         );
+    //     },
+    //     },
+
+    //     {
+    //         field: "Date",
+    //         headerName: "Departure",
+    //         width: 160,
+    //         flex: 1,
+    //         renderCell: (params) => {
+    //             return (
+    //                 <div className='text-[11px]'>
+    //                 {new Date(params.row.departureDate).toDateString()}
+    //                 </div>
+    //             );
+    //         },
+    //         },
+    //     {
+    //         field: "bookingDate",
+    //         headerName: "Booking Date",
+    //         width: 160,
+    //         flex: 1,
+    //         renderCell: (params) => {
+    //             return (
+    //                 <div className="text-green-600 text-[11px]">
+    //                 {new Date(params.row.openAt).toDateString()}
+    //                 </div>
+    //             );
+    //         },
+    //         },
+    // ]
+
+
     const columns = [
-        { field: "id", headerName: "Booking ID", width: 120, weight:"bold",
-        flex: 1,
+        { field: "id", headerName: "ID", width: 150,
+        
         renderCell: (params) => {
             return (
-                <div className="text-[11px]">
-                    {params.row.bookingId }
+            // <Link to={`/ticket_communication/${params.row._id}`}>
+                <div className="text-[12px]">
+                O{params.row._id.slice(0,10)}...
                 </div>
-    
+            // </Link>
             );
         }},
-    
+        
         {
-        field: "Booked User",
-        headerName: "Booked User Details",
-        width: 160,
-        flex: 1,
-        renderCell: (params) => {
+            field: "user",
+            headerName: "User ID",
+            width: 150,
+            renderCell: (params) => {
             return (
-            <div className="text-[11px]">
-                {params.row.bookedUser}
-            </div>
-            );
-        },
-        },
-    
-        {
-        field: "flight",
-        headerName: "Flight ID",
-        width: 160,
-        flex: 1,
-        renderCell: (params) => {
-            return (
-                <div className='text-[11px]'>
-                    {params.row.flight}
+                <div className="flex text-[12px] items-center">
+                U{params.row.userId.slice(0,10)}..
                 </div>
             );
+            },
         },
+        
+        
+        { field: "productsId", headerName: "Products ID", width: 200,
+        renderCell : (params) => {
+            return (
+            <div className="text-[12px] ">
+                {params.row.products.map((product) =>(
+                    <div className="text-black space-y-2">
+                        {product.productId}
+                    </div>
+                ))}
+            </div>
+            )
+        }
         },
-
-        {
-            field: "Date",
-            headerName: "Departure",
-            width: 160,
-            flex: 1,
-            renderCell: (params) => {
-                return (
-                    <div className='text-[11px]'>
-                    {new Date(params.row.departureDate).toDateString()}
+        
+        { field: "productsName", headerName: "Products Name", width: 200,
+        renderCell : (params) => {
+            return (
+            <div className="text-[12px] ">
+                {params.row.products.map((product) =>(
+                    <div className="text-black space-y-2">
+                    {product.productName}
                     </div>
-                );
-            },
-            },
+                ))}
+            </div>
+            )
+        }
+        },
         {
-            field: "bookingDate",
-            headerName: "Booking Date",
+            field: "total",
+            headerName: "Total Amount",
+            width: 120,
+            renderCell : (params) => (
+            <div className="text-[12px]">
+                ${params.row.total/100}
+            </div>
+            )
+        },
+        {
+            field: "paymentStatus",
+            headerName: "Payment Status",
+            width: 120,
+            renderCell : (params) => (
+            <div className="text-[12px] text-green-500">
+                {params.row.payment_status}
+            </div>
+            )
+        },
+        {
+            field: "deliveryStatus",
+            headerName: "Delivery Status",
+            width: 120,
+            renderCell : (params) => (
+            <div className="text-[12px]">
+                {params.row.delivery_status}
+            </div>
+            )
+        },
+        
+        {
+            field: "OrderDone",
+            headerName: "Order time",
             width: 160,
-            flex: 1,
-            renderCell: (params) => {
-                return (
-                    <div className="text-green-600 text-[11px]">
-                    {new Date(params.row.openAt).toDateString()}
-                    </div>
-                );
-            },
-            },
-    ]
+            renderCell : (params) => (
+            <div className="text-[12px]">
+                {new Date(params.row.createdAt).toLocaleString()}
+            </div>
+            )
+        },
+        
+        // {
+        //     field: "action",
+        //     headerName: "Action",
+        //     width: 150,
+        //     renderCell: (params) => {
+        //     return (
+        //         <>
+        //         <Link to={"/admin/users/" + params.row._id}>
+        //             <button className="bg-green-800 w-max px-2 py-[3px] rounded-sm text-white text-[11px]">Edit</button>
+        //         </Link>
+        //         <DeleteOutline
+        //             className="productListDelete"
+        //             onClick={() => handleDelete(params.row._id)}
+        //         />
+        //         </>
+        //     );
+        //     },
+        // }
+        ];
 
 
 return (

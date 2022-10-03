@@ -13,3 +13,16 @@ export const fetchOrders = async()=>{
     }
 }
 
+
+
+
+export const fetchAnOrder = async(id)=>{
+    try{
+        const res = await axios.get(FetchingOrdersUrl + id)
+        return res
+    }catch(error){
+        console.log(error)
+        return error
+    }
+}
+
