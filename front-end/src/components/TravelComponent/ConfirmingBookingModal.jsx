@@ -36,7 +36,7 @@ function ConfirmingBookingModal({setModalOpen, departureDate}) {
         newObj["price"]= newObj["fare"]
         newObj["type"] = "Travel"
 
-        const joinedObj = {...newObj, bookedUser:SelectedUsersDetail._id, firstName:SelectedUsersDetail.firstName, lastName:SelectedUsersDetail.lastName, birthDate:SelectedUsersDetail.birthdate, departureDate}
+        const joinedObj = {...newObj, accountUser:user._id, bookedUser:SelectedUsersDetail._id, firstName:SelectedUsersDetail.firstName, lastName:SelectedUsersDetail.lastName, birthDate:SelectedUsersDetail.birthdate, departureDate}
 
         try{
             await dispatch(addToCart(joinedObj))
@@ -48,7 +48,7 @@ function ConfirmingBookingModal({setModalOpen, departureDate}) {
         
         setTimeout(()=>{
             navigate("/cart")
-        },3000)
+        },2000)
     }
 
 

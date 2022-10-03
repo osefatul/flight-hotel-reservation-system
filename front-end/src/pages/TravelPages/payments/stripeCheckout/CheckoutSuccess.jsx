@@ -7,41 +7,45 @@ import { clearCart } from '../../../../features/cartSlice/cartSlice';
 function CheckoutSuccess() {
 
     const {cartItems} = useSelector(state => state.cart)
-    const {user} = useSelector(state => state.login);
+    // const {user} = useSelector(state => state.login);
     const {bookingData} = useSelector(state => state.booking);
     const dispatch = useDispatch()
 
-    const dispatching = async()=>{
-        cartItems.map(cartItem => {
+    const dispatching = async ()=>{
+        await cartItems.map(cartItem => {
             
             cartItem.type === "Travel" &&
                 dispatch(
                     AddingBooking({
                         bookedUser:cartItem.bookedUser, 
-                        accountUser:user._id, 
+                        accountUser:cartItem.accountUser,
                         flight:cartItem._id, 
                         departureDate:cartItem.departureDate})
                 )
             })
+        await dispatch(clearCart());
+        
     }
 
-    useEffect(()=>{
-        dispatching()
-    },[])
+    
+
+    // useEffect(()=>{
+        
+    // },[])
 
     useEffect(() => {
-        dispatch(clearCart());
-    }, [bookingData?.message]);
+        dispatching()
+    }, []);
     
 return (
 <div className='text-black '>
 
-    <div className ="bg-black sticky z-50 top-0 ">
+    {/* <div className ="bg-black sticky z-50 top-0 ">
             <Navbar  />
-    </div>
+    </div> */}
 
         <h1 className='flex justify-center pt-5 font-bold text-lg sm:text-xl'>
-        Thank you {user.username} for choosing Travel & Stay.
+        Thank you for choosing Travel & Stay.
         </h1>
 
         <div className='flex items-center justify-center text-start text-sm flex-col'>
