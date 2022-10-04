@@ -28,15 +28,16 @@ function ConfirmingBookingModal({setModalOpen, departureDate}) {
 
     const handleConfirmation = async (e) => {
 
-        const newObj = {...flight}
+        await dispatch(AddingBooking({bookedUser: SelectedUsersDetail._id, accountUser:user._id, flight:flight._id, departureDate}))
 
+        const newObj = {...flight}
         newObj["name"] = `Flight on ${flight.airline} `;
         newObj["desc"] = `Airline ticket`;
-
         newObj["price"]= newObj["fare"]
         newObj["type"] = "Travel"
 
-        const joinedObj = {...newObj, accountUser:user._id, bookedUser:SelectedUsersDetail._id, firstName:SelectedUsersDetail.firstName, lastName:SelectedUsersDetail.lastName, birthDate:SelectedUsersDetail.birthdate, departureDate}
+        //get bookingId and add it into cart after we created booking.
+        const joinedObj = await {...newObj, bookingId:bookingData?.booked?.bookingId , firstName:SelectedUsersDetail.firstName, lastName:SelectedUsersDetail.lastName, birthDate:SelectedUsersDetail.birthdate, departureDate}
 
         try{
             await dispatch(addToCart(joinedObj))
@@ -54,7 +55,6 @@ function ConfirmingBookingModal({setModalOpen, departureDate}) {
 
     return (
         <div className="text-black fixed top-0 left-0 right-0 bottom-0  flex items-center justify-center bg-black  bg-opacity-70 ">
-            
             <div className='h-max w-max sm:w-1/3 bg-slate-100 flex flex-col space-y-4 px-10 py-8 relative'>
                 
                 <div className="absolute -top-2 -right-4 w-12 flex items-center justify-center cursor-pointer">

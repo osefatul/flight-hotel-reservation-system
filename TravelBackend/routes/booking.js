@@ -6,12 +6,14 @@ const {
     getABooking, 
     cancelBooking, 
     getUserDetailsBooking,
-    getBookingsForAccountUser } = require("../controllers/booking");
+    getBookingsForAccountUser,
+    getBookingsBasedOnBookingId} = require("../controllers/booking");
 
 
 router.post ("/", addNewBooking);
 router.get("/", getAllBookings)
 router.get("/:id", getBookingsForAccountUser)
+router.get("/booking/:id", getBookingsBasedOnBookingId)
 router.get("/getABooking/:id", getABooking);
 router.get("/getUserDetailsBooking/:id", getUserDetailsBooking);
 router.delete("/cancelBooking/:id", cancelBooking);

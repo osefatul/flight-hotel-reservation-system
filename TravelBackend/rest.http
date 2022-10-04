@@ -79,7 +79,7 @@ Content-Type: application/json
 
 
 ### get a UserDetail
-GET http://localhost:8000/v1/userDetails/63292e686689a2eac5718329
+GET http://localhost:8000/v1/userDetails/632c3c91c7191d0ae902e8ec
 Content-Type: application/json
 
 
@@ -107,8 +107,13 @@ Content-Type: application/json
 }
 
 
-### Get a Booking.
+### Get a Booking for user
 Get http://localhost:8000/v1/bookings/630c8f707740928186e01216
+Content-Type: application/json
+
+
+### Get a Booking based on bookingId
+Get http://localhost:8000/v1/bookings/booking/19US11LS
 Content-Type: application/json
 
 
@@ -164,4 +169,22 @@ Content-Type: application/json
     }
     }
 ]
+}
+
+
+# --------------------------------------------------------------------------------------
+
+###CreatePDF
+POST http://localhost:8000/v1/create-pdf/
+Content-Type: application/json
+
+{
+
+        "to":"Vancouver",
+        "from":"Dubai",
+        "airlines":"Emirate Airways",
+        "firstName":"Sefatullah",
+        "lastName":"Omar",
+        "code": "EA",
+        "date":"10/28/2022"
 }

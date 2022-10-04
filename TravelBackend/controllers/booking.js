@@ -30,8 +30,8 @@ const addNewBooking = async (req, res) => {
             accountUser,
             departureDate:req.body.departureDate, 
         });
-        await newBooking.save();
-        res.status(200).json({message:"You have successfully booked for the ticket."});
+        const booked = await newBooking.save();
+        res.status(200).json({booked});
     }catch(error){
         console.log(error);
         res.status(500).json({message:error.message});
@@ -61,6 +61,16 @@ const getBookingsForAccountUser = async (req, res,) => {
     }
 }
 
+
+const getBookingsBasedOnBookingId = async (req, res,) => {
+    try{
+        const theBooking = await Booking.find({bookingId: req.params.id});
+        res.status(200).json(theBooking);
+    }catch(error){
+        console.log(error);
+        res.status(500).json({message:error.message});
+    }
+}
 
 
 
@@ -123,6 +133,7 @@ module.exports = {
     getUserDetailsBooking,
     cancelBooking,
     addNewBooking,
-    getBookingsForAccountUser
+    getBookingsForAccountUser,
+    getBookingsBasedOnBookingId
 
 }

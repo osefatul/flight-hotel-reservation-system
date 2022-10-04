@@ -1,4 +1,4 @@
-import { CreateBooking, fetchBooking, fetchBookings } from "../../api/TravelApi/booking";
+import { CreateBooking, fetchBooking, fetchBookingBasedOnBookingId, fetchBookings } from "../../api/TravelApi/booking";
 import { BookingFail, BookingPending, fetchingABookingSuccess, fetchingBookingsSuccess } from "./bookingSlice"
 
 
@@ -33,6 +33,19 @@ export const FetchingBooking = (id) => async (dispatch) =>{
     dispatch(BookingPending);
     try{
         const res = await fetchBooking(id);
+        console.log(res.data);
+        dispatch(fetchingABookingSuccess(res.data))
+    }catch(error){
+        console.log(error)
+        dispatch(BookingFail)
+    }
+}
+
+
+export const FetchingBookingBasedOnBookingId = (id) => async (dispatch) =>{
+    dispatch(BookingPending);
+    try{
+        const res = await fetchBookingBasedOnBookingId(id);
         console.log(res.data);
         dispatch(fetchingABookingSuccess(res.data))
     }catch(error){

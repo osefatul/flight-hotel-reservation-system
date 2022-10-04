@@ -116,6 +116,8 @@ const createOrder = async (customer, data) => {
     const products = productsData.map((item) => {
     return {
     productName:item.name,
+    productType:item.type,
+    bookingId:item.bookingId || null,
     productId: item.id || item._id,
     quantity: item.itemQuantity,
     };

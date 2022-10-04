@@ -34,3 +34,14 @@ export const fetchBooking = async (id) => {
         return err
     }
 }
+
+
+export const fetchBookingBasedOnBookingId = async (id) => {
+    try {
+        const res = await axios.get(creatingBookingUrl+"booking/" + id)
+        return res
+    }catch(err){
+        console.log(err);
+        return err
+    }
+}

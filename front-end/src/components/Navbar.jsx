@@ -48,18 +48,18 @@ function Navbar() {
 
     const handleAdminPanel = ()=>{
         setSelectOption(false)
-        if (location.pathname !== "/admin") {
-            dispatch(AdminPanelMode())
-            navigate("/admin")
-        }
-        else{
+        if (location.pathname.includes("admin")) {
             dispatch(NotAdminPanelMode())
             navigate("/")
+        }
+        else{
+            dispatch(AdminPanelMode())
+            navigate("/admin")
         }
     }
 
     return (
-        <div className={`text-white sm:h-[70px] sm:h-[50px] bg-black flex flex-col justify-center ${location.pathname === "/admin" ? "w-full pl-2 pr-8" : "w-[75%]"} mx-auto `}>
+        <div className={`text-white sm:h-[70px] sm:h-[50px] bg-black flex flex-col justify-center ${location.pathname === "/admin" || location.pathname.includes("/admin")? "w-full pl-2 pr-8" : "w-[75%]"} mx-auto `}>
 
             <div className='w-full flex sm:flex-row pt-2 sm:py-5 justify-between items-center sm:items-center space-y-1 sm:space-y-0'>
 
@@ -68,7 +68,7 @@ function Navbar() {
                         whileHover={{ scale: 1.03 }}
                         whileTap={{ scale: 0.9 }}
                         className="pt-2 sm:pt-0 font-bold sm:border-b border-amber-400 cursor-pointer hover:text-amber-400 text-xl sm:text-2xl" >
-                            {!location.pathname === "/admin"? "Travel & Stay Booking System": "Travel & Stay Admin Panel" }
+                            {location.pathname.includes("admin")? "Travel & Stay Admin Panel" : "Travel & Stay Booking System" }
                     </motion.h1>
                 </Link>
 
@@ -82,7 +82,7 @@ function Navbar() {
                             onClick={handleAdminPanel}
                             >
                                 {/* {!isAdminPanel? "Admin Panel": "T&S Home" } */}
-                                {location.pathname === "/admin"? "T&S Home": "Admin Panel" }
+                                {location.pathname.includes("admin")? "T&S Home" : "Admin Panel" }
 
                         </motion.h1>
                         )

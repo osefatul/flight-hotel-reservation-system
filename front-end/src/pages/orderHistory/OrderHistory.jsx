@@ -5,16 +5,19 @@ import { useDispatch, useSelector } from "react-redux"
 import Navbar from '../../components/Navbar';
 import FlightHistory from '../../components/Orderhistory/FlightHistory';
 import ReservedRoomsByUser from '../../components/Orderhistory/ReservedRoomsByUser';
+import ViewBooking from '../../components/Orderhistory/ViewBooking';
 import { FetchingBooking } from '../../features/bookingSlice/bookingAction';
 import { fetchingReservedRoomsByUser } from '../../features/roomSlice/roomAction';
 
 function OrderHistory() {
     const [tabSelected, setTabSelected] = useState(0)
     const {user} = useSelector(state => state.login);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [bookingId, setBookingId] = useState()
 
     const tabs = [
-        {id:0, tab:"Booked & Reserved History"},
-        {id:1, tab:"Reserved Rooms Details"}
+        {id:0, tab:"Booking & Reservation History"},
+        {id:1, tab:"Reserved Room/s Details"}
     ]
 
     const handleSubmit = (e,index)=>{
@@ -49,14 +52,16 @@ function OrderHistory() {
 
         <div className='h-full w-full space-y-3'>
             {tabSelected === 0 ?
-            <FlightHistory user={user}/>:
+            <FlightHistory user={user} setBookingId={setBookingId} bookingId={bookingId} setModalOpen={setModalOpen}/>:
             <ReservedRoomsByUser user={user}/>
             }
 
-            {/* <FlightHistory user={user}/>: */}
-
         </div>
     </div>
+
+    {
+            modalOpen && <ViewBooking setModalOpen={setModalOpen} bookingId={bookingId} />
+        }
 </div>
 )
 }

@@ -64,7 +64,7 @@ renderCell: (params) => {
 },
 
 
-{ field: "productsId", headerName: "Products ID", width: 200,
+{ field: "productsId", headerName: "Products ID", width: 200, height: 400, 
 renderCell : (params) => {
     return (
     <div className="text-[12px] ">
@@ -182,6 +182,7 @@ return (
 
         <div className="userList ">
         <DataGrid
+        getRowHeight={() => 'auto'}
         sx={{
             border: 0, // also tried setting to none 
             borderRadius: 2,

@@ -1,10 +1,11 @@
 import { DataGrid } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { FetchingBooking } from '../../features/bookingSlice/bookingAction';
+import { Link } from 'react-router-dom';
+import { FetchingBooking, FetchingBookingBasedOnBookingId } from '../../features/bookingSlice/bookingAction';
 import { FetchingAnOrder } from '../../features/ordersSlice/ordersAction';
 
-function FlightHistory({user}) {
+function FlightHistory({user, setBookingId, bookingId, setModalOpen}) {
     const dispatch = useDispatch();
     // const {isLoading, bookingData} = useSelector(state => state.booking);
     // const [data, setData] = useState(bookingData)
@@ -20,6 +21,22 @@ function FlightHistory({user}) {
     useEffect(()=>{
         setData(orders)
         },[orders])
+
+
+
+    const handleBooking = (e, params)=>{
+        e.preventDefault()
+        params.row.products.map(product=>{
+            if(product.bookingId){
+                setBookingId(product.bookingId)
+            }
+        })
+        return setModalOpen(true)
+    }
+
+    useEffect(()=>{
+        bookingId && dispatch(FetchingBookingBasedOnBookingId(bookingId))
+    },[bookingId, dispatch])
 
 
     // const columns = [
@@ -92,7 +109,7 @@ function FlightHistory({user}) {
 
 
     const columns = [
-        { field: "id", headerName: "ID", width: 150,
+        { field: "id", headerName: "ID", width: 150, 
         
         renderCell: (params) => {
             return (
@@ -165,20 +182,19 @@ function FlightHistory({user}) {
             </div>
             )
         },
-        {
-            field: "deliveryStatus",
-            headerName: "Delivery Status",
-            width: 120,
-            renderCell : (params) => (
-            <div className="text-[12px]">
-                {params.row.delivery_status}
-            </div>
-            )
-        },
-        
+        // {
+        //     field: "deliveryStatus",
+        //     headerName: "Status",
+        //     width: 120,
+        //     renderCell : (params) => (
+        //     <div className="text-[12px]">
+        //         {params.row.delivery_status}
+        //     </div>
+        //     )
+        // },
         {
             field: "OrderDone",
-            headerName: "Order time",
+            headerName: "Booking time",
             width: 160,
             renderCell : (params) => (
             <div className="text-[12px]">
@@ -187,30 +203,33 @@ function FlightHistory({user}) {
             )
         },
         
-        // {
-        //     field: "action",
-        //     headerName: "Action",
-        //     width: 150,
-        //     renderCell: (params) => {
-        //     return (
-        //         <>
-        //         <Link to={"/admin/users/" + params.row._id}>
-        //             <button className="bg-green-800 w-max px-2 py-[3px] rounded-sm text-white text-[11px]">Edit</button>
-        //         </Link>
-        //         <DeleteOutline
-        //             className="productListDelete"
-        //             onClick={() => handleDelete(params.row._id)}
-        //         />
-        //         </>
-        //     );
-        //     },
-        // }
+        {
+            field: "action",
+            headerName: "Action",
+            width: 150,
+            renderCell: (params) => {
+            return (
+                <>
+                {/* <Link to={"/admin/users/" + params.row._id}> */}
+                    <button className="bg-green-800 w-max px-2 py-[3px] rounded-sm text-white text-[11px]"
+                    onClick ={(e) => handleBooking(e,params )}
+                    >
+                        View Booking
+                    </button>
+                {/* </Link> */}
+                {/* <DeleteOutline
+                    className="productListDelete"
+                    onClick={() => handleDelete(params.row._id)}
+                /> */}
+                </>
+            );
+            },
+        }
         ];
 
 
 return (
         <div className="w-full h-full pt-4">
-
 
             {isLoading ? "Loading..." : (
                     <div className=" w-full h-full text-[12px]">

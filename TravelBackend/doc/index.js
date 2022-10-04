@@ -19,7 +19,7 @@ module.exports = (booking) => {
     left: -webkit-calc(50% - 300px);
   }
   .ticket{
-    width: 600px;
+    width: 590px;
     height: 250px;
     background: #FFB300;
     border-radius: 3px;
@@ -264,7 +264,7 @@ module.exports = (booking) => {
     top: 10px;
     left: 20px;
     font-family: Arial;
-    font-size: 38px;
+    font-size: 22px;
     color: #222;
   }
   .sfo{
@@ -272,7 +272,7 @@ module.exports = (booking) => {
     top: 10px;
     left: 180px;
     font-family: Arial;
-    font-size: 38px;
+    font-size: 22px;
     color: #222;
   }
   .plane{
@@ -292,7 +292,7 @@ module.exports = (booking) => {
     left: 5px;
     top: -10px;
     font-family: Arial;
-    font-size: 110px;
+    font-size: 50px;
     font-weight: bold;
     color: rgba(255,255,255,0.2);
   }
@@ -412,7 +412,7 @@ module.exports = (booking) => {
       inset -90px 0 0 #FFB300;
   }
   .slip{
-    left: 455px;
+    left: 420px;
   }
   .nameslip{
     top: 60px;
@@ -422,24 +422,24 @@ module.exports = (booking) => {
     left: 410px;
   }
   .seatslip{
-    left: 540px;
+    left: 500px;
   }
   .jfkslip{
-    font-size: 30px;
+    font-size: 12px;
     top: 20px;
-    left: 410px;
+    left: 390px;
   }
   .sfoslip{
-    font-size: 30px;
+    font-size: 12px;
     top: 20px;
-    left: 530px;
+    left: 510px;
   }
   .planeslip{
     top: 10px;
-    left: 475px;
+    left: 450px;
   }
   .airlineslip{
-    left: 455px;
+    left: 440px;
   }
             </style>
   <body>
@@ -478,38 +478,35 @@ module.exports = (booking) => {
       <li></li>
     </ul>
     <div class="ticket">
-      <span class="airline">${booking.flight.airlines}</span>
-      <span class="airline airlineslip">${booking.flight.airlines}</span>
+      <span class="airline">${booking.airline}</span>
+      <span class="airline airlineslip">${booking.airline}</span>
       <span class="boarding">Boarding pass</span>
       <div class="content">
-        <span class="jfk">${booking.flight.from}</span>
+        <span class="jfk">${booking.from}</span>
         <span class="plane"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="60" width="60" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
-        <span class="sfo">${booking.flight.to}</span>
+        <span class="sfo">${booking.to}</span>
         
-        <span class="jfk jfkslip">${booking.flight.from}</span>
+        <span class="jfk jfkslip">${booking.from}</span>
         <span class="plane planeslip"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="50" width="50" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
-        <span class="sfo sfoslip">${booking.flight.to}</span>
+        <span class="sfo sfoslip">${booking.to}</span>
         <div class="sub-content">
-          <span class="watermark">${booking.flight.airlines}</span>
-          <span class="name">PASSENGER NAME<br><span>${booking.user.lastName}, ${
-      booking.user.firstName
+          <span class="watermark">${booking.airline}</span>
+          <span class="name">PASSENGER NAME<br><span>${booking.lastName}, ${
+      booking.firstName
     }</span></span>
           <span class="flight">FLIGHT N&deg;<br><span>${
-            booking.flight.name
+            booking.code
           }</span></span>
           <span class="seat">SEAT<br><span>45A</span></span>
-          <span class="boardingtime">BOARDING ON<br><span>${booking.flight.date.substring(
-            0,
-            10
-          )}</span></span>
+          <span class="boardingtime">BOARDING ON<br><span>${booking.date}</span></span>
               
-           <span class="flight flightslip">FLIGHT N&deg;<br><span>${
-             booking.flight.name
-           }</span></span>
-            <span class="seat seatslip">SEAT<br><span>45A</span></span>
-           <span class="name nameslip">PASSENGER NAME<br><span>${
-             booking.user.lastName
-           }, ${booking.user.firstName}</span></span>
+          <span class="flight flightslip">FLIGHT N&deg;<br><span>${
+            booking.code
+          }</span></span>
+          <span class="seat seatslip">SEAT<br><span>45A</span></span>
+          <span class="name nameslip">PASSENGER NAME<br><span>${
+            booking.lastName
+          }, ${booking.firstName}</span></span>
         </div>
       </div>
       <div class="barcode"></div>
