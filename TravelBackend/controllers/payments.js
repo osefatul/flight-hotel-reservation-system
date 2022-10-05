@@ -113,7 +113,7 @@ const createOrder = async (customer, data) => {
     // const Items = JSON.parse(customer.metadata.cart);
     // console.log("This is from Items", Items);
 
-    const products = productsData.map((item) => {
+    const products = await productsData.map((item) => {
     return {
     productName:item.name,
     productType:item.type,
@@ -123,7 +123,7 @@ const createOrder = async (customer, data) => {
     };
 });
 
-const newOrder = new Order({
+const newOrder = await  new Order({
     userId: customer.metadata.userId,
     customerId: data.customer,
     paymentIntentId: data.payment_intent,
@@ -187,9 +187,9 @@ const webhook = async(req, res) =>{
             stripe.customers
                 .retrieve(data.customer)
                     .then(async (customer) => {
-                        // console.log(customer);
-                        // console.log("this from data:", data)
-                        // console.log("productData:", productsData)
+                        console.log(customer);
+                        console.log("this from data:", data)
+                        console.log("productData:", productsData)
                         
                     // Create Order:
                         try{

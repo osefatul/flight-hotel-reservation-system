@@ -28,28 +28,33 @@ function ConfirmingBookingModal({setModalOpen, departureDate}) {
 
     const handleConfirmation = async (e) => {
 
-        await dispatch(AddingBooking({bookedUser: SelectedUsersDetail._id, accountUser:user._id, flight:flight._id, departureDate}))
-
-        const newObj = {...flight}
+        const newObj = await {...flight}
         newObj["name"] = `Flight on ${flight.airline} `;
         newObj["desc"] = `Airline ticket`;
         newObj["price"]= newObj["fare"]
         newObj["type"] = "Travel"
 
         //get bookingId and add it into cart after we created booking.
-        const joinedObj = await {...newObj, bookingId:bookingData?.booked?.bookingId , firstName:SelectedUsersDetail.firstName, lastName:SelectedUsersDetail.lastName, birthDate:SelectedUsersDetail.birthdate, departureDate}
-
-        try{
-            await dispatch(addToCart(joinedObj))
-            await setMessageAlert(true)
-        }
-        catch(error){
+        //I used this below method to wait until I get bookingId but first let me create it 
+        await dispatch(AddingBooking({bookedUser: SelectedUsersDetail._id, accountUser:user._id, flight:flight._id, departureDate}))
+        .then(()=>{
+            const joinedObj = {...newObj, bookingId:bookingData?.booked?.bookingId, firstName:SelectedUsersDetail.firstName, lastName:SelectedUsersDetail.lastName, birthDate:SelectedUsersDetail.birthdate, departureDate}
+            try{
+                dispatch(addToCart(joinedObj))
+                setMessageAlert(true)
+            }
+            catch(error){
+                console.log(error)
+            }
+        })
+        .then (()=>{
+            setTimeout(()=>{
+                navigate("/cart")
+            },2000)
+        }).cath((error)=>{
             console.log(error)
-        }
-        
-        setTimeout(()=>{
-            navigate("/cart")
-        },2000)
+        })
+
     }
 
 
