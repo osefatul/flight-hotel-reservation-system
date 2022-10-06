@@ -45,3 +45,14 @@ export const fetchBookingBasedOnBookingId = async (id) => {
         return err
     }
 }
+
+
+export const deleteBooking = async (id, flightId) => {
+    try {
+        const res = await axios.delete(creatingBookingUrl + id + "/" + flightId )
+        return res
+    }catch(err){
+        console.log(err);
+        return err
+    }
+}

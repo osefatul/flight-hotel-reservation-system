@@ -39,16 +39,16 @@ function AdminHome() {
         <Navbar  />
       </div>
       
-      <div className="flex w-full">
-        <div className="w-[15%]">
+      <div className="flex w-full space-x-4 justify-between">
+        <div className="w-[10%] ">
         <Sidebar />
         </div>
 
-        <div className="w-[85%] mt-2 ">
+        <div className="w-[85%] mt-2 p-2 pr-8 space-y-4">
               <FeaturedInfo />
               <Charts
                 data={userData}
-                title="User Analytics"
+                title="Last 7 Days Revenue"
                 grid
                 dataKey="Active User"
                 />

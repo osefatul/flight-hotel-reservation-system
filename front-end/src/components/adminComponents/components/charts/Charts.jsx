@@ -9,19 +9,27 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  AreaChart,
+  Area,
 } from "recharts";
 
 function Charts({ title, data, dataKey, grid }) {
   return (
-    <div className="charts">
-      <h3 className="chartTitle">{title}</h3>
-      <ResponsiveContainer with="100%" aspect={4 / 1}>
-        <LineChart data={data}>
-          <XAxis dataKey="name" stroke="#5550bd" />
-          <Line type="monotone" dataKey={dataKey} stroke="#5550bd" />
+    <div className=" bg-slate-700 rounded-md w-[100%] items-center text-white relative shadow-xl p-2 space-y-2">
+      <h3 className="font-bold text-xl ">{title}</h3>
+      <ResponsiveContainer height={300} width="98%">
+        <AreaChart data={data}
+        margin={{
+          top: 20, right: 20, bottom: 20, left: 20,
+        }}
+        >
+          <XAxis dataKey="name" stroke="#fff" />
+          <YAxis />
+          {/* <Line type="monotone" dataKey={dataKey} stroke="red" /> */}
+          <Area dataKey={dataKey} stroke="8884d8" fill="#8884d8" />
           <Tooltip />
-          {grid && <CartesianGrid stroke="#e0dfdf" strokeDasharray="5 5" />}
-        </LineChart>
+          {grid && <CartesianGrid stroke="#8884d8" strokeDasharray="3 4" />}
+        </AreaChart>
       </ResponsiveContainer>
     </div>
   );

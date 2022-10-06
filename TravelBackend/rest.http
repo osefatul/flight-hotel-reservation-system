@@ -116,10 +116,16 @@ Content-Type: application/json
 Get http://localhost:8000/v1/bookings/booking/19US11LS
 Content-Type: application/json
 
-
+W
 ### Get Booking.
 Get http://localhost:8000/v1/bookings/
 Content-Type: application/json
+
+
+### Delte Booking.
+Delete http://localhost:8000/v1/bookings/633d2b9766d6c8a64de92b9d/632852d623b5f98024289848
+Content-Type: application/json
+
 
 
 

@@ -85,6 +85,21 @@ const getABooking = async (req, res,) => {
 }
 
 
+const deleteBooking = async (req, res, next) => {
+    try{
+        const { id } = req.params;
+        const {fid} = req.params;
+        await UserDetail.findOneAndUpdate({flights: fid}, {$pull: {flights:fid}})
+        await Booking.findOneAndDelete({id})
+        res.status(200).json("Successfully deleted booking");
+
+    }catch(error) {
+        console.log(error);
+        res.status(500).json({message:error.message});
+    }
+}
+
+
 const cancelBooking = async (req, res, next) => {
     try{
 
@@ -107,6 +122,12 @@ const cancelBooking = async (req, res, next) => {
         res.status(500).json({message:error.message});
     }
 }
+
+
+
+
+
+
 
 
 
@@ -134,6 +155,7 @@ module.exports = {
     cancelBooking,
     addNewBooking,
     getBookingsForAccountUser,
-    getBookingsBasedOnBookingId
+    getBookingsBasedOnBookingId,
+    deleteBooking
 
 }

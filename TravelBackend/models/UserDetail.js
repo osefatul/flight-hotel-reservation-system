@@ -16,7 +16,7 @@ var userDetailsSchema = new Schema({
     },
     flights: [
         {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Flight",
         },
     ],

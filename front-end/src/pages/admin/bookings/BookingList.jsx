@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar"
-import { FetchingBookings } from "../../../features/bookingSlice/bookingAction";
+import { deletingBooking, FetchingBookings } from "../../../features/bookingSlice/bookingAction";
 import Navbar from "../../../components/Navbar";
 
 
@@ -26,12 +26,12 @@ setData(bookings)
 },[bookings])
 
 
-const handleDelete = async (id) => {
-// await dispatch(DeletingUser(id))
-// setData(data.filter((item) => item._id !== id));
-// //map all those that are not equal to the selected row id
-// dispatch(FetchingFlights())
-
+const handleDelete = async (e, id, flightId) => {
+    e.preventDefault();
+    await dispatch(deletingBooking(id, flightId))
+    setData(data.filter((item) => item._id !== id));
+    //map all those that are not equal to the selected row id
+    dispatch(FetchingBookings())
 };
 
 
@@ -74,10 +74,20 @@ renderCell : (params) => {
 {
     field: "accountUser",
     headerName: "Registered Account",
-    width: 180,
+    width: 200,
     renderCell : (params) => (
     <div className="text-[12px]">
         U{params.row.accountUser}
+    </div>
+    )
+},
+{
+    field: "flightId",
+    headerName: "Flight ID",
+    width: 200,
+    renderCell : (params) => (
+    <div className="text-[12px]">
+        F{params.row.flight}
     </div>
     )
 },
@@ -113,7 +123,7 @@ renderCell : (params) => {
         </Link>
         <DeleteOutline
             className="productListDelete"
-            onClick={() => handleDelete(params.row._id)}
+            onClick={(e) => handleDelete(e, params.row._id, params.row.flight)}
         />
         </>
     );

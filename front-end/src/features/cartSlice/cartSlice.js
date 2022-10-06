@@ -33,12 +33,8 @@ const cartSlice = createSlice({
 
         let tempProductItem = { ...action.payload, itemQuantity: 1 };
         state.cartItems.push(tempProductItem);
-        toast.success("Product added to cart", {
-        position: "bottom-left",
-        });
-    localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-    state.message = "Item added to cart successfully"
-    },
+        localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+        state.message = "Item added to cart successfully"},
 
     // decreaseCart(state, action) {
     // const itemIndex = state.cartItems.findIndex(
@@ -47,7 +43,6 @@ const cartSlice = createSlice({
 
     // if (state.cartItems[itemIndex].itemQuantity > 1) {
     //     state.cartItems[itemIndex].itemQuantity -= 1;
-
     //     toast.info("Decreased product quantity", {
     //     position: "bottom-left",
     //     });

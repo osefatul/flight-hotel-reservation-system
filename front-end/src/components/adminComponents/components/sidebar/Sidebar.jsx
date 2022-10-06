@@ -56,7 +56,7 @@ const handleSubmit =  (index, url) =>{
   }
   return (
 
-    <div className="homeHeight pb-4 flex flex-col sticky z-50 top-[70px]">
+    <div className="homeHeight pb-4 flex flex-col sticky z-50 top-[50px]">
           <h1 className="px-2 text-xl text-slate-700 font-bold pb-4">Dashboard</h1>
           <div className='flex flex-col space-y-2 text-sm '>
             {tabs.map((tab ,index)=>(
