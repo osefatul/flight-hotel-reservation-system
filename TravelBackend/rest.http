@@ -149,6 +149,11 @@ GET http://localhost:8000/v1/orders/
 Content-Type: application/json
 
 
+### Get orders stats
+GET http://localhost:8000/v1/orders/stats
+Content-Type: application/json
+
+
 ### Get an order
 GET http://localhost:8000/v1/orders/630c8f707740928186e01216
 Content-Type: application/json

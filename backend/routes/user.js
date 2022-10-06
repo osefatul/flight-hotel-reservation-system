@@ -7,7 +7,8 @@ const {
     deleteUser,
     getUser,
     getUsers,
-    getCurrentUser
+    getCurrentUser,
+    getUsersStats
 } = require("../controllers/user.js");
 
 
@@ -36,20 +37,18 @@ router.put("/:id", verifyToken, verifyUser, updateUser);
 //DELETE
 router.delete("/:id",verifyToken, verifyUser, deleteUser);
 
-
 //Get current user.
 router.get("/currentUser/:id",verifyToken, verifyUser, getCurrentUser);
 
+// Get users stats
+router.get("/stats",verifyToken, verifyAdmin, getUsersStats);
 
-//GET
+//GET user
 router.get("/:id",verifyToken, verifyUser, getUser);
 
 
-//GET ALL
+//GET ALL users
 router.get("/",verifyToken, verifyAdmin, getUsers);
-
-
-
 
 
 module.exports = router;

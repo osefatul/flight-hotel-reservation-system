@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     users: [],
+    usersStats: [],
     requestedUser:{},
     isLoading: false,
     error: "",
@@ -20,6 +21,13 @@ const userSlice = createSlice({
         state.requestedUser = payload;
         state.error = "";
     },
+
+    getUsersStatsSuccess: (state, { payload }) => {
+        state.isLoading = false;
+        state.usersStats = payload;
+        state.error = "";
+    },
+
     getUsersSuccess: (state, { payload }) => {
         state.isLoading = false;
         state.users = payload;
@@ -47,6 +55,7 @@ export const {
     getUsersPending,
     getRequestedUserSuccess,
     getUsersSuccess,
+    getUsersStatsSuccess,
     searchUsers,
     getUsersFail,
 

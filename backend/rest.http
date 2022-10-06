@@ -142,9 +142,16 @@ Content-Type: application/json
 
 
 
-### Get user 
+### delete user 
 DELETE http://localhost:5000/v1/users/630c96f619b49ba0cca1b056
 Content-Type: application/json
+
+
+###get users stats
+GET http://localhost:5000/v1/users/stats
+Content-Type: application/json
+
+
 
 
 

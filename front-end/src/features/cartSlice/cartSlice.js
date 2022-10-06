@@ -26,8 +26,6 @@ const cartSlice = createSlice({
     //     ...state.cartItems[existingIndex],
     //     itemQuantity: state.cartItems[existingIndex].itemQuantity + 1,
     //     };
-    //     toast.info("Increased product quantity", {
-    //     position: "bottom-left",
     //     });
     // } else {
 
@@ -43,20 +41,11 @@ const cartSlice = createSlice({
 
     // if (state.cartItems[itemIndex].itemQuantity > 1) {
     //     state.cartItems[itemIndex].itemQuantity -= 1;
-    //     toast.info("Decreased product quantity", {
-    //     position: "bottom-left",
-    //     });
     // } else if (state.cartItems[itemIndex].itemQuantity === 1) {
     //     const nextCartItems = state.cartItems.filter(
     //     (item) => item._id !== action.payload._id
     //     );
-
     //     state.cartItems = nextCartItems;
-
-    //     toast.error("Product removed from cart", {
-    //     position: "bottom-left",
-    //     });
-    // }
 
     // localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     // },

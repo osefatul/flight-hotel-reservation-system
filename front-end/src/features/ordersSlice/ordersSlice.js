@@ -6,6 +6,7 @@ const initialState = {
     error: "",
     order: {},
     orders: [],
+    ordersStats: [],
 }
 
 const orderSlice = createSlice ({
@@ -21,6 +22,12 @@ const orderSlice = createSlice ({
             state.isLoading = false
             state.error = ""
             state.orders = action.payload
+        },
+
+        fetchingOrdersStatsSuccess: (state, action)=>{
+            state.isLoading = false
+            state.error = ""
+            state.ordersStats = action.payload
         },
 
         fetchingAnOrderSuccess: (state, action)=>{
@@ -42,7 +49,8 @@ const { reducer, actions} = orderSlice
 export const  {
     ordersPending,
     fetchingOrdersSuccess,
-    fetchingAnOrderSuccess, 
+    fetchingAnOrderSuccess,
+    fetchingOrdersStatsSuccess,
     orderFail
 } = actions
 

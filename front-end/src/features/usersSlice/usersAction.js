@@ -1,5 +1,6 @@
-import { fetchAllUsers, fetchUser, userDelete, fetchCurrentUser } from "../../api/userApi";
-import { getRequestedUserSuccess, getUsersFail, getUsersPending, getUsersSuccess } from "./usersSlice";
+import { fetchAllUsers, fetchUser, userDelete, fetchCurrentUser, fetchUsersStats } from "../../api/userApi";
+import { compare } from "../../utils/compare";
+import { getRequestedUserSuccess, getUsersFail, getUsersPending, getUsersStatsSuccess, getUsersSuccess } from "./usersSlice";
 
 
 
@@ -14,6 +15,22 @@ export const getUsersData =() => async dispatch => {
         dispatch(getUsersFail(error));
     }
 }
+
+
+
+export const getUsersStats =() => async dispatch => {
+    dispatch(getUsersPending());
+    try {
+        const result = await fetchUsersStats();
+        const finalResult = await result.sort(compare)
+        dispatch(getUsersStatsSuccess(finalResult));
+        return result
+        
+    } catch (error) {
+        dispatch(getUsersFail(error));
+    }
+}
+
 
 
 
