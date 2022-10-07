@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { FetchingBooking, FetchingBookingBasedOnBookingId } from '../../features/bookingSlice/bookingAction';
 import { FetchingAnOrder } from '../../features/ordersSlice/ordersAction';
 
-function FlightHistory({user, setBookingId, bookingId, setModalOpen}) {
+function FlightHistory({user, setBookingId, bookingId, setModalOpen, setFlightId}) {
     const dispatch = useDispatch();
     // const {isLoading, bookingData} = useSelector(state => state.booking);
     // const [data, setData] = useState(bookingData)
@@ -24,13 +24,12 @@ function FlightHistory({user, setBookingId, bookingId, setModalOpen}) {
 
 
 
-    const handleBooking = (e, params)=>{
+    const handleBooking = (e, product)=>{
         e.preventDefault()
-        params.row.products.map(product=>{
             if(product.bookingId){
                 setBookingId(product.bookingId)
+                setFlightId(product.productId)
             }
-        })
         return setModalOpen(true)
     }
 
@@ -38,74 +37,6 @@ function FlightHistory({user, setBookingId, bookingId, setModalOpen}) {
         bookingId && dispatch(FetchingBookingBasedOnBookingId(bookingId))
     },[bookingId, dispatch])
 
-
-    // const columns = [
-    //     { field: "id", headerName: "Booking ID", width: 120, weight:"bold",
-    //     flex: 1,
-    //     renderCell: (params) => {
-    //         return (
-    //             <div className="text-[11px]">
-    //                 {params.row.bookingId }
-    //             </div>
-    
-    //         );
-    //     }},
-    
-    //     {
-    //     field: "Booked User",
-    //     headerName: "Booked User Details",
-    //     width: 160,
-    //     flex: 1,
-    //     renderCell: (params) => {
-    //         return (
-    //         <div className="text-[11px]">
-    //             {params.row.bookedUser}
-    //         </div>
-    //         );
-    //     },
-    //     },
-    
-    //     {
-    //     field: "flight",
-    //     headerName: "Flight ID",
-    //     width: 160,
-    //     flex: 1,
-    //     renderCell: (params) => {
-    //         return (
-    //             <div className='text-[11px]'>
-    //                 {params.row.flight}
-    //             </div>
-    //         );
-    //     },
-    //     },
-
-    //     {
-    //         field: "Date",
-    //         headerName: "Departure",
-    //         width: 160,
-    //         flex: 1,
-    //         renderCell: (params) => {
-    //             return (
-    //                 <div className='text-[11px]'>
-    //                 {new Date(params.row.departureDate).toDateString()}
-    //                 </div>
-    //             );
-    //         },
-    //         },
-    //     {
-    //         field: "bookingDate",
-    //         headerName: "Booking Date",
-    //         width: 160,
-    //         flex: 1,
-    //         renderCell: (params) => {
-    //             return (
-    //                 <div className="text-green-600 text-[11px]">
-    //                 {new Date(params.row.openAt).toDateString()}
-    //                 </div>
-    //             );
-    //         },
-    //         },
-    // ]
 
 
     const columns = [
@@ -133,14 +64,30 @@ function FlightHistory({user, setBookingId, bookingId, setModalOpen}) {
             );
             },
         },
+        {
+            field: "productType",
+            headerName: "Type",
+            width: 100,
+            renderCell: (params) => {
+            return (
+                <div className="flex flex-col space-y-2 text-[12px] items-center">
+                    {params.row.products.map((product) =>(
+                    <div className="text-black ">
+                        {product.productType}
+                    </div>
+                    ))}
+                </div>
+            );
+            },
+        },
         
         
         { field: "productsId", headerName: "Products ID", width: 200,
         renderCell : (params) => {
             return (
-            <div className="text-[12px] ">
+            <div className='flex flex-col space-y-2'>
                 {params.row.products.map((product) =>(
-                    <div className="text-black space-y-2">
+                    <div className="text-black">
                         {product.productId}
                     </div>
                 ))}
@@ -152,9 +99,9 @@ function FlightHistory({user, setBookingId, bookingId, setModalOpen}) {
         { field: "productsName", headerName: "Products Name", width: 200,
         renderCell : (params) => {
             return (
-            <div className="text-[12px] ">
+            <div className='flex flex-col space-y-2'>
                 {params.row.products.map((product) =>(
-                    <div className="text-black space-y-2">
+                    <div className="text-black">
                     {product.productName}
                     </div>
                 ))}
@@ -182,16 +129,7 @@ function FlightHistory({user, setBookingId, bookingId, setModalOpen}) {
             </div>
             )
         },
-        // {
-        //     field: "deliveryStatus",
-        //     headerName: "Status",
-        //     width: 120,
-        //     renderCell : (params) => (
-        //     <div className="text-[12px]">
-        //         {params.row.delivery_status}
-        //     </div>
-        //     )
-        // },
+
         {
             field: "OrderDone",
             headerName: "Booking time",
@@ -209,19 +147,20 @@ function FlightHistory({user, setBookingId, bookingId, setModalOpen}) {
             width: 150,
             renderCell: (params) => {
             return (
-                <>
-                {/* <Link to={"/admin/users/" + params.row._id}> */}
-                    <button className="bg-green-800 w-max px-2 py-[3px] rounded-sm text-white text-[11px]"
-                    onClick ={(e) => handleBooking(e,params )}
-                    >
+                <div className='flex flex-col space-y-2 py-2'>
+
+                    {
+                    params.row.products.map((product) =>(
+                        product.productType === "Travel" &&
+                        <button className="bg-green-800 w-max px-2 py-[3px] rounded-sm text-white text-[11px]"
+                        // onClick ={(e) => handleBooking(e,params)}
+                        onClick ={(e) => handleBooking(e,product)}
+
+                        >
                         View Booking
                     </button>
-                {/* </Link> */}
-                {/* <DeleteOutline
-                    className="productListDelete"
-                    onClick={() => handleDelete(params.row._id)}
-                /> */}
-                </>
+                    ))}
+                </div>
             );
             },
         }
@@ -234,6 +173,7 @@ return (
             {isLoading ? "Loading..." : (
                     <div className=" w-full h-full text-[12px]">
                         <DataGrid
+                        getRowHeight={() => 'auto'}
                         sx={{
                         border: 0, // also tried setting to none 
                         borderRadius: 2,

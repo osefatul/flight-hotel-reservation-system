@@ -14,7 +14,7 @@ function OrderHistory() {
     const {user} = useSelector(state => state.login);
     const [modalOpen, setModalOpen] = useState(false);
     const [bookingId, setBookingId] = useState()
-
+    const [flightId, setFlightId] = useState()
     const tabs = [
         {id:0, tab:"Booking & Reservation History"},
         {id:1, tab:"Reserved Room/s Details"}
@@ -52,15 +52,20 @@ function OrderHistory() {
 
         <div className='h-full w-full space-y-3'>
             {tabSelected === 0 ?
-            <FlightHistory user={user} setBookingId={setBookingId} bookingId={bookingId} setModalOpen={setModalOpen}/>:
+            <FlightHistory 
+                user={user} 
+                setBookingId={setBookingId} 
+                bookingId={bookingId} 
+                setModalOpen={setModalOpen}
+                setFlightId={setFlightId}
+                />:
             <ReservedRoomsByUser user={user}/>
             }
-
         </div>
     </div>
 
     {
-            modalOpen && <ViewBooking setModalOpen={setModalOpen} bookingId={bookingId} />
+            modalOpen && <ViewBooking setModalOpen={setModalOpen} flightId={flightId} />
         }
 </div>
 )

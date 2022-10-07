@@ -17,6 +17,7 @@ function ConfirmingBookingModal({setModalOpen, departureDate}) {
     const [messageAlert, setMessageAlert] = useState(false)
 
     const navigate = useNavigate()
+    let joinedObj = {}
 
     useEffect(()=>{
         setTimeout(()=>{
@@ -37,10 +38,11 @@ function ConfirmingBookingModal({setModalOpen, departureDate}) {
         //get bookingId and add it into cart after we created booking.
         //I used this below method to wait until I get bookingId but first let me create it 
         await dispatch(AddingBooking({bookedUser: SelectedUsersDetail._id, accountUser:user._id, flight:flight._id, departureDate}))
-        .then(()=>{
-            const joinedObj = {...newObj, bookingId:bookingData?.booked?.bookingId, firstName:SelectedUsersDetail.firstName, lastName:SelectedUsersDetail.lastName, birthDate:SelectedUsersDetail.birthdate, departureDate}
+        .then(async()=>{
+            joinedObj = await {...newObj, bookingId:bookingData?.booked?.bookingId, firstName:SelectedUsersDetail.firstName, lastName:SelectedUsersDetail.lastName, birthDate:SelectedUsersDetail.birthdate, departureDate}
+        }).then(()=>{
             try{
-                dispatch(addToCart(joinedObj))
+                Object.keys(joinedObj).includes("bookingId") && dispatch(addToCart(joinedObj))
                 setMessageAlert(true)
             }
             catch(error){

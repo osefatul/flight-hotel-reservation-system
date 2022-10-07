@@ -9,7 +9,7 @@ import { FetchingAFlight } from '../../features/flightsSlice/flightAction'
 import { FetchingUserDetail } from '../../features/flightUserDetails/flightUserDetailsAction'
 
 
-function ViewBooking({setModalOpen}) {
+function ViewBooking({setModalOpen, flightId}) {
     const {bookingData} = useSelector(state => state.booking)
     const {isLoading, flight} = useSelector(state => state.flights)
     const [flightData, setFlightData] = useState(flight)
@@ -21,7 +21,7 @@ function ViewBooking({setModalOpen}) {
 
     useEffect(()=>{
         bookingData[0]?.bookedUser && dispatch(FetchingUserDetail(bookingData[0]?.bookedUser))
-            bookingData[0]?.flight && dispatch(FetchingAFlight(bookingData[0]?.flight))
+            bookingData[0]?.flight && flightId && dispatch(FetchingAFlight(flightId))
     },[dispatch,bookingData])
 
     useEffect(()=>{
@@ -47,7 +47,6 @@ function ViewBooking({setModalOpen}) {
         const res = await createPDFTicket(formData)
         console.log(res)
         setModalOpen(false);
-
     }
 
 
