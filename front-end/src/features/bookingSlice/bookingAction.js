@@ -1,4 +1,4 @@
-import { CreateBooking, deleteBooking, fetchBooking, fetchBookingBasedOnBookingId, fetchBookings } from "../../api/TravelApi/booking";
+import { CreateBooking, deleteBooking, fetchABookingBasedOnId, fetchBooking, fetchBookingBasedOnBookingId, fetchBookings } from "../../api/TravelApi/booking";
 import { BookingFail, BookingPending, fetchingABookingSuccess, fetchingBookingsSuccess } from "./bookingSlice"
 
 
@@ -7,7 +7,10 @@ export const AddingBooking = (formData) => async (dispatch) =>{
     dispatch(BookingPending);
     try{
         const res = await CreateBooking(formData);
-        dispatch(fetchingABookingSuccess(res.data))
+        // console.log("this is data", res.data.booked._id)
+        const fetchingARecentBooking = await fetchABookingBasedOnId(res.data.booked._id);
+        console.log(fetchingARecentBooking.data)
+        await dispatch(fetchingABookingSuccess(fetchingARecentBooking.data))
 
     }catch(error){
         console.log(error)
@@ -42,6 +45,19 @@ export const deletingBooking = (id, flightId) => async (dispatch) =>{
 }
 
 
+export const FetchingBookingBasedOnId = (id) => async (dispatch) =>{
+    dispatch(BookingPending);
+    try{
+        const res = await fetchABookingBasedOnId(id);
+        console.log(res.data);
+        dispatch(fetchingABookingSuccess(res.data))
+    }catch(error){
+        console.log(error)
+        dispatch(BookingFail)
+    }
+}
+
+// for accountUser
 export const FetchingBooking = (id) => async (dispatch) =>{
     dispatch(BookingPending);
     try{

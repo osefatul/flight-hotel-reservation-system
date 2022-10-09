@@ -107,7 +107,51 @@ const getOrdersStats = async (req, res, next) => {
     }catch(error){
         res.status(404).json({ message: error.message });
     }
+}
 
+
+
+// Get orders statistics
+const getOrdersRevenueStats = async (req, res, next) => {
+    //normally how you get month in moment: moment().month()
+    const previousMonth = 
+    moment()//define date...
+    .month(moment().month()-1)//get month - this define month(current month - 1 )
+    .set("date", 1)// set date the first day of the month.
+    .format("YYYY-MM-DD HH:mm:ss")
+
+    try{
+        const revenue = await Order.aggregate([
+
+            // Stage1: Filter users based on join date, which is previous month.
+            {
+                $match: {createdAt: {
+                    $gte:new Date(previousMonth)
+                    }
+                }
+            },
+            // State2" Create another field named month and get the month of createdAt
+            {
+                $project: {
+                    month: {$month: "$createdAt"},
+                    sales: "$total",
+                    
+                }
+            },
+            // State3" return a group where th id would be the month from stage2 and total would be the sum of all $project of the month
+            {
+                $group:{
+                    _id: "$month",
+                    total:{$sum: "$sales"}
+                }
+            }
+        ])
+
+        res.status(200).json(revenue)
+
+    }catch(error){
+        res.status(404).json({ message: error.message });
+    }
 }
 
 
@@ -118,6 +162,7 @@ module.exports = {
     getAnOrder,
     deleteAnOrder,
     updateAnOrder,
-    getOrdersStats
+    getOrdersStats,
+    getOrdersRevenueStats
     
 }

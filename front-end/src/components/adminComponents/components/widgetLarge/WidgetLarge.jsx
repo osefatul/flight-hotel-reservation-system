@@ -2,9 +2,14 @@ import React from "react";
 import "./widgetLarge.css";
 
 function WidgetLarge() {
+
+  
   const Button = ({ type }) => {
     return <button className={"widgetLargeButton " + type}>{type}</button>;
   };
+
+
+
   return (
     <div className="widgetLarge">
       <h3 className="widgetLargeTitle">Latest Transactions</h3>

@@ -6,6 +6,7 @@ const initialState = {
     bookings:[],
     isLoading: false,
     error: "",
+    nestedModal: false,
 };
 
 
@@ -28,6 +29,12 @@ const BookingSlice = createSlice({
             state.error = ""
             state.bookings = action.payload 
         },
+        ToggleNestModalTrue: (state, action)=>{
+            state.nestedModal = true
+        },
+        ToggleNestModalFalse: (state, action)=>{
+            state.nestedModal = false
+        },
 
         BookingFail: (state, action)=>{
             state.isLoading = false
@@ -38,7 +45,7 @@ const BookingSlice = createSlice({
     },
 });
 
-export const {BookingPending, fetchingABookingSuccess, fetchingBookingsSuccess, BookingFail} =
+export const {BookingPending, fetchingABookingSuccess, fetchingBookingsSuccess,ToggleNestModalTrue, ToggleNestModalFalse, BookingFail} =
 BookingSlice.actions;
 
 export default BookingSlice.reducer;

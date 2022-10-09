@@ -21,14 +21,14 @@ function ViewBooking({setModalOpen, flightId}) {
 
     useEffect(()=>{
         bookingData[0]?.bookedUser && dispatch(FetchingUserDetail(bookingData[0]?.bookedUser))
-            bookingData[0]?.flight && flightId && dispatch(FetchingAFlight(flightId))
+        bookingData[0]?.flight && flightId && dispatch(FetchingAFlight(flightId))
     },[dispatch,bookingData])
+
 
     useEffect(()=>{
         setFlightData(flight)
         setUserData(SelectedUsersDetail)
     },[flight, SelectedUsersDetail])
-
 
 
     const handleCheckIn= async (e)=>{

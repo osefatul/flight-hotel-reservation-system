@@ -1,6 +1,6 @@
-import { fetchOrders, fetchOrdersStats } from "../../api/TravelApi/orders";
+import { fetchOrders, fetchOrdersRevenue, fetchOrdersStats } from "../../api/TravelApi/orders";
 import { compare } from "../../utils/compare";
-import { fetchingAnOrderSuccess, fetchingOrdersStatsSuccess, fetchingOrdersSuccess, orderFail, ordersPending } from "./ordersSlice";
+import { fetchingAnOrderSuccess, fetchingOrdersRevenueSuccess, fetchingOrdersStatsSuccess, fetchingOrdersSuccess, orderFail, ordersPending } from "./ordersSlice";
 
 
 
@@ -23,8 +23,22 @@ export const FetchingOrdersStats = () => async (dispatch) => {
     dispatch(ordersPending());
     try {
         const result = await fetchOrdersStats();
-        const finalResult = await result.sort(compare)
+        const finalResult = await result
         dispatch(fetchingOrdersStatsSuccess(finalResult))
+    }catch(error){
+        console.log(error)
+        dispatch(orderFail(error))
+        return error;
+    }
+}
+
+
+export const FetchingOrdersRevenue = () => async (dispatch) => {
+    dispatch(ordersPending());
+    try {
+        const result = await fetchOrdersRevenue();
+        const finalResult = await result
+        dispatch(fetchingOrdersRevenueSuccess(finalResult))
     }catch(error){
         console.log(error)
         dispatch(orderFail(error))

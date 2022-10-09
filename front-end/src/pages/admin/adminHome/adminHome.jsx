@@ -54,7 +54,6 @@ function AdminHome() {
                 />
               <div className="homeWidgets">
                 <WidgetSmall />
-                <WidgetLarge />
               </div>
         </div>
       

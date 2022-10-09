@@ -79,9 +79,9 @@ const cartSlice = createSlice({
 
     removeFlightFromCart(state, action) {
         state.cartItems.map((cartItem) => {
-            if (cartItem.departureDate === action.payload.departureDate) {
+            if (cartItem.departureDate.departureDate === action.payload.departureDate.departureDate) {
                 const nextCartItems = state.cartItems.filter(
-                (item) =>  item.departureDate !== action.payload.departureDate
+                (item) =>  item.departureDate.departureDate !== action.payload.departureDate.departureDate
                 );
                 state.cartItems = nextCartItems;
             }

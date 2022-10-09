@@ -26,9 +26,9 @@ function FlightHistory({user, setBookingId, bookingId, setModalOpen, setFlightId
 
     const handleBooking = (e, product)=>{
         e.preventDefault()
-            if(product.bookingId){
-                setBookingId(product.bookingId)
-                setFlightId(product.productId)
+            if(product?.bookingId){
+                setBookingId(product?.bookingId)
+                setFlightId(product?.productId)
             }
         return setModalOpen(true)
     }

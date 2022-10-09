@@ -24,10 +24,21 @@ export const fetchBookings = async () => {
     }
 }
 
-
+//for accountUser
 export const fetchBooking = async (id) => {
     try {
         const res = await axios.get(creatingBookingUrl + id)
+        return res
+    }catch(err){
+        console.log(err);
+        return err
+    }
+}
+
+
+export const fetchABookingBasedOnId = async (id) => {
+    try {
+        const res = await axios.get(creatingBookingUrl +"getABooking/" + id)
         return res
     }catch(err){
         console.log(err);

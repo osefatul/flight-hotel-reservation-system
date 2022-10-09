@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Navbar from '../../../components/Navbar'
 import { DataGrid } from '@mui/x-data-grid';
 import { getCurrentUserData } from '../../../features/usersSlice/usersAction';
-import { AddingFlightsUserDetails, deletingUserDetail, FetchingAFlightUserDetail, FetchingUserDetail } from '../../../features/flightUserDetails/flightUserDetailsAction';
-import { addNewUserDetails } from '../../../api/TravelApi/userDetails';
+import {  deletingUserDetail, FetchingAFlightUserDetail, FetchingUserDetail } from '../../../features/flightUserDetails/flightUserDetailsAction';
+
 import ConfirmingBookingModal from '../../../components/TravelComponent/ConfirmingBookingModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlaneArrival, faPlaneDeparture, faPlaneUp, faTicket, faTrash, } from '@fortawesome/free-solid-svg-icons';
@@ -13,8 +13,7 @@ import { GiCommercialAirplane } from 'react-icons/gi';
 import {MdAirplaneTicket} from "react-icons/md"
 import { motion } from "framer-motion"
 import AddTraveler from '../../../components/TravelComponent/AddTraveler';
-
-
+import NestedConfirmingModal from '../../../components/TravelComponent/NestedConfirmingModal';
 
 
 
@@ -24,14 +23,16 @@ function Booking() {
     const date = location?.state?.date;
     const dispatch = useDispatch()
 
-
     const [addPassenger, setAddPassenger] = useState(false)
     const [modalOpen, setModalOpen] = useState(false);
     
     const {user} = useSelector(state => state.login);
     const {flight} = useSelector(state => state.flights)
+    const {nestedModal} = useSelector(state => state.booking)
     const { isLoading, UsersDetail} = useSelector(state => state.flightsUserDetail)
     const [data, setData] = useState(UsersDetail)
+
+
 
 
     useEffect(  () => {
@@ -240,7 +241,11 @@ return (
         </div>
 
         {
-            modalOpen && <ConfirmingBookingModal setModalOpen={setModalOpen} departureDate = {date} />
+            modalOpen && <ConfirmingBookingModal setModalOpen={setModalOpen} departureDate={date}  />
+        }
+
+        {
+            nestedModal && <NestedConfirmingModal departureDate={date}/>
         }
 
     </div>

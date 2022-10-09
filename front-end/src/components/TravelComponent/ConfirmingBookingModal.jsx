@@ -5,19 +5,17 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from "react-router-dom";
 import { AddingBooking } from '../../features/bookingSlice/bookingAction';
-import { addToCart } from '../../features/cartSlice/cartSlice';
+import { ToggleNestModalTrue } from '../../features/bookingSlice/bookingSlice';
+
 
 function ConfirmingBookingModal({setModalOpen, departureDate}) {
 
     const dispatch = useDispatch() 
     const {flight} = useSelector(state => state.flights)
     const {user} = useSelector(state => state.login)
-    const {bookingData} = useSelector(state => state.booking)
     const {SelectedUsersDetail} = useSelector(state => state.flightsUserDetail)
     const [messageAlert, setMessageAlert] = useState(false)
 
-    const navigate = useNavigate()
-    let joinedObj = {}
 
     useEffect(()=>{
         setTimeout(()=>{
@@ -28,34 +26,12 @@ function ConfirmingBookingModal({setModalOpen, departureDate}) {
 
 
     const handleConfirmation = async (e) => {
+        e.preventDefault();
 
-        const newObj = await {...flight}
-        newObj["name"] = `Flight on ${flight.airline} `;
-        newObj["desc"] = `Airline ticket`;
-        newObj["price"]= newObj["fare"]
-        newObj["type"] = "Travel"
-
-        //get bookingId and add it into cart after we created booking.
-        //I used this below method to wait until I get bookingId but first let me create it 
-        await dispatch(AddingBooking({bookedUser: SelectedUsersDetail._id, accountUser:user._id, flight:flight._id, departureDate}))
-        .then(async()=>{
-            joinedObj = await {...newObj, bookingId:bookingData?.booked?.bookingId, firstName:SelectedUsersDetail.firstName, lastName:SelectedUsersDetail.lastName, birthDate:SelectedUsersDetail.birthdate, departureDate}
-        }).then(()=>{
-            try{
-                Object.keys(joinedObj).includes("bookingId") && dispatch(addToCart(joinedObj))
-                setMessageAlert(true)
-            }
-            catch(error){
-                console.log(error)
-            }
-        })
-        .then (()=>{
-            setTimeout(()=>{
-                navigate("/cart")
-            },2000)
-        }).cath((error)=>{
-            console.log(error)
-        })
+        dispatch(AddingBooking({bookedUser: SelectedUsersDetail._id, accountUser:user._id, flight:flight._id, departureDate})).then(()=>(
+            // setNestedModal(true) //
+            dispatch(ToggleNestModalTrue())
+        ))
 
     }
 
@@ -128,7 +104,7 @@ function ConfirmingBookingModal({setModalOpen, departureDate}) {
                             Cancel</button>
 
                         <button className='text-white text-[12px] bg-green-900 w-max px-2 p-1 rounded-sm'
-                        onClick={(e) => handleConfirmation()}
+                        onClick={(e) => handleConfirmation(e)}
                         >
                             Confirm
                         </button>
@@ -137,7 +113,6 @@ function ConfirmingBookingModal({setModalOpen, departureDate}) {
                 </div>
 
             </div>
-
     </div>
 
     )

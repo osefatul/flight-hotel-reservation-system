@@ -39,7 +39,7 @@ return (
                             <p>From:<span className="font-bold"> {item.from}</span></p> 
                             <p>To:<span className="font-bold"> {item.to}</span></p>
                             <p>Price:<span className="font-bold"> ${item.fare}</span></p>
-                            <p>Travel Date:<span className="font-bold"> {new Date(item.departureDate).toDateString()}</span></p>
+                            <p>Travel Date:<span className="font-bold"> {new Date(item.departureDate.departureDate).toDateString()}</span></p>
 
                         </div>
                     </div>
