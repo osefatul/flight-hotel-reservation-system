@@ -25,6 +25,7 @@ export const fetchOrdersStats = async()=>{
     }
 }
 
+// revenue of the previous month
 export const fetchOrdersRevenue = async()=>{
     try{
         const res = await axios.get(FetchingOrdersUrl+"revenue")
@@ -35,6 +36,26 @@ export const fetchOrdersRevenue = async()=>{
     }
 }
 
+export const fetchOrdersWeeklyRevenue = async()=>{
+    try{
+        const res = await axios.get(FetchingOrdersUrl+"weeklyRevenue")
+        return res.data.sort(compare)
+    }catch(error){
+        console.log(error)
+        return error
+    }
+}
+
+
+export const fetchLatestOrdersTransactions = async()=>{
+    try{
+        const res = await axios.get(FetchingOrdersUrl+"latestTransactions/?new")
+        return res.data
+    }catch(error){
+        console.log(error)
+        return error
+    }
+}
 
 
 

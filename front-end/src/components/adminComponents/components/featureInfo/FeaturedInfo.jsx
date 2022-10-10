@@ -18,9 +18,9 @@ function FeaturedInfo() {
 
   return (
 
-    <div className="flex items-center">
+    <div className="flex sm:flex-row flex-col items-center space-y-3 sm:space-y-0 sm:space-x-4 w-full">
 
-      <div className="flex justify-between bg-slate-700 rounded-md w-max items-center text-white p-2 pt-20 space-x-4 relative shadow-xl text-slate-200">
+      <div className="flex justify-between bg-slate-700 rounded-md h-56 w-full items-center text-white p-2 pt-20 space-x-4 relative shadow-xl text-slate-200">
 
         <div className="absolute top-2 left-6">
           <h1 className="font-bold text-2xl">
@@ -49,8 +49,10 @@ function FeaturedInfo() {
 
       </div>
 
-
+      <div className="flex items-start bg-slate-700 rounded-md h-56 w-full items-center text-white relative shadow-xl text-slate-200">
       <WidgetLarge />
+      </div>
+
     </div>
   );
 }

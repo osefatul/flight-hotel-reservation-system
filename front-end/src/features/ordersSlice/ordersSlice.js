@@ -5,12 +5,16 @@ const initialState = {
     isStatsLoading: false,
     isRevenueLoading: false,
     FeaturedLoading: false,
+    ordersWeeklyLoading: false,
+    latestTransactionsLoading: false,
+
     error: "",
     order: {},
     orders: [],
     ordersStats: [],
     ordersRevenue: [],
-
+    ordersWeeklyRevenue: [],
+    latestTransactions: [],
 }
 
 const orderSlice = createSlice ({
@@ -22,6 +26,8 @@ const orderSlice = createSlice ({
             state.isLoading = true
             state.isRevenueLoading = true
             state.isStatsLoading = true
+            state.ordersWeeklyRevenue = true
+            state.latestTransactions = true
         },
 
         fetchingOrdersSuccess: (state, action)=>{
@@ -42,6 +48,20 @@ const orderSlice = createSlice ({
             state.isLoading = false
             state.error = ""
             state.ordersRevenue = action.payload
+        },
+
+        fetchingWeeklyOrdersRevenueSuccess: (state, action)=>{
+            state.ordersWeeklyLoading = false
+            state.isLoading = false
+            state.error = ""
+            state.ordersWeeklyRevenue = action.payload
+        },
+
+        fetchingLatestTransactionsSuccess: (state, action)=>{
+            state.latestTransactionsLoading = false
+            state.isLoading = false
+            state.error = ""
+            state.latestTransactions = action.payload
         },
 
         fetchingAnOrderSuccess: (state, action)=>{
@@ -66,6 +86,8 @@ export const  {
     fetchingAnOrderSuccess,
     fetchingOrdersStatsSuccess,
     fetchingOrdersRevenueSuccess,
+    fetchingLatestTransactionsSuccess,
+    fetchingWeeklyOrdersRevenueSuccess,
     orderFail
 } = actions
 

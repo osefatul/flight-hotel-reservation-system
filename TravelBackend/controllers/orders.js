@@ -66,7 +66,7 @@ const updateAnOrder = async (req, res, next) => {
 
 
 
-// Get orders statistics
+// Get orders statistics for a month
 const getOrdersStats = async (req, res, next) => {
     //normally how you get month in moment: moment().month()
     const previousMonth = 
@@ -111,7 +111,7 @@ const getOrdersStats = async (req, res, next) => {
 
 
 
-// Get orders statistics
+// Get orders Revenue Statistics for a month
 const getOrdersRevenueStats = async (req, res, next) => {
     //normally how you get month in moment: moment().month()
     const previousMonth = 
@@ -156,6 +156,67 @@ const getOrdersRevenueStats = async (req, res, next) => {
 
 
 
+// Get orders statistics
+const getWeeklyOrdersStats = async (req, res, next) => {
+    //normally how you get month in moment: moment().month()
+    const previousWeek = 
+    moment()//define date...
+    .day(moment().day()-7)//get month - this define day(current day - 7 )
+    .format("YYYY-MM-DD HH:mm:ss")
+
+    try{
+        const orders = await Order.aggregate([
+
+            // Stage1: Filter users based on join date, which is previous month.
+            {
+                $match: {createdAt: {
+                    $gte:new Date(previousWeek)
+                    }
+                }
+            },
+            // State2" Create another field named month and get the month of createdAt
+            {
+                $project: {
+                    day: {$dayOfWeek: "$createdAt"},
+                    sales:"$total"
+                }
+            },
+            // State3" return a group where th id would be the month from stage2 and total would be the sum of all $project of the month
+            {
+                $group:{
+                    _id: "$day",
+                    total:{$sum:"$sales"}
+                }
+            }
+        ])
+
+        res.status(200).json(orders)
+
+    }catch(error){
+        res.status(404).json({ message: error.message });
+    }
+}
+
+
+const latestTransactions = async(req, res, next) =>{
+    const query = req.query.new //new is a query we put in the params.
+
+    try{
+        // -1 descending order
+        const orders = query? 
+            await Order.find().sort({_id: -1}).limit(5)
+            :
+            await Order.find().sort({_id:-1});
+        res.status(200).json(orders)
+        
+
+    }catch(error){
+        res.status(500).json({ message: error.message });
+        console.log(error.message)
+    }
+
+}
+
 module.exports = {
     newOrder,
     getAllOrders,
@@ -163,6 +224,7 @@ module.exports = {
     deleteAnOrder,
     updateAnOrder,
     getOrdersStats,
-    getOrdersRevenueStats
-    
+    getOrdersRevenueStats,
+    getWeeklyOrdersStats,
+    latestTransactions
 }

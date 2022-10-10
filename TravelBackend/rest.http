@@ -154,8 +154,16 @@ GET http://localhost:8000/v1/orders/stats
 Content-Type: application/json
 
 
-### Get an order
+### Get an orders revenue
 GET http://localhost:8000/v1/orders/revenue
+Content-Type: application/json
+
+### Get orders weekly revenue
+GET http://localhost:8000/v1/orders/weeklyRevenue
+Content-Type: application/json
+
+### Get Orders latest transaction
+GET http://localhost:8000/v1/orders/latestTransactions/?new
 Content-Type: application/json
 
 

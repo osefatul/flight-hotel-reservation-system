@@ -12,9 +12,7 @@ function OverviewComponents({fetchStats, arrayData, dataType , }) {
 
     useEffect(()=>{
         const dispatchingData = async ()=>{
-        await dispatch(fetchStats()).then(()=>(setData(arrayData))).then(()=> (
-        setPercentage(((Data[0]?.total - Data[1]?.total)/Data[1]?.total)*100)
-        ))
+        await dispatch(fetchStats())
         }
         dispatchingData()
     

@@ -1,86 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchingLatestOrdersTransactions } from "../../../../features/ordersSlice/ordersAction";
 import "./widgetLarge.css";
 
 function WidgetLarge() {
 
-  
-  const Button = ({ type }) => {
-    return <button className={"widgetLargeButton " + type}>{type}</button>;
-  };
+  const dispatch = useDispatch();
+  const {latestTransactionsLoading, latestTransactions} = useSelector(state=> state.orders)
+  const [data, setData] = useState()
+  console.log(data)
 
 
+  useEffect(()=>{
+    dispatch(fetchingLatestOrdersTransactions())
+  },[])
+
+  useEffect(()=>{
+    setData(latestTransactions)
+  },[latestTransactions])
 
   return (
-    <div className="widgetLarge">
-      <h3 className="widgetLargeTitle">Latest Transactions</h3>
-      <table className="widgetLargeTable">
-        <tr className="widgetLargeTr">
-          <th className="widgetLargeTh">Customer</th>
-          <th className="widgetLargeTh">Date</th>
-          <th className="widgetLargeTh">Amount</th>
-          <th className="widgetLargeTh">Status</th>
+    <div className="flex flex-col p-2 h-full space-y-5 text-[12px]">
+      <h3 className="font-bold text-2xl">Latest Transactions</h3>
+      {
+        latestTransactionsLoading?"Loading...":
+
+      <table className="w-full ">
+        <tr className="w-full flex space-x-12">
+          <th className="">Customer</th>
+          <th className="">Date</th>
+          <th className="">Amount</th>
+          <th className="">Status</th>
         </tr>
-        <tr className="widgetLargeTr">
-          <td className="widgetLargeUser">
-            <img
-              className="widgetLargeImage"
-              src="https://qph.fs.quoracdn.net/main-qimg-cebbc5f4664800cb05eccace997e1010"
-              alt=""
-            />
-            <span className="widgetLargeName">King Khan</span>
+
+        {data?.length>0 && data.map((item, index)=>(
+          <tr className="w-full flex space-x-8">
+          <td className="">
+            <span className="">
+            U{item.userId.slice(0, 10)}
+            </span>
           </td>
-          <td className="widgetLargeDate">2th Jan 20222</td>
-          <td className="widgetLargeAmount">$1225.9</td>
-          <td className="widgetLargeStatus">
-            <Button type="Approved" />
-          </td>
+          <td className=" ">{new Date(item.createdAt).toLocaleDateString()}</td>
+          <td className="pr-2">${item.total/100}</td>
+          <td className="pl-4 text-green-300">{item.payment_status}</td>
         </tr>
-        <tr className="widgetLargeTr">
-          <td className="widgetLargeUser">
-            <img
-              className="widgetLargeImage"
-              src="https://qph.fs.quoracdn.net/main-qimg-cebbc5f4664800cb05eccace997e1010"
-              alt=""
-            />
-            <span className="widgetLargeName">King Khan</span>
-          </td>
-          <td className="widgetLargeDate">2th Jan 20222</td>
-          <td className="widgetLargeAmount">$1225.9</td>
-          <td className="widgetLargeStatus">
-            <Button type="Declined" />
-          </td>
-        </tr>
-        <tr className="widgetLargeTr">
-          <td className="widgetLargeUser">
-            <img
-              className="widgetLargeImage"
-              src="https://qph.fs.quoracdn.net/main-qimg-cebbc5f4664800cb05eccace997e1010"
-              alt=""
-            />
-            <span className="widgetLargeName">King Khan</span>
-          </td>
-          <td className="widgetLargeDate">2th Jan 20222</td>
-          <td className="widgetLargeAmount">$1225.9</td>
-          <td className="widgetLargeStatus">
-            <Button type="Pending" />
-          </td>
-        </tr>
-        <tr className="widgetLargeTr">
-          <td className="widgetLargeUser">
-            <img
-              className="widgetLargeImage"
-              src="https://qph.fs.quoracdn.net/main-qimg-cebbc5f4664800cb05eccace997e1010"
-              alt=""
-            />
-            <span className="widgetLargeName">King Khan</span>
-          </td>
-          <td className="widgetLargeDate">2th Jan 20222</td>
-          <td className="widgetLargeAmount">$1225.9</td>
-          <td className="widgetLargeStatus">
-            <Button type="Approved" />
-          </td>
-        </tr>
+        ))}
       </table>
+      }
+
     </div>
   );
 }
