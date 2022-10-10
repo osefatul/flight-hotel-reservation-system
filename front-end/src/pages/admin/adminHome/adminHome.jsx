@@ -46,7 +46,7 @@ function AdminHome() {
         <Sidebar />
         </div>
 
-        <div className="w-[85%] mt-2 p-2 pr-8 space-y-4">
+        <div className="w-[85%] mt-2 p-2 px-8 space-y-4">
               <FeaturedInfo />
               <Charts
                 data={userData}
@@ -54,9 +54,9 @@ function AdminHome() {
                 grid
                 dataKey="Active User"
                 />
-              <div className="homeWidgets">
+              {/* <div className="homeWidgets">
                 <WidgetSmall />
-              </div>
+              </div> */}
         </div>
       
       

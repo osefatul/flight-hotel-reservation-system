@@ -18,18 +18,18 @@ function FeaturedInfo() {
 
   return (
 
-    <div className="flex sm:flex-row flex-col items-center space-y-3 sm:space-y-0 sm:space-x-4">
+    <div className="flex sm:flex-row flex-col items-center space-y-3 sm:space-y-0 sm:space-x-2">
 
-      <div className="flex justify-between bg-slate-700 rounded-md h-56  w-full items-center text-white p-2 pt-20 space-x-4 relative shadow-xl text-slate-200">
+      <div className="flex justify-between bg-slate-700 rounded-md h-max sm:h-56 space-y-4 w-full items-center text-white p-2 pt-20 sm:space-x-4 relative shadow-xl text-slate-200">
 
-        <div className="absolute top-2 left-6">
+        <div className="absolute top-2 left-6 space-y-2">
           <h1 className="font-bold text-2xl">
             Overview
           </h1>
           <p className="text-sm ">How is your business performing comparatively speaking...</p>
         </div>
 
-        <div className= "flex w-full space-x-2">
+        <div className= "flex flex-col sm:flex-row w-full space-y-3 sm:space-y-0 sm:space-x-2">
           <OverviewComponents
           className="" 
           dataType="Revenue" 
@@ -52,7 +52,7 @@ function FeaturedInfo() {
         </div>
       </div>
 
-      <div className="flex items-start bg-slate-700 rounded-md h-56 items-center text-white relative shadow-xl text-slate-200 ">
+      <div className="flex items-start bg-slate-700 rounded-md h-max sm:h-56 items-center text-white relative shadow-xl text-slate-200 w-full">
       <WidgetLarge />
       </div>
 

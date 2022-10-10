@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchingLatestOrdersTransactions } from "../../../../features/ordersSlice/ordersAction";
 import "./widgetLarge.css";
+import moment from "moment";
+import { Link } from "react-router-dom";
 
 function WidgetLarge() {
 
@@ -25,39 +27,39 @@ function WidgetLarge() {
   return (
     <div className="flex flex-col p-2 h-full space-y-5 text-[12px] w-full">
       <h3 className="font-bold text-2xl">Latest Transactions</h3>
-      {
-        latestTransactionsLoading?"Loading...":
+        
+        <div className="w-full">
+          <div className="w-full">
+              <div className="w-full flex justify-between ">
+                <p className="">Customer</p>
+                <p className="">Date</p>
+                <p className="">Amount</p>
+                <p className="pl-2">Status</p>
+              </div>
 
-      <div className="w-full">
-
-        <table className="table-auto">
-          <thead>
-            <tr className="w-full flex space-x-12">
-              <th className="widgetLargeTh">Customer</th>
-              <th className="widgetLargeTh">Date</th>
-              <th className="widgetLargeTh">Amount</th>
-              <th className="widgetLargeTh">Status</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {data?.length>0 && data.map((item, index)=>(
-              <tr className="w-full flex space-x-8">
-              <td className="widgetLargeUser">
-                <span className="">
-                U{item.userId.slice(0, 10)}
-                </span>
-              </td>
-              <td className=" widgetLargeDate">{new Date(item.createdAt).toLocaleDateString()}</td>
-              <td className="widgetLargeAmount">${item.total/100}</td>
-              <td className="pl-10 text-green-300">{item.payment_status}</td>
-            </tr>
-            ))}
-          </tbody>
-        </table>
+            { latestTransactionsLoading?"Loading...":
+              data?.length>0 && data.map((item, index)=>(
+                <div className="w-full flex items-center justify-between ">
+                  <Link to ={`/admin/users/${item.userId}`}>
+                    <p className="">
+                      <span className="underline text-red-700">
+                      U{item.userId.slice(0, 5)}
+                      </span>
+                    </p>
+                  </Link>
+                  <p className="">
+                    {moment(item.createdAt).fromNow().slice(0, 5)}..
+                  </p>
+                  <p className="">
+                    ${item.total/100}
+                  </p>
+                  <p className={`text-green-300`}>
+                    {item.payment_status}
+                  </p>
+              </div>
+              ))}
+          </div>
       </div>
-
-      }
 
     </div>
   );

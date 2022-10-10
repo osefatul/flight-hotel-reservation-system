@@ -164,7 +164,6 @@ function ReservedRoom() {
       field: "action",
       headerName: "Action",
       width: 150,
-      flex: 1,
       renderCell: (params) => {
       return (
       <>
