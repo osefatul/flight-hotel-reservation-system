@@ -18,21 +18,27 @@ function Home() {
     return (
         <div className="relative bg-slate-100">
             <div className="sticky z-30 top-0 bg-black " >
-            <Navbar/>
-            <Header />
+                <Navbar/>
+                <Header />
             </div>
             
             <div className="mt-2 sm:mt-10 flex flex-col items-center space-y-4 w-[75%] mx-auto relative ">
                 <Featured/>
-                <h1 className="w-full font-bold text-[13px] lg:text-xl">Browse by property type</h1>
+                <div className="pl-2 pt-2 flex items-center w-[100%]">
+                    <h1 className="w-[30%] font-bold text-[13px] lg:text-xl">Explore by property type</h1>
+                    <hr className='w-[70%] border-slate-400' />
+                </div>
+                
                 <PropertyList/>
-                <h1 className="w-full font-bold [13px] lg:text-xl">Homes guests love</h1>
+                <div className="pl-2 pt-2 flex items-center w-[100%]">
+                    <h1 className="w-[30%] font-bold text-[13px] lg:text-xl">Homes guests love</h1>
+                    <hr className='w-[70%] border-slate-400' />
+                </div>
                 <FeaturedProperties/>
             </div>
                 <MailList/>
                 <Footer/>
                 <CopyRightMark />
-                
         </div>
     )
 }

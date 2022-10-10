@@ -24,16 +24,18 @@ function ListPageSidebar({destination, setDestination}) {
         dispatch(fetchingHotelsByDestination(destination, min, max))
     }
 
+// bg-[#febb02]
+
 return (
 <div>
     <div 
-        className="bg-[#febb02] text-[12px] p-2 rounded-sm space-y-4 ">
+        className=" bg-slate-900 text-[12px] p-2 text-white rounded-md space-y-4 ">
         <div className='space-y-1 text-[12px]'>
 
             <h1 className="text-[##555] text-sm font-bold">Search</h1>
             <div className="flex flex-col space-y-1">
                 <label className=''>Destination</label>
-                <input className="!border-none !outline-none h-5 bg-slate-100 rounded-md pl-1" 
+                <input className="!border-none !outline-none placeholder:text-black h-5 bg-slate-100 rounded-md pl-1" 
                 placeholder={destination} 
                 onChange = {e => setDestination(e.target.value)}
                 type="text" />
@@ -43,9 +45,9 @@ return (
                 <label className=''>Check-in Date</label>
                 <div 
                 onClick={()=> setOpenDate(!openDate)}
-                className=" h-6 bg-slate-100 rounded-md p-2 flex items-center justify-start space-x-1 cursor-pointer">
+                className=" h-6 bg-slate-100 rounded-md p-2 flex items-center justify-start space-x-1 cursor-pointer text-black">
                     <FontAwesomeIcon icon={faCalendar} />
-                    <span>
+                    <span className="placeholder:text-black text-black">
                         {`${format(
                             date[0].startDate,
                             "MM/dd/yyyy"
@@ -68,7 +70,7 @@ return (
 
                 <div
                     onClick={()=> setOpenDate(!openDate)}
-                    className=" h-6 bg-slate-100 rounded-md p-2 flex items-center justify-start space-x-1 cursor-pointer">
+                    className=" h-6 bg-slate-100 rounded-md p-2 flex items-center justify-start space-x-1 cursor-pointer text-black">
 
                     <FontAwesomeIcon icon={faCalendar} />
                     <span>
@@ -83,65 +85,65 @@ return (
 
 
 
-        <div className="flex flex-col space-y-1 mb-2 text-[12px]">
-            <label className='font-bold '>Options</label>
+        <div className="flex flex-col space-y-1 mb-2 text-[12px] text-[#555]">
+            <label className='font-bold text-white '>Options</label>
             
             <div className="p-2">
-                <div className="flex justify-between text-[#555] text-[12px] mb-2 space-x-2">
+                <div className="flex justify-between text-white text-[12px] mb-2 space-x-2">
                     <span className="lsOptionText">
                         Min price/night
                     </span>
                     <input 
                     type="number"
                     onChange = {e=> setMin(e.target.value)}
-                    className="w-10 h-5  pl-1 rounded-sm text-[9px]"
+                    className="w-10 h-5  pl-1 rounded-sm text-[9px] placeholder:text-black text-black"
                     />
                 </div>
                 
-                <div className="flex justify-between text-[#555] text-[12px] mb-2">
+                <div className="flex justify-between text-[12px] mb-2 text-white">
                     <span className="lsOptionText">
                         Max price/night
                     </span>
                     <input 
                     type="number"
                     onChange = {e => setMax(e.target.value)}
-                    className="w-10 h-5 pl-1 rounded-sm text-[9px]"
+                    className="w-10 h-5 pl-1 rounded-sm text-[9px] placeholder:text-black text-black"
                     />
                 </div>
 
-                <div className="flex justify-between text-[#555] text-[12px] mb-2">
+                <div className="flex justify-between text-[12px] mb-2 text-white">
                     <span className="lsOptionText">Adult</span>
                     <input
                     type="number"
                     min={1}
-                    className="w-8 pl-1 rounded-sm"
+                    className="w-8 pl-1 rounded-sm placeholder:text-black text-black"
                     placeholder={options.adult}
                     />
                 </div>
                 
-                <div className="flex justify-between text-[#555] text-[12px] mb-2">
+                <div className="flex justify-between text-[12px] mb-2 text-white">
                     <span className="lsOptionText">Children</span>
                     <input
                     type="number"
                     min={0}
-                    className="w-8 pl-1 rounded-sm"
+                    className="w-8 pl-1 rounded-sm placeholder:text-black text-black"
                     placeholder={options.children}
                     />
                 </div>
                 
-                <div className="flex justify-between text-[#555] text-[12px] mb-2">
+                <div className="flex justify-between  text-[12px] mb-2 text-white">
                     <span className="lsOptionText">Room</span>
                     <input
                     type="number"
                     min={1}
-                    className="w-8 pl-1 rounded-sm"
+                    className="w-8 pl-1 rounded-sm placeholder:text-black text-black"
                     placeholder={options.room}
                 />
                 </div>
             </div>
         </div>
 
-        <button className='w-full flex items-center justify-center bg-slate-900 text-white rounded-sm' onClick={refetch}>Search</button>
+        <button className='w-full flex items-center justify-center bg-[#febb02] font-bold text-black rounded-sm' onClick={refetch}>Search</button>
     </div>
 </div>
 )

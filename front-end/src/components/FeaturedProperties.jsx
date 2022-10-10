@@ -36,7 +36,7 @@ function FeaturedProperties() {
                     alt=""
                     className="w-full h-28 sm:h-32 object-cover rounded-lg"/>
                     
-                    <div className='flex flex-col justify-between space-y-3'>
+                    <div className='flex flex-col justify-between space-y-2'>
 
                     <span className=" text-[12px] sm:text-[15px] text-[#333] font-bold">{hotel.name}</span>
                     <span className="text-[11px] sm:text-[13px]">{hotel.city}</span>

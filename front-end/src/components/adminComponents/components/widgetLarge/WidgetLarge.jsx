@@ -30,7 +30,7 @@ function WidgetLarge() {
         
         <div className="w-full">
           <div className="w-full">
-              <div className="w-full flex justify-between ">
+              <div className="w-full flex justify-between font-bold pb-2 ">
                 <p className="">Customer</p>
                 <p className="">Date</p>
                 <p className="">Amount</p>
@@ -39,18 +39,18 @@ function WidgetLarge() {
 
             { latestTransactionsLoading?"Loading...":
               data?.length>0 && data.map((item, index)=>(
-                <div className="w-full flex items-center justify-between ">
+                <div className="w-full flex items-center justify-between pb-1">
                   <Link to ={`/admin/users/${item.userId}`}>
                     <p className="">
-                      <span className="underline text-red-700">
-                      U{item.userId.slice(0, 5)}
+                      <span className="underline text-yellow-500">
+                      U{item.userId.slice(0, 10)}
                       </span>
                     </p>
                   </Link>
                   <p className="">
-                    {moment(item.createdAt).fromNow().slice(0, 5)}..
+                    {moment(item.createdAt).fromNow()}..
                   </p>
-                  <p className="">
+                  <p className="pr-8">
                     ${item.total/100}
                   </p>
                   <p className={`text-green-300`}>
