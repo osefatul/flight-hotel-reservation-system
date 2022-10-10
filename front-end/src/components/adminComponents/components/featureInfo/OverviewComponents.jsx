@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 function OverviewComponents({fetchStats, arrayData, dataType , }) {
 
@@ -26,19 +26,17 @@ useEffect(()=>{
 
 return (
 
-    <div>
-
-        <div className="p-2 bg-slate-900 rounded-lg space-y-3">
+    <div className='w-full'>
+        <div className="p-2 bg-slate-900 rounded-lg space-y-3 w-full">
                 <span className="font-bold text-md">{dataType && dataType}</span>
                 <div className="flex items-center justify-between space-x-4">
-                <span className="font-bold text-lg">{dataType==="Revenue"? "$":""}{Data && Data[0]?.total}</span>
+                <span className="font-bold text-lg">{dataType==="Revenue"? "$":""}{dataType ==="Revenue"? Data[0]?.total/100: Data[0]?.total }</span>
                 <span className={`${Percentage>0? "text-green-600":"text-red-600" }  flex items-center text-[12px]`}>
                     {Percentage && Percentage?.toFixed(2)}%
                 </span>
             </div>
             <span className="text-slate-400 text-[10px]">Compared to last month</span>
         </div>
-
     </div>
 )
 }

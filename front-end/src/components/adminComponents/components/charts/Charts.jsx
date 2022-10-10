@@ -38,6 +38,7 @@ function Charts({ title, dataKey, grid }) {
     :<div className=" bg-slate-700 rounded-md w-[100%] items-center text-white relative shadow-xl p-2 space-y-2">
       <h3 className="font-bold text-xl ">{title}</h3>
       <ResponsiveContainer height={300} width="98%">
+
         <AreaChart 
           data={data}
           margin={{
@@ -50,11 +51,17 @@ function Charts({ title, dataKey, grid }) {
           <XAxis dataKey="day" stroke="#fff" />
           <YAxis />
           <Legend />
-          {/* <Line type="monotone" dataKey={dataKey} stroke="red" /> */}
-          <Area dataKey="day" stroke="8884d8" fill="#8884d8" activeDot={{ r: 8 }} />
+          <Area dataKey="amount" stroke="8884d8" fill="#8884d8" activeDot={{ r: 8 }} />
           <Tooltip />
           {grid && <CartesianGrid stroke="#8884d8" strokeDasharray="3 4" />}
         </AreaChart>
+
+        {/* <LineChart data={data}>
+          <XAxis dataKey="day" stroke="#fff" />
+          <Line type="monotone" dataKey="amount" stroke="#fff" />
+          <Tooltip />
+          {grid && <CartesianGrid stroke="#e0dfdf" strokeDasharray="5 5" />}
+        </LineChart> */}
       </ResponsiveContainer>
     </div>
   );

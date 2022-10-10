@@ -205,7 +205,6 @@ return (
                         sx={{
                         border: 0, // also tried setting to none 
                         borderRadius: 2,
-                        
                         minWidth: 300,
                         }}
                         getRowId = {(row) => row._id}

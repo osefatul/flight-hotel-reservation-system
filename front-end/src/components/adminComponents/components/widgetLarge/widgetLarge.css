@@ -42,7 +42,7 @@
 
 .widgetLargeDate,.widgetLargeAmount{
   display: flex;
-  align-items: center;
+  align-items: left;
   font-size: 12px;
   font-weight: 300;
   font-size: 12px;
