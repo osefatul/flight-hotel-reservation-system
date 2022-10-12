@@ -1,4 +1,4 @@
-### Create a new UseHotel
+### Create a new Hotel
 POST http://localhost:5000/v1/hotels/
 Content-Type: application/json
 
@@ -153,6 +153,16 @@ Content-Type: application/json
 
 
 
+###UPdate a user
+PUT http://localhost:5000/v1/users/630c96f619b49ba0cca1b056
+Content-Type: application/json
+
+{
+"username": "testedNoAdmin", 
+"email":"noAdmin@gmail.com",
+"password": "Password5%",
+"phone":"12341235"
+}
 
 
 # ------------------------------------------------------------------

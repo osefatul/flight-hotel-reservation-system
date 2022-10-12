@@ -8,7 +8,7 @@ const updateUser = async (req,res,next)=>{
         { $set: req.body },
         { new: true }
         );
-        res.status(200).json(updatedUser);
+        res.status(200).json("Successfully updated");
     } catch (err) {
         next(err);
     }

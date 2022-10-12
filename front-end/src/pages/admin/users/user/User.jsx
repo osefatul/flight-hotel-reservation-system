@@ -12,19 +12,79 @@ import { Link, useParams } from "react-router-dom";
 import Sidebar from "../../../../components/adminComponents/components/sidebar/Sidebar";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getUserData } from "../../../../features/usersSlice/usersAction";
+import { getUserData, UpdatingAUser } from "../../../../features/usersSlice/usersAction";
 import Navbar from "../../../../components/Navbar";
+import axios from "axios";
 
 function User() {
-  const [file, setFiles] = useState()
   const dispatch = useDispatch()
   const {id} = useParams()
-  const {isLoading ,error, requestedUser} = useSelector(state => state.users)
+
+  const [file, setFiles] = useState()
+  const [info, setInfo] = useState({});
+  const[MessageAddedAlert, setMessageAddedAlert] = useState(false)
+
+  const {isLoading ,error, usersStats, requestedUser} = useSelector(state => state.users)
+
+
+  const handleChange = (e) => {
+    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    console.log(info)
+
+  };
+
+
+
+  const handleClick = async (e)=>{
+    e.preventDefault()
+    const data = new FormData();
+    
+    try {
+      
+      if(file){
+        data.append("file", file);
+        data.append("upload_preset", "hotelReservation");
+
+        const uploadRes = await axios.post(
+          //I used the foldername as: hotelReservation/newUser in the cloudinary
+          "https://api.cloudinary.com/v1_1/ddgn3r0t2/image/upload",
+          data,
+          data, axios.defaults.withCredentials = false
+        );
+  
+        const { url } = uploadRes.data;
+        const updateUser = {
+          ...info,
+          img: url,
+        };
+        
+        dispatch(UpdatingAUser(id, updateUser ))
+        setMessageAddedAlert(true)//To turn on message alert
+      }
+      else{
+        dispatch(UpdatingAUser(id, info ))
+        setMessageAddedAlert(true)//To turn on message alert
+      }
+        // setInfo({})
+      // dispatch(getUserData(id))
+
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
 
   useEffect(()=>{
     dispatch(getUserData(id))
   },[])
+
+  
+  useEffect(()=>{
+    setTimeout(()=>{
+      setMessageAddedAlert(false);
+    },5000)
+  },[MessageAddedAlert])
 
 
 
@@ -42,9 +102,10 @@ function User() {
 
         <div className="user w-[85%]">
 
+          {MessageAddedAlert && <div className=" bg-green-600 w-full text-white text-small rounded flex items-center justify-center m-2">{usersStats}</div> }
+
           <div className="userTitleContainer">
             <h1 className="userTitle font-bold">Edit User</h1>
-          
           </div>
 
           <div className="userContainer">
@@ -87,15 +148,17 @@ function User() {
 
             <div className="userUpdate">
               <span className="userUpdateTitle">Edit</span>
-              <form className="userUpdateForm">
+              <form className="userUpdateForm" onSubmit={handleClick}>
 
                 <div className="userUpdateLeft">
                   <div className="userUpdateItem">
                     <label>Username</label>
                     <input
+                      id="username"
                       type="text"
+                      onChange={handleChange}
                       placeholder={requestedUser.username}
-                      className="userUpdateInput"
+                      className="!outline-none userUpdateInput "
                     />
                   </div>
 
@@ -103,25 +166,41 @@ function User() {
                     <label>Email</label>
                     <input
                       type="text"
+                      id="email"
+                      onChange={handleChange}
                       placeholder={requestedUser.email}
-                      className="userUpdateInput"
+                      className=" !outline-none userUpdateInput"
                     />
                   </div>
                   <div className="userUpdateItem">
                     <label>Phone</label>
                     <input
                       type="text"
+                      id="phone"
                       placeholder={`+ ${requestedUser.phone}`}
-                      className="userUpdateInput"
+                      className="!outline-none userUpdateInput"
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="userUpdateItem">
                     <label>Address</label>
                     <input
                       type="text"
-                      placeholder={`${requestedUser.city} | ${requestedUser.country}`}
-                      className="userUpdateInput"
+                      onChange={handleChange}
+                      id="city"
+                      placeholder={`${requestedUser.city}`}
+                      className="!outline-none userUpdateInput"
                     />
+                  </div>
+
+                  <div className="userUpdateItem">
+                    <label>isAdmin</label>
+                    <select className="border border-1 border-black placeholder:pl-1 rounded-sm w-full" id="isAdmin" defaultValue
+                      onChange={handleChange}>
+                      <option disabled value> {`${requestedUser.isAdmin}`} </option>
+                      <option value={false}>No</option>
+                      <option value={true}>Yes</option>
+                    </select>
                   </div>
                 </div>
 
@@ -137,7 +216,7 @@ function User() {
                     </label>
                     <input type="file" id="file" onChange= {(e) => setFiles(e.target.files[0])} style={{ display: "none" }} />
                   </div>
-                  <button className="userUpdateButton">Update</button>
+                  <button type="submit" className="userUpdateButton">Update</button>
                 </div>
                 
               </form>

@@ -1,4 +1,4 @@
-import { fetchAllUsers, fetchUser, userDelete, fetchCurrentUser, fetchUsersStats } from "../../api/userApi";
+import { fetchAllUsers, fetchUser, userDelete, fetchCurrentUser, fetchUsersStats, updateAUser } from "../../api/userApi";
 import { compare } from "../../utils/compare";
 import { getRequestedUserSuccess, getUsersFail, getUsersPending, getUsersStatsSuccess, getUsersSuccess } from "./usersSlice";
 
@@ -17,7 +17,7 @@ export const getUsersData =() => async dispatch => {
 }
 
 
-
+// In the Admin Home page dashboard
 export const getUsersStats =() => async dispatch => {
     dispatch(getUsersPending());
     try {
@@ -51,6 +51,18 @@ export const getCurrentUserData =(id) => async dispatch => {
     try {
         const result = await fetchCurrentUser(id);
         dispatch(getRequestedUserSuccess(result));
+        return result
+    } catch (error) {
+        dispatch(getUsersFail(error));
+    }
+}
+
+
+export const UpdatingAUser =(id, formData) => async dispatch => {
+    dispatch(getUsersPending());
+    try {
+        const result = await updateAUser(id, formData);
+        dispatch(getUsersStatsSuccess(result));
         return result
     } catch (error) {
         dispatch(getUsersFail(error));

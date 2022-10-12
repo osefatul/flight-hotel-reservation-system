@@ -66,7 +66,7 @@ export const fetchUser = async (id) =>{
     }
 }
 
-
+// For the Admin Home page dashboard
 export const fetchUsersStats = async (id) =>{
     try {
         const res = await axios.get(allUsersProfileUrl+"stats", 
@@ -93,6 +93,19 @@ export const fetchCurrentUser = async (id) =>{
     }
 }
 
+
+
+export const updateAUser = async (id, formData) =>{
+    try {
+        const res = await axios.put(allUsersProfileUrl+ id, formData, 
+            axios.defaults.withCredentials = true //for sending cookies.
+            )
+        return res.data
+    }catch(error){
+        console.log(error);
+        return(error.message);
+    }
+}
 
 
 
