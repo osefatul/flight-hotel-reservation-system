@@ -16,49 +16,35 @@ import { GiCommercialAirplane } from 'react-icons/gi';
 
 
 const cities = [
-    { city: "", code: "" },
-    { city: "Dubai", code: "" },
-    { city: "Vancouver", code: "" },
-    { city: "Mumbai", code: "BOM" },
-    { city: "Bangalore", code: "BLR" },
-    { city: "Chennai", code: "MAA" },
-    { city: "Kolkata", code: "CCU" },
-    { city: "Lucknow", code: "LKO" },
-    { city: "Amritsar", code: "ATQ" },
-    { city: "Vishakhapatnam", code: "VTZ" },
-    { city: "Kannur", code: "CNN" },
-    { city: "Raipur", code: "RPR" },
-    { city: "Surat", code: "STV" },
-    { city: "Indore", code: "IDR" },
-    { city: "Kochi", code: "COK" },
-    { city: "Ahmedabad", code: "AMD" },
-    { city: "Delhi", code: "DEL" },
-    { city: "Goa", code: "GOI" },
-    { city: "Pune", code: "PNQ" },
-    { city: "Thiruvananthapuram", code: "TRV" },
-    { city: "Coimbatore", code: "CJB" },
-    { city: "Calicut", code: "CCJ" },
-    { city: "Bhubaneshwar", code: "BBI" },
-    { city: "Guwahati", code: "GAU" },
-    { city: "Varanasi", code: "VNS" },
-    { city: "Hyderabad", code: "HYD" },
-    { city: "Tiruchirapalli", code: "TRZ" },
-    { city: "Nagpur", code: "NAG" },
-    { city: "Srinagar", code: "SXR" },
-    { city: "Imphal", code: "IMF" },
-    { city: "Jaipur", code: "JAI" },
-    { city: "Madurai", code: "IXM" },
-    { city: "Siliguri", code: "IXB" },
-    { city: "Patna", code: "PAT" },
-    { city: "Mangalore", code: "IXE" },
-    { city: "Chandigarh", code: "IXC" },
-    { city: "Andaman & Nicobar", code: "IXZ" },
+    { city: "Dubai", code: "DB" },
+    { city: "Vancouver", code: "YVR" },
+    { city: "Toronto", code: "YYZ" },
+    { city: "New York", code: "NYK" },
+    { city: "Atlanta, Georgia", code: "ATL" },
+    { city: "Denver, Colorado", code: "DEN" },
+    { city: "Los Angeles", code: "LAX" },
+    { city: "Charlotte", code: "CLT" },
+    { city: "Orlando", code: "MCO" },
+    { city: "Las Vegas", code: "LAS" },
+    { city: "Phoenix", code: "PHX" },
+    { city: "Madrid", code: "MAD" },
+    { city: "Antalya", code: "AYT" },
+    { city: "Wuhan", code: "WUH" },
+    { city: "Calgary", code: "YYC" },
+    { city: "Edmonton", code: "YEG" },
+    { city: "Gander", code: "YQX" },
+    { city: "Halifax", code: "YHZ" },
+    { city: "Moncton", code: "YQM" },
+    { city: "Montreal", code: "YUL" },
+    { city: "Ottawa", code: "YOW" },
+    { city: "Quebec City", code: "YQB" },
+    { city: "Winnipeg", code: "YWG" },
 ];
 
 
 
-function TravelHome() {
 
+function TravelHome() {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()

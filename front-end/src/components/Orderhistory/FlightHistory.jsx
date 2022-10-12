@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FetchingBooking, FetchingBookingBasedOnBookingId } from '../../features/bookingSlice/bookingAction';
-import { FetchingAnOrder } from '../../features/ordersSlice/ordersAction';
+import { FetchingAnOrder, FetchingOrdersForASpecificUser } from '../../features/ordersSlice/ordersAction';
 
 function FlightHistory({user, setBookingId, bookingId, setModalOpen, setFlightId}) {
     const dispatch = useDispatch();
@@ -15,7 +15,7 @@ function FlightHistory({user, setBookingId, bookingId, setModalOpen, setFlightId
 
     useEffect(()=>{
         // dispatch(FetchingBooking(user._id)) 
-        dispatch(FetchingAnOrder(user._id))
+        dispatch(FetchingOrdersForASpecificUser(user._id))
     },[])
 
     useEffect(()=>{

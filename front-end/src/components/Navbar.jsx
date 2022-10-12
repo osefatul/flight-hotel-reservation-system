@@ -100,6 +100,8 @@ function Navbar() {
 
                         {selectOption &&
                         <div className='absolute z-50 bg-white text-black -right-3 sm:right-6 top-8 sm:top-6 h-max sm:h-24 w-max sm:w-max p-2 sm:p-3  rounded-md font-bold '>
+                            
+                            {user.isAdmin &&
                             <motion.p
                             className='pt-1 flex sm:hidden font-bold text-green-500 cursor-pointer hover:text-amber-400 text-sm sm:text-md w-max mx-auto '
                             onClick={handleAdminPanel}
@@ -112,6 +114,7 @@ function Navbar() {
                                 
                                 "T&S Home" }
                             </motion.p>
+                            }
 
 
                             <Link to="/cart">

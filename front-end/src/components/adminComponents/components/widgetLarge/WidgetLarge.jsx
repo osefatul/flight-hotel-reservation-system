@@ -11,7 +11,7 @@ function WidgetLarge() {
   const dispatch = useDispatch();
   const {latestTransactionsLoading, latestTransactions} = useSelector(state=> state.orders)
   const [data, setData] = useState()
-  console.log(data)
+
 
 
   useEffect(()=>{
@@ -39,7 +39,7 @@ function WidgetLarge() {
 
             { latestTransactionsLoading?"Loading...":
               data?.length>0 && data.map((item, index)=>(
-                <div className="w-full flex items-center justify-between pb-1">
+                <div key={item+index} className="w-full flex items-center justify-between pb-1">
                   <Link to ={`/admin/users/${item.userId}`}>
                     <p className="">
                       <span className="underline text-yellow-500">

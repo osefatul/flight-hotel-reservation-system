@@ -148,13 +148,6 @@ return (
     </div>
 
     <div className="flex flex-col w-[85%]  mt-10 ">
-        <div className=" pl-5">
-            <Link to="/admin/newFlight">
-            <button className="w-24 bg-green-900 text-white rounded-sm">Create</button>
-            </Link>
-        </div>
-
-
 
         {isLoading ? "Loading..." : (
 

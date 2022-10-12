@@ -7,9 +7,6 @@ import Header from '../../components/Header/Header'
 import MailList from '../../components/MailList'
 import Navbar from '../../components/Navbar'
 import PropertyList from '../../components/PropertyList'
-import { useDispatch, useSelector } from "react-redux";
-import { loginSuccess } from '../../features/authSlice/loginSlice'
-
 
 function Home() {
 

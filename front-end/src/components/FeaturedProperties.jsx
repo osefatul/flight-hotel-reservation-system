@@ -1,20 +1,14 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
-import { fetchingHotels, fetchingHotelsByCity, fetchingHotelsByFeature, fetchingHotelsByType } from '../features/hotelSlice/hotelAction';
-import { hotelPending, HotelsFail } from '../features/hotelSlice/hotelSlice';
-import axios from "axios"
+import { fetchingHotelsByFeature } from '../features/hotelSlice/hotelAction';
+
 
 function FeaturedProperties() {
 
 
     const dispatch = useDispatch();
-    const {isLoading,
-    FeaturedLoading,
-    error,
-    hotels,
-    hotelsFeatured
-    } = useSelector(state => state.hotels)
+    const {hotelsFeatured} = useSelector(state => state.hotels)
 
     const [data, setData] = useState();
 
@@ -23,18 +17,24 @@ function FeaturedProperties() {
     },[ dispatch])
 
 
+    useEffect(() =>{
+        setData(hotelsFeatured)
+    },[ hotelsFeatured])
+
+
+
     return (
             <div className="w-full flex space-between space-x-4">
             
             {
             
-            hotelsFeatured.map((hotel) => (
+            data?.map((hotel) => (
 
-                <div key={hotel._id} className="w-full flex flex-col justify-between space-y-2 ">
+                <div key={hotel._id} className="w-full flex flex-col justify-between space-y-2 group cursor-pointer">
                     <img
                     src={hotel.photos[0]}
                     alt=""
-                    className="w-full h-28 sm:h-32 object-cover rounded-lg"/>
+                    className="w-full h-28 sm:h-32 object-cover rounded-lg group-hover:scale-105 transition-transform duration-200 ease-in-out"/>
                     
                     <div className='flex flex-col justify-between space-y-2'>
 

@@ -37,11 +37,11 @@ function PropertyList() {
       {
         hotelTypes && images.map((image, i)=> (
 
-          <div key = {i} className="cursor-pointer w-full "> 
+          <div key = {i} className="cursor-pointer w-full group "> 
         <img
           src= {image}
           alt=""
-          className="w-full h-20 sm:h-36 object-cover rounded-md "/>
+          className="w-full h-20 sm:h-36 object-cover rounded-md  group-hover:scale-105 transition-transform duration-200 ease-in-out"/>
         <div className="">
           <h1 className="text-[12px] sm:text-md font-bold capitalize" >{hotelTypes[i]?.type}</h1>
           <h2 className="text-[11px] sm:text-md capitalize" >{hotelTypes[i]?.count + " " + hotelTypes[i]?.type} </h2>

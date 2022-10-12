@@ -13,17 +13,13 @@ Content-Type: application/json
 
 
 ### Update Flight
-PUT http://localhost:5000/v1/flights/updateAFlight/63204e13720c07dd3e0d2fda
+PATCH http://localhost:8000/v1/flights/updateAFlight/63280b9d153fee8f3309b332
 Content-Type: application/json
 
-{"name": "Intercontenintal Hotel", 
-"type":"hotel",
-"city":"Kabul",
-"address":"Bagh bala st",
-"distance":"500",
-"title": "Best Hotel",
-"desc": "Hoteell",
-"cheapestPrice": 100
+{
+"to":"Vancouver",
+"date": "2023-10-28",
+"fare": 300
 }
 
 
@@ -69,7 +65,6 @@ Content-Type: application/json
 "birthdate": "1993-09-28",
 "flights": "63280b9d153fee8f3309b332"
 }
-
 
 
 ### get a loggedInUser UserDetails
@@ -170,8 +165,6 @@ Content-Type: application/json
 ### Get an order
 GET http://localhost:8000/v1/orders/630c8f707740928186e01216
 Content-Type: application/json
-
-
 
 
 

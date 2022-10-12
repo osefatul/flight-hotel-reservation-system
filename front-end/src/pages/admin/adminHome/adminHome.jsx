@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react";
-import WidgetLarge from "../../../components/adminComponents/components/widgetLarge/WidgetLarge";
-import WidgetSmall from "../../../components/adminComponents/components/widgetSmall/WidgetSmall";
 import Charts from "../../../components/adminComponents/components/charts/Charts";
 import FeaturedInfo from "../../../components/adminComponents/components/featureInfo/FeaturedInfo";
-import Topbar from "../../../components/adminComponents/components/topbar/Topbar";
 import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar";
 import { userData } from "../../../dummyData";
-import "./adminHome.css";
-import CopyRightMark from "../../../components/CopyRightMark";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../../features/authSlice/loginSlice";
-import { AdminPanelMode } from "../../../features/adminPanel/adminPanel";
 
 import Navbar from "../../../components/Navbar";
 
@@ -56,9 +50,6 @@ function AdminHome() {
                 grid
                 dataKey="Active User"
                 />
-              {/* <div className="homeWidgets">
-                <WidgetSmall />
-              </div> */}
         </div>
       
       

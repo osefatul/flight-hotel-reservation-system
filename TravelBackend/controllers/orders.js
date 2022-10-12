@@ -27,7 +27,7 @@ const getAllOrders = async (req, res, next) => {
 
 
 //get order based on userId for current user
-const getAnOrder = async (req, res, next) => {
+const getOrdersForASpecificUser = async (req, res, next) => {
     try{
         const theOrder = await Order.find({userId: req.params.id});
         res.status(200).json(theOrder);
@@ -220,7 +220,7 @@ const latestTransactions = async(req, res, next) =>{
 module.exports = {
     newOrder,
     getAllOrders,
-    getAnOrder,
+    getOrdersForASpecificUser,
     deleteAnOrder,
     updateAnOrder,
     getOrdersStats,

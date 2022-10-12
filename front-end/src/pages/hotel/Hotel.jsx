@@ -41,7 +41,7 @@ function Hotel() {
     
     
     function dayDifference(date1, date2) {
-        //getTime will convert the date to a milliseconds.
+        //getTime will convert the date to milliseconds.
         const timeDiff = Math.abs(date2.getTime() - date1.getTime());
         const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
         return diffDays;

@@ -60,7 +60,7 @@ const handleSubmit =  (index, url) =>{
           <h1 className="px-2 text-xl text-slate-700 font-bold pb-4">Dashboard</h1>
           <div className='flex flex-col space-y-2 text-sm '>
             {tabs.map((tab ,index)=>(
-              <div>
+              <div key={tab+index}>
                 {"section" in tab? 
                 <h2 className="px-2 text-gray-400 font-bold pb-1">{tab.section}</h2> 
                 : " "}

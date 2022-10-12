@@ -1,4 +1,4 @@
-import { fetchLatestOrdersTransactions, fetchOrders, fetchOrdersRevenue, fetchOrdersStats, fetchOrdersWeeklyRevenue } from "../../api/TravelApi/orders";
+import { fetchAnOrder, fetchLatestOrdersTransactions, fetchOrders, fetchOrdersRevenue, fetchOrdersStats, fetchOrdersWeeklyRevenue } from "../../api/TravelApi/orders";
 import { compare } from "../../utils/compare";
 import { fetchingAnOrderSuccess, fetchingLatestTransactionsSuccess, fetchingOrdersRevenueSuccess, fetchingOrdersStatsSuccess, fetchingOrdersSuccess, fetchingWeeklyOrdersRevenueSuccess, orderFail, ordersPending } from "./ordersSlice";
 
@@ -82,10 +82,10 @@ export const fetchingLatestOrdersTransactions = () => async (dispatch) => {
 
 
 
-export const FetchingAnOrder = () => async (dispatch) => {
+export const FetchingOrdersForASpecificUser = (id) => async (dispatch) => {
     dispatch(ordersPending());
     try {
-        const result = await fetchOrders();
+        const result = await fetchAnOrder(id);
         dispatch(fetchingOrdersSuccess(result.data))
     }catch(error){
         console.log(error)

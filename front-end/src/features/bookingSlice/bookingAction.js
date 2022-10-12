@@ -9,7 +9,7 @@ export const AddingBooking = (formData) => async (dispatch) =>{
         const res = await CreateBooking(formData);
         // console.log("this is data", res.data.booked._id)
         const fetchingARecentBooking = await fetchABookingBasedOnId(res.data.booked._id);
-        console.log(fetchingARecentBooking.data)
+        // console.log(fetchingARecentBooking.data)
         await dispatch(fetchingABookingSuccess(fetchingARecentBooking.data))
 
     }catch(error){
@@ -23,7 +23,7 @@ export const FetchingBookings = (id) => async (dispatch) =>{
     dispatch(BookingPending);
     try{
         const res = await fetchBookings();
-        console.log(res.data);
+        // console.log(res.data);
         dispatch(fetchingBookingsSuccess(res.data))
     }catch(error){
         console.log(error)
@@ -36,7 +36,7 @@ export const deletingBooking = (id, flightId) => async (dispatch) =>{
     dispatch(BookingPending);
     try{
         const res = await deleteBooking(id, flightId);
-        console.log(res.data);
+        // console.log(res.data);
         dispatch(fetchingABookingSuccess(res.data))
     }catch(error){
         console.log(error)
@@ -49,7 +49,7 @@ export const FetchingBookingBasedOnId = (id) => async (dispatch) =>{
     dispatch(BookingPending);
     try{
         const res = await fetchABookingBasedOnId(id);
-        console.log(res.data);
+        // console.log(res.data);
         dispatch(fetchingABookingSuccess(res.data))
     }catch(error){
         console.log(error)
@@ -62,7 +62,7 @@ export const FetchingBooking = (id) => async (dispatch) =>{
     dispatch(BookingPending);
     try{
         const res = await fetchBooking(id);
-        console.log(res.data);
+        // console.log(res.data);
         dispatch(fetchingABookingSuccess(res.data))
     }catch(error){
         console.log(error)
@@ -75,7 +75,7 @@ export const FetchingBookingBasedOnBookingId = (id) => async (dispatch) =>{
     dispatch(BookingPending);
     try{
         const res = await fetchBookingBasedOnBookingId(id);
-        console.log(res.data);
+        // console.log(res.data);
         dispatch(fetchingABookingSuccess(res.data))
     }catch(error){
         console.log(error)

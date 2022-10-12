@@ -9,7 +9,8 @@ const {
     getOrdersStats, 
     getOrdersRevenueStats, 
     getWeeklyOrdersStats,
-    latestTransactions
+    latestTransactions,
+    getOrdersForASpecificUser
 } = require("../controllers/orders");
 
 router.post("/", newOrder );
@@ -19,7 +20,7 @@ router.get("/weeklyRevenue", getWeeklyOrdersStats)
 router.get("/latestTransactions", latestTransactions)
 
 router.get("/", getAllOrders)
-router.get("/:id", getAnOrder)
+router.get("/:id", getOrdersForASpecificUser)
 router.delete("/deleteAnOrder/:id", deleteAnOrder);
 router.patch("/updateAFlight/:id", updateAnOrder)
 // router.get("/monthlyIncome", monthlyIncome);

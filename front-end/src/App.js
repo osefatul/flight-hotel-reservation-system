@@ -25,6 +25,7 @@ import CheckoutSuccess from "./pages/TravelPages/payments/stripeCheckout/Checkou
 import Cart from "./pages/cart/Cart";
 import OrderHistory from "./pages/orderHistory/OrderHistory";
 import FlightsList from "./pages/admin/flights/FlightsList";
+import Flights from "./pages/admin/flights/Flights";
 import NewFlight from "./pages/admin/flights/NewFlight";
 import OrdersList from "./pages/admin/orders/OrdersList";
 import BookingList from "./pages/admin/bookings/BookingList";
@@ -34,45 +35,42 @@ function App() {
   return (
     
     <Routes>
+      {/* Public Routes that can be accessed anytime */}
       <Route path="/" element={<Home/>}/>
       <Route path="hotels" element={<List/>}/>
       <Route path="login" element={<Auth/>}/>
       <Route path="register" element={<Register/>}/>
       <Route path="flights" element={<TravelHome/>}/>
-  
 
-
+    {/* Routes that can't be accessed without getting login. */}
 
       <Route path="/" element={<ProtectedRoutes/>}>        
-        <Route path="hotels/:id" element={<Hotel/>}/>
         <Route path="admin" element={<AdminHome/>}/>
         <Route path="admin/newUser" element={<NewUser/>}/>
         <Route path="admin/users" element={<UserList/>} />
         <Route path="admin/users/:id" element={<User/>}/>
+
         <Route path="admin/new-hotel" element={<NewHotel/>} />
         <Route path="admin/hotels/" element={<HotelList/>} />
         <Route path="admin/hotels/:id" element={<HotelDetails/>}/>
+
         <Route path="admin/new-room/" element={<NewRoom/>}/>
         <Route path="admin/rooms/" element={<RoomsList/>}/>
         <Route path="admin/reserved-rooms/" element={<ReservedRoom/>}/>
+
         <Route path="admin/flights/" element={<FlightsList/>}/>
         <Route path="admin/newFlight/" element={<NewFlight/>}/>
-        <Route path="admin/bookings/" element={<BookingList/>}/>
+        <Route path="admin/flights/:id" element={<Flights/>}/>
 
+        <Route path="admin/bookings/" element={<BookingList/>}/>
         <Route path="admin/orders/" element={<OrdersList/>}/>
 
-
-
+        <Route path="hotels/:id" element={<Hotel/>}/>
         <Route path="cart" element={<Cart/>}/>
         <Route path="order-history" element={<OrderHistory/>}/>
-
         <Route path="booking" element={<Booking/>}/>
         {/* <Route path="payments" element={<Payments/>}/> */}
         <Route path="checkout-success" element={<CheckoutSuccess/>}/>
-
-
-
-
 
       </Route>
     </Routes>

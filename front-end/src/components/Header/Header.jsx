@@ -32,8 +32,6 @@ const handleClick = (e) =>{
             
             <div className={type === "list"? "w-full": "space-y-4" }>
 
-
-
                 <div className="flex justify-between items-center space-x-4">
                     <motion.div className="flex items-center space-x-2 pl-2 cursor-pointer w-full bg-amber-500 text-black rounded-sm"
                     whileHover={{ scale: 1.02 }}
