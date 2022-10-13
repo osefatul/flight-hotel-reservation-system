@@ -1,4 +1,4 @@
-import { fetchAllUsers, fetchUser, userDelete, fetchCurrentUser, fetchUsersStats, updateAUser } from "../../api/userApi";
+import { fetchAllUsers, fetchUser, userDelete, fetchCurrentUser, fetchUsersStats, updateAUser } from "../../api/StaysApi/userApi";
 import { compare } from "../../utils/compare";
 import { getRequestedUserSuccess, getUsersFail, getUsersPending, getUsersStatsSuccess, getUsersSuccess } from "./usersSlice";
 

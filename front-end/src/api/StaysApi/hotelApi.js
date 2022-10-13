@@ -1,5 +1,5 @@
 import axios from "axios"
-import { fetchingHotelsByDestinationSuccess, fetchingHotelsFeaturedSuccess, hotelPending } from "../features/hotelSlice/hotelSlice";
+import { fetchingHotelsByDestinationSuccess, fetchingHotelsFeaturedSuccess, hotelPending } from "../../features/hotelSlice/hotelSlice";
 
 const rootUrl = "http://localhost:5000/v1/"
 const createHotelUrl = rootUrl + "hotels/";

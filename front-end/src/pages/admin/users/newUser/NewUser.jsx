@@ -8,7 +8,7 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { EraseRegistrationError, registrationError, registrationPending, registrationSuccess } from "../../../../features/authSlice/registerSlice";
-import { userRegistration } from "../../../../api/userApi";
+import { userRegistration } from "../../../../api/StaysApi/userApi";
 import { loginFail } from "../../../../features/authSlice/loginSlice";
 import { useEffect } from "react";
 

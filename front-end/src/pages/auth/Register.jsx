@@ -3,7 +3,7 @@ import { useNavigate,useLocation, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./auth.css";
 import { loginFail, loginPending, loginSuccess } from "../../features/authSlice/loginSlice";
-import { loginUser, userRegistration } from "../../api/userApi";
+import { loginUser, userRegistration } from "../../api/StaysApi/userApi";
 import { useEffect, useState } from "react";
 import { registrationError, registrationPending, registrationSuccess } from '../../features/authSlice/registerSlice';
 

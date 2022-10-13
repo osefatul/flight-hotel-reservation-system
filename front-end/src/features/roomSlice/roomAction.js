@@ -1,6 +1,6 @@
 import { fetchingReservedRoomsData, fetchingRoomAvailabilitySuccess, fetchingRoomData, fetchingRoomsData, fetchingRoomSuccess, roomPending, roomsFail } from "./roomSlice"
 import axios from "axios"
-import { createRoom, deleteRoom, getRooms, updateRoom, updateRoomAvailability, getReservedRooms, getReservedRoomsByUser, deleteReservedRooms } from "../../api/roomsApi"
+import { createRoom, deleteRoom, getRooms, updateRoom, updateRoomAvailability, getReservedRooms, getReservedRoomsByUser, deleteReservedRooms } from "../../api/StaysApi/roomsApi"
 
 
 export const updatingRoomAvailability = ({

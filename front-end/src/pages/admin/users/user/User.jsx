@@ -60,10 +60,14 @@ function User() {
         
         dispatch(UpdatingAUser(id, updateUser ))
         setMessageAddedAlert(true)//To turn on message alert
+        dispatch(getUserData(id))
+
       }
       else{
         dispatch(UpdatingAUser(id, info ))
         setMessageAddedAlert(true)//To turn on message alert
+        dispatch(getUserData(id))
+
       }
         // setInfo({})
       // dispatch(getUserData(id))

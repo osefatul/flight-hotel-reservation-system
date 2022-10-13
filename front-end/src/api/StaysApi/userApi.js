@@ -1,5 +1,5 @@
 import axios from "axios"
-import { loginSuccess } from "../features/authSlice/loginSlice";
+import { loginSuccess } from "../../features/authSlice/loginSlice";
 
 const rootUrl = "http://localhost:5000/v1/"
 const registerUserUrl = rootUrl + "auth/register";

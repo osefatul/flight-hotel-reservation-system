@@ -1,4 +1,4 @@
-import { createHotel, deleteHotel, getHotel, getHotelRooms, getHotels, getHotelsByCity, getHotelsByDestination, getHotelsByFeature, getHotelsByType, updateHotel } from "../../api/hotelApi";
+import { createHotel, deleteHotel, getHotel, getHotelRooms, getHotels, getHotelsByCity, getHotelsByDestination, getHotelsByFeature, getHotelsByType, updateHotel } from "../../api/StaysApi/hotelApi";
 import { FeaturedHotelPending, fetchingAHotelSuccess, fetchingHotelRoomsDetailsSuccess, fetchingHotelsByDestinationSuccess, fetchingHotelsFeaturedSuccess, fetchingHotelsInTheCitiesSuccess, fetchingHotelsSuccess, fetchingHotelTypesSuccess, hotelPending, HotelsFail } from "./hotelSlice"
 
 
