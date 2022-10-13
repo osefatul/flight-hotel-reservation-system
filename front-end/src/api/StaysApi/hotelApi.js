@@ -61,9 +61,11 @@ export const deleteHotel = async (hotelId) =>{
 }
 
 
-export const updateHotel = async (hotelId) =>{
+export const updateHotel = async (hotelId, formData) =>{
     try {
-        const res = await axios.put(updateHotelUrl + hotelId );
+        const res = await axios.put(updateHotelUrl + hotelId, formData,
+            axios.defaults.withCredentials = true //for sending cookies.
+            );
         return res
     }catch(error){
         console.log(error)

@@ -9,7 +9,7 @@ export const creatingHotel = (formData) => async (dispatch) => {
     dispatch(hotelPending());
     try {
         const result = await createHotel(formData);
-        console.log(result);
+        // console.log(result);
         dispatch(fetchingAHotelSuccess(result.data))
     }catch(error){
         console.log(error)
@@ -60,11 +60,12 @@ export const deletingHotel = (hotelId) => async (dispatch) => {
 }
 
 
-export const updatingHotel = (hotelId) => async (dispatch) => {
+export const updatingHotel = (hotelId, formData) => async (dispatch) => {
     dispatch(hotelPending());
     try {
-        const result = await updateHotel(hotelId);
-        console.log(result);
+        const result = await updateHotel(hotelId, formData);
+        // console.log(result);
+        dispatch(fetchingHotelsSuccess(result.data))
     }catch(error){
         console.log(error)
         return error;
@@ -132,7 +133,6 @@ export const fetchingHotelsByDestination = (destination, min, max) => async (dis
     dispatch(hotelPending());
     try {
         const result = await getHotelsByDestination(destination, min, max);
-
         dispatch(fetchingHotelsByDestinationSuccess(result.data))
 
     }catch(error){

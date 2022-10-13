@@ -15,8 +15,8 @@ function NewFlight() {
     }
     const dispatch =  useDispatch()
     const [info, setInfo] = useState(initialInfo);
-
-    const {message} = useSelector(state => state.rooms)
+    const[MessageAddedAlert, setMessageAddedAlert] = useState(false)
+    const {flight} = useSelector(state => state.flights)
 
     const handleChange = (e) =>{
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -27,20 +27,19 @@ function NewFlight() {
     const handleClick = async (e) => {
     e.preventDefault();
     try{
-        await dispatch(CreatingFlight(info))
-
+        dispatch(CreatingFlight(info))
+        setMessageAddedAlert(true);
     }catch(e){
         console.log(e)
         }
     }
 
-
-
     useEffect(()=>{
     setTimeout(()=>{
-        // dispatch(EraseRoomMessage())
+        setMessageAddedAlert(false);
     },5000)
-    },[message])
+    },[ MessageAddedAlert])
+
 
 
 
@@ -51,7 +50,7 @@ return (
         <Navbar  />
     </div>
 
-    {message.message && <div className=" bg-green-600 w-full text-white text-small rounded flex items-center justify-center m-2">{message.message}</div> }
+    {MessageAddedAlert && <div className=" bg-green-600 w-full text-white text-small rounded flex items-center justify-center m-2">{flight.message}</div> }
     
     <div className="flex w-full">
         <div className="w-[15%]">

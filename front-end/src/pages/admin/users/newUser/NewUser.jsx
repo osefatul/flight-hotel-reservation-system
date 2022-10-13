@@ -19,7 +19,6 @@ function NewUser() {
   const[MessageAddedAlert, setMessageAddedAlert] = useState(false)
   const {isLoading, status, message} = useSelector(state => state.register)
 
-  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const [file, setFile]= useState("")

@@ -21,7 +21,7 @@ const cities = [
     { city: "Vancouver", code: "YVR" },
     { city: "Toronto", code: "YYZ" },
     { city: "New York", code: "NYK" },
-    { city: "Atlanta, Georgia", code: "ATL" },
+    { city: "Virginia", code: "ATL" },
     { city: "Denver, Colorado", code: "DEN" },
     { city: "Los Angeles", code: "LAX" },
     { city: "Charlotte", code: "CLT" },

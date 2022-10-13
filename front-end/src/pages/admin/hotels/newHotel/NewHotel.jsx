@@ -7,12 +7,15 @@ import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUpload
 import { fetchingRooms } from "../../../../features/roomSlice/roomAction";
 import axios from "axios"
 import { creatingHotel } from "../../../../features/hotelSlice/hotelAction";
+import { HotelsFail } from "../../../../features/hotelSlice/hotelSlice";
 
 export default function NewHotel() {
 
   const dispatch = new useDispatch()
   const[MessageAddedAlert, setMessageAddedAlert] = useState(false)
   const {isLoading, error, rooms} = useSelector(state => state.rooms)
+  const {hotel} = useSelector(state => state.hotels)
+
 
   const [files, setFiles]= useState([])
   const [filesUploaded, setFilesUploaded]= useState()
@@ -28,7 +31,6 @@ export default function NewHotel() {
       images.push(URL.createObjectURL(e.target.files[i]));
     }
     setFiles([...images]);
-    
   }
 
 
@@ -71,8 +73,10 @@ export default function NewHotel() {
         const newHotel = {
           ...info, selectRooms, photos:list
         }
-        console.log(newHotel)
+        // console.log(newHotel)
         dispatch(creatingHotel(newHotel))
+        setMessageAddedAlert(true)
+        setInfo({})
 
     }catch(error){
       console.log(error)
@@ -85,6 +89,13 @@ export default function NewHotel() {
     dispatch(fetchingRooms())
   },[])
 
+  useEffect(()=>{
+    setTimeout(()=>{
+        setMessageAddedAlert(false);
+    },5000)
+    },[ MessageAddedAlert])
+
+
 
   return (
 
@@ -93,7 +104,7 @@ export default function NewHotel() {
         <Navbar  />
       </div>
 
-      {MessageAddedAlert && <div className=" bg-green-600 w-full text-white text-small rounded flex items-center justify-center m-2">{error}</div> }
+      {MessageAddedAlert && <div className=" bg-green-600 w-full text-white text-small rounded flex items-center justify-center m-2">{hotel.message}</div> }
       
       <div className="flex w-full">
 
