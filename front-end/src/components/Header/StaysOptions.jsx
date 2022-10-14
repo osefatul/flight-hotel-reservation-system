@@ -22,7 +22,7 @@ const cities = [
     { city: "Toronto", code: "YYZ" },
     { city: "New York", code: "NYK" },
     { city: "Virginia", code: "ATL" },
-    { city: "Denver, Colorado", code: "DEN" },
+    { city: "Denver", code: "DEN" },
     { city: "Los Angeles", code: "LAX" },
     { city: "Charlotte", code: "CLT" },
     { city: "Orlando", code: "MCO" },
@@ -70,7 +70,6 @@ function StaysOptions() {
     });
 
 
-
     const handleOption = (name, operation) => {
         setOptions((prev) => {
         return {
@@ -97,7 +96,6 @@ return (
                 <FontAwesomeIcon icon={faBed} className="text-slate-400" />
                 <input
                 type="text"
-                autocomplete="on"
                 options={cities.map(option => option.city)}
                 list="wizards-list"
                 placeholder="Where are you going?"
@@ -107,7 +105,7 @@ return (
 
                 <datalist id="wizards-list">
                     {cities.map(option => (
-                        <option>{option.city}</option>
+                        <option key={option.city}>{option.city}</option>
                         ))}
                 </datalist>
             </div>
@@ -231,9 +229,7 @@ return (
                     Search
                 </button>
             </motion.div>
-
         </div>
-
 
         {/* Sidebar Icons */}
         <div className=" sm:hidden h-[40px] relative flex items-center justify-end ">
@@ -254,7 +250,6 @@ return (
             />
             </motion.div>
             )}
-
 
             {/* SIDE BAR */}
             <div
@@ -278,7 +273,7 @@ return (
 
                         <datalist id="wizards-list">
                         {cities.map(option => (
-                            <option>{option.city}</option>
+                            <option key={option.city}>{option.city}</option>
                             ))}
                         </datalist>
                     </div>

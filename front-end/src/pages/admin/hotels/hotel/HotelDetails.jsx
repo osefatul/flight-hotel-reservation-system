@@ -27,8 +27,7 @@ function HotelDetails() {
   const [filesUploaded, setFilesUploaded]= useState()
 
 
-
-  const {isLoading, error, rooms} = useSelector(state => state.rooms)
+  const {isLoading, rooms} = useSelector(state => state.rooms)
   const { hotels, hotel} = useSelector(state => state.hotels)
 
 
@@ -44,7 +43,7 @@ function HotelDetails() {
   
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-    console.log(info)
+    // console.log(info)
   };
 
   const handleSelect = (e) => {
@@ -53,7 +52,7 @@ function HotelDetails() {
       e.target.selectedOptions,
       (option) => option.value
     );
-
+    console.log(value)
     setSelectRooms(value);
   };
 
@@ -81,9 +80,9 @@ function HotelDetails() {
           )
   
           const newHotel = {
-            ...info, selectRooms, photos:list
+            ...info, rooms:selectRooms, photos:list
           }
-          // console.log(newHotel)
+          console.log(newHotel)
           dispatch(updatingHotel(id, newHotel))
           setMessageAddedAlert(true)
 
@@ -94,9 +93,9 @@ function HotelDetails() {
       }
       else{
         const newHotel = {
-          ...info, selectRooms
+          ...info, rooms:selectRooms
         }
-        // console.log(newHotel)
+        console.log(newHotel)
         dispatch(updatingHotel(id, newHotel))
         setMessageAddedAlert(true)
         
@@ -142,7 +141,7 @@ function HotelDetails() {
 
     <form onSubmit={handleClick} className="flex flex-col relative w-[80%]">
 
-        {MessageAddedAlert && <div className=" bg-green-600 w-full text-white text-small rounded flex items-center justify-center m-2">{hotels.message}</div> }
+        {MessageAddedAlert && <div className=" bg-green-600 w-full text-white text-small rounded flex items-center justify-center m-2">{hotels?.message}</div> }
 
       <div className="flex flex-col sm:flex-row w-full relative">
         <h1 className=" absolute font-bold text-[18px] pt-10 pl-10">Edit Hotel</h1>

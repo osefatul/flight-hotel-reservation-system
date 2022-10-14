@@ -38,7 +38,7 @@ function RoomReview({item}) {
                     </div>
         
                     <div className='text-[12px] space-y-3 pl-1 border-x pt-1 '>
-                        <p className=' border-b border-b-amber-600 font-bold w-max'>{item?.hotel[0]?.hotelName} {item?.hotel[0]?.hotelId?.slice(0,5)}</p>
+                        <p className=' border-b border-b-amber-600 font-bold w-max'>{item?.name} {item?.id?.slice(0,5)}</p>
             
                         <div className='grid grid-cols-4 items-center '>
 

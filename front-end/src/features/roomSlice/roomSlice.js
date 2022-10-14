@@ -7,6 +7,7 @@ const initialState = {
     room: {},
     rooms: [],
     reservedRooms:[],
+    reservedRoom:{},
     message: "",
 }
 
@@ -31,6 +32,12 @@ const roomSlice = createSlice ({
         fetchingRoomsData: (state, action)=>{
             state.isLoading = false
             state.rooms = action.payload
+            state.error = ""
+        },
+
+        fetchingReservedRoomData: (state, action)=>{
+            state.isLoading = false
+            state.reservedRoom = action.payload
             state.error = ""
         },
 
@@ -70,6 +77,7 @@ export const  {
     fetchingRoomAvailabilitySuccess,
     EraseRoomMessage,
     roomsFail,
+    fetchingReservedRoomData,
     fetchingReservedRoomsData
 } = actions
 

@@ -66,16 +66,6 @@ const updateRoomAvailability = async (req, res, next) => {
         hotel,
         selectedRoomsNumber} = req.body
         
-
-        await Room.updateOne(
-        { "roomNumbers._id": req.params.id },
-        {
-            // We use push with an array-".$." means in roomNumbers"
-            $push: {
-            "roomNumbers.$.unavailableDates": dates,
-            },
-        });
-
         const createReservedRoom =  new ReservedRoom({
             totalPrice, reservedBy, roomId, reservedDates:dates, hotel,
             roomNumbers:selectedRoomsNumber
@@ -109,7 +99,7 @@ const deleteRoom = async (req, res, next) => {
 
 
 // All reserved rooms
-const getReservedRoom = async (req, res, next) => {
+const getAllReservedRoom = async (req, res, next) => {
     try {
         const rooms = await ReservedRoom.find();
         res.status(200).json(rooms);
@@ -128,21 +118,38 @@ const getAReservedRoomByUser = async (req, res, next) => {
     }
 };
 
+
+// reservedRooms by a hotelId
+const getAReservedRoomByHotelId = async (req, res, next) => {
+    try {
+        const room = await ReservedRoom.find({hotel: req.params.id});
+
+        if(!room){
+            res.status(200).json({message: "room is not found"});
+        }
+        res.status(200).json(room);
+    } catch (err) {
+        next(err);
+    }
+};
+
+
 //delete reserved room and updated room availability as well.
 const UpdateReservedRoom= async (req, res, next) => {
     try {
         const {dates} = req.body
-        await Room.updateOne(
-        { "roomNumbers._id": req.body.roomId },
-        {
-            // We use pull with an array-".$." means in roomNumbers"
-            $set: {
-            "roomNumbers.$.unavailableDates": "",
-            },
-        });
+        // await Room.updateOne(
+        // { "roomNumbers._id": req.body.roomId },
+        // {
+        //     // We use pull with an array-".$." means in roomNumbers"
+        //     $set: {
+        //     "roomNumbers.$.unavailableDates": "",
+        //     },
+        // });
 
         const createReservedRoom =  await ReservedRoom.findByIdAndDelete(req.params.id)
-        res.status(200).json("Room status has been updated.");
+        console.log(dates)
+        res.status(200).json({message: "Room status has been updated."});
     } catch (err) {
         next(err);
     }
@@ -189,8 +196,9 @@ module.exports = {
     getRooms,
     updateRoom,
     findHotels,
-    getReservedRoom,
+    getAllReservedRoom,
     getAReservedRoomByUser,
+    getAReservedRoomByHotelId,
     UpdateReservedRoom,
     updateRoomAvailability,
 }

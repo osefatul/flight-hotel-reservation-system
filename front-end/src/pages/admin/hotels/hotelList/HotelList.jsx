@@ -41,7 +41,6 @@ function HotelList() {
 
   const columns = [
     { field: "id", headerName: "ID", width: 180,
-    flex: 1,
     renderCell: (params) => {
       return (
         // <Link to={`/ticket_communication/${params.row._id}`}>
@@ -56,7 +55,6 @@ function HotelList() {
       field: "name",
       headerName: "Name",
       width: 200,
-      flex: 1,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
@@ -69,7 +67,6 @@ function HotelList() {
       field: "type",
       headerName: "Type",
       width: 120,
-      flex: 1,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
@@ -79,10 +76,21 @@ function HotelList() {
       },
     },
     {
+      field: "rooms",
+      headerName: "Rooms",
+      width: 120,
+      renderCell: (params) => {
+        return (
+          <div className="text-[12px]">
+            {params.row.rooms.length}
+          </div>
+        );
+      },
+    },
+    {
       field: "city",
       headerName: "City",
       width: 120,
-      flex: 1,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
@@ -95,7 +103,6 @@ function HotelList() {
       field: "address",
       headerName: "Address",
       width: 120,
-      flex: 1,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
@@ -108,7 +115,6 @@ function HotelList() {
       field: "distance",
       headerName: "Distance",
       width: 120,
-      flex: 1,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
@@ -121,7 +127,6 @@ function HotelList() {
       field: "price",
       headerName: "Cheapest Price",
       width: 160,
-      flex: 1,
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
@@ -134,7 +139,6 @@ function HotelList() {
       field: "action",
       headerName: "Action",
       width: 150,
-      flex: 1,
       renderCell: (params) => {
         return (
           <>

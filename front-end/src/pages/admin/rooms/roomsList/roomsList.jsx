@@ -62,14 +62,16 @@ function RoomsList() {
     {
       field: "hotelName",
       headerName: "Hotel",
-      width: 160,
+      width: 260,
   
       renderCell: (params) => {
         return (
-          <div className="text-[12px]">
-            {params.row.hotel.map( i => {
-              return i.hotelName
-            })}
+          <div className="flex flex-col text-[12px] space-y-1">
+            {params.row.hotel.map( i => (
+              <div className="text-[12px] ">
+              {i.hotelName}
+              </div>
+            ))}
           </div>
         );
       },
@@ -82,8 +84,7 @@ function RoomsList() {
       renderCell: (params) => {
         return (
 
-          <div
-          >
+          <div className="flex flex-col text-[12px] space-y-1">
             {params.row.hotel.map( i => {
               return (
                 <Link to ={`/admin/hotels/${i.hotelId}`}>
@@ -101,7 +102,7 @@ function RoomsList() {
     {
       field: "price",
       headerName: "Price",
-      width: 120,
+      width: 100,
   
       renderCell: (params) => {
         return (
@@ -114,7 +115,7 @@ function RoomsList() {
     {
       field: "maxPeople",
       headerName: "Max People",
-      width: 120,
+      width: 100,
   
       renderCell: (params) => {
         return (
@@ -145,7 +146,7 @@ function RoomsList() {
       renderCell: (params) => {
         return (
           <div className="text-[12px]">
-            {params.row.desc.slice(0,10)}...
+            {params.row.desc.slice(0,20)}.
           </div>
         );
       },
@@ -200,6 +201,8 @@ function RoomsList() {
               p: 2,
               minWidth: 200,
             }}
+            getRowHeight={() => 'auto'}
+            getRowWidth={() => 'auto'}
             getRowId = {(row) => row._id}
             rows={data}
             disableSelectionOnClick

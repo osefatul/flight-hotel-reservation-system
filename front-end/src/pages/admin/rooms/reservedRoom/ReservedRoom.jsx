@@ -81,9 +81,9 @@ function ReservedRoom() {
 
       renderCell: (params) => {
         return (
-        <Link to={`/admin/hotels/${params.row.hotel[0].hotelId}`}>
+        <Link to={`/admin/hotels/${params.row.hotel}`}>
           <div className="text-[12px] text-blue-600">
-            {params?.row?.hotel[0].hotelId?.slice(0,12)}
+            {params?.row?.hotel?.slice(0,12)}
           </div>
         </Link>
         );

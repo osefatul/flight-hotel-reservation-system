@@ -43,6 +43,7 @@ export const getRooms = async () =>{
     }
 }
 
+
 // Get all reserved rooms
 export const getReservedRooms = async () =>{
     try {
@@ -54,10 +55,22 @@ export const getReservedRooms = async () =>{
     }
 }
 
-
+// get reserved room by a user
 export const getReservedRoomsByUser = async (id) =>{
     try {
         const res = await axios.get(getRoomUrl + "reservedRooms/" + id);
+        return res
+    }catch(error){
+        console.log(error)
+        return error;
+    }
+}
+
+
+// get reserved room by a user
+export const getReservedRoomsByHotel = async (id) =>{
+    try {
+        const res = await axios.get(getRoomUrl + "reservedRoomsByHotel/" + id);
         return res
     }catch(error){
         console.log(error)

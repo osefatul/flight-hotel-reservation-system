@@ -8,10 +8,25 @@ const {Room} = require("../models/Room");
 
 const createHotel = async (req, res, next) => {
     const newHotel = new Hotel (req.body);
-
+    const rooms = req.body.rooms
+    
     try{
         const savedHotel = await newHotel.save();
-        res.status(200).json({message: "Successfully Created", savedHotel});
+
+        // Push the hotel into the rooms Schema..
+        const roomUpdate = await Promise.all(
+            rooms.map( async room =>{
+            await Room.findByIdAndUpdate({_id:room}, {
+                $push: {
+                    hotel: {
+                        hotelName: savedHotel.name,
+                        hotelId: savedHotel._id
+                    }
+                }
+            })
+        }))
+
+        res.status(200).json({message: "Successfully Created",});
     }catch(err){
         next(err);
     }
@@ -19,13 +34,33 @@ const createHotel = async (req, res, next) => {
 
 
 const updateHotel = async (req, res, next) => {
+    const rooms = req.body.rooms;
+
     try {
+
         const updatedHotel = await Hotel.findByIdAndUpdate(
             req.params.id,
             { $set: req.body },
             { new: true }//return new object
         );
-        res.status(200).json({message: "Successfully updated", updatedHotel});
+
+
+        if(rooms){
+
+            // Push the hotel into the rooms Schema..
+            const roomUpdate = await Promise.all(
+                rooms.map( async room =>{
+                    await Room.findByIdAndUpdate({_id:room}, {
+                        $push: {
+                            hotel: {
+                                hotelName: updatedHotel.name,
+                                hotelId: updatedHotel._id
+                            }
+                        }
+                    })
+                }))
+            }
+        res.status(200).json({message: "Successfully updated"});
     } catch (err) {
         next(err);
     }
@@ -85,10 +120,10 @@ const countByCity = async (req, res, next) => {
 const countByType = async (req, res, next) => {
     try {
     const hotelCount = await Hotel.countDocuments({ type: "Hotel" });
-    const apartmentCount = await Hotel.countDocuments({ type: "Apartments" });
-    const resortCount = await Hotel.countDocuments({ type: "resort" });
-    const villaCount = await Hotel.countDocuments({ type: "villa" });
-    const cabinCount = await Hotel.countDocuments({ type: "cabin" });
+    const apartmentCount = await Hotel.countDocuments({ type: "Apartment" });
+    const resortCount = await Hotel.countDocuments({ type: "Resort" });
+    const villaCount = await Hotel.countDocuments({ type: "Villa" });
+    const cabinCount = await Hotel.countDocuments({ type: "Cabin" });
 
     res.status(200).json([
         { type: "hotels", count: hotelCount },

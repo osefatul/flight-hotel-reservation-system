@@ -140,9 +140,9 @@ renderCell : (params) => {
     renderCell: (params) => {
     return (
         <>
-        <Link to={"/admin/users/" + params.row._id}>
+        {/* <Link to={"/admin/users/" + params.row._id}>
             <button className="bg-green-800 w-max px-2 py-[3px] rounded-sm text-white text-[11px]">Edit</button>
-        </Link>
+        </Link> */}
         <DeleteOutline
             className="productListDelete"
             onClick={() => handleDelete(params.row._id)}

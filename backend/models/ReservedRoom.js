@@ -15,7 +15,9 @@ title: {
     type: String,
 },
 
-hotel: [{ hotelName: {type: String}, hotelId:{type: String}}],
+hotel: {
+    type:String
+},
 
 totalPrice: {
     type: Number,

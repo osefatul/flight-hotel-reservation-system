@@ -34,7 +34,7 @@ function Featured() {
     <div className=" cursor-pointer w-full flex justify-between space-x-4">
       {cityData?.map((item,index )=>(
 
-        <div className="group relative w-full">
+        <div key={index} className="group relative w-full">
           <img
             src={item.photo}
             alt=""

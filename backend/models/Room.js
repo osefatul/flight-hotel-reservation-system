@@ -25,7 +25,7 @@ roomNumbers: [
     { 
     // totalPrice: {type: Number}, 
     // reservedBy: {type: String},
-    number: Number, 
+    number: Number,
     unavailableDates: {type: [Date]}, 
 },
 ],

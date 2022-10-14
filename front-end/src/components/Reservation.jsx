@@ -4,8 +4,7 @@ import { fetchingHotelRooms } from '../features/hotelSlice/hotelAction';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { updatingRoomAvailability } from '../features/roomSlice/roomAction';
-import axios from "axios"
+import { fetchingReservedRoomsByHotelId, updatingRoomAvailability } from '../features/roomSlice/roomAction';
 import { addToCart } from '../features/cartSlice/cartSlice';
 
 function Reservation({setOpenModal, hotelId, totalPrice, totalDays}) {
@@ -15,25 +14,24 @@ function Reservation({setOpenModal, hotelId, totalPrice, totalDays}) {
     const [selectedRooms, setSelectedRooms] = useState([]);
     const [messageAlert, setMessageAlert] = useState(false)
     const [selectedRoomsNumber, setSelectedRoomsNumber] = useState([]);
-    // let SelectedRoomsNumber = [];
 
 
     const {date} = useSelector(state => state.search)
-    const {hotelRoomsDetails, hotel} = useSelector(state => state.hotels)
-    
     const {user} = useSelector(state => state.login)
-
-
+    const {hotelRoomsDetails, hotel} = useSelector(state => state.hotels)
+    const {reservedRooms} = useSelector(state => state.rooms)
 
 
     const getDatesInRange = (startDate, endDate) => {
-        const start = new Date(startDate); //make an object of date
+        //make an object of date
+        const start = new Date(startDate); 
         const end = new Date (endDate);
-        const date = new Date(start.getTime()); // timestamps of the dates.
 
         const dates = [];
-
+        
         //we want to store all dates in an array. using loops, if the date is smaller or equal to end date.
+        
+        const date = new Date(start.getTime()); // timestamps of the start date.
         while (date <= end){
             dates.push (new Date(date).getTime()); //push current date into the array
             date.setDate(date.getDate() + 1); //Change date to next day
@@ -44,16 +42,31 @@ function Reservation({setOpenModal, hotelId, totalPrice, totalDays}) {
     const allDates = getDatesInRange(date[0].startDate, date[0].endDate);
 
 
-    //find if dates are available in the unavailableDates.
-    const isAvailable = (roomNumber) => {
+    //find if dates are available in the reservedDates.
+    const isAvailable = (currentRoomInTheLoop) => {
 
-        //Some: at least one unavailable date is included in the requested dates range..
-        const isFound = roomNumber.unavailableDates.some((date) =>
-        allDates.includes(new Date(date).getTime())
-        );
-        /*if the unavailableDates are found in the allDates array then room is not available and value will be "true"
-        Thats why we make it "false" so it shows not available */
-        return !isFound;
+        if(reservedRooms.length>0){
+
+            //first filter a reservedRoom that has current room...
+            const checkRoomIdExistInReservedHotel = reservedRooms?.filter((ReservedRoom) => {
+                return ReservedRoom.roomId === currentRoomInTheLoop
+            })
+
+            if(checkRoomIdExistInReservedHotel.length>0) {
+                //Some: at least one reservedDates is included in the requested dates range..
+                const isFound = checkRoomIdExistInReservedHotel[0].reservedDates.some((date) =>
+                allDates.includes(new Date(date).getTime())
+                );
+
+                /*if the reservedDates are found in the allDates array then room is not available and value will be "true", hence isFound will be true.
+                Thats why we make it "false" so it shows not available */
+                return !isFound             
+            }
+
+            else return true //True as it indicates availability.
+        }
+
+        else return true;// means available...
     };
 
 
@@ -61,7 +74,6 @@ function Reservation({setOpenModal, hotelId, totalPrice, totalDays}) {
     const handleSelect = (e, roomNum) => {
         const checked = e.target.checked;
         const value = e.target.value;
-
 
         setSelectedRoomsNumber(
             checked? [...selectedRoomsNumber, roomNum]: selectedRoomsNumber.filter((item)=> item !== roomNum)
@@ -85,7 +97,7 @@ function Reservation({setOpenModal, hotelId, totalPrice, totalDays}) {
                     dates:allDates, 
                     reservedBy:user._id, 
                     totalPrice:totalPrice, 
-                    hotel:hotelRoomsDetails[0].hotel,
+                    hotel:hotel._id,
                     selectedRoomsNumber:selectedRoomsNumber[index]
                 }))
 
@@ -94,9 +106,9 @@ function Reservation({setOpenModal, hotelId, totalPrice, totalDays}) {
 
             await dispatch(addToCart({
                 hotel:hotelRoomsDetails[0].hotel,
-                id:hotelRoomsDetails[0]._id, 
-                name:hotelRoomsDetails[0].hotel[0].hotelName,
-                title: hotelRoomsDetails[0].title,
+                id:hotel._id, 
+                name:hotel.name,
+                title: hotel.title,
                 roomPrice:hotel.cheapestPrice,
                 price: totalDays*hotel.cheapestPrice*selectedRoomsNumber.length,// using this instead of totalPrice because it doesn't count days after the checkbox.
                 days:totalDays,
@@ -130,6 +142,7 @@ function Reservation({setOpenModal, hotelId, totalPrice, totalDays}) {
 
     useEffect(()=>{
         dispatch(fetchingHotelRooms(hotelId))
+        dispatch(fetchingReservedRoomsByHotelId(hotelId))
     },[])
 
 
@@ -153,28 +166,27 @@ function Reservation({setOpenModal, hotelId, totalPrice, totalDays}) {
 
             <h1 className='font-bold'>Select your rooms:</h1>
 
-            {hotelRoomsDetails.map(item => (
-                <div className="flex justify-between items-center space-x-10 sm:space-x-6 md: space-x-2" key={item?._id}>
+            {hotelRoomsDetails.map(room => (
+                <div className="flex justify-between items-center space-x-10 sm:space-x-6 md: space-x-2" key={room?._id}>
 
                     <div className="text-[12px] sm:text-[14px]">
-                        <div className="rTitle ">{item?.title}</div>
-                        <div className="rDesc">{item?.desc}</div>
+                        <div className="rTitle ">{room?.title}</div>
+                        <div className="rDesc">{room?.desc}</div>
                         <div className="rMax">
-                            Max people: <b>{item?.maxPeople}</b>
+                            Max people: <b>{room?.maxPeople}</b>
                         </div>
-                        <div className="font-semibold  text-[16px]">${item?.price}</div>
+                        <div className="font-semibold  text-[16px]">${room?.price}</div>
                     </div>
 
                     <div className="flex space-x-2 items-center justify-center">
-                        {item?.roomNumbers.map((roomNumber) => (
+                        {room?.roomNumbers.map((roomNumber) => (
                             <div key={roomNumber._id} className="flex flex-col text-[9px] items-center justify-center">
                                 <label>{roomNumber?.number}</label>
                                 <input
                                     type="checkbox"
                                     value={roomNumber._id}
                                     onChange={e => handleSelect(e, roomNumber.number)}
-                                    // checked= {!isAvailable(roomNumber)}//if the isAvailable === false, or use below disabled method
-                                    disabled={!isAvailable(roomNumber)}//if the isAvailable === false,
+                                    disabled={!isAvailable(roomNumber._id)}//if the isAvailable === false,
                                 />
                         </div>
                         ))}

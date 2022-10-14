@@ -196,13 +196,21 @@ GET http://localhost:5000/v1/rooms/
 Content-Type: application/json
 
 
-### Get Reserved Rooms
+
+
+### Get All Reserved Rooms
 GET http://localhost:5000/v1/rooms/reservedRooms
 Content-Type: application/json
 
 ### Get a Reserved Room by specific user
 GET http://localhost:5000/v1/rooms/reservedRooms/630c8f707740928186e01216
 Content-Type: application/json
+
+### Get a Reserved Room by specific hotel
+GET http://localhost:5000/v1/rooms/reservedRoomsByHotel/63206fd040e2238c11b8b6b2
+Content-Type: application/json
+
+
 
 
 ### Update room availability.

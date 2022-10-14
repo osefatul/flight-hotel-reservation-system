@@ -45,6 +45,7 @@ export default function NewHotel() {
       e.target.selectedOptions,
       (option) => option.value
     );
+    // console.log(value)
 
     setSelectRooms(value);
   };
@@ -71,13 +72,12 @@ export default function NewHotel() {
         )
 
         const newHotel = {
-          ...info, selectRooms, photos:list
+          ...info, rooms:selectRooms, photos:list
         }
         // console.log(newHotel)
         dispatch(creatingHotel(newHotel))
         setMessageAddedAlert(true)
-        setInfo({})
-
+        // setInfo({})
     }catch(error){
       console.log(error)
     }
@@ -92,8 +92,9 @@ export default function NewHotel() {
   useEffect(()=>{
     setTimeout(()=>{
         setMessageAddedAlert(false);
+        // setInfo({})
     },5000)
-    },[ MessageAddedAlert])
+    },[ MessageAddedAlert, info])
 
 
 
@@ -104,7 +105,7 @@ export default function NewHotel() {
         <Navbar  />
       </div>
 
-      {MessageAddedAlert && <div className=" bg-green-600 w-full text-white text-small rounded flex items-center justify-center m-2">{hotel.message}</div> }
+      {MessageAddedAlert && <div className=" bg-green-600 w-full text-white text-small rounded flex items-center justify-center m-2">{hotel?.message}</div> }
       
       <div className="flex w-full">
 
