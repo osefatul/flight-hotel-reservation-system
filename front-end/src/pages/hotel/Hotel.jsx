@@ -133,12 +133,12 @@ function Hotel() {
 
                 <div className="flex flex-wrap justify-between">
                     {hotel?.photos?.map((photo, i) => (
-                        <div className="w-[33%]" key={i}>
+                        <div className="w-[33%] h[40%]" key={i}>
                         <img
                             onClick={() => handleOpen(i)}
                             src={photo}
                             alt=""
-                            className="w-full cursor-pointer object-cover rounded-sm "
+                            className="w-full h-full cursor-pointer object-cover rounded-sm "
                         />
                         </div>
                     ))}

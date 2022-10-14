@@ -59,7 +59,7 @@ function List() {
             </div>
             
                 {/* Sidebar Icons for small screens */}
-                <div className=" sm:hidden h-[40px] relative flex items-center justify-end ">
+                <div className=" sm:hidden h-[40px] bg-white text-yellow-600 relative flex items-center justify-end ">
 
                     {!toggle ? (
                     <FontAwesomeIcon icon={faBars} 
@@ -68,7 +68,7 @@ function List() {
                     />
                     ) : (
                     <motion.div 
-                    className=" z-50 absolute top-10 left-28  w-[30px] h-[25px] cursor-pointer"
+                    className=" z-50 fixed top-50 left-40  w-[30px] h-[25px] cursor-pointer"
                     >
                     <FontAwesomeIcon icon={faCircleXmark}
                         className="w-[20px] h-[20px] "
