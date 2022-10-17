@@ -18,11 +18,15 @@ var bookingSchema = new Schema({
     departureDate:{
         type: Date
     },
+    bookingFileLink:{
+        type:String
+    },
     openAt: {
         type: Date,
         required: true,
         default: Date.now(),
     },
+
 });
 
 module.exports = {Booking: mongoose.model("Booking", bookingSchema)};

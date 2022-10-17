@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { createPDFTicket } from '../../api/TravelApi/checkInTicket'
 import { FetchingBooking, FetchingBookingBasedOnBookingId } from '../../features/bookingSlice/bookingAction'
 import { FetchingAFlight } from '../../features/flightsSlice/flightAction'
@@ -14,6 +15,7 @@ function ViewBooking({setModalOpen, flightId}) {
     const {isLoading, flight} = useSelector(state => state.flights)
     const [flightData, setFlightData] = useState(flight)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const {isLoading:userLoading, SelectedUsersDetail} = useSelector(state => state.flightsUserDetail)
     const [userData, setUserData] = useState(SelectedUsersDetail)
@@ -45,12 +47,11 @@ function ViewBooking({setModalOpen, flightId}) {
         }
 
         const res = await createPDFTicket(formData)
-        console.log(res)
+        // console.log(res)
+        
+        navigate("/boarding-pass", { state: {formData } });
         setModalOpen(false);
     }
-
-
-
 
 
 

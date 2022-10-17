@@ -1,8 +1,8 @@
 import axios from "axios"
-import { fetchingHotelsByDestinationSuccess, fetchingHotelsFeaturedSuccess, hotelPending } from "../../features/hotelSlice/hotelSlice";
 
-// const rootUrl = "https://stays-web-app.herokuapp.com/v1/"
-const rootUrl = "http://localhost:5000/v1/"
+
+const rootUrl = "https://stays-web-app.herokuapp.com/v1/"
+// const rootUrl = "http://localhost:5000/v1/"
 const createHotelUrl = rootUrl + "hotels/";
 const getHotelUrl =  rootUrl + "hotels/";
 const deleteHotelUrl = rootUrl + "hotels/";

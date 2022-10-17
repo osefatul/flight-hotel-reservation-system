@@ -1,7 +1,7 @@
 import axios from "axios"
 
-const rootUrl = "http://localhost:5000/v1/"
-// const rootUrl = "https://stays-web-app.herokuapp.com/v1/"
+// const rootUrl = "http://localhost:5000/v1/"
+const rootUrl = "https://stays-web-app.herokuapp.com/v1/"
 const createRoomUrl = rootUrl + "rooms/";
 const getRoomUrl =  rootUrl + "rooms/";
 const deleteRoomUrl = rootUrl + "rooms/";

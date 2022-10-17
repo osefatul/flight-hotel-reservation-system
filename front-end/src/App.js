@@ -29,6 +29,7 @@ import Flights from "./pages/admin/flights/Flights";
 import NewFlight from "./pages/admin/flights/NewFlight";
 import OrdersList from "./pages/admin/orders/OrdersList";
 import BookingList from "./pages/admin/bookings/BookingList";
+import BoardingPass from "./components/Orderhistory/BoardingPass";
 
 
 function App() {
@@ -69,6 +70,8 @@ function App() {
         <Route path="cart" element={<Cart/>}/>
         <Route path="order-history" element={<OrderHistory/>}/>
         <Route path="booking" element={<Booking/>}/>
+        <Route path="boarding-pass" element={<BoardingPass/>}/>
+
         {/* <Route path="payments" element={<Payments/>}/> */}
         <Route path="checkout-success" element={<CheckoutSuccess/>}/>
 

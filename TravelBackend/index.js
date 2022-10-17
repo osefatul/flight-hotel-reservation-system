@@ -16,8 +16,6 @@ const BookingRoute = require( "./routes/booking.js");
 const UserDetailsRoute = require( "./routes/userDetails.js");
 const OrdersRoute = require( "./routes/orders");
 const PaymentRoute = require("./routes/payments.js")
-const puppeteer = require('puppeteer')
-const fs = require("fs");
 
 
 const PORT = process.env.PORT || 8000;
@@ -36,8 +34,8 @@ app.use(function (req, res, next) {
 
 
 const corsOptions = {
-    // origin: "https://stays-travels-system.netlify.app",
-    origin: "http://localhost:3000",
+    origin: "https://stays-travels-system.netlify.app",
+    // origin: "http://localhost:3000",
     credentials: true, //access-control-allow-credentials:true
     optionSuccessStatus: 200,
 };
@@ -76,32 +74,21 @@ app.use("/v1/orders", OrdersRoute);
 app.use("/v1/payments", PaymentRoute);
 
 
-// GENERATE PDF AND SAVE IT...
-app.post("/v1/create-pdf", (req, res) => {
-    console.log(req.body)
-    // pdf.create(pdfTemplate(req.body), {}).toFile("result.pdf", (err) => {
-    //     try{
-    //         res.send(Promise.resolve());
-    //         // res.download()
-    //     }catch(err){
-    //         console.log(err)
-    //         return res.send(Promise.reject());
-            
-    //     }
-    // }
-    // );
 
-        const fileName = 'test.pdf';
-        const fileUrl = `http://localhost:${PORT}/${fileName}`;
-        const filePath = path.join(__dirname, 'files', fileName);
-        // res.pdf.create(pdfTemplate(req.body)
+//The below code perfectly works on localhost.
+app.post("/v1/create-pdf", async (req, res) => {
 
+    pdf.create(pdfTemplate(req.body), {}).toFile("result.pdf", (err) => {
+        try{
+            res.send(Promise.resolve());
+        }catch(err){
+            console.log(err)
+            return res.send(Promise.reject());
 
-        // console.log(pdf.create(pdfTemplate(req.body)))
-        res.download(pdf.create(pdfTemplate(req.body)))
-
-
+        }
+    });
 });
+
 
 // GET PDF FROM THE ROOT FOLDER THAT WE SAVED ABOVE...
 app.get("/v1/fetch-pdf", (req, res) => {

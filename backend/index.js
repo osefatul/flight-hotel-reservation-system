@@ -19,8 +19,8 @@ app.use(cookieParser());
 
 
 const corsOptions = {
-    // origin: "https://stays-travels-system.netlify.app",
-    origin: "http://localhost:3000",
+    origin: "https://stays-travels-system.netlify.app",
+    // origin: "http://localhost:3000",
     credentials: true, //access-control-allow-credentials:true
     optionSuccessStatus: 200,
 };

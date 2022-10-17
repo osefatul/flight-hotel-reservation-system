@@ -1,8 +1,8 @@
 import axios from "axios"
 import { loginSuccess } from "../../features/authSlice/loginSlice";
 
-const rootUrl = "http://localhost:5000/v1/"
-// const rootUrl = "https://stays-web-app.herokuapp.com/v1/"
+// const rootUrl = "http://localhost:5000/v1/"
+const rootUrl = "https://stays-web-app.herokuapp.com/v1/"
 const registerUserUrl = rootUrl + "auth/register";
 const loginUserUrl =    rootUrl + "auth/login";
 const allUsersProfileUrl = rootUrl + "users/";
