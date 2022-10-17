@@ -65,10 +65,10 @@ return (
         <Sidebar />
         </div>
 
-        <h1 className=" absolute font-bold text-[18px] top-20 left-60">Edit Flight</h1>
+        <h1 className=" absolute font-bold text-[18px] top-20 left-24 sm:left-60">Edit Flight</h1>
 
-        <form className="flex w-[85%] items-center justify-center relative pl-20">
-        <div className=" w-[50%] flex flex-col space-y-1 justify-center p-10 ">
+        <form className="flex w-[85%] items-center justify-center relative sm:pl-20">
+        <div className=" w-full sm:w-[50%] flex flex-col space-y-1 justify-center p-10 ">
             
             {/* Inputs */}
             <div className="flex flex-col space-y-2 w-full">

@@ -1,5 +1,4 @@
 import React from 'react'
-import { useStripe } from '@stripe/react-stripe-js';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {motion} from "framer-motion"
@@ -8,11 +7,8 @@ import axios from "axios";
 
 function StripeCheckout() {
 
-    const {flight} = useSelector(state => state.flights)
     const {user} = useSelector(state => state.login)
-
-    const navigate = useNavigate()
-    const { cartItems, cartTotalAmount} = useSelector(state => state.cart)
+    const { cartItems} = useSelector(state => state.cart)
 
 
     const handleCheckout = async (e)=>{
@@ -21,7 +17,8 @@ function StripeCheckout() {
 
         const res = await axios({
             method:"post", 
-            url:"http://localhost:8000/v1/payments" , 
+            // url:"http://localhost:8000/v1/payments" , 
+            url:"https://travels-web-app.herokuapp.com/v1/payments" , 
             data:{cartItems , userId:user._id}
         })
 

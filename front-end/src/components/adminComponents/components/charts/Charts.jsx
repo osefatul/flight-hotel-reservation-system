@@ -35,8 +35,8 @@ function Charts({ title, dataKey, grid }) {
   return (
 
     ordersWeeklyLoading? <div>"loading..."</div>
-    :<div className=" bg-slate-700 rounded-md w-[100%] items-center text-white relative shadow-xl p-2 space-y-2">
-      <h3 className="font-bold text-xl ">{title}</h3>
+    :<div className=" bg-slate-700 rounded-md w-[100%] items-center text-white text-[10px] relative shadow-xl p-2 space-y-2">
+      <h3 className="font-bold text-xl text-yellow-400">{title}</h3>
       <ResponsiveContainer height={300} width="98%">
 
         <AreaChart 
@@ -53,7 +53,7 @@ function Charts({ title, dataKey, grid }) {
           <Legend />
           <Area dataKey="amount" stroke="8884d8" fill="#8884d8" activeDot={{ r: 8 }} />
           <Tooltip />
-          {grid && <CartesianGrid stroke="#8884d8" strokeDasharray="3 4" />}
+          {grid && <CartesianGrid stroke="#8884d8" strokeDasharray="6 5" />}
         </AreaChart>
 
         {/* <LineChart data={data}>

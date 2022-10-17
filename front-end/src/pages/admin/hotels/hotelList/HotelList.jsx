@@ -169,7 +169,8 @@ function HotelList() {
           </div>
 
           <div className="flex flex-col w-[85%]  mt-10 ">
-            <div className=" pl-5">
+          <div className=" pl-5 flex items-center   justify-between sm:justify-start px-2 sm:px-0">
+            <p className='font-bold sm:hidden text-xl text-green-800'>Hotels</p>
               <Link to="/admin/new-hotel">
                   <button className="w-24 bg-green-900 text-white rounded-sm">Create</button>
               </Link>

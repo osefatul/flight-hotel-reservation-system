@@ -18,9 +18,8 @@ const PORT = process.env.PORT || 5000;
 app.use(cookieParser());
 
 
-
-
 const corsOptions = {
+    // origin: "https://stays-travels-system.netlify.app",
     origin: "http://localhost:3000",
     credentials: true, //access-control-allow-credentials:true
     optionSuccessStatus: 200,
@@ -46,6 +45,11 @@ console.log("Connected to MongoDB")
 mongoose.connect(process.env.MONGO_URL).then(
 ).catch(err => console.error(err));
 
+
+// TEST GET REQUEST
+app.get("/", (req, res) => {
+    res.send("Hi There");
+});
 
 app.use("/v1/auth", authRoute);
 app.use("/v1/users", usersRoute);

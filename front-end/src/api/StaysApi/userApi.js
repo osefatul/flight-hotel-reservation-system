@@ -2,6 +2,7 @@ import axios from "axios"
 import { loginSuccess } from "../../features/authSlice/loginSlice";
 
 const rootUrl = "http://localhost:5000/v1/"
+// const rootUrl = "https://stays-web-app.herokuapp.com/v1/"
 const registerUserUrl = rootUrl + "auth/register";
 const loginUserUrl =    rootUrl + "auth/login";
 const allUsersProfileUrl = rootUrl + "users/";
@@ -83,7 +84,7 @@ export const fetchUsersStats = async (id) =>{
 
 export const fetchCurrentUser = async (id) =>{
     try {
-        const res = await axios.get("http://localhost:5000/v1/users/currentUser/"+ id, 
+        const res = await axios.get(allUsersProfileUrl+"currentUser/"+ id, 
             axios.defaults.withCredentials = true //for sending cookies.
             )
         return res.data

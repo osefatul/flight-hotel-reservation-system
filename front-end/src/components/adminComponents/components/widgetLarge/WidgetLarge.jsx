@@ -26,7 +26,7 @@ function WidgetLarge() {
 
   return (
     <div className="flex flex-col p-2 h-full space-y-5 text-[12px] w-full">
-      <h3 className="font-bold text-2xl">Latest Transactions</h3>
+      <h3 className="font-bold text-2xl text-yellow-400">Latest Transactions</h3>
         
         <div className="w-full">
           <div className="w-full">
@@ -42,7 +42,7 @@ function WidgetLarge() {
                 <div key={item+index} className="w-full flex items-center justify-between pb-1">
                   <Link to ={`/admin/users/${item.userId}`}>
                     <p className="">
-                      <span className="underline text-yellow-500">
+                      <span className="underline text-green-500">
                       U{item.userId.slice(0, 10)}
                       </span>
                     </p>

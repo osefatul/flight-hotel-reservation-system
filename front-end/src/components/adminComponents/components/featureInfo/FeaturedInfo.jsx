@@ -22,11 +22,11 @@ function FeaturedInfo() {
 
       <div className="flex justify-between bg-slate-700 rounded-md h-max sm:h-56 space-y-4 w-full items-center text-white p-2 pt-20 sm:space-x-4 relative shadow-xl text-slate-200">
 
-        <div className="absolute top-2 left-6 space-y-2">
-          <h1 className="font-bold text-2xl">
+        <div className="absolute top-2 left-2 space-y-2">
+          <h1 className="font-bold text-2xl text-yellow-400">
             Overview
           </h1>
-          <p className="text-sm ">How is your business performing comparatively speaking...</p>
+          <p className="text-[12px]">How is your business performing comparatively speaking.</p>
         </div>
 
         <div className= "flex flex-col sm:flex-row w-full space-y-3 sm:space-y-0 sm:space-x-2">

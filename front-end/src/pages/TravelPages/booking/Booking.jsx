@@ -61,7 +61,7 @@ function Booking() {
 
 
     const columns = [
-        { field: "firstName", headerName: "Name", width: 180, flex: 1, weight:"bold",
+        { field: "firstName", headerName: "Name", minWidth: 180, weight:"bold", flex:1,
         renderCell: (params) => {
             return (
                 <div className="text-[12px]">
@@ -75,7 +75,6 @@ function Booking() {
         field: "birthday",
         headerName: "Birthday",
         width: 180,
-        flex: 1,
         renderCell: (params) => {
             return (
             <div className="text-[12px]">
@@ -88,8 +87,8 @@ function Booking() {
         {
         field: "booking",
         headerName: "Booking",
-        width: 160,
-        flex: 1,
+        width: 250,
+        
         renderCell: (params) => {
             return (
                 <div className=" w-full flex space-x-3">
@@ -138,11 +137,11 @@ return (
         </div>
 
         <div className="h-main flex sm:flex-row space-x-10 items-start
-        justify-center w-[75%] mx-auto relative">
+        justify-center w-[85%] sm:w-[75%] mx-auto relative">
 
             <div className='w-full space-y-3 h-full pt-2'>
                 <div className='w-full flex flex-col space-y-3 text-black'>
-                    <div className='bg-slate-600 rounded-sm text-white text-xl font-bold p-2'>
+                    <div className='bg-slate-600 rounded-sm text-white text-large sm:text-xl font-bold p-2'>
                         <h1>Book Flight</h1>
                     </div>
 
@@ -159,28 +158,30 @@ return (
                                 <p className='text-[18px] font-bold'>{flight.airline}</p>
                                 
                                 <div className='flex space-x-3 items-center justify-between text-[14px] font-semibold'>
-                                    <p >
-                                    {flight.from}
+                                    <p className='text-[12px] sm:text-[16px] flex flex-col sm:flex-row items-center justify-center'>
                                     <FontAwesomeIcon 
                                     icon= {faPlaneDeparture}
-                                    className="text-[20px] pl-2"
+                                    className="text-[16px] sm:text-[20px] pr-1 sm:pr-2"
                                     />
+                                    {flight.from}
                                     </p>
 
                                     <GiCommercialAirplane 
-                                    className="text-[50px]"
+                                    className="text-[30px] sm:text-[50px]"
                                     />
                                     
-                                    <p >
-                                    {flight.to}
+                                    <p className='text-[12px] sm:text-[16px] flex flex-col sm:flex-row items-center justify-center'>
                                     <FontAwesomeIcon 
                                     icon= {faPlaneArrival}
-                                    className="text-[20px] pl-2"
+                                    className="text-[16px] sm:text-[20px] pr-1 sm:pr-2"
                                     />
+                                    {flight.to}
                                     </p>
 
-                                    <p className='font-bold'>${flight.fare}</p>
-                                    <p className=''>{date}</p>
+                                    <div className='flex justify-center items-center space-x-3 sm:space-x-16'>
+                                        <p className='font-bold text-[12px] sm:text-[16px]'>${flight.fare}</p>
+                                        <p className='text-[10px] sm:text-sm'>{date}</p>
+                                    </div>
 
                                 </div>
 
@@ -195,7 +196,7 @@ return (
                 <hr className='bg-black'/>
 
                 <div className=' space-y-1 w-full relative'>
-                    <h1 className='text-xl font-bold'>
+                    <h1 className='text-large sm:text-xl font-bold'>
                         Booking Flight List
                     </h1>
 
@@ -209,6 +210,8 @@ return (
                         }}
                         getRowId = {(row) => row._id}
                         rows={data}
+                        getRowHeight={() => 'auto'}
+                        getRowWidth={() => 'auto'}
                         disableSelectionOnClick
                         columns={columns}
                         autoPageSize={true}

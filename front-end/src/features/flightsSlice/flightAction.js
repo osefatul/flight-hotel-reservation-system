@@ -1,5 +1,5 @@
 
-import { createFlight, getAFlight, getFlights, searchFlights, updateAFlight } from "../../api/TravelApi/flights";
+import { createFlight, deleteAFlight, getAFlight, getFlights, searchFlights, updateAFlight } from "../../api/TravelApi/flights";
 import { fetchingAFlightSuccess, fetchingFlightsSuccess, flightFail, flightPending } from "./flightSlice";
 
 
@@ -54,6 +54,19 @@ export const UpdatingAFlight = (id,formData) => async (dispatch) => {
     }
 }
 
+
+
+export const deletingAFlight = (id) => async (dispatch) => {
+    dispatch(flightPending());
+    try {
+        const result = await deleteAFlight(id);
+        dispatch(fetchingAFlightSuccess(result.data))
+    }catch(error){
+        console.log(error)
+        dispatch(flightFail(error))
+        return error;
+    }
+}
 
 
 export const SearchingFlights = (formData) => async (dispatch) => {

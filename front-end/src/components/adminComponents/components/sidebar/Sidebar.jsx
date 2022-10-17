@@ -1,19 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./sidebar.css";
 import {
-  AttachMoney,
-  BarChart,
-  ChatBubbleOutline,
-  DynamicFeed,
+
   LineStyle,
-  MailOutline,
   PermIdentity,
-  Report,
   Storefront,
-  Timeline,
-  TrendingUp,
-  WorkOutline,
-  Room,
   Flight,
   HolidayVillage,
   MenuBook,
@@ -43,9 +34,6 @@ function Sidebar() {
     {id:6, section:"Travel", title:"Flights", url:"flights", Icon: Flight},
     {id:7, title:"Bookings", url:"bookings", Icon: MenuBook},
     {id:8, section:"Cart", title:"Orders", url:"orders", Icon: ProductionQuantityLimits}
-
-
-
 ] 
 
 
@@ -57,7 +45,7 @@ const handleSubmit =  (index, url) =>{
   return (
 
     <div className="homeHeight pb-4 flex flex-col sticky z-50 top-[50px]">
-          <h1 className="px-2 text-xl text-slate-700 font-bold pb-4">Dashboard</h1>
+          <h1 className="hidden sm:flex px-2 text-xl text-slate-700 font-bold pb-4">Dashboard</h1>
           <div className='flex flex-col space-y-2 text-sm '>
             {tabs.map((tab ,index)=>(
               <div key={tab+index}>
@@ -66,14 +54,14 @@ const handleSubmit =  (index, url) =>{
                 : " "}
                 <motion.div 
                   key={index}
-                  className={`${index === selected && " border-l-4 border-blue-800 bg-slate-300 hover:shadow-md  "} w-full h-8 flex text-[10px] items-center justify-start px-2 hover:bg-slate-300 hover:shadow-md ` }
+                  className={`${index === selected && " border-l-4 border-blue-800 bg-slate-300 hover:shadow-md  "} w-full h-10 flex text-[10px] items-center justify-start px-2 hover:bg-slate-300 hover:shadow-md ` }
                   onClick={() => handleSubmit(index, tab.url)}>
                     <motion.p 
-                    className=" cursor-pointer"
+                    className=" cursor-pointer flex items-center justify-center space-x-1"
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.9 }}
                     >
-                      <tab.Icon/> {tab.title}
+                    <tab.Icon  fontSize="small"/> <span className="hidden sm:flex items-center justify-center">{tab.title}</span> 
                     </motion.p>
                 </motion.div>
               </div>

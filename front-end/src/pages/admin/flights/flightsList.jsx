@@ -4,7 +4,7 @@ import { DeleteOutline } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FetchingFlights } from "../../../features/flightsSlice/flightAction";
+import { deletingAFlight, FetchingFlights } from "../../../features/flightsSlice/flightAction";
 import Navbar from "../../../components/Navbar";
 import Sidebar from "../../../components/adminComponents/components/sidebar/Sidebar";
 
@@ -26,10 +26,11 @@ setData(flights)
 
 
 const handleDelete = async (id) => {
-// await dispatch(DeletingUser(id))
-// setData(data.filter((item) => item._id !== id));
-// //map all those that are not equal to the selected row id
-// dispatch(FetchingFlights())
+await dispatch(deletingAFlight(id))
+setData(data.filter((item) => item._id !== id));
+
+//map all those that are not equal to the selected row id
+dispatch(FetchingFlights())
 
 };
 
@@ -144,7 +145,8 @@ return (
     </div>
 
     <div className="flex flex-col w-[85%]  mt-10 ">
-        <div className=" pl-5">
+    <div className=" pl-5 flex items-center   justify-between sm:justify-start px-2 sm:px-0">
+            <p className='font-bold sm:hidden text-xl text-green-800'>Flights</p>
             <Link to="/admin/newFlight">
             <button className="w-24 bg-green-900 text-white rounded-sm">Create</button>
             </Link>

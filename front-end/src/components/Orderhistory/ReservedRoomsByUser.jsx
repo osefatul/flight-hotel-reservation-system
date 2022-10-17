@@ -27,7 +27,7 @@ function ReservedRoomsByUser({user}) {
             field: "hotel",
             headerName: "Hotel Name",
             width: 150,
-            flex: 1,
+
             renderCell: (params) => {
                 return (
                     <div className='tex-[11px]'>
@@ -38,7 +38,7 @@ function ReservedRoomsByUser({user}) {
             },
     
         { field: "roomId", headerName: "Room ID", width: 150, weight:"bold",
-        flex: 1,
+
         renderCell: (params) => {
             return (
                 <div className="text-[11px]">
@@ -51,7 +51,7 @@ function ReservedRoomsByUser({user}) {
         field: "roomNumbers",
         headerName: "Room No",
         width: 130,
-        flex: 1,
+
         renderCell: (params) => {
             return (
             <div>
@@ -66,7 +66,7 @@ function ReservedRoomsByUser({user}) {
             field: "checkIn",
             headerName: "Check In",
             width: 160,
-            flex: 1,
+
             renderCell: (params) => {
                 return (
                     <div className='text-green-600 text-[11px]'>
@@ -79,7 +79,7 @@ function ReservedRoomsByUser({user}) {
             field: "checkOut",
             headerName: "Check Out",
             width: 160,
-            flex: 1,
+
             renderCell: (params) => {
                 return (
                     <div className='text-red-600 text-[11px]'>
@@ -92,7 +92,7 @@ function ReservedRoomsByUser({user}) {
             field: "ReservationDate",
             headerName: "Reservation Date",
             width: 160,
-            flex: 1,
+
             renderCell: (params) => {
                 return (
                     <div className='text-[11px]'>

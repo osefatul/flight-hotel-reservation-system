@@ -1,10 +1,14 @@
 import axios from "axios"
 
 const rootUrl = "http://localhost:8000/v1/"
+// const rootUrl = "https://travels-web-app.herokuapp.com/v1/"
+
 const getFlightsUrl = rootUrl + "flights/"
 const getAFlightUrl = rootUrl + "flights/getAFlight/"
 const searchFlightsUrl = getFlightsUrl + "searchAFlight"
-const updateAFlightsUrl = getFlightsUrl + "updateAFlight/"
+const updateAFlightUrl = getFlightsUrl + "updateAFlight/"
+const deleteAFlightUrl = getFlightsUrl + "deleteAFlight/"
+
 
 
 
@@ -44,7 +48,7 @@ export const getAFlight = async (id) =>{
 
 export const updateAFlight = async (id ,formData) =>{
     try {
-        const res = await axios.patch(updateAFlightsUrl+id, formData);
+        const res = await axios.patch(updateAFlightUrl+id, formData);
         return res
     }catch(error){
         console.log(error)
@@ -52,6 +56,16 @@ export const updateAFlight = async (id ,formData) =>{
     }
 }
 
+
+export const deleteAFlight = async (id) =>{
+    try {
+        const res = await axios.delete(deleteAFlightUrl+id);
+        return res
+    }catch(error){
+        console.log(error)
+        return error;
+    }
+}
 
 export const searchFlights = async (formData) =>{
     try {

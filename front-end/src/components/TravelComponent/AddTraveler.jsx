@@ -37,10 +37,10 @@ function AddTraveler({setAddPassenger, flight, user}) {
 
 
 return (
-    <div className=' flex w-[60%] mx-auto mt-4'>
+    <div className=' flex w-full sm:w-[60%] mx-auto mt-4'>
         <form className="flex flex-col space-y-3 pb-10 w-full pr-10 text-[12px]"    onSubmit = {handleSubmit} >
 
-            <h1 className='mx-auto font-bold text-lg w-max border-b border-amber-500'>Add New Traveler </h1>
+            <h1 className='sm:mx-auto font-bold text-lg w-max border-b border-amber-500'>Add New Traveler </h1>
             <input className='border pl-1'  type="text" name="firstName" id="firstName" 
             placeholder='Enter Passenger first name'
             onChange={handleChange}

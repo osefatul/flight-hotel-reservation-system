@@ -1,6 +1,7 @@
 import axios from "axios"
 import { fetchingHotelsByDestinationSuccess, fetchingHotelsFeaturedSuccess, hotelPending } from "../../features/hotelSlice/hotelSlice";
 
+// const rootUrl = "https://stays-web-app.herokuapp.com/v1/"
 const rootUrl = "http://localhost:5000/v1/"
 const createHotelUrl = rootUrl + "hotels/";
 const getHotelUrl =  rootUrl + "hotels/";
@@ -125,6 +126,7 @@ export const getHotelsByFeature = async ()=>{
 export const getHotelsByDestination = async(destination, min, max) => {
     try {
         const result = await axios.get(`http://localhost:5000/v1/hotels?city=${destination}&min=${min || 0 }&max=${max || 999}`);
+        // const result = await axios.get(`https://stays-web-app.herokuapp.com/v1/hotels?city=${destination}&min=${min || 0 }&max=${max || 999}`);
         
         return result
 

@@ -1,5 +1,7 @@
 import axios from "axios";
 const userDetailsUrl = "http://localhost:8000/v1/userDetails/";
+// const userDetailsUrl = "https://travels-web-app.herokuapp.com/v1/userDetails/";
+
 const getUserDetailsUrl =userDetailsUrl + "loggedInUser/"
 
 

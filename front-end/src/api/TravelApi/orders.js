@@ -1,6 +1,9 @@
 import axios from "axios"
 import { compare } from "../../utils/compare"
 const FetchingOrdersUrl = "http://localhost:8000/v1/orders/"
+// const FetchingOrdersUrl = "https://travels-web-app.herokuapp.com/v1/orders/"
+
+
 
 
 
@@ -49,7 +52,7 @@ export const fetchOrdersWeeklyRevenue = async()=>{
 
 export const fetchLatestOrdersTransactions = async()=>{
     try{
-        const res = await axios.get(FetchingOrdersUrl+"latestTransactions/?new")
+        const res = await axios.get(FetchingOrdersUrl+"latestTransactions/?new=true")
         return res.data
     }catch(error){
         console.log(error)

@@ -1,0 +1,13 @@
+1 - Created a host server for stays and added env variable.
+	cookies were not working: cookies wasn't getting set on brwoser from backend side. in the cookies object just added
+		{httpOnly: false,
+            	sameSite: 'none'}
+	For me sometimes, cookies were sent on firefox header but not on chrome header, then added a secure: true, in the above cookes object and it solved the issue
+2- created another host for Travel server.
+Reason why Stripe Checkout was not working: 
+In the TravelBackend/env I was using "" for domain_URL.. to run it locally it works but for heroku, it doesn't.. So i removed it.
+Added a webhook listner such as below for session.complete.checkout
+https://travels-web-app.herokuapp.com/v1/payments/webhook
+
+
+3- for netlify make sure you include _redirect in the build folder and netlify.toml in the main frontend.

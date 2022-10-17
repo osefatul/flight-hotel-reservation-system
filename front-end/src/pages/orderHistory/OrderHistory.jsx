@@ -34,7 +34,7 @@ function OrderHistory() {
 
             <div className=' w-full pb-3'>
                 {/* <h1 className=' text-lg font-bold border-b border-slate-300'>Orders History</h1> */}
-                <div className='flex space-x-3 w-max'>
+                <div className='flex space-x-3 w-full text-sm'>
                     {
                         tabs.map((tab, i) =>(
                             <h1 className={`${tabSelected === i ?  "border-b-2 border-amber-400 font-bold text-black" : "text-slate-400" } pt-4 cursor-pointer `}
