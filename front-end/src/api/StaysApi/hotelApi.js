@@ -125,8 +125,8 @@ export const getHotelsByFeature = async ()=>{
 
 export const getHotelsByDestination = async(destination, min, max) => {
     try {
-        const result = await axios.get(`http://localhost:5000/v1/hotels?city=${destination}&min=${min || 0 }&max=${max || 999}`);
-        // const result = await axios.get(`https://stays-web-app.herokuapp.com/v1/hotels?city=${destination}&min=${min || 0 }&max=${max || 999}`);
+        // const result = await axios.get(`http://localhost:5000/v1/hotels?city=${destination}&min=${min || 0 }&max=${max || 999}`);
+        const result = await axios.get(`https://stays-web-app.herokuapp.com/v1/hotels?city=${destination}&min=${min || 0 }&max=${max || 999}`);
         
         return result
 
