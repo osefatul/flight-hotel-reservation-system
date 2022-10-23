@@ -49,7 +49,7 @@ function RoomReview({item}) {
                                     Room No:
                                     </span>
                                     <span className="font-bold flex items-center space-x-2">
-                                    {item.selectedRoomsNumber.map(item =>
+                                    {item?.selectedRoomsNumber?.map(item =>
                                     <div className=''>
                                         {item}
                                     </div>

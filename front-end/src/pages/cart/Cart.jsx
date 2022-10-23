@@ -36,7 +36,7 @@ function Cart() {
                     <h1 className=' text-lg font-bold border-b border-slate-300'>Review Cart Details</h1>
                 </div>
 
-                {cartItems.map((item)=>(
+                {cartItems?.map((item)=>(
                     Object.keys(item).includes("airline")
                     ?
                     <div className='w-full space-y-2'>
