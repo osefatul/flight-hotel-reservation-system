@@ -1,7 +1,7 @@
 # Travel and Stay System
 Travel and Stay is an advanced fullstack web application built using MERN technology upon microservices architecture.
 
-## Overview
+### Intro
 T&S system is composed of several advanced features. In this application, a user can choose and reserve a destination for stays and then also book a ticket for travel to that destination or different as a package. This is an advanced full package system starting from searching a destination till check-in and receive boarding pass.
 
 Both systems can be used as a one- choose a destination for stay and then book a ticket for travel to that destination. or just use any system individually/separately.
