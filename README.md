@@ -7,3 +7,5 @@ T&S system is composed of several advanced features. In this application, a user
 Both systems can be used as a one- choose a destination for stay and then book a ticket for travel to that destination. or just use any system individually/separately.
 No external API has been used, rather we developed our own system where an admin can create multiple hotels in the targeted stayed destination with different features as per request. The same way, another system has been developed for travels services as well.
 
+### Live Demo
+[Click Here for live project](tays-travels-system.netlify.app/)
