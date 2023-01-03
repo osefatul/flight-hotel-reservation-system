@@ -7,4 +7,4 @@ The T&S system is equipped with numerous advanced features that allow users to e
 Both the travel and accommodation systems can be used together or independently. We have developed our own systems without relying on external APIs. The accommodation system allows an admin to create multiple hotels in the selected destination, each with custom features as desired. Similarly, the travel system has been developed to offer a range of travel services.
 
 ### Live Demo
-[Click Here for live project](tays-travels-system.netlify.app/)
+[Click Here for live project](https://stays-travels-system.netlify.app/)
