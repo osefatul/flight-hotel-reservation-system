@@ -1,11 +1,10 @@
 # Travel and Stay System
-Travel and Stay is an advanced fullstack web application built using MERN technology upon microservices architecture.
+Travel and Stay is a sophisticated full-stack web application developed using the MERN technology stack and a microservices architecture.
 
 ### Intro
-T&S system is composed of several advanced features. In this application, a user can choose and reserve a destination for stays and then also book a ticket for travel to that destination or different as a package. This is an advanced full package system starting from searching a destination till check-in and receive boarding pass.
+The T&S system is equipped with numerous advanced features that allow users to easily plan and book their travel and accommodation. Using this application, users can search for and select a destination, choose and reserve a place to stay, and book a ticket for travel to that destination or a package that includes both stay and travel. This is an all-in-one system that allows users to plan their trip from start to finish, including checking in and obtaining their boarding pass.
 
-Both systems can be used as a one- choose a destination for stay and then book a ticket for travel to that destination. or just use any system individually/separately.
-No external API has been used, rather we developed our own system where an admin can create multiple hotels in the targeted stayed destination with different features as per request. The same way, another system has been developed for travels services as well.
+Both the travel and accommodation systems can be used together or independently. We have developed our own systems without relying on external APIs. The accommodation system allows an admin to create multiple hotels in the selected destination, each with custom features as desired. Similarly, the travel system has been developed to offer a range of travel services.
 
 ### Live Demo
 [Click Here for live project](tays-travels-system.netlify.app/)
